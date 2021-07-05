@@ -1,15 +1,14 @@
 import './assets/styles/App.scss';
-import Button from './componentes/generales/botton';
-import Input from './componentes/generales/input';
 import Header from './componentes/Header';
+import Login from './componentes/Login';
+import Footer from './componentes/Footer';
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-        <Button color ='main' text='Información'/>
-        <Button color ='second' text='Pepinillos'/>
-        <Input/>
+      <Header/>
+      <Login/>
+      <Footer/>
     </div>
   );
 }
