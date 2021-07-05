@@ -1,0 +1,17 @@
+.Login{
+  box-sizing: border-box;
+  width: 85%;
+  height: calc(100vh - 128px);
+  margin: 0 auto;
+  padding-top: 44px;
+
+  &__title{
+    margin-bottom: 67px;
+    .title{
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+  }
+
+}
