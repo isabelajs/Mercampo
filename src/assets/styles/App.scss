@@ -1,6 +1,6 @@
 @import './Vars.scss';
 
-*{
+body{
   margin: 0;
   padding: 0;
 }
@@ -11,3 +11,6 @@
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.separator{
+  border-bottom: 1px solid black;
+}

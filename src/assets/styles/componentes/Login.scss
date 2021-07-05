@@ -1,3 +1,5 @@
+@import '../Vars.scss';
+
 .Login{
   box-sizing: border-box;
   width: 85%;
@@ -6,12 +8,50 @@
   padding-top: 44px;
 
   &__title{
-    margin-bottom: 67px;
     .title{
       font-size: 24px;
       font-weight: 500;
       margin-bottom: 10px;
     }
+  }
+
+  .form{
+    margin-top: 55px;
+    margin-bottom: $margin-components;
+    &__text{
+      margin:$margin-elements 0;
+      font-size: $small-letter;
+      text-align: center;
+    }
+  }
+
+  &__options{
+    margin-bottom: $margin-components;
+    &--text{
+      font-size: $small-letter;
+      text-align: center;
+      margin-bottom:$margin-elements;
+    }
+    &--options{
+      display: flex;
+      justify-content: space-between;
+      margin:0 auto; 
+      width: 160px;
+
+    }
+  }
+
+  &__register{
+    margin-top: $margin-components;
+    &--text{
+      font-size: $small-letter;
+      text-align: center;
+      margin-bottom : $margin-elements;
+    }
+  }
+  .method-icon{
+    width: 25px;
+    height: 25px;
   }
 
 }
