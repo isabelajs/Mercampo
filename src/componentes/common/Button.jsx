@@ -1,8 +1,7 @@
 import React from 'react';
-import '../../assets/styles/componentes/generales/Button.scss'
+import '../../assets/styles/generales/Button.scss'
 
 const Button = (props)=>{
-  // const [text, color] = props
 
   return(
     <div className={`Button ${ props.color }`}>

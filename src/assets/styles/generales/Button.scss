@@ -1,4 +1,4 @@
-@import '../../Vars.scss';
+@import '../Vars.scss';
 
 .Button{
   display: flex;
@@ -8,6 +8,7 @@
   height: 30px;
   border-radius: 4px;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .main{
@@ -20,4 +21,10 @@
 
 .Button__text{
   color: white;
+}
+
+.method-icon{
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }

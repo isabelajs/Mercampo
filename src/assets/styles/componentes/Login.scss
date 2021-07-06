@@ -1,8 +1,10 @@
 @import '../Vars.scss';
 
-.Login{
+.login{
   box-sizing: border-box;
   width: 85%;
+  align-self: center;
+  // overflow-y: auto;
   height: calc(100vh - 128px);
   margin: 0 auto;
   padding-top: 44px;
@@ -49,9 +51,10 @@
       margin-bottom : $margin-elements;
     }
   }
-  .method-icon{
-    width: 25px;
-    height: 25px;
-  }
 
+}
+
+.method-icon{
+  width: 25px;
+  height: 25px;
 }
