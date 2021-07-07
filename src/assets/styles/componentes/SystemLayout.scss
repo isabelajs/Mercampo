@@ -1,0 +1,128 @@
+//estandars layout c-profile
+.system{
+  width: 100%;
+  background-color: rgb(233, 233, 233);
+  display: flex;
+  justify-content: center;
+}
+
+.l-system{
+  width: 100%;
+  max-width: 921px;
+  box-sizing: border-box;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2.5% 20px 2.5%;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 8px rgba(65, 65, 65, 0.3);
+  border-radius: 10px;
+  margin-top: 20px;
+
+  .system__location{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
+    &-logo{
+      margin-right: 10px;
+    }
+
+    & a {
+      text-decoration: none;
+      color: black;
+      text-align: center;
+    }
+
+    & span{
+      margin: 0 5px;
+    }
+  }
+
+  .system-view{
+    width: 100%;
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+    padding: 20px 3.5% 0 3.5%;
+    box-sizing: border-box;
+  }
+
+}
+
+
+.systemSubGroup__title{
+  margin-bottom: 10px;
+
+}
+  
+
+
+.separation-line{
+  width: 100%;
+  height: 1px;
+  background:#D2DAD8;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width:768px){
+  .l-system{
+    width: 90%;
+    padding: 0 20px 20px 20px;
+
+    .system-view{
+      padding: 20px 20px 0 20px;
+    }
+
+  }
+}
+
+
+@media (min-width:910px){
+  .l-system{
+    padding: 0 30px 30px 30px;
+
+    .system-view{
+      padding: 20px 30px 0 30px;
+    }
+
+    .system__location{
+      margin: 15px 0;
+    }
+
+  }
+}
+
+@media (min-width:1024px){
+  .l-system{
+    padding: 0 40px 30px 40px;
+  }
+}
+
+
+//  system -> container general
+//            window >=0  system width 100%
+
+
+//    l-system -> disposicion (layout) 
+//               window < 768px l-system width 100%
+//               window >= 768px l-system width 90%
+
+
+//    system-view -> container de las vistas (settings,products,newproducts) 
+//                  no tiene un width por defecto, su tamaño se ajusta aapartir de los paddings de (l-system), asi que empieza con el 
+//                  window < 768px l-system tiene 2.5% de padding por ende system-view tiene 95% 
+//                  window >= 768px l-system tiene 20px de padding por ende system-view tiene (100% - 40px)
+//                  window >= 910px l-system tiene 30px de padding por ende system-view tiene (100% - 60px)
+//                  window >= 1024  l-system tiene 40px de padding por ende system-view tiene (100% - 80px)
+
+
+
+//    childrens -> hijos almacenados en system-view
+//                  window < 768px system-view tiene 3.5% de padding por ende los hijos tienen el 93%
+//                  window > 768px system-view tiene 20px de padding por ende los hijos tienen (100% - 40px)
+//                  window > 910px system-view tiene 30px de padding por ende los hijos tienen (100% - 60px)

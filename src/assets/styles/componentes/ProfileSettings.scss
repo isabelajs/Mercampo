@@ -1,5 +1,5 @@
 
-.configuration{
+.profileSettings__data{
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -7,10 +7,14 @@
   .Button{
     align-self: flex-end;
   }
-
 }
 
-.configuration__data{
+.l-info, .l-contacto, .l-password{
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.data__info{
 
   p{
     margin-top: 10px;
@@ -18,7 +22,7 @@
   }
 }
 
-.configuration__photo{
+.data__photo{
   img{
     width: 160px;
     height: 160px;
@@ -29,7 +33,7 @@
 
 }
 
-.configuration__password{
+.profileSettings__password{
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -47,7 +51,7 @@
 
 
 @media(min-width:425px){
-  .configuration__password{
+  .profileSettings__password{
     .l-buttons{
       align-self: flex-end;
     }
@@ -56,12 +60,14 @@
 
 
 @media (min-width:910px){
-  .profile{
+  .profileSettings__data{
 
     .l-info, .l-contacto, .l-password{
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 15px;
+      margin-right: 5px;
+      margin-left: 5px;
     }
 
   }
