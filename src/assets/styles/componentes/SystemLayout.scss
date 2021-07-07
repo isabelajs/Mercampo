@@ -29,18 +29,16 @@
     box-sizing: border-box;
 
     &-logo{
-      margin-right: 10px;
+      margin-right: 5px;
     }
 
     & a {
       text-decoration: none;
       color: black;
       text-align: center;
+      margin: 0 7px;
     }
 
-    & span{
-      margin: 0 5px;
-    }
   }
 
   .system-view{
@@ -69,6 +67,13 @@
   margin-bottom: 20px;
 }
 
+
+.separationPath{
+  font-size: 30px;
+  font-weight: 600;
+  // margin: 0 6px;
+}
+
 @media (min-width:768px){
   .l-system{
     width: 90%;
@@ -91,7 +96,7 @@
     }
 
     .system__location{
-      margin: 15px 0;
+      margin: 10px 0;
     }
 
   }
