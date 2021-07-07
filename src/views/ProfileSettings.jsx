@@ -3,14 +3,16 @@ import SystemLayout from "../componentes/system/SystemLayout";
 import Button from "../componentes/common/Button";
 import '../assets/styles/componentes/ProfileSettings.scss'
 
-const ProfileSettings = () => {
+const ProfileSettings = (props) => {
 
   const links = [
-    { name: "Mi Perfil", url: "/profile" }];
+    { name: "Perfil", url: "/profile/settings" },
+    { name: "Settings", url: "/profile/settings" },
+  ];
 
   return (
 
-    <SystemLayout links={links} type='profile'>
+    <SystemLayout links={links} type='settings'  props={props}>
 
           <form className='profileSettings__data form'>
 

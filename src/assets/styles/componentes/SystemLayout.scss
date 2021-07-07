@@ -1,9 +1,53 @@
 //estandars layout c-profile
 .system{
   width: 100%;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(250, 250, 250);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+
+  &__buttons{
+    display: flex;
+    height: 50px;
+    margin-left: 5px;
+    width: 90%;
+    max-width: 921px;
+
+    .system__button{
+      box-sizing: border-box;
+      padding: 10px;
+      border-bottom: 3px solid gray;
+      height: 40px;
+      position: relative;
+
+
+      &:hover{
+        &::after{
+          content: '';
+          display: block;
+          height: 3px;
+          width: 90%;
+          background-color: rgb(63, 62, 90);
+          position: absolute;
+          bottom: 2px;
+          right: 0;
+        }
+      }
+
+      &.selected{
+        border-bottom: 3px solid #FE043C;
+        // &:hover{
+        //   &::after{
+        //     content: none;
+        //   }
+        // }
+      }
+    }
+    
+
+
+  }
 }
 
 .l-system{
@@ -18,7 +62,6 @@
   margin-bottom: 20px;
   box-shadow: 0px 5px 8px rgba(65, 65, 65, 0.3);
   border-radius: 10px;
-  margin-top: 20px;
 
   .system__location{
     display: flex;
@@ -33,10 +76,8 @@
     }
 
     & a {
-      text-decoration: none;
-      color: black;
       text-align: center;
-      margin: 0 7px;
+      margin: 0 5px;
     }
 
   }
@@ -69,9 +110,8 @@
 
 
 .separationPath{
-  font-size: 30px;
-  font-weight: 600;
-  // margin: 0 6px;
+  font-size: 25px;
+  font-weight: 500;
 }
 
 @media (min-width:768px){
