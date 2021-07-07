@@ -22,6 +22,7 @@ function App() {
           <Route exact path="/profile/products/edit/:product" />
         </LayoutLoged>
       </Switch>
+          
     </BrowserRouter>
   );
 }
