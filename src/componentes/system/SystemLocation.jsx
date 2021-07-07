@@ -11,6 +11,7 @@ const SystemLocation = ({links})=>{
 
     {
       links.map((item,index)=>{
+        console.log(item, index)
         
         if(index < links.length -1 ){
           return <><Link to={item.url} key={index}>{item.name}</Link> <span>/</span> </>

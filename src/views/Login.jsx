@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from '../componentes/common/Button';
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 import '../assets/styles/generales/Form.scss'
+import '../assets/styles/generales/Button.scss'
 
 
 //le coloque overflow-y scroll, asi ocupa el tamaño que tiene de height si no seguira de largo ocupadno hacia abajo cuanto necesite 
@@ -14,10 +14,10 @@ import '../assets/styles/generales/Form.scss'
 //  https://co.pinterest.com/pin/184577284702032988/
 // le veo mas potencial al ultimo link para organizar un menu... mañana lo hablamos bien
 // lo mismo en login no deberia aparecer el hedaer apenas una flechita intuitiva de ir hacia atras.. no sheee, lo veo dudosiño
+
+
 function Login (props){
 
-  console.log(props);
-  
   return(
     <div className="login">
 
@@ -37,9 +37,11 @@ function Login (props){
           <input className="form-input" name='password' type="password" placeholder="Ingresa la contraseña" autoComplete='false'/>
         </div>
 
+
+        <button className="button main">Ingresar</button>
+
         <div className='form__text'>Olvidaste tu contraseña</div>
 
-        <Button color='main' text='Ingresar'/>
       </form>
 
       <div className="login__options">
@@ -55,7 +57,7 @@ function Login (props){
 
       <div className="login__register">
         <div className="login__register--text">¿No estas registrado?</div>
-        <Button color='main' text='Registrate'/>
+        {/* <Button color='main' text='Registrate'/> */}
       </div>
 
 
