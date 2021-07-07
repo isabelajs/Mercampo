@@ -1,0 +1,68 @@
+
+.configuration{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  .Button{
+    align-self: flex-end;
+  }
+
+}
+
+.configuration__data{
+
+  p{
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.configuration__photo{
+  img{
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    background-color: gray;
+    overflow: hidden;
+  }
+
+}
+
+.configuration__password{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  .l-buttons{
+
+    display: flex;
+    align-self: center;
+
+    .Button:first-child{
+      margin-right: 10px;
+    }
+  }
+}
+
+
+@media(min-width:425px){
+  .configuration__password{
+    .l-buttons{
+      align-self: flex-end;
+    }
+  }
+}
+
+
+@media (min-width:910px){
+  .profile{
+
+    .l-info, .l-contacto, .l-password{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 15px;
+    }
+
+  }
+}
