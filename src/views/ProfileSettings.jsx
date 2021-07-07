@@ -1,6 +1,6 @@
 import React from "react";
 import SystemLayout from "../componentes/system/SystemLayout";
-import Button from "../componentes/common/Button";
+// import Button from "../componentes/common/Button";
 import '../assets/styles/componentes/ProfileSettings.scss'
 
 const ProfileSettings = (props) => {
@@ -86,7 +86,7 @@ const ProfileSettings = (props) => {
 
             </div>
 
-            <Button color='second' text='Guardar'/>
+            <button className='button second'>Guardar</button>
 
           </form>
 
@@ -112,8 +112,8 @@ const ProfileSettings = (props) => {
 
 
             <div className="l-buttons">
-              <Button color='second' text='Cambiar'/>
-              <Button color='second' text='Cancelar'/>
+              <button className='button second'>Cambiar</button>
+              <button className='button second'>Cancelar</button>
             </div>
 
           </form>

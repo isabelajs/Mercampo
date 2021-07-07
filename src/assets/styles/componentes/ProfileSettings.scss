@@ -4,7 +4,7 @@
   flex-direction: column;
   margin-bottom: 20px;
 
-  .Button{
+  .button{
     align-self: flex-end;
   }
 }
@@ -43,7 +43,7 @@
     display: flex;
     align-self: center;
 
-    .Button:first-child{
+    .button:first-child{
       margin-right: 10px;
     }
   }
@@ -60,15 +60,14 @@
 
 
 @media (min-width:910px){
-  .profileSettings__data{
 
-    .l-info, .l-contacto, .l-password{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 15px;
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-
+  .l-info, .l-contacto, .l-password{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
   }
+
+  
 }
