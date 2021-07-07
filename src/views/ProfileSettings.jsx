@@ -6,13 +6,11 @@ import '../assets/styles/componentes/ProfileSettings.scss'
 const ProfileSettings = () => {
 
   const links = [
-    { name: "Mi Perfil", url: "/profile" },
-    { name: "Productos", url: "/profile/products" },
-    { name: "Nuevo producto", url: "/profile/products/newproduct" }];
+    { name: "Mi Perfil", url: "/profile" }];
 
   return (
 
-    <SystemLayout links={links}>
+    <SystemLayout links={links} type='profile'>
 
           <form className='profileSettings__data form'>
 
