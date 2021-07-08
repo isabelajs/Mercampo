@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
@@ -16,7 +18,15 @@ import '../assets/styles/componentes/Login.scss'
 
 function Login (props){
 
+  let print = ()=>{
+    console.log('pepe');
+    
+  }
+
+
   return(
+    <LayoutSignMethod>
+
     <div className="login">
 
       <div className="login__title">
@@ -35,18 +45,11 @@ function Login (props){
           <input className="form-input" name='password' type="password" placeholder="Ingresa la contraseña" autoComplete='false'/>
         </div>
 
+        <Link to={'/register'} className='form__text'>¿Olvidaste tu contraseña?</Link>
+        <button className="button button--main">Ingresar</button>
 
-        <button className="button main">Ingresar</button>
-
-        <div className='form__text'>¿Olvidaste tu contraseña?</div>
 
       </form>
-
-      <div className="separator">
-        <div className='separator__line'></div>
-        <div className='separator__text'>Or</div>
-        <div className='separator__line'></div>
-      </div>
 
       <div className="login__options">
         <div className="login__options--text">Ingresar con:</div>
@@ -58,10 +61,13 @@ function Login (props){
       </div>
 
       <div className="login__register">
-        <div className="login__register--text">¿No estas registrado? <span className='bold'>Registrate</span>   </div>
+        <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>
       </div>
 
     </div>
+
+    </LayoutSignMethod>
+
   )
 }
 
