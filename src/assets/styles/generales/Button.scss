@@ -19,25 +19,35 @@
   
 }
 
+.button--icon{
+  justify-content: space-around;
+  padding: 0px 3%;
+  border: solid 0.8px #B8B5B5;
+  width: 100%;
+
+  p{
+    padding-left: 15%;
+    width: 70%;
+  }
+
+  .button__icon{
+    width: 30%;
+  }
+}
+
+
 .button--main{
   background-color: $main-button;
   color: white;
+  border: none;
 }
 
 .button--second{
   background-color: #2D9CDB ;
   color: white;
+  border: none;
 }
 
-.button--icon{
-  min-width: max-content;
-  padding: 0px 3%;
-  border: solid 0.8px #B8B5B5;
-
-  .button__icon{
-    margin-right: 15px;
-  }
-}
 
 .method-icon{
   cursor: pointer;
