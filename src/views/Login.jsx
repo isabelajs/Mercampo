@@ -38,9 +38,15 @@ function Login (props){
 
         <button className="button main">Ingresar</button>
 
-        <div className='form__text'>Olvidaste tu contraseña</div>
+        <div className='form__text'>¿Olvidaste tu contraseña?</div>
 
       </form>
+
+      <div className="separator">
+        <div className='separator__line'></div>
+        <div className='separator__text'>Or</div>
+        <div className='separator__line'></div>
+      </div>
 
       <div className="login__options">
         <div className="login__options--text">Ingresar con:</div>
@@ -51,13 +57,9 @@ function Login (props){
         </div>
       </div>
 
-      <div className="separator"></div>
-
       <div className="login__register">
-        <div className="login__register--text">¿No estas registrado?</div>
-        {/* <Button color='main' text='Registrate'/> */}
+        <div className="login__register--text">¿No estas registrado? <span className='bold'>Registrate</span>   </div>
       </div>
-
 
     </div>
   )
