@@ -1,0 +1,25 @@
+.l-signMethod{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen{
+  opacity: 0;
+  visibility: hidden;
+  height: 100vh;
+  background-color: blue;
+}
+
+@media (min-width:910px){
+  .l-signMethod{
+    justify-content: space-between
+  }
+
+  .imagen{
+    width: 75%;
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -1,5 +1,6 @@
 @import '../Vars.scss';
 
+//TODO hover de los botones
 .button{
   display: flex;
   justify-content: center;
@@ -11,8 +12,6 @@
   border: none;
   color: rgb(0, 0, 0);
   font-size: 14px;
-  // font-family: Arial, Helvetica, sans-serif;
-  // letter-spacing: 1px;
   font-weight: 500;
 
 
@@ -51,6 +50,6 @@
 
 .method-icon{
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }

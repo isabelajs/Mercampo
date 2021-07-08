@@ -1,11 +1,8 @@
 @import '../Vars.scss';
 
 .login{
-  box-sizing: border-box;
-  width: 85%;
-  align-self: center;
-  margin: 0 auto;
-  padding-top: 70px;
+  width: 320px;
+  padding: 60px 20px 20px;
 
   &__title{
     .title{
@@ -17,19 +14,25 @@
   }
 
   .form{
-    margin-top: 40px;
+    margin-top: 50px;
     margin-bottom: $margin-components;
     &__text{
-      margin:$margin-elements 0;
       font-size: $small-letter;
       text-align: center;
+      display: block;
+      cursor: pointer;
+    }
+
+    .button{
+      margin:auto;
+      margin-top: 20px;
     }
   }
 
   &__options{
-    margin-bottom: $margin-components;
+    margin-top: 40px;
+    margin-bottom: 40px;
     &--text{
-      font-size: $small-letter;
       text-align: center;
       margin-bottom:$margin-elements;
     }
@@ -47,12 +50,7 @@
     &--text{
       font-size: $small-letter;
       text-align: center;
-      margin-bottom : $margin-elements;
     }
-  }
-
-  .button{
-    margin: 0 auto;
   }
 
 }

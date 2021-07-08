@@ -20,7 +20,23 @@ body{
 }
 
 .separator{
-  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__line{
+    border-bottom: 1px solid black;
+    width: 45%;
+  }
+  &__text{
+    font-size: 12px;
+    margin: 0 10px;
+  }
+}
+
+.bold{
+  font-weight: 600;
+  color: #22409d;
+  cursor: pointer;
 }
 
 a{

@@ -1,0 +1,26 @@
+@import '../Vars.scss';
+
+
+
+.register{
+  width: 320px;
+  padding: 50px 20px;
+
+  &__title{
+    .title{
+      letter-spacing: -1px;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  }
+
+  .form{
+    margin-top: 40px;
+
+    .button{
+      margin: 0 auto;
+    }
+  }
+
+}
