@@ -14,6 +14,8 @@ const ProfileSettings = (props) => {
 
     <SystemLayout links={links} type='settings'  props={props}>
 
+        <div className="l-profileSettings">
+
           <form className='profileSettings__data form'>
 
             <div className='data__photo'>
@@ -86,7 +88,7 @@ const ProfileSettings = (props) => {
 
             </div>
 
-            <button className='button second'>Guardar</button>
+            <button className='button button--second'>Guardar</button>
 
           </form>
 
@@ -112,12 +114,14 @@ const ProfileSettings = (props) => {
 
 
             <div className="l-buttons">
-              <button className='button second'>Cambiar</button>
-              <button className='button second'>Cancelar</button>
+              <button className='button button--second'>Cambiar</button>
+              <button className='button button--second'>Cancelar</button>
             </div>
 
           </form>
-    
+  
+        </div>
+
     </SystemLayout>
   );
 };
