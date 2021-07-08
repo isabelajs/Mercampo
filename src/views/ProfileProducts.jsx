@@ -52,7 +52,13 @@ const ProfileSettings = (props) => {
           <p>Nuevo</p>
         </div>
 
+        <div>
+
+        </div>
+
         <div className="profileProducts__container">
+          <ProfileProduct isNewProduct={true}/>
+          <ProfileProduct />
           <ProfileProduct />
           <ProfileProduct />
           <ProfileProduct />

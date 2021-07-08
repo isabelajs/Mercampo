@@ -36,6 +36,7 @@
     margin-top: 90px;
     display: grid;
     grid-template-columns: repeat(auto-fit,190px);
-    gap: 10px;
+    gap: 15px;
+    justify-content: center;
   }
 }
