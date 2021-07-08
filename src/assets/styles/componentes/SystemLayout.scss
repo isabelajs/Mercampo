@@ -4,7 +4,6 @@
   background-color: rgb(250, 250, 250);
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
 
   &__buttons{
@@ -13,6 +12,7 @@
     margin-left: 5px;
     width: 90%;
     max-width: 921px;
+    align-self: flex-start;
 
     .system__button{
       box-sizing: border-box;
@@ -27,11 +27,11 @@
           content: '';
           display: block;
           height: 3px;
-          width: 90%;
+          width: 80%;
           background-color: rgb(63, 62, 90);
           position: absolute;
-          bottom: 2px;
-          right: 0;
+          bottom: -3px;
+          left: 10%;
         }
       }
 
@@ -86,8 +86,11 @@
     width: 100%;
     border: 1px solid #DFDFDF;
     border-radius: 5px;
-    padding: 20px 3.5% 0 3.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
+
   }
 
 }
@@ -95,7 +98,6 @@
 
 .systemSubGroup__title{
   margin-bottom: 10px;
-
 }
   
 
@@ -119,10 +121,10 @@
     width: 90%;
     padding: 0 20px 20px 20px;
 
-    .system-view{
-      padding: 20px 20px 0 20px;
-    }
+  }
 
+  .system__buttons{
+    align-self:initial;
   }
 }
 
@@ -130,10 +132,6 @@
 @media (min-width:910px){
   .l-system{
     padding: 0 30px 30px 30px;
-
-    .system-view{
-      padding: 20px 30px 0 30px;
-    }
 
     .system__location{
       margin: 10px 0;
