@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
+import {auth} from '../firebase.config'
 
 
 //le coloque overflow-y scroll, asi ocupa el tamaño que tiene de height si no seguira de largo ocupadno hacia abajo cuanto necesite 
@@ -18,10 +19,18 @@ import '../assets/styles/componentes/Login.scss'
 
 function Login (props){
 
-  let print = ()=>{
-    console.log('pepe');
-    
-  }
+  const [form, setForm ]=  useState({
+                                      email: '',
+                                      password: '',
+                                    })
+  
+  const changeInput = (event)=>{
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+  }        
+
 
 
   return(
@@ -37,12 +46,23 @@ function Login (props){
       <form className='form' >
         <div className="form-group">
           <label >Usuario</label>
-          <input className="form-input" name='email' type="email" placeholder="Ingresa un correo electrónico" />
+          <input 
+            className="form-input" 
+            onChange={changeInput}   
+            name='email' type="email" 
+            placeholder="Ingresa un correo electrónico" 
+          />
         </div>
 
         <div className="form-group">
           <label>Contraseña</label>
-          <input className="form-input" name='password' type="password" placeholder="Ingresa la contraseña" autoComplete='false'/>
+          <input 
+            onChange={changeInput} 
+            className="form-input" 
+            name='password' 
+            type="password" 
+            placeholder="Ingresa la contraseña" 
+            autoComplete='false'/>
         </div>
 
         <Link to={'/register'} className='form__text'>¿Olvidaste tu contraseña?</Link>

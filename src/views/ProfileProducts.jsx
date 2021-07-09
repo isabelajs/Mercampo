@@ -7,6 +7,7 @@ const ProfileSettings = (props) => {
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
+    
   ];
 
   return (
@@ -71,5 +72,4 @@ const ProfileSettings = (props) => {
 };
 
 export default ProfileSettings;
-
 

@@ -8,10 +8,11 @@ import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import "../../assets/styles/App.scss";
 
-//definir cuantos layout existen..
+
 
 function App() {
   return (
+
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />
@@ -32,3 +33,6 @@ function App() {
 }
 
 export default App;
+
+
+//TODO modal de alert 

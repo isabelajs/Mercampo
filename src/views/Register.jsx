@@ -1,13 +1,49 @@
-import React from 'react';
+import React , {useState}from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase.config';
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
+
 function Register(){
+
+
+  const [form, setForm ]=  useState({
+    name:'',
+    email: '',
+    password: '',
+  })
+
+  const handleChange = (event)=>{
+  setForm({
+    ...form,
+    [event.target.name]: event.target.value
+    })
+  }        
+
+
+  const handleSubmit = (e,a)=>{
+    e.preventDefault()
+    console.log(form)
+    auth.createUserWithEmailAndPassword(form.email,form.password)
+      .then((user)=>{
+
+        //crear una store para almacenar la info diferente
+
+
+      })
+      .catch(
+        (error)=>{
+          console.log(error.message)
+        }
+      )
+  }
+
   return(
+
     <LayoutSignMethod>
       <div className="register">
 
@@ -16,21 +52,43 @@ function Register(){
           <div className='subtitle'>Registrate para continuar</div>
         </div>
 
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
 
           <div className="form-group">
             <label>Nombre</label>   
-            <input className='form-input' name='name' type='text' placeholder='Ingresa tu nombre' autoComplete='false' />
+            <input 
+              className='form-input' 
+              name='name' 
+              type='text' 
+              placeholder='Ingresa tu nombre' 
+              autoComplete='false'
+              value={form.name}
+              onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Correo</label>   
-            <input className='form-input' name='email' type='email' placeholder='Ingresa tu correo electronico' autoComplete='false' />
+            <input 
+              className='form-input' 
+              onChange={handleChange}
+              name='email' 
+              type='email' 
+              placeholder='Ingresa tu correo electronico' 
+              autoComplete='false' 
+              value = {form.email}
+              />
           </div>
 
           <div className="form-group">
             <label>Contraseña</label>   
-            <input className='form-input' name='password' type='text' placeholder='Ingresa tu contraseña' autoComplete='false' />
+            <input 
+              onChange={handleChange}
+              className='form-input' 
+              name='password' 
+              type='text' 
+              placeholder='Ingresa tu contraseña' 
+              value = {form.password}
+              autoComplete='false' />
           </div>
 
           <button className='button button--main'>Registrate</button>
@@ -60,3 +118,12 @@ function Register(){
 }
 
 export default Register;
+
+
+
+
+
+//funciones aparte
+
+
+  //
