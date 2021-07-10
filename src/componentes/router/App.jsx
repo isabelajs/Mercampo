@@ -12,7 +12,6 @@ import "../../assets/styles/App.scss";
 
 function App() {
   return (
-
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />

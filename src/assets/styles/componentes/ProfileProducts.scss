@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  // padding: 20px;
   box-sizing: border-box;
   padding: 20px 3.5% 20px 3.5%;
   border-bottom: 1px solid #B8B5B5;
@@ -17,10 +16,20 @@
   }
 
 }
+
 .profileProducts__container{
   margin-top: 10px;
+
+  &>div{
+    margin-bottom: 15px;
+  }
+
+  .itemNewProduct{
+    display: none;
+  }
 }
 
+//esconder el botom version product
 
 .l-profileProducts__products{
   width: 100%;
@@ -36,7 +45,32 @@
     margin-top: 90px;
     display: grid;
     grid-template-columns: repeat(auto-fit,190px);
-    gap: 15px;
+    gap: 10px;
     justify-content: center;
+
+    //esconder el botonsencillo
+    & > .buttonNewProduct{
+      display: none;
+    }
+    
+    //mostrar buttonNewProduct
+    .itemNewProduct{
+      display: flex;
+    }
+
+  }
+
+}
+
+
+@media (min-width: 810px){
+  .profileProducts__container{
+    grid-template-columns: repeat(auto-fit,200px);
+  }
+}
+
+@media (min-width: 910px){
+  .profileProducts__container{
+    column-gap: 15px;
   }
 }
