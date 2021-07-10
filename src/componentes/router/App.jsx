@@ -6,6 +6,7 @@ import Register from "../../views/Register";
 import LayoutLoged from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
+import ProfileNewProduct from "../../views/NewProduct";
 import "../../assets/styles/App.scss";
 
 
@@ -21,7 +22,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/profile/settings" component={ProfileSettings} />
             <Route exact path="/profile/products" component={ProfileProducts}/>
-            <Route exact path="/profile/products/new" />
+            <Route exact path="/profile/products/new" component={ProfileNewProduct} />
             <Route exact path="/profile/products/edit/:product" />
           </LayoutLoged>
         </Switch>
