@@ -33,9 +33,24 @@ const ProfileSettings = (props) => {
         </div>
 
       </div>
+      
+      <div className="l-profileProducts__info">
+        
+          <h2 className="profileProducts__textList">Listado de productos</h2>
 
+          <div className="profileProducts__infoList">
+            <p className="infoList__count infoList__count--green">6</p>
+            <p className="infoList__type">Disponibles</p>
+          </div>
+
+          <div className="profileProducts__infoList">
+            <p className="infoList__count infoList__count--red">2</p>
+            <p className="infoList__type">No Disponibles</p>
+          </div>
+        </div>
+      
       <div className="l-profileProducts__products">
-
+        
         <div className="profileProducts__container">
           <ProfileButtonNewProduct />
           <ProfileProduct />
@@ -43,6 +58,7 @@ const ProfileSettings = (props) => {
           <ProfileProduct />
           <ProfileProduct />
         </div>
+      
       </div>
 
     
