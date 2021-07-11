@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "../../views/Home";
 import Login from "../../views/Login";
@@ -8,10 +8,11 @@ import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
 import "../../assets/styles/App.scss";
-
+import {auth} from '../../firebase.config'
 
 
 function App() {
+
   return (
     <BrowserRouter>
       <Switch>

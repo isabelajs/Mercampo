@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import App from './componentes/router/App.jsx';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -8,4 +10,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-

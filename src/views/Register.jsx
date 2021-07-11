@@ -27,7 +27,6 @@ function Register(){
 
   const handleSubmit = (e,a)=>{
     e.preventDefault()
-    console.log(form)
     auth.createUserWithEmailAndPassword(form.email,form.password)
       .then((user)=>{
 
@@ -37,7 +36,7 @@ function Register(){
       })
       .catch(
         (error)=>{
-          console.log(error.message)
+
         }
       )
   }

@@ -52,7 +52,7 @@ const ProfileSettings = (props) => {
       <div className="l-profileProducts__products">
         
         <div className="profileProducts__container">
-          <ProfileButtonNewProduct />
+          <ProfileButtonNewProduct/>
           <ProfileProduct />
           <ProfileProduct />
           <ProfileProduct />

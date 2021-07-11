@@ -5,7 +5,6 @@ import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
-import {auth} from '../firebase.config'
 
 
 //le coloque overflow-y scroll, asi ocupa el tamaño que tiene de height si no seguira de largo ocupadno hacia abajo cuanto necesite 
@@ -29,8 +28,8 @@ function Login (props){
       ...form,
       [event.target.name]: event.target.value
     })
-  }        
-
+  }    
+  
 
 
   return(
