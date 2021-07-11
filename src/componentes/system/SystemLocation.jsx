@@ -23,14 +23,17 @@ const SystemLocation = ({links,type})=>{
 
     {
       links.map((item,index)=>{
-        if(index < links.length -1 ){
-          return <><Link to={item.url} key={index}>{item.name}</Link> <span className='separationPath'>/</span> </>
-        }
-        else{
-          return <Link to={item.url} key={index}>{item.name}</Link>
-        }
-      })
-    }
+      //   if(index < links.length -1 ){
+      //     return <><Link to={item.url} key={index}>{item.name}</Link> <span className='separationPath'>/</span> </>
+      //   }
+      //   else{
+      //     return <Link to={item.url} key={index+10}>{item.name}</Link>
+      //   }
+      // })
+      return <Link to={item.url} key={index}> {item.name } </Link>
+    })
+  }
+
     </div>
   )
 }

@@ -1,20 +1,33 @@
-import React , {useState}from 'react';
+import React , {useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
-import { auth } from '../firebase.config';
+
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
+import Modal from '../componentes/common/Modal'
+import {createUser} from '../utils/auth'
+
+
+//TODO: LEER DONDE ENCONTRE LA SOLUCION https://stackoverflow.com/questions/51819349/getting-uncaught-after-catching-error-in-firebase-auth-with-async
+//TODO: DARLE MAS WIDTH AL CONTENEDOR DEL FORM EN TAMAÑO 1024 
+//BUG NO SE CIERRA CON ENTER EL MODAL
+
 
 function Register(){
-
-
+  
   const [form, setForm ]=  useState({
     name:'',
     email: '',
     password: '',
+  })
+
+  const [statusRegister, setStatusRegister] = useState({
+    error: null,
+    message: '',
+    isOpen: false,
   })
 
   const handleChange = (event)=>{
@@ -22,25 +35,33 @@ function Register(){
     ...form,
     [event.target.name]: event.target.value
     })
+
   }        
 
-
-  const handleSubmit = (e,a)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault()
-    console.log(form)
-    auth.createUserWithEmailAndPassword(form.email,form.password)
-      .then((user)=>{
 
-        //crear una store para almacenar la info diferente
-
-
+    try{
+      const user = await createUser(form.email,form.password, form.name)
+      setStatusRegister({
+        error: null,
+        message: `Se ha enviado un correo de confirmacion al email ${user.email}, porfavor revisa la bandeja de entrada o spam de tu correo electronico`,
+        isOpen: true,
       })
-      .catch(
-        (error)=>{
-          console.log(error.message)
-        }
-      )
+    }catch(error){
+      setStatusRegister({
+        error: error,
+        message: `Hemos encontrado un error ${error.message}`,
+        isOpen: true,
+      })
+    }
+  
   }
+
+  const handleCloseModal = ()=>{
+    setStatusRegister(false)
+  }
+
 
   return(
 
@@ -63,7 +84,10 @@ function Register(){
               placeholder='Ingresa tu nombre' 
               autoComplete='false'
               value={form.name}
-              onChange={handleChange} />
+              onChange={handleChange}
+              required
+            />
+            
           </div>
 
           <div className="form-group">
@@ -76,6 +100,7 @@ function Register(){
               placeholder='Ingresa tu correo electronico' 
               autoComplete='false' 
               value = {form.email}
+              required
               />
           </div>
 
@@ -85,14 +110,16 @@ function Register(){
               onChange={handleChange}
               className='form-input' 
               name='password' 
-              type='text' 
+              type='password' 
               placeholder='Ingresa tu contraseña' 
               value = {form.password}
-              autoComplete='false' />
+              autoComplete='false'
+              required
+            />
           </div>
 
           <button className='button button--main'>Registrate</button>
-
+         
         </form>
 
         <div className="login__options">
@@ -109,10 +136,10 @@ function Register(){
         </div>
 
       </div>
-
+      {
+        statusRegister.isOpen && <Modal status={statusRegister} handleClose={handleCloseModal} />
+      }
     </LayoutSignMethod>
-
-
 
   )
 }
@@ -121,9 +148,15 @@ export default Register;
 
 
 
+//FIXME UNA OPCION PUEDE SER UTILIZAR EL REDUX PARA CUALQUIER MODAL Y TENERLO COMO ESTADO GLOBAL
+
+//POR QUE EL MODAL NO PUEDE TENER SU PROPIO ESTADO SOBRE SI ESTA ABIERTO O CERRADO? 
+
+  //POR QUE DE ALGUNA MANERA DEBE SER INSERTADO Y ESO ES MEDIANTE UN PADRE ASI QUE REALMENTE ES EL PADRE EL QUE LO RENDERIZO
+  //Y POR ENDE EL ES EL QUE CONTROLA CUANDO SE DEBE VER O NO DEBE VER EL HIJO
 
 
-//funciones aparte
-
-
-  //
+  //OTRA OPCION ES QUE EL STATUS DEL MODAL SEA GLOBAL POR EJEMPLO CON REDUX
+  //ENTONCES AHORA (NADIE ES PADRE DEL MODAL) -> EL QUE lO NECESITE USAR TIENE QUE HACER UN DISPATCH (PARA CAMBIAR EL MODAL A OPEN PASANDOLE
+  //LAS DEMAS PROPIEDADES QUE NECESITE COMO MESSGAE O TYPE) AL CAMBIAR EL ESTADO MEDIANTE ESE DISPATCH, APP LO DIBUJARA OSEA SIEMPRE ESTARIA 
+  //AL LADO DE LAS RUTAS PREGUNTANDOSE SI    modalIsOpen ? <modal/> connect({error,message}, {cerrarModal})  

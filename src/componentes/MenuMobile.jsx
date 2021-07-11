@@ -4,7 +4,6 @@ import profile from '../assets/static/profile-icon.svg'
 import aboutUs from '../assets/static/aboutUs-icon.svg'
 import '../assets/styles/componentes/MenuMobile.scss';
 
-//TODO: Los botones estan muy grandes porfa intenta con 23x23 o 25x25
 function MenuMobile(){
   return(
     <div className="menuMobile">
