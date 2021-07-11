@@ -31,47 +31,48 @@ const  useAuth = ()=>{
 }
 
 
-function App() {
+const App = ()=> {
   
   const {user, isLoadingAuthentication} = useAuth()
-  console.log(user)
-//TODO: FUNCIONA PERO HAY UN PEQUEÑO PARPADEO PINTA LOGIN Y LUEGO SI PINTA LA RUTA CORRECTA :C AVERIGUAR COMO QUITAR ESE PARPADEO
-//TODO HACER UN DISEÑO PARA CARGAR
 
-  return (
-    <BrowserRouter>
-      <Switch>
+  if(isLoadingAuthentication){
+    return <div>...Loading</div>
+  }
+  else{
 
+    return (
 
-        <Route exact path="/login">
-          {isLoadingAuthentication  && <h1>esta cargando ...</h1>}
-          {user && !isLoadingAuthentication && <Redirect to='/'/>}
-          {!user && !isLoadingAuthentication && <Login/>}
-        </Route>
-
-        <Route exact path="/register" component={Register} />
+      <BrowserRouter>
         <Switch>
-          <LayoutLoged>
-            <Route exact path="/" component={Home} />
-
-            <Route exact path="/profile/settings">
-              {isLoadingAuthentication  && <h1>esta cargando ...</h1>}
-              {user && !isLoadingAuthentication && <ProfileSettings/>}
-              {!user && !isLoadingAuthentication && <Redirect to='/login'/>}
-            </Route>
-
-            <Route exact path="/profile/products" component={ProfileProducts}/>
-            <Route exact path="/profile/products/new" component={ProfileNewProduct} />
-            <Route exact path="/profile/products/edit/:product" />
-          </LayoutLoged>
+          <Route exact path="/login">
+            {user && !isLoadingAuthentication && <Redirect to='/'/>}
+            {!user && !isLoadingAuthentication && <Login/>}
+          </Route>
+  
+          <Route exact path="/register" component={Register} />
+          <Switch>
+            <LayoutLoged>
+              <Route exact path="/" component={Home} />
+  
+              <Route exact path="/profile/settings">
+                {user && !isLoadingAuthentication && <ProfileSettings/>}
+                {!user && !isLoadingAuthentication && <Redirect to='/login'/>}
+              </Route>
+  
+              <Route exact path="/profile/products" component={ProfileProducts}/>
+              <Route exact path="/profile/products/new" component={ProfileNewProduct} />
+              <Route exact path="/profile/products/edit/:product" />
+            </LayoutLoged>
+          </Switch>
         </Switch>
-      </Switch>
           
-    </BrowserRouter>
-  );
-}
+      </BrowserRouter>
+     
+    );
+  }
+
+
+  }
+
 
 export default App;
-
-
-//TODO modal de alert 

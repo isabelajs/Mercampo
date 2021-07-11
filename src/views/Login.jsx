@@ -19,7 +19,6 @@ import {addUserToStore, findUserById, getCurrentUser} from '../utils/dataBase';
 //TODO: SI YA ESTA LOGUEADO NO ENTRAR A LOGIN....  REDIRECT DIRECTO A PROFILE SUPONGO
 function Login (props){
 
-  // console.log(props)
 
   const history = useHistory()
 
@@ -32,8 +31,6 @@ function Login (props){
     isOpen:false,
     message: ''
   })
-
-  const [test,setTest] = useState({isOpen:false, message:''})
 
   const handleInput = (event)=>{
     setForm({
@@ -107,14 +104,8 @@ function Login (props){
 
 
       <LayoutSignMethod>
-
-        {/* {props.test && <div>melo</div>} */}
         
         <div className="login">
-
-        {
-          test.isOpen ? <div>{test.message}</div> : undefined
-        }
 
         <div className="login__title">
           <div className='title'>Bienvenido</div>
