@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../../views/Home";
 import Login from "../../views/Login";
@@ -6,6 +6,7 @@ import Register from "../../views/Register";
 import LayoutLoged from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
+import ProfileNewProduct from "../../views/NewProduct";
 import "../../assets/styles/App.scss";
 import { auth } from "../../firebase.config";
 
@@ -38,7 +39,6 @@ function App() {
 //TODO HACER UN DISEÑO PARA CARGAR
 
   return (
-
     <BrowserRouter>
       <Switch>
 
@@ -61,7 +61,7 @@ function App() {
             </Route>
 
             <Route exact path="/profile/products" component={ProfileProducts}/>
-            <Route exact path="/profile/products/new" />
+            <Route exact path="/profile/products/new" component={ProfileNewProduct} />
             <Route exact path="/profile/products/edit/:product" />
           </LayoutLoged>
         </Switch>

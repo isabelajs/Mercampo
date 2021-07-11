@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import Reactfrom 'react';
 import ReactDOM from 'react-dom';
 import App from './componentes/router/App.jsx';
-import {auth} from './firebase.config'
+
+
 
 
 

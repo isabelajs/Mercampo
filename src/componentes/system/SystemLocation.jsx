@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 const SystemLocation = ({links,type})=>{
-  console.log(type)
+
   return (
     <div className="system__location">
 
