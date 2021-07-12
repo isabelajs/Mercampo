@@ -23,8 +23,6 @@ const  useAuth = ()=>{
   useEffect(()=>{
     const unsubscribe = auth.onAuthStateChanged((user)=>{
 
-
-      //dispatch de redux 
       setUser(user);
       setIsLoadingAuthentication(false);
     })
@@ -78,6 +76,5 @@ const App = ()=> {
 
 
   }
-
 
 export default App;
