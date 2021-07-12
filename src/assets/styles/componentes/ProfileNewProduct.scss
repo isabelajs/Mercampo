@@ -5,8 +5,12 @@
   .form-textArea{
     height: 70px;
   }
-}
 
+  .button{
+    align-self: flex-end;
+  }
+  
+}
 
 .profileNewProduct{
   display: flex;
@@ -28,54 +32,53 @@
 
 
 .newProduct__unitPrices{
+
+  .l-table{
+    
+    border: solid 0.8px #B8B5B5;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    padding: 0px 10px;
+    width: 100%;
+    max-width: 350px;
+  }
+  
   table{
     width: 100%;
-    max-width: 330px;
     border-collapse: collapse;
+    
+    .colNames{
+      width: 40%;
+    }
+    
+    .colPrices{
+      width: 35%;
+    }
 
     tr{
-      // border-top: solid 0.8px #B8B5B5;
-    }
-    //padding celdas del encabezado
-    tr:first-child{
-      td{
-        padding-left:10px;
-      }
-    }
 
-    //bordes superior 
-    tr:nth-child(2){
-      td:first-child{
-        border-radius: 5px 0 0 0 ;
-      }
-
-      td:nth-child(3){
-        border-radius: 0 5px 0 0 ;
-      }
-    }
-
-
-    //bordes inferiores
-    tr:last-child{
-      td:first-child{
-        border-radius: 0 0 0 5px;
-      }
-
-      td:last-child{
-        border-radius: 0 0 5px 0 ;
-      }
-    }
-
-    tr:not(:first-child){
-
-
-
-      td{
+      &:not(:first-child){
         border-top: solid 0.8px #B8B5B5;
       }
+
+      td{
+        height: 50px;
+
+        &:first-child{
+          padding-left: 10px;
+        }
+
+        .unitPrice__buttons{
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .form-input{
+          padding-left: 0;
+        }
+
+      }
     }
-
-
 
     .button--icon{
       border: none;
@@ -86,7 +89,6 @@
 
 
     .form-input{
-      text-align: center;
       width: 100%;
       margin: 0;
 
@@ -97,24 +99,35 @@
   }
 }
 
-.button{
-  align-self: flex-end;
-}
 
-.unitsName{
-  // background-color: rebeccapurple;
 
-  tr{
-    background: red;
+
+@media(min-width:768px){
+
+  
+  .newProduct__unitPrices{
+
+    .l-table{
+      padding: 0px 20px;
+    }
+
+    table{
+
+      .colNames{
+        width: 40%;
+      }
+      .colPrices{
+        width: 40%;
+      }
+
+      tr{
+        td{
+          .unitPrice__buttons{
+            justify-content: space-between;
+          }
+        }
+      }
+    }
   }
 
-  width: 40%;
-}
-
-.unitsPrice{
-  // background-color: red;
-}
-
-.test{
-  // background-color: aqua;
 }
