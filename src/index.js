@@ -1,53 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { Provider } from 'react-redux';
+import { createStore} from 'redux';
+import reducer from './reducers';
+
 import App from './componentes/router/App.jsx';
 
+const initialState ={
+  user : null,
+  statusModal : {
+    error: null,
+    message: '',
+    isOpen: false,
+  }
+}
 
-
+const store = createStore(reducer, initialState)
 
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store = {store}>
       <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-
-
-// const AuthContext = createContext();
- 
-// // Hook for child components to get the auth object ...
-// // ... and re-render when it changes.
-// const useAuth = () => {
-//  return useContext(AuthContext);
-// };
-
-// const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-//   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  
-
-//   useEffect(() => {
-//     const unsubscribe = auth.onAuthStateChanged((user) => {
-//       setUser(user);
-//       setIsAuthenticating(false);
-//     });
-
-//     // Cleanup subscription on unmount
-//     return () => unsubscribe();
-//   }, []);
-
-//   const values = {
-//     user,
-//     setUser,
-//     setIsAuthenticating,
-//     isAuthenticating,
-//   }
-
-//   return(
-//     <AuthContext.Provider value={values}>
-//       {children}
-//     </AuthContext.Provider>
-//   )
-// }

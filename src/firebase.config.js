@@ -15,17 +15,9 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig)
 
 
-//auth se vuelve a crear, revisa cookies o la base de datos firebase -> quienes estan logueados
-//base de datos y dijo ese man ya no tiene accceso se deslogueo, 
 
-//activar el evento onAuthStateChange -> 
 const auth = firebase.auth()
 const db = firebase.firestore()
 
-
-//subscripcion para ver el cambio de estado en el usuario
-// auth.onAuthStateChanged((user)=>{
-//   console.log(user)
-// })
 
 export {auth,db}

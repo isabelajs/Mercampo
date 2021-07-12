@@ -1,13 +1,16 @@
 import React , {useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
 
+//componentes react
+import Modal from '../componentes/common/Modal'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
+
+//imagenes y estilos css
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
-
-import Modal from '../componentes/common/Modal'
+//funciones auth
 import {createUser} from '../utils/auth'
 
 

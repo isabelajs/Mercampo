@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+
+//componentes de react
 import Home from "../../views/Home";
 import Login from "../../views/Login";
 import Register from "../../views/Register";
@@ -7,7 +9,10 @@ import LayoutLoged from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
+//estilos
 import "../../assets/styles/App.scss";
+
+//funciones firebase
 import { auth } from "../../firebase.config";
 
 

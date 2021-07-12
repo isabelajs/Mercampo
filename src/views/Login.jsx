@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+//componentes de react
 import Modal from '../componentes/common/Modal'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
+//imagenes
 import google from '../assets/static/google-icon.svg'
 import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
+//funciones de firebase
 import { singInWithEmail } from '../utils/auth'
 import {addUserToStore, findUserById, getCurrentUser} from '../utils/dataBase';
 
