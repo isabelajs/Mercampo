@@ -1,5 +1,6 @@
 import React , {useEffect, useState}from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 //componentes react
 import Modal from '../componentes/common/Modal'
@@ -19,8 +20,10 @@ import {createUser} from '../utils/auth'
 //BUG NO SE CIERRA CON ENTER EL MODAL
 
 
-function Register(){
-  
+function Register(props){
+  //debo tambien usar el user
+  const {statusModal} = props
+
   const [form, setForm ]=  useState({
     name:'',
     email: '',
@@ -139,15 +142,26 @@ function Register(){
         </div>
 
       </div>
-      {
+      {/* {
         statusRegister.isOpen && <Modal status={statusRegister} handleClose={handleCloseModal} />
+      } */}
+      
+      {
+        statusModal.isOpen && <Modal status={statusModal} handleClose = {handleCloseModal}/>
       }
     </LayoutSignMethod>
 
   )
 }
 
-export default Register;
+const mapStateToProps = state =>{
+  return{
+    user: state.user,
+    statusModal: state.statusModal
+  }
+}
+
+export default connect(mapStateToProps,null)(Register);
 
 
 
