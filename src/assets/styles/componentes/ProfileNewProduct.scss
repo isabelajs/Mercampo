@@ -2,12 +2,16 @@
   width: 100%;
   padding: 20px 3.5% 20px 3.5%;
 
-
   .form-textArea{
     height: 70px;
   }
 }
 
+
+.profileNewProduct{
+  display: flex;
+  flex-direction: column;
+}
 
 .newProduct__photo{
 
@@ -20,4 +24,97 @@
     margin-right: 10px;
   }
 
+}
+
+
+.newProduct__unitPrices{
+  table{
+    width: 100%;
+    max-width: 330px;
+    border-collapse: collapse;
+
+    tr{
+      // border-top: solid 0.8px #B8B5B5;
+    }
+    //padding celdas del encabezado
+    tr:first-child{
+      td{
+        padding-left:10px;
+      }
+    }
+
+    //bordes superior 
+    tr:nth-child(2){
+      td:first-child{
+        border-radius: 5px 0 0 0 ;
+      }
+
+      td:nth-child(3){
+        border-radius: 0 5px 0 0 ;
+      }
+    }
+
+
+    //bordes inferiores
+    tr:last-child{
+      td:first-child{
+        border-radius: 0 0 0 5px;
+      }
+
+      td:last-child{
+        border-radius: 0 0 5px 0 ;
+      }
+    }
+
+    tr:not(:first-child){
+
+
+
+      td{
+        border-top: solid 0.8px #B8B5B5;
+      }
+    }
+
+
+
+    .button--icon{
+      border: none;
+      p{
+        padding-left: 8%;
+      }
+    }
+
+
+    .form-input{
+      text-align: center;
+      width: 100%;
+      margin: 0;
+
+      border: 0;
+      box-shadow: none;
+    }
+
+  }
+}
+
+.button{
+  align-self: flex-end;
+}
+
+.unitsName{
+  // background-color: rebeccapurple;
+
+  tr{
+    background: red;
+  }
+
+  width: 40%;
+}
+
+.unitsPrice{
+  // background-color: red;
+}
+
+.test{
+  // background-color: aqua;
 }
