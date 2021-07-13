@@ -54,7 +54,6 @@ const createUser = async (email, password, name) => {
 const singInWithEmail = async (email, password) =>{
 
   return new Promise((resolve,reject)=>{
-
     auth.signInWithEmailAndPassword(email,password)
     .then((credential)=>resolve(credential.user))
     .catch((error)=>reject(error))

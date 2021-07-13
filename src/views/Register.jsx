@@ -1,5 +1,5 @@
 import React , {useEffect, useState}from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 //componentes react
@@ -23,7 +23,7 @@ import { messageInModal } from '../actions'
 
 
 function Register(props){
-
+  const history = useHistory()
   const {statusModal} = props
 
   const [form, setForm ]=  useState({
@@ -62,11 +62,11 @@ function Register(props){
       const user = await createUser(form.email,form.password, form.name)
       handleMessageInModal(user.email)
       signOff()
-
+      
     }catch(error){
       handleErrorInModal(error)
     }
-  
+    
   }
 
   const handleCloseModal = ()=>{
@@ -75,6 +75,7 @@ function Register(props){
       message: '',
       isOpen: false
     })
+    
   }
 
   
