@@ -1,0 +1,62 @@
+.newProduct__unitPrices{
+
+  td{
+    height: 50px;
+
+    &:first-child{
+      padding-left: 10px;
+    }
+
+    .unitPrice__buttons{
+      display: flex;
+      justify-content: space-around;
+
+      &--onlyEdit{
+        justify-content: center;
+      }
+
+      svg{
+        cursor: pointer;
+      }
+    }    
+
+    .button--icon{
+      border: none;
+      p{
+        padding-left: 8%;
+      }
+    }
+
+
+    .form-input{
+      padding-left: 0;
+      width: 100%;
+      margin: 0;
+
+      border: 0;
+      box-shadow: none;
+    }
+
+
+  }
+  
+}
+
+
+@media(min-width:768px){
+
+  .newProduct__unitPrices{
+
+    td{
+      .unitPrice__buttons{
+        justify-content: space-between;
+
+        &--onlyEdit{
+          justify-content: center;
+        }
+      }
+    }
+    
+  }
+
+}
