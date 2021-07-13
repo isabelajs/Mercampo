@@ -34,6 +34,10 @@ const  useAuth = ()=>{
 }
 
 
+
+
+//TODO: crear componente privateRoute para aplicarlo solo a quellos que lo necesiten
+//TODO: LEER SOBRE REDUX-THUNK
 const App = ()=> {
   
   const {user, isLoadingAuthentication} = useAuth()

@@ -1,9 +1,10 @@
 const reducer = (state, action)=>{
   switch(action.type){
     case 'MESSAGE_IN_MODAL':
-      console.log(state,action)
-
-      break
+      return {
+        ...state,
+        statusModal : action.payload
+      }
 
     default:
       return state
