@@ -1,0 +1,37 @@
+//Layout del componente 
+.l-profileNewProduct{
+  width: 100%;
+  padding: 20px 3.5% 20px 3.5%;
+
+  .form-textArea{
+    height: 70px;
+  }
+
+  .button{
+    align-self: flex-end;
+  }
+  
+}
+
+//comportamiento del compon
+.profileNewProduct{
+  display: flex;
+  flex-direction: column;
+}
+
+.newProduct__photo{
+
+  img{
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    background-color: gray;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+}
+
+
+
+
