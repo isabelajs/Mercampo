@@ -1,7 +1,7 @@
 import React from "react";
 import SystemLayout from "../componentes/system/SystemLayout";
 import '../assets/styles/componentes/ProfileProducts.scss'
-import {ProfileProduct, ProfileButtonNewProduct} from "../componentes/ProfileProduct";
+import {ProfileProduct, ProfileButtonNewProduct} from "../componentes/ProfileProducts/ProfileProduct";
 
 const ProfileSettings = (props) => {
 

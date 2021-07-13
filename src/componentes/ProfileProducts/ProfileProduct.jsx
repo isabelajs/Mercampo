@@ -1,13 +1,11 @@
 import React from 'react';
-import test from '../assets/static/img-product.png'
-import '../assets/styles/componentes/ProfileProduct.scss'
-import '../assets/styles/componentes/itemNewProduct.scss'
+import test from '../../assets/static/img-product.png'
+import '../../assets/styles/componentes/ProfileProduct.scss'
+import '../../assets/styles/componentes/itemNewProduct.scss'
 import { useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom'
 
 function ProfileProduct(props) {
-
-  // console.log(props)
 
   return (
     <div className='profileProduct'>
