@@ -1,9 +1,9 @@
-import React , {useEffect, useState}from 'react';
+import React , { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 //componentes react
-import Modal from '../componentes/common/Modal'
+import Alert from '../componentes/common/Alert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes y estilos css
@@ -14,17 +14,21 @@ import '../assets/styles/componentes/Register.scss'
 
 //funciones auth
 import {createUser, signOff} from '../utils/auth'
+
 //actiones
-import { messageInModal } from '../actions'
+import { openAlert } from '../actions'
+import Modal from '../componentes/common/Modal';
 
 //TODO deberia exister un elemento que me retorne a home?
 //TODO: DARLE MAS WIDTH AL CONTENEDOR DEL FORM EN TAMAÑO 1024 
+//TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
 //BUG NO SE CIERRA CON ENTER EL MODAL
 
 
 function Register(props){
-  const history = useHistory()
-  const {statusModal} = props
+
+  const {openAlert} = props
+  
 
   const [form, setForm ]=  useState({
     name:'',
@@ -39,46 +43,32 @@ function Register(props){
       })
   }        
 
-  const handleMessageInModal = (email)=>{
-    props.messageInModal({
-      error: null,
-      message: `Se ha enviado un correo de confirmacion al email ${email}, porfavor revisa la bandeja de entrada o spam de tu correo electronico`,
-      isOpen: true
-    })
-  }
-
-  const handleErrorInModal = (error) => {
-    props.messageInModal({
-      error:error,
-      message: `Hemos encontrado un error ${error.message}`,
-      isOpen:true
-    })
-  }
+  const validationsInForm = (form)=>{
+    if (form.name){
+      return 'nombre esta ok'
+    }
+  } 
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
 
     try{
       const user = await createUser(form.email,form.password, form.name)
-      handleMessageInModal(user.email)
+      openAlert({
+        error:false,
+        message: 'Todo esta correcto'
+      })
       signOff()
       
     }catch(error){
-      handleErrorInModal(error)
+      openAlert({
+        error: error,
+        message: error.message
+      })
+    
     }
     
-  }
-
-  const handleCloseModal = ()=>{
-    props.messageInModal({
-      error:null,
-      message: '',
-      isOpen: false
-    })
-    
-  }
-
-  
+  }  
 
   return(
 
@@ -91,6 +81,8 @@ function Register(props){
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
+          
+          <Alert/>
 
           <div className="form-group">
             <label>Nombre</label>   
@@ -136,7 +128,6 @@ function Register(props){
           </div>
 
           <button className='button button--main'>Registrate</button>
-         
         </form>
 
         <div className="login__options">
@@ -151,28 +142,45 @@ function Register(props){
         <div className="login__register">
           <div className="login__register--text">¿Ya estas registrado? <Link to={'/login'} className='bold'>Ingresa</Link>   </div>
         </div>
-
+      
       </div>
             
-      {
-        statusModal.isOpen && <Modal status={statusModal} handleClose = {handleCloseModal}/>
-      }
     </LayoutSignMethod>
 
   )
 }
 
-const mapStateToProps = state =>{
-  return{
-    statusModal: state.statusModal
+const mapStateToProps = state => {
+  return {
+    statusAlert :state.statusAlert
   }
 }
 
 const mapDispatchToProps = {
-  messageInModal
+  openAlert
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Register);
+export default connect(null,mapDispatchToProps)(Register);
 
 
+
+
+
+// hanlde(){
+
+//   message = validateRegister(form)
+
+  //si existe un mensaje 'que hay algo mal escroto'
+    //alert({error:true,message:message})
+    //return --> no sigue mas codigo
+
+
+  //createuser()
+
+    //then
+      //alert({error:null,message:'Todo correcto y yo que me alegro'})
+
+    //catch
+      //alert({error:true,message:'no conocemos'})
+// }

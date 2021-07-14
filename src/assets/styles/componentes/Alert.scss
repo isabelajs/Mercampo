@@ -1,0 +1,17 @@
+.containerAlert{
+  display: flex;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.green{
+  background-color: rgb(144, 209, 144);
+}
+
+.red{
+  background-color: rgb(221, 128, 125);
+}

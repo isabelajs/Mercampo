@@ -12,6 +12,11 @@ const initialState ={
   statusModal : {
     error: null,
     message: '',
+    isOpen: true,
+  },
+  statusAlert:{
+    error:null,
+    message: '',
     isOpen: false,
   }
 }

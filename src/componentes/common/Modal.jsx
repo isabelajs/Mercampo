@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import '../../assets/styles/componentes/Modal.scss'
 
 function Modal (props){

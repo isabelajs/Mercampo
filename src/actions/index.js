@@ -1,9 +1,9 @@
-export const messageInModal = payload =>({
-  type:'MESSAGE_IN_MODAL',
+export const openAlert = payload =>({
+  type:'OPEN_ALERT',
   payload
 })
 
-// export const closeModal = payload => ({
-//   type: 'CLOSE_MODAL',
-//   payload
-// })
+export const closeAlert = payload =>({
+  type:'CLOSE_ALERT',
+  payload
+})
