@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SystemLayout from "../componentes/system/SystemLayout";
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
@@ -23,6 +23,7 @@ const ProfileNewProduct = (props) => {
     ],
   });
 
+
   const handleChange = (e)=> {
     setInfoProduct({
       ...infoProduct,
@@ -41,7 +42,6 @@ const ProfileNewProduct = (props) => {
   };
 
   //agregar un componente UnitPrice
-
   const insertNewPrice = () => {
 
     const lastPrice = infoProduct.prices[infoProduct.prices.length-1]
@@ -85,15 +85,77 @@ const ProfileNewProduct = (props) => {
     });
   };
 
+  const addPhoto = (e) =>{
+    const inputFile = e.target
+
+
+    console.log(e.target.files[0])
+
+    if(inputFile.files && inputFile.files[0]){
+
+      const url = URL.createObjectURL(inputFile.files[0])
+
+      setInfoProduct({
+        ...infoProduct,
+        photos: [...infoProduct.photos,{alt:'tpepe',url:url, file:inputFile.files[0]}]
+      })
+
+    }
+  }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+
+    //Send img's to server, get a list of src links to save in firestore
+    infoProduct.photos.forEach(photo=>{
+
+      const data = new FormData()
+      
+      data.append('image',photo.file)
+
+      const options = {
+        method:'POST',
+        body: data,
+      }
+
+      fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_TOKEN_IMGBB}`,options)
+      .then(response => response.json())
+      .then(data=>console.log(data))
+      .catch(error=>console.log(error))
+    })
+
+  }
+
 
   return (
     <SystemLayout links={links} type="products" props={props}>
+
       <div className="l-profileNewProduct">
-        <form className="profileNewProduct form">
-          <div className="newProduct__photo">
+
+        <form className="profileNewProduct form" onSubmit={handleSubmit}>
+
+          <div className="l-newProduct__photos">
+
             <div className="systemSubGroup__title">Fotos:</div>
-            <img src="" alt="" />
-            <img src="" alt="" />
+
+              <div className="newProduct__photos">
+
+                {infoProduct.photos.map((item,index)=>{
+                  return <img src={item.url} alt={item.alt} key={index} />
+                })}
+                
+
+                {/* TODO PASAR ESTO A UN COMPONENTE APARTE */}
+
+                <label className="newProduct__addPhoto" name='file'>
+                  <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="20.1923" width="6.73077" height="35" rx="3.36538" transform="rotate(-90 0 20.1923)" fill="#2EC4B6"/>
+                    <rect x="14.8076" width="6.73077" height="35" rx="3.36538" fill="#2EC4B6"/>
+                  </svg>
+                  <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' onChange={addPhoto}/>
+                </label>
+              </div>
+
             <div className="separation-line"></div>
           </div>
 
