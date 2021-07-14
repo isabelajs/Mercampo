@@ -13,7 +13,7 @@ import { auth } from "../firebase.config.js";
 //asi que aunque el usuario no halla confirmado el correo debemos crear un doc con los datos del usuario
 
 
-
+//crea un usuario
 const createUser = async (email, password, name) => {
   return new Promise((resolve, reject) => {
     auth.createUserWithEmailAndPassword(email, password)
@@ -50,20 +50,29 @@ const createUser = async (email, password, name) => {
   });
 };
 
+//ingresa sesión con correo y contraseña
 const singInWithEmail = async (email, password) =>{
 
   return new Promise((resolve,reject)=>{
-
     auth.signInWithEmailAndPassword(email,password)
     .then((credential)=>resolve(credential.user))
     .catch((error)=>reject(error))
   })
 }
 
+//cierra sesión
+const signOff = async()=>{
+  auth.signOut()
+    .then( ()=>{
+      console.log('cerramos sesión')
+    })
+    .catch((error)=>{
+      console.log(error.message)
+    })
+}
 
 
-
-export {createUser, singInWithEmail,};
+export {createUser, singInWithEmail, signOff};
 
 
 
