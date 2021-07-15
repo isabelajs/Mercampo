@@ -23,7 +23,6 @@ const ProfileNewProduct = (props) => {
     ],
   });
 
-
   const handleChange = (e)=> {
     setInfoProduct({
       ...infoProduct,

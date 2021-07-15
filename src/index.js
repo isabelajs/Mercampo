@@ -9,11 +9,7 @@ import App from './componentes/router/App.jsx';
 
 const initialState ={
   user : null,
-  statusModal : {
-    error: null,
-    message: '',
-    isOpen: true,
-  },
+  
   statusAlert:{
     error:null,
     message: '',

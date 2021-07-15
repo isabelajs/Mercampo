@@ -17,19 +17,18 @@ import {createUser, signOff} from '../utils/auth'
 
 //actiones
 import { openAlert } from '../actions'
-import Modal from '../componentes/common/Modal';
+import { useCallback } from 'react';
+
 
 //TODO deberia exister un elemento que me retorne a home?
-//TODO: DARLE MAS WIDTH AL CONTENEDOR DEL FORM EN TAMAÑO 1024 
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
-//BUG NO SE CIERRA CON ENTER EL MODAL
+
 
 
 function Register(props){
 
   const {openAlert} = props
   
-
   const [form, setForm ]=  useState({
     name:'',
     email: '',
@@ -43,27 +42,46 @@ function Register(props){
       })
   }        
 
-  const validationsInForm = (form)=>{
-    if (form.name){
-      return 'nombre esta ok'
+  //function to validate register form use hook 'useCallback' why it not need to change in every render
+  const validationsInForm = useCallback((form)=>{
+    
+    let message = null
+  
+    if (form.name.length <= 8 || !isNaN(form.name)){
+      message =  'Nombre invalido'
     }
-  } 
+    else if(form.password.length < 8 ){
+      message = 'La contraseña debe contener almenos 8 digitos'
+    }
+  
+    return message
+  },[])
 
+  //validate and do stuff to create a user in firebase
   const handleSubmit = async (e)=>{
     e.preventDefault()
 
+    const validation = validationsInForm(form)
+
+    if(validation){
+      openAlert({
+        error:true,
+        message: validation,
+      })
+      return
+    }
+
     try{
-      const user = await createUser(form.email,form.password, form.name)
+      await createUser(form.email,form.password, form.name)
       openAlert({
         error:false,
         message: 'Todo esta correcto'
       })
-      signOff()
       
     }catch(error){
       openAlert({
         error: error,
-        message: error.message
+        message: error.code
       })
     
     }
@@ -94,7 +112,6 @@ function Register(props){
               autoComplete='false'
               value={form.name}
               onChange={handleChange}
-              required
             />
             
           </div>
@@ -109,7 +126,6 @@ function Register(props){
               placeholder='Ingresa tu correo electronico' 
               autoComplete='false' 
               value = {form.email}
-              required
               />
           </div>
 
@@ -123,7 +139,6 @@ function Register(props){
               placeholder='Ingresa tu contraseña' 
               value = {form.password}
               autoComplete='false'
-              required
             />
           </div>
 
@@ -150,11 +165,12 @@ function Register(props){
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    statusAlert :state.statusAlert
-  }
-}
+//this is not needed because alert draw by his own state
+// const mapStateToProps = state => {
+//   return {
+//     statusAlert :state.statusAlert
+//   }
+// }
 
 const mapDispatchToProps = {
   openAlert
@@ -162,25 +178,3 @@ const mapDispatchToProps = {
 
 
 export default connect(null,mapDispatchToProps)(Register);
-
-
-
-
-
-// hanlde(){
-
-//   message = validateRegister(form)
-
-  //si existe un mensaje 'que hay algo mal escroto'
-    //alert({error:true,message:message})
-    //return --> no sigue mas codigo
-
-
-  //createuser()
-
-    //then
-      //alert({error:null,message:'Todo correcto y yo que me alegro'})
-
-    //catch
-      //alert({error:true,message:'no conocemos'})
-// }
