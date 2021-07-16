@@ -14,7 +14,7 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { singInWithEmail } from '../utils/auth'
+import { singInWithEmail, signOff } from '../utils/auth'
 import {addUserToStore, findUserById} from '../utils/dataBase';
 import { useCallback } from 'react';
 
@@ -25,23 +25,19 @@ import { useCallback } from 'react';
 function Login (props){
   const {openAlert, closeAlert} = props
 
+  //como la alerta no es un modal, yo creo que no deberia estar en el redux, aahora que lo pienso
+  //si fuera un modal si me interesaria que todos supieran sobre su estado
+  //pero lo estamos utilizando como un componente de dibujo normal...
   useEffect(()=>{
     closeAlert()
   },[])
 
-  const history = useHistory()
+  // const history = useHistory()
 
   const [form, setForm ] =  useState({
                               email: '',
                               password: '',
   })
-
-  const handleInput = (event)=>{
-    setForm({
-      ...form,
-      [event.target.name]: event.target.value
-    })
-  }        
 
   const validationsInForm = useCallback((form)=>{
     let message = null
@@ -55,8 +51,16 @@ function Login (props){
     return message
 
   },[])
-  
+
+  const handleInput = (event)=>{
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+  }        
+
   const handleSubmit = async (event)=>{
+
     event.preventDefault()
     
     const validation = validationsInForm(form)
@@ -70,31 +74,31 @@ function Login (props){
     }
 
     try{
-      //loggin user
+
+      //El usuario intenta loguearse
       const user = await singInWithEmail(form.email, form.password)
-      console.log(user)
-      //si esta verificado 
+
+
+      //si el ususario existe en la base de datos , confirma si se encuentra verificado
       if(user.emailVerified){
         
         const userRef = await findUserById(user.uid)
-        console.log(user,userRef)
 
         if(!userRef.exists){
           await addUserToStore(user)
         }
 
-        history.push('/')
+        //COMPLETE PERDI 1 HORA POR QUE AL LOGUEARME ME REDIRECCIONABA A HOME ...
+        // history.push('/')
 
       }else{
-
-        console.log('no puede ingresar')
+        // signOff() -> esto ya no tiene proposito aca
         openAlert({
           error: true,
           message: 'Tu correo actualmente no se encuentra verificado'
         })
       }
     }catch (error){
-      
       openAlert({
         error: true,
         message: error.code

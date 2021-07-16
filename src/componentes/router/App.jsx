@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect, useLocation } from "react-router-dom";
 //redux
 import { connect } from "react-redux";
 import { setUser,setLoadingUser } from '../../actions'
@@ -27,18 +27,35 @@ import useAuth from "../../utils/Hooks/useAuth";
 //para hacer esto debo mover el user desde el hook hacia el redux
 const App = (props)=> {
   
-  // const {user, isLoadingAuthentication, setUser, setLoadingUser} = props
+  const {user, isLoadingAuthentication, setUser, setLoadingUser} = props
 
-  const {user, isLoadingAuthentication} = useAuth()
+  //TODO: IMPRIME LA SECUENCIA 
+  // LA PRIMERA VEZ IMPRIME 'USER NULL' -> cuando la pagina carga
+  // el usuario se loguea a si que  -> user = 'usuario logueado'
+  // se imprime ese man no esta autenticado -> utilizo la funcion de signout directa de auth 
+  // como se deslogueo vuelve a activarse la esta funcion pero imprime user = null
 
+  useEffect(()=>{
+    const unSub = auth.onAuthStateChanged((user)=>{
 
-  // useEffect(()=>{
-  //   auth.onAuthStateChanged((user)=>{
-  //     setUser(user)
-  //     setLoadingUser(false)
-  //   })
-  // },[])
-  
+      console.log('paso un cambio melo',user)
+
+      //no puedo poner solo user.emailverified por que cuando es  null me tira error a si que primero evalua si existe
+      //un usuario y seguido confirma si ese usuario tendria el email verificado  si no lo tiene verificado
+      //lo deslogueo para que sea serio
+      if(user && !user.emailVerified){
+          auth.signOut()
+          console.log('ese man no esta autenticado', auth.currentUser)
+          return
+        }
+      
+      //en todos los otros casos lo dejo como esta.
+      setUser(user)
+      setLoadingUser(false)
+    })
+
+    return () => unSub()
+  },[])
   
 
   if(isLoadingAuthentication){
@@ -61,27 +78,17 @@ const App = (props)=> {
             <LayoutLoged>
 
               <Route exact path="/" component={Home} />
-
-
-              <Route exact path='/profile/settings' component={ProfileSettings}/>
-
-              {/* <PrivateRoute exact path='/profile/settings'>
+              
+              <PrivateRoute exact path='/profile/settings'>
                 <ProfileSettings />
               </PrivateRoute>
 
               <PrivateRoute exact path='/profile/products'>
                 <ProfileProducts />
-              </PrivateRoute> */}
+              </PrivateRoute>
 
 
-              {/* <Route exact path="/profile/products/new">
-                {
-                  user ? <ProfileNewProduct/> : <Redirect to='/login'/>
-                }
-              </Route> */}
-  
-
-              {/* <Route exact path="/profile/products" component={ProfileProducts}/> */}
+              <Route exact path="/profile/products" component={ProfileProducts}/>
               <Route exact path="/profile/products/new" component={ProfileNewProduct} />
               <Route exact path="/profile/products/edit/:product" />
             </LayoutLoged>
@@ -109,6 +116,4 @@ const mapDispatchToProps = {
   setLoadingUser
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App);
