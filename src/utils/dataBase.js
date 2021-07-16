@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {db} from '../firebase.config'
 import { auth } from "../firebase.config.js";
 

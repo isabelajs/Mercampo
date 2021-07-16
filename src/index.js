@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //necesarias para hacer el redux
-import { Provider } from 'react-redux';
+import { Provider} from 'react-redux';
 import { createStore, compose } from 'redux';
 import reducer from './reducers';
-
+import {setUser}from './actions'
 import App from './componentes/router/App.jsx';
+import { auth } from './firebase.config';
 
 const initialState ={
   user : null,
+  isLoadingAuthentication: true,
   
   statusAlert:{
     error:null,
@@ -18,7 +20,9 @@ const initialState ={
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(reducer, initialState, composeEnhancers())
+
 
 
 ReactDOM.render(

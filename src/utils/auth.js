@@ -1,24 +1,12 @@
 import { auth } from "../firebase.config.js";
+//  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
-
-//TODO: IMPLEMENTAR EL USERNAME... user.update(displayName:)
-// estuve buscando si se podia ejecutar una accion cuando el usuario confirme su correo, pero no..
-// a si que basicamente no podemos dejar loguear gente que no tenga su correo confirmado
-// era para que la accion de  confirmar el correo disparara una funcion que creara 
-// en firestore un documento con los datos ejemplo {name, email, telefono, telefono-2, etc..}
-// pero esto fuera solo creado cuando se confirme el email, cosa que.... no es posible
-//  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified
-// en este link explica que por defecto no existe esa funcion en firebase
-
-//asi que aunque el usuario no halla confirmado el correo debemos crear un doc con los datos del usuario
-
-
-//crea un usuario
+//FIXME: Viabilidad de crear el usuario en store inmediatamente o solo cuando se loguee por primera vez... 
 const createUser = async (email, password, name) => {
   return new Promise((resolve, reject) => {
     auth.createUserWithEmailAndPassword(email, password)
 
-    //le añado el nombre
+    //creo el dato en display name
     .then((credential) => {
       credential.user.updateProfile({
         displayName: name
@@ -73,34 +61,3 @@ const signOff = async()=>{
 
 
 export {createUser, singInWithEmail, signOff};
-
-
-
-//si te logueas con un email 
-
-  //existo
-
-    //no esta verificado
-
-      //not isInUserCollection
-
-        //addUserToCollectionStore
-
-
-    //isVerified
-      // redirect to home
-
-
-  //catch (posibles errores)
-
-    //auth/user-not-found
-    //error en pregunta de usercollection
-    //error en addusertocollection
-
-
-
-
-
-//ese logueado tiene que ser guardada la token en localstore o en cookies 
-
-  //

@@ -1,5 +1,5 @@
-import React , { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React , { useState,useEffect,useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 //componentes react
@@ -13,11 +13,10 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
 //funciones auth
-import {createUser, signOff} from '../utils/auth'
+import {createUser} from '../utils/auth'
 
 //actiones
-import { openAlert } from '../actions'
-import { useCallback } from 'react';
+import { openAlert, closeAlert } from '../actions'
 
 
 //TODO deberia exister un elemento que me retorne a home?
@@ -26,8 +25,11 @@ import { useCallback } from 'react';
 
 
 function Register(props){
+  const {openAlert, closeAlert} = props
 
-  const {openAlert} = props
+  useEffect(()=>{
+    closeAlert()
+  },[])
   
   const [form, setForm ]=  useState({
     name:'',
@@ -51,7 +53,7 @@ function Register(props){
       message =  'Nombre invalido'
     }
     else if(form.password.length < 8 ){
-      message = 'La contraseña debe contener almenos 8 digitos'
+      message = 'La contraseña es demasiado corta'
     }
   
     return message
@@ -75,7 +77,7 @@ function Register(props){
       await createUser(form.email,form.password, form.name)
       openAlert({
         error:false,
-        message: 'Todo esta correcto'
+        message: 'Se ha enviado un correo de verificación, por favor revisa tu bandeja de entrada'
       })
       
     }catch(error){
@@ -173,7 +175,8 @@ function Register(props){
 // }
 
 const mapDispatchToProps = {
-  openAlert
+  openAlert,
+  closeAlert
 }
 
 

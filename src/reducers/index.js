@@ -13,11 +13,23 @@ const reducer = (state, action)=>{
     case 'CLOSE_ALERT':
       return {
         ...state,
-        statusModal: {
+        statusAlert: {
           isOpen: false,
           error: null,
           message: null,
         }
+      }
+    
+    case 'SET_USER':
+      return{
+        ...state,
+        user: action.payload,
+      }
+
+    case 'SET_LOADING_USER':
+      return{
+        ...state,
+        isLoadingAuthentication:action.payload
       }
 
     default:

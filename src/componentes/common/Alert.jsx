@@ -15,11 +15,14 @@ function Alert (props){
       case ('auth/invalid-email'):
         message = 'El correo que intentas registrar no es válido'
         break
-      case ('Nombre invalido'):
-        message = 'Por favor escribe un nombre válido'
+      case ('auth/wrong-password'):
+        message = 'La contraseña es incorrecta'
         break
+      case ('auth/user-not-found'):
+        message = 'El usuario no se encuentra registrado'
+        break
+    
       default:
-        console.log(statusAlert.message)
         message = statusAlert.message
     }
 
@@ -45,28 +48,4 @@ const mapStateToProps = state => {
 
 export default connect (mapStateToProps,null)(Alert)
 
-// const alert ()=>{
-  
-//   //state.message = ''
 
-//   //statusModal.error -> true
-
-//     //evaluamos el message -> swtich
-//       //case 'auth/email-wrong
-//         //state.message = 'El email esta mal escrito porfavor confirmelo'
-//         //break
-//       //case 'auth/email-wrong
-//         //state.message = 'El email esta mal escrito porfavor confirmelo'
-//         //break
-//       //default
-//         //stage.message = message
-
-
-        
-//     //statusModal.error -> false
-//       //state.message = statusModal.message
-        
-//     //return( statusModal.error ? <color rojo y message> : <color verde y message>
-
-
-// }

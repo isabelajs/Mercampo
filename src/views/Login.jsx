@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { openAlert,closeAlert } from '../actions';
 
 //componentes de react
-import Modal from '../componentes/common/Modal'
+import Alert from '../componentes/common/Alert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes
@@ -13,26 +15,25 @@ import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
 import { singInWithEmail } from '../utils/auth'
-import {addUserToStore, findUserById, getCurrentUser} from '../utils/dataBase';
+import {addUserToStore, findUserById} from '../utils/dataBase';
+import { useCallback } from 'react';
 
 // https://dribbble.com/wenhy/collections/1631290-design
 //  https://co.pinterest.com/pin/184577284702032988/
 
 
-//TODO: SI YA ESTA LOGUEADO NO ENTRAR A LOGIN....  REDIRECT DIRECTO A PROFILE SUPONGO
 function Login (props){
+  const {openAlert, closeAlert} = props
 
+  useEffect(()=>{
+    closeAlert()
+  },[])
 
   const history = useHistory()
 
-  const [form, setForm ]=  useState({
-                                      email: '',
-                                      password: '',
-                                    })
-
-  const [statusModal, setStatusLogin] = useState({
-    isOpen:false,
-    message: ''
+  const [form, setForm ] =  useState({
+                              email: '',
+                              password: '',
   })
 
   const handleInput = (event)=>{
@@ -42,17 +43,39 @@ function Login (props){
     })
   }        
 
+  const validationsInForm = useCallback((form)=>{
+    let message = null
+
+    if(form.email === '' || (form.email.length < 10 && !form.email.includes('@'))){
+      message = 'Por favor ingresa un correo válido'
+    }else if(form.password === ' ' || form.password.length < 8){
+      message = 'La contraseña es muy corta'
+    }
+
+    return message
+
+  },[])
+  
   const handleSubmit = async (event)=>{
     event.preventDefault()
+    
+    const validation = validationsInForm(form)
+
+    if(validation){
+    openAlert({
+      error:true,
+      message: validation,
+    })
+    return
+    }
 
     try{
       //loggin user
       const user = await singInWithEmail(form.email, form.password)
-
+      console.log(user)
       //si esta verificado 
       if(user.emailVerified){
         
-
         const userRef = await findUserById(user.uid)
         console.log(user,userRef)
 
@@ -63,105 +86,87 @@ function Login (props){
         history.push('/')
 
       }else{
-        
-        //desloguear ese perro
-        setStatusLogin({
-          isOpen:true,
-          message:'Tu correo actualmente no se encuentra verificado, por favor verificalo para ingresar'
+
+        console.log('no puede ingresar')
+        openAlert({
+          error: true,
+          message: 'Tu correo actualmente no se encuentra verificado'
         })
       }
-
-
     }catch (error){
-      console.log(error);
       
-      let message = ''
-
-      switch (error.code) {
-        //if the user not exists 
-        case 'auth/user-not-found':
-          message = 'El perro hpta no existe en la base de datos'
-          break
-        case 'auth/wrong-password':
-          message = 'Contraseña incorrecta mi perro'
-          break
-        default:
-          message = error.message
-      }
-
-      setStatusLogin({
-        isOpen: true,
-        message: `${message}`
+      openAlert({
+        error: true,
+        message: error.code
       })
     }
   }
 
-  const handleClose = ()=>{
-    setStatusLogin({
-      isOpen: false,
-      message: null
-    })
-  }
-
+  
   return(
 
+    <LayoutSignMethod>
+      
+      <div className="login">
 
-      <LayoutSignMethod>
-        
-        <div className="login">
-
-        <div className="login__title">
-          <div className='title'>Bienvenido</div>
-          <div className='subtitle'>Ingresa para continuar</div>
-        </div>
-
-        <form className='form' onSubmit={handleSubmit} >
-          <div className="form-group">
-            <label >Usuario</label>
-            <input 
-              className="form-input" 
-              onChange={handleInput}   
-              name='email' type="email" 
-              placeholder="Ingresa un correo electrónico" 
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Contraseña</label>
-            <input 
-              onChange={handleInput} 
-              className="form-input" 
-              name='password' 
-              type="password" 
-              placeholder="Ingresa la contraseña" 
-              autoComplete='false'/>
-          </div>
-
-          <Link to={'/register'} className='form__text'>¿Olvidaste tu contraseña?</Link>
-          <button className="button button--main">Ingresar</button>
-
-
-        </form>
-
-        <div className="login__options">
-          <div className="login__options--text">Ingresar con:</div>
-          <div className="login__options--options">
-            <img className='method-icon' src={google} alt="" />
-            <img className='method-icon' src={facebook} alt="" />
-            <img className='method-icon' src={phone} alt="" />
-          </div>
-        </div>
-
-        <div className="login__register">
-          <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>
-        </div>
-
+      <div className="login__title">
+        <div className='title'>Bienvenido</div>
+        <div className='subtitle'>Ingresa para continuar</div>
       </div>
 
-        { statusModal.isOpen && <Modal status={statusModal} handleClose={handleClose}></Modal>}
+      <form className='form' onSubmit={handleSubmit} >
+        <Alert/>
+        <div className="form-group">
+          <label >Usuario</label>
+          <input 
+            className="form-input" 
+            onChange={handleInput}   
+            name='email' 
+            type="text" 
+            placeholder="Ingresa un correo electrónico" 
+          />
+        </div>
 
-      </LayoutSignMethod>
+        <div className="form-group">
+          <label>Contraseña</label>
+          <input 
+            onChange={handleInput} 
+            className="form-input" 
+            name='password' 
+            type="password" 
+            placeholder="Ingresa la contraseña" 
+            autoComplete='false'/>
+        </div>
+
+        <Link to={'/register'} className='form__text'>¿Olvidaste tu contraseña?</Link>
+        <button className="button button--main">Ingresar</button>
+
+
+      </form>
+
+      <div className="login__options">
+        <div className="login__options--text">Ingresar con:</div>
+        <div className="login__options--options">
+          <img className='method-icon' src={google} alt="" />
+          <img className='method-icon' src={facebook} alt="" />
+          <img className='method-icon' src={phone} alt="" />
+        </div>
+      </div>
+
+      <div className="login__register">
+        <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>
+      </div>
+
+    </div>
+
+    </LayoutSignMethod>
   )
 }
 
-export default Login
+
+const mapDispatchToProps ={
+  openAlert,
+  closeAlert
+}
+
+export default connect (null, mapDispatchToProps)(Login)
