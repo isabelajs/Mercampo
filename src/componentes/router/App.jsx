@@ -20,20 +20,11 @@ import "../../assets/styles/App.scss";
 
 //funciones de auth
 import { auth } from '../../firebase.config'
-import useAuth from "../../utils/Hooks/useAuth";
 
 
-//TODO: crear componente PrivateRoute para aplicarlo solo a quellos que lo necesiten
-//para hacer esto debo mover el user desde el hook hacia el redux
 const App = (props)=> {
   
   const {user, isLoadingAuthentication, setUser, setLoadingUser} = props
-
-  //TODO: IMPRIME LA SECUENCIA 
-  // LA PRIMERA VEZ IMPRIME 'USER NULL' -> cuando la pagina carga
-  // el usuario se loguea a si que  -> user = 'usuario logueado'
-  // se imprime ese man no esta autenticado -> utilizo la funcion de signout directa de auth 
-  // como se deslogueo vuelve a activarse la esta funcion pero imprime user = null
 
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
@@ -88,7 +79,6 @@ const App = (props)=> {
               </PrivateRoute>
 
 
-              <Route exact path="/profile/products" component={ProfileProducts}/>
               <Route exact path="/profile/products/new" component={ProfileNewProduct} />
               <Route exact path="/profile/products/edit/:product" />
             </LayoutLoged>

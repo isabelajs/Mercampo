@@ -1,6 +1,7 @@
 import React from "react";
 import SystemLayout from "../componentes/system/SystemLayout";
-// import Button from "../componentes/common/Button";
+
+//estilos
 import '../assets/styles/componentes/ProfileSettings.scss'
 
 const ProfileSettings = (props) => {

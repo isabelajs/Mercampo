@@ -1,6 +1,7 @@
-.Header{
+.header{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color:#FE043C;
   height: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -8,6 +9,84 @@
 
   &__logo{
     width: 150px;
-    height: 30px;
+    height: 25px;
+    object-fit: contain;
+  }
+
+  &__menuBurguer{
+    cursor: pointer;
+  }
+
+  &__userStatus{
+    cursor: pointer;
+    
+    .userStatus__icon{
+      width: 35px;
+      height: 35px;
+    }
+    
+    .userStatus__userName{
+      display: none;
+    }
+  }
+}
+
+
+.menuUser{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  // bottom: 0; alternativa -> top 0 bottom 0 
+
+  transition: all 0.3s;
+  transform: translateX(-100%);
+  z-index: 3;
+  
+  background-color: indigo;
+
+  &--open{
+    transform: translateX(0);
+  }
+  
+  &>p{
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: end;
+  }
+}
+
+
+
+
+
+@media (min-width:910px){
+  .header{
+
+    &__logo{
+      height: 30px;
+    }
+
+    &__menuBurguer{
+      display: none;
+    }
+
+    &__userStatus{
+      display: flex;
+      align-items: center;
+      // padding-right: 20px;
+      margin-right: 10px;
+
+      .userStatus__icon{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      .userStatus__userName{
+        display: block;
+      }
+    }
   }
 }

@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import { Provider} from 'react-redux';
 import { createStore, compose } from 'redux';
 import reducer from './reducers';
-import {setUser}from './actions'
+//componente react
 import App from './componentes/router/App.jsx';
-import { auth } from './firebase.config';
+
 
 const initialState ={
   user : null,
