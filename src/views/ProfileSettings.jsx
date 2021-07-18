@@ -3,21 +3,23 @@ import { connect } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
+import Alert from "../componentes/common/Alert";
 
 //estilos
 import '../assets/styles/componentes/ProfileSettings.scss';
 
 //funciones de auth
 import { findUserById, updateUserInfo } from "../utils/dataBase";
+import validationsInForm from '../utils/validationsInform';
 
 //import actions
-import { openAlert } from '../actions'
+import { closeAlert, openAlert } from '../actions'
 
 //TODO Campos obligatorios deberia mostratme un alert??
 
 
 const ProfileSettings = (props) => {
-  const {user} = props
+  const {user,openAlert, closeAlert} = props
 
   const [form, setForm] = useState({
     city: '',
@@ -41,6 +43,7 @@ const ProfileSettings = (props) => {
     })
   }
 
+  const validationForm = useCallback((form)=>validationsInForm(form),[])
 
   useEffect( ()=>{
 
@@ -63,21 +66,26 @@ const ProfileSettings = (props) => {
   }
     ,[])
 
-  const validationsInForm = useCallback((form)=>{
-    if (!form.pepe){
-      console.log('exciste')
-    }
-    console.log(form)
-    } ,[])
   
   const handleSubmit = (e)=>{
     e.preventDefault()
-    validationsInForm(form)
+
+    const validation = validationForm(form)
+
+    if(validation){
+      openAlert({
+        error:true,
+        message:validation
+      }
+      )
+    }else{
+      closeAlert()
+    }
     // updateUserInfo(user.uid,form)
     
   }
 
- 
+
   return (
 
     <SystemLayout links={links} type='settings'  props={props}>
@@ -200,7 +208,7 @@ const ProfileSettings = (props) => {
               </div>
 
             </div>
-
+            <Alert/>
             <button className='button button--second'>Guardar</button>
 
           </form>
@@ -246,7 +254,8 @@ const mapStateToProps = (state)=>{
 }
 
 const mapDispatchToProps = {
-  openAlert
+  openAlert,
+  closeAlert
 }
 
 

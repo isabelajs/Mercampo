@@ -1,5 +1,5 @@
-import React, {useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, {useState, useEffect, useCallback  } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { openAlert,closeAlert } from '../actions';
 
@@ -14,9 +14,9 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { singInWithEmail, signOff } from '../utils/auth'
+import { singInWithEmail } from '../utils/auth'
 import {addUserToStore, findUserById} from '../utils/dataBase';
-import { useCallback } from 'react';
+import validationsInForm from '../utils/validationsInform';
 
 // https://dribbble.com/wenhy/collections/1631290-design
 //  https://co.pinterest.com/pin/184577284702032988/
@@ -25,32 +25,29 @@ import { useCallback } from 'react';
 function Login (props){
   const {openAlert, closeAlert} = props
 
-  //como la alerta no es un modal, yo creo que no deberia estar en el redux, aahora que lo pienso
-  //si fuera un modal si me interesaria que todos supieran sobre su estado
-  //pero lo estamos utilizando como un componente de dibujo normal...
   useEffect(()=>{
     closeAlert()
   },[])
-
-  // const history = useHistory()
 
   const [form, setForm ] =  useState({
                               email: '',
                               password: '',
   })
 
-  const validationsInForm = useCallback((form)=>{
-    let message = null
+  const validationForm = useCallback((form)=>{validationsInForm(form)},[])
 
-    if(form.email === '' || (form.email.length < 10 && !form.email.includes('@'))){
-      message = 'Por favor ingresa un correo válido'
-    }else if(form.password === ' ' || form.password.length < 8){
-      message = 'La contraseña es muy corta'
-    }
+  // const validationsInForm = useCallback((form)=>{
+  //   let message = null
 
-    return message
+  //   if(form.email === '' || (form.email.length < 10 && !form.email.includes('@'))){
+  //     message = 'Por favor ingresa un correo válido'
+  //   }else if(form.password === ' ' || form.password.length < 8){
+  //     message = 'La contraseña es muy corta'
+  //   }
 
-  },[])
+  //   return message
+
+  // },[])
 
   const handleInput = (event)=>{
     setForm({
@@ -63,7 +60,7 @@ function Login (props){
 
     event.preventDefault()
     
-    const validation = validationsInForm(form)
+    const validation = validationForm(form)
 
     if(validation){
     openAlert({
@@ -78,27 +75,23 @@ function Login (props){
       //El usuario intenta loguearse
       const user = await singInWithEmail(form.email, form.password)
 
-
-      //si el ususario existe en la base de datos , confirma si se encuentra verificado
+      //si el usuario esta verificado, se confirma si esta en la base de datos
       if(user.emailVerified){
-        
+      
         const userRef = await findUserById(user.uid)
 
-        if(!userRef.exists){
+        if(userRef === undefined){
           await addUserToStore(user)
         }
 
-        //COMPLETE PERDI 1 HORA POR QUE AL LOGUEARME ME REDIRECCIONABA A HOME ...
-        // history.push('/')
-
       }else{
-        // signOff() -> esto ya no tiene proposito aca
         openAlert({
           error: true,
           message: 'Tu correo actualmente no se encuentra verificado'
         })
       }
     }catch (error){
+      console.log(error)
       openAlert({
         error: true,
         message: error.code

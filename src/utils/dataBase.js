@@ -4,9 +4,13 @@ import { auth } from "../firebase.config.js";
 // agrega los usuarios a firestore (copia de users + info adicional)
 const addUserToStore = async (user) => {
   db.collection('users').doc(user.uid).set({
-    name:user.displayName,
+    city: '',
+    department:'',
     email:user.email,
     id:user.uid,
+    name:user.displayName,
+    phoneMain:'',
+    phoneSecond:''
   })
   .catch((error) => error);
 
