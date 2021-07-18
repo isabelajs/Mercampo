@@ -1,23 +1,65 @@
 import React from "react";
+import { useEffect } from "react";
+import { connect } from 'react-redux'
+
 import SystemLayout from "../componentes/system/SystemLayout";
 
 //estilos
 import '../assets/styles/componentes/ProfileSettings.scss'
+//funciones de auth
+import { findUserById } from "../utils/dataBase";
+import { useState } from "react";
 
 const ProfileSettings = (props) => {
+  const {user} = props
+  const [form, setForm] = useState({
+    name: '',
+    })
 
   const links = [
     { name: "Perfil", url: "/profile/settings" },
     { name: "Settings", url: "/profile/settings" },
   ];
 
+  const handleChange = (e)=>{
+    console.log('pepe')
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+
+  useEffect( ()=>{
+
+    const findUser = async ()=>{
+      let userInData = await findUserById(user.uid)
+      setForm({
+        ...form,
+        name: userInData.name,
+        email: userInData.email,
+      })
+    }
+
+    findUser()
+
+   
+  }
+    ,[])
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    console.log(user)
+  }
+
+ 
   return (
 
     <SystemLayout links={links} type='settings'  props={props}>
 
         <div className="l-profileSettings">
 
-          <form className='profileSettings__data form'>
+          <form className='profileSettings__data form' onSubmit = {handleSubmit}>
 
             <div className='data__photo'>
               <div className='systemSubGroup__title'>Foto:</div>
@@ -37,7 +79,7 @@ const ProfileSettings = (props) => {
 
                   <div className="form-group">
                     <label>Nombre y apellido</label>
-                    <input className="form-input" name='email' type="email" placeholder="Ingresa un correo electrónico" />
+                    <input className="form-input" name='name' type="text" placeholder="Ingresa tu nombre" value ={form.name} onChange={handleChange} />
                   </div>
 
                   <div className="form-group">
@@ -127,4 +169,11 @@ const ProfileSettings = (props) => {
   );
 };
 
-export default ProfileSettings;
+const mapDispatchToProps = (state)=>{
+  return{
+    user : state.user
+  }
+}
+
+
+export default connect (mapDispatchToProps,null)(ProfileSettings)

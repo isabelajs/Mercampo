@@ -7,6 +7,7 @@ import { setUser,setLoadingUser } from '../../actions'
 //componentes de react
 import Home from "../../views/Home";
 import Login from "../../views/Login";
+import Products from '../../views/Products'
 import Register from "../../views/Register";
 import LayoutLoged from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
@@ -17,10 +18,8 @@ import PrivateRoute from "./PrivateRoute";
 //estilos
 import "../../assets/styles/App.scss";
 
-
 //funciones de auth
 import { auth } from '../../firebase.config'
-
 
 const App = (props)=> {
   
@@ -63,12 +62,17 @@ const App = (props)=> {
             {!user  && <Login/>}
           </Route>
   
-          <Route exact path="/register" component={Register} />
+          <Route exact path="/register">
+            {  user && <Redirect to='profile/settings'/> }
+            {  !user && <Register/> }
+          </Route>
 
           <Switch>
             <LayoutLoged>
 
               <Route exact path="/" component={Home} />
+
+              <Route exact path='/products' component={Products} />
               
               <PrivateRoute exact path='/profile/settings'>
                 <ProfileSettings />

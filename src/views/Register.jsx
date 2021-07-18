@@ -26,16 +26,21 @@ import { openAlert, closeAlert } from '../actions'
 
 function Register(props){
   const {openAlert, closeAlert} = props
-
-  useEffect(()=>{
-    closeAlert()
-  },[])
-  
   const [form, setForm ]=  useState({
     name:'',
     email: '',
     password: '',
   })
+
+  //cuan
+  useEffect(()=>{
+    closeAlert();
+    setForm({
+      name:'juan',
+    })
+  },[])
+  
+
 
   const handleChange = (event)=>{
     setForm({

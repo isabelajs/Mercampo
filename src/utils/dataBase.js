@@ -7,7 +7,6 @@ const addUserToStore = async (user) => {
     name:user.displayName,
     email:user.email,
     id:user.uid,
-    phone:'12345'
   })
   .catch((error) => error);
 
@@ -17,8 +16,8 @@ const findUserById = async (id)=>{
 
   return new Promise ((resolve,reject)=>{
     db.collection('users').doc(id).get()
-    .then((userRef)=>{
-      resolve(userRef)
+    .then((userRef) =>{
+      resolve(userRef.data())
     })
     .catch((error)=>{
       reject(error)

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/static/logo.png'
@@ -6,11 +6,11 @@ import '../assets/styles/componentes/Header.scss';
 import menuBurger from '../assets/static/menuBurguer.png'
 import userIcon from '../assets/static/Group.png'
 
-//solucion linda para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
+//solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
 //header login and not login
 function Header (props){
 
-  const {user} = props
+  // const {user} = props
 
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
@@ -74,10 +74,10 @@ function Header (props){
 }
 
 
-const mapStateToProps = (state)=>{
-  return{
-    user: state.user
-  }
-}
+// const mapStateToProps = (state)=>{
+//   return{
+//     user: state.user
+//   }
+// }
 
 export default connect(null,null)(Header)

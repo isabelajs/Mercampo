@@ -22,10 +22,14 @@ const UnitPrice = (props) => {
   const myRef = useRef()
 
   const test = ()=>{
-    setIsOpenEdit(!isOpenEdit)
+
+    // setIsOpenEdit(!isOpenEdit)
+    console.log('melosqui')
+    myRef.current.disable = 'true'
+    myRef.current.select()
 
   }
-
+  
   //el select para los elementos nuevos debe ser sobre el nombre no el precio
   useEffect(()=>{
     myRef.current.select()
@@ -60,7 +64,7 @@ const UnitPrice = (props) => {
           type="text"
           value={value}
           placeholder='$  0'
-          disabled= {!isOpenEdit}
+          // disabled= {!isOpenEdit}
           onClick={onClick}
         />
       </td>

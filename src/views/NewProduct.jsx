@@ -17,7 +17,7 @@ const ProfileNewProduct = (props) => {
     description: "",
     avaliable: true,
     prices: [
-      { name: "Kilogramo", value: '' },
+      { name: "Kilogramo", value: '5000' },
       { name: "Libra", value: '' },
       { name: "Unidad", value: '' },
     ],
