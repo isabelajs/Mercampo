@@ -11,6 +11,7 @@ import App from './componentes/router/App.jsx';
 const initialState ={
   user : null,
   isLoadingAuthentication: true,
+  userInfo: null,
   
   statusAlert:{
     error:null,

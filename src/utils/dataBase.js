@@ -36,7 +36,7 @@ const updateUserInfo = async(id,info) =>{
       console.log('Todo fine');
     })
     .catch((error) =>{
-      console.error('error al sobre escribir la infromación:', error)
+      console.error('error al sobre escribir la información:', error)
     })
 }
 

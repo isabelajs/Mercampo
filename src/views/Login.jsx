@@ -79,7 +79,7 @@ function Login (props){
       if(user.emailVerified){
       
         const userRef = await findUserById(user.uid)
-
+        console.log(userRef)
         if(userRef === undefined){
           await addUserToStore(user)
         }
@@ -159,6 +159,7 @@ function Login (props){
     </LayoutSignMethod>
   )
 }
+
 
 
 const mapDispatchToProps ={

@@ -15,8 +15,6 @@ import validationsInForm from '../utils/validationsInform';
 //import actions
 import { closeAlert, openAlert } from '../actions'
 
-//TODO Campos obligatorios deberia mostratme un alert??
-
 
 const ProfileSettings = (props) => {
   const {user,openAlert, closeAlert} = props
@@ -46,7 +44,10 @@ const ProfileSettings = (props) => {
   const validationForm = useCallback((form)=>validationsInForm(form),[])
 
   useEffect( ()=>{
+    //cierra el alert si esta abierto al momento de montar el componente
+    closeAlert()
 
+    //busca el usuario actualiza el estado de form con la información de firestore
     const findUser = async ()=>{
       let userInData = await findUserById(user.uid)
       setForm({
@@ -81,7 +82,19 @@ const ProfileSettings = (props) => {
     }else{
       closeAlert()
     }
-    // updateUserInfo(user.uid,form)
+
+    try{
+      updateUserInfo(user.uid,form)
+      openAlert({
+        error:false,
+        message: 'Se ha actualizado la información con exito'
+      })
+    }catch(error){
+      openAlert({
+        error:true,
+        message:error.message
+      })
+    }
     
   }
 
