@@ -14,7 +14,7 @@ import '../assets/styles/componentes/Register.scss'
 
 //funciones auth
 import {createUser} from '../utils/auth'
-
+import validationsInForm from '../utils/validationsInform';
 //actiones
 import { openAlert, closeAlert } from '../actions'
 
@@ -32,16 +32,12 @@ function Register(props){
     password: '',
   })
 
-  //cuan
+  //cierro el alert al montar el componente
   useEffect(()=>{
     closeAlert();
-    setForm({
-      name:'juan',
-    })
   },[])
   
-
-
+  //agrega información a mi estado form
   const handleChange = (event)=>{
     setForm({
       ...form,
@@ -49,26 +45,28 @@ function Register(props){
       })
   }        
 
+  const validationForm = useCallback((form)=>validationsInForm(form),[])
+
   //function to validate register form use hook 'useCallback' why it not need to change in every render
-  const validationsInForm = useCallback((form)=>{
+  // const validationsInForm = useCallback((form)=>{
     
-    let message = null
+  //   let message = null
   
-    if (form.name.length <= 8 || !isNaN(form.name)){
-      message =  'Nombre invalido'
-    }
-    else if(form.password.length < 8 ){
-      message = 'La contraseña es demasiado corta'
-    }
+  //   if (form.name.length <= 8 || !isNaN(form.name)){
+  //     message =  'Nombre invalido'
+  //   }
+  //   else if(form.password.length < 8 ){
+  //     message = 'La contraseña es demasiado corta'
+  //   }
   
-    return message
-  },[])
+  //   return message
+  // },[])
 
   //validate and do stuff to create a user in firebase
   const handleSubmit = async (e)=>{
     e.preventDefault()
 
-    const validation = validationsInForm(form)
+    const validation = validationForm(form)
 
     if(validation){
       openAlert({
@@ -117,7 +115,6 @@ function Register(props){
               type='text' 
               placeholder='Ingresa tu nombre' 
               autoComplete='false'
-              value={form.name}
               onChange={handleChange}
             />
             
@@ -132,7 +129,6 @@ function Register(props){
               type='email' 
               placeholder='Ingresa tu correo electronico' 
               autoComplete='false' 
-              value = {form.email}
               />
           </div>
 
@@ -144,7 +140,6 @@ function Register(props){
               name='password' 
               type='password' 
               placeholder='Ingresa tu contraseña' 
-              value = {form.password}
               autoComplete='false'
             />
           </div>
@@ -172,12 +167,6 @@ function Register(props){
   )
 }
 
-//this is not needed because alert draw by his own state
-// const mapStateToProps = state => {
-//   return {
-//     statusAlert :state.statusAlert
-//   }
-// }
 
 const mapDispatchToProps = {
   openAlert,

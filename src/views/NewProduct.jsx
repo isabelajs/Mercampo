@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SystemLayout from "../componentes/system/SystemLayout";
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";

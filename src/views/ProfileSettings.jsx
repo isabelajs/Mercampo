@@ -1,19 +1,32 @@
-import React from "react";
-import { useEffect } from "react";
-import { connect } from 'react-redux'
+import React, { useEffect, useState, useCallback} from "react";
+import { connect } from 'react-redux';
 
+//componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 
 //estilos
-import '../assets/styles/componentes/ProfileSettings.scss'
+import '../assets/styles/componentes/ProfileSettings.scss';
+
 //funciones de auth
-import { findUserById } from "../utils/dataBase";
-import { useState } from "react";
+import { findUserById, updateUserInfo } from "../utils/dataBase";
+
+//import actions
+import { openAlert } from '../actions'
+
+//TODO Campos obligatorios deberia mostratme un alert??
+
 
 const ProfileSettings = (props) => {
   const {user} = props
+
   const [form, setForm] = useState({
+    city: '',
+    department: '',
+    email: '',
+    id: '',
     name: '',
+    phoneMain: '',
+    phoneSecond: ''
     })
 
   const links = [
@@ -22,7 +35,6 @@ const ProfileSettings = (props) => {
   ];
 
   const handleChange = (e)=>{
-    console.log('pepe')
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -36,20 +48,33 @@ const ProfileSettings = (props) => {
       let userInData = await findUserById(user.uid)
       setForm({
         ...form,
-        name: userInData.name,
+        city: userInData.city,
+        department: userInData.department,
         email: userInData.email,
+        id: userInData.id,
+        name: userInData.name,
+        phoneMain: userInData.phoneMain,
+        phoneSecond: userInData.phoneSecond
+
       })
     }
 
     findUser()
-
-   
   }
     ,[])
 
+  const validationsInForm = useCallback((form)=>{
+    if (!form.pepe){
+      console.log('exciste')
+    }
+    console.log(form)
+    } ,[])
+  
   const handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(user)
+    validationsInForm(form)
+    // updateUserInfo(user.uid,form)
+    
   }
 
  
@@ -79,22 +104,49 @@ const ProfileSettings = (props) => {
 
                   <div className="form-group">
                     <label>Nombre y apellido</label>
-                    <input className="form-input" name='name' type="text" placeholder="Ingresa tu nombre" value ={form.name} onChange={handleChange} />
+                    <input 
+                      className="form-input"
+                      name='name'
+                      type="text"
+                      placeholder="Ingrese un nombre"
+                      value ={form.name}
+                      onChange={handleChange} />
                   </div>
 
                   <div className="form-group">
                     <label>Cedula</label>
-                    <input className="form-input" name='password' type="text" placeholder="Ingresa la contraseña" />
+                    <input 
+                      className="form-input" 
+                      name='id' 
+                      type="number" 
+                      value ={form.id}
+                      placeholder="Ingrese número de cédula" 
+                      onChange={handleChange} 
+                      />
                   </div>
                   
                   <div className="form-group">
                     <label>Departamento</label>
-                    <input className="form-input" name='departamento' type="text" placeholder="Ingresa la contraseña" autoComplete='false'/>
+                    <input 
+                      className="form-input" 
+                      name='department' 
+                      type="text" 
+                      value={form.department}
+                      placeholder="Ingrese el departamento de residencia" 
+                      autoComplete='false' 
+                      onChange={handleChange}/>
                   </div>
 
                   <div className="form-group">
-                    <label>Municipio</label>
-                    <input className="form-input" name='municipio' type="text" placeholder="Ingresa la contraseña" />
+                    <label>Ciudad</label>
+                    <input 
+                      className="form-input" 
+                      name='city' 
+                      type="text" 
+                      value={form.city}
+                      placeholder="Ingrese ciudad de residencia" 
+                      onChange={handleChange} 
+                    />
                   </div>
 
                 </div>
@@ -111,17 +163,35 @@ const ProfileSettings = (props) => {
 
                   <div className="form-group">
                     <label>Telefono-1 (WhatsApp)</label>
-                    <input className="form-input" name='telefono-1' type="text" placeholder="Ingresa la contraseña"/>
+                    <input 
+                      className="form-input" 
+                      name='phoneMain' 
+                      type="number" 
+                      value = {form.phoneMain}
+                      placeholder="Número telefonico principal" 
+                      onChange={handleChange}/>
                   </div>
 
                   <div className="form-group">
                     <label>Telefono-2</label>
-                    <input className="form-input" name='telefono-2' type="text" placeholder="Ingresa la contraseña"/>
+                    <input 
+                      className="form-input" 
+                      name='phoneSecond' 
+                      type="number" 
+                      value= {form.phoneSecond}
+                      placeholder="Número telefonico secundario" 
+                      onChange={handleChange}/>
                   </div>
 
                   <div className="form-group">
                     <label>Correo Electronico</label>
-                    <input className="form-input" name='correo' type="text" placeholder="Ingresa la contraseña" autoComplete='false'/>
+                    <input 
+                      className="form-input" 
+                      name='email' type="email" 
+                      placeholder="Ingrese un correo electronico" 
+                      value={form.email} 
+                      autoComplete='false'
+                      onChange={handleChange}/>
                   </div>
 
                 </div>
@@ -169,11 +239,15 @@ const ProfileSettings = (props) => {
   );
 };
 
-const mapDispatchToProps = (state)=>{
+const mapStateToProps = (state)=>{
   return{
     user : state.user
   }
 }
 
+const mapDispatchToProps = {
+  openAlert
+}
 
-export default connect (mapDispatchToProps,null)(ProfileSettings)
+
+export default connect (mapStateToProps,mapDispatchToProps)(ProfileSettings)

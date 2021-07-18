@@ -26,10 +26,20 @@ const findUserById = async (id)=>{
 
 }
 
+const updateUserInfo = async(id,info) =>{
+  db.collection('users').doc(id).set(info)
+    .then(()=>{
+      console.log('Todo fine');
+    })
+    .catch((error) =>{
+      console.error('error al sobre escribir la infromación:', error)
+    })
+}
+
 const getCurrentUser = ()=>{
   return auth.currentUser
 }
 
 //TODO: Actualizar el usuario sus datos si llega a modificar name o correo -> updateUser
 
-export {addUserToStore, findUserById, getCurrentUser}
+export {addUserToStore, findUserById, getCurrentUser, updateUserInfo}
