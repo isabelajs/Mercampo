@@ -73,17 +73,18 @@ const ProfileSettings = (props) => {
 
     const validation = validationForm(form)
 
-    if(validation){
-      openAlert({
-        error:true,
-        message:validation
-      }
-      )
-    }else{
-      closeAlert()
-    }
 
     try{
+      
+      if(validation){
+        openAlert({
+          error:true,
+          message:validation
+        }
+        )
+        return
+      }
+
       updateUserInfo(user.uid,form)
       openAlert({
         error:false,
@@ -212,7 +213,8 @@ const ProfileSettings = (props) => {
                       placeholder="Ingrese un correo electronico" 
                       value={form.email} 
                       autoComplete='false'
-                      onChange={handleChange}/>
+                      // onChange={handleChange}
+                      />
                   </div>
 
                 </div>

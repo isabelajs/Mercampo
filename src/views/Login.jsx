@@ -160,8 +160,6 @@ function Login (props){
   )
 }
 
-
-
 const mapDispatchToProps ={
   openAlert,
   closeAlert
