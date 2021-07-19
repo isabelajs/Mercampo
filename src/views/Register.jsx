@@ -35,7 +35,7 @@ function Register(props){
   //cierro el alert al montar el componente
   useEffect(()=>{
     closeAlert();
-  },[])
+  },[closeAlert])
   
   //agrega información a mi estado form
   const handleChange = (event)=>{

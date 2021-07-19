@@ -46,12 +46,13 @@ const ProfileSettings = (props) => {
   useEffect( ()=>{
     //cierra el alert si esta abierto al momento de montar el componente
     closeAlert()
+    
 
     //busca el usuario actualiza el estado de form con la información de firestore
     const findUser = async ()=>{
       let userInData = await findUserById(user.uid)
+      
       setForm({
-        ...form,
         city: userInData.city,
         department: userInData.department,
         email: userInData.email,
@@ -65,7 +66,7 @@ const ProfileSettings = (props) => {
 
     findUser()
   }
-    ,[])
+    ,[closeAlert, user])
 
   
   const handleSubmit = (e)=>{

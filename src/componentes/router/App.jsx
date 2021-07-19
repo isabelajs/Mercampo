@@ -45,6 +45,7 @@ const App = (props)=> {
     })
 
     return () => unSub()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
 

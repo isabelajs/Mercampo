@@ -27,7 +27,7 @@ function Login (props){
 
   useEffect(()=>{
     closeAlert()
-  },[])
+  },[closeAlert])
 
   const [form, setForm ] =  useState({
                               email: '',
