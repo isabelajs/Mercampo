@@ -26,7 +26,8 @@ const ProfileSettings = (props) => {
     id: '',
     name: '',
     phoneMain: '',
-    phoneSecond: ''
+    phoneSecond: '',
+    userId: ''
     })
 
   const links = [
@@ -59,8 +60,8 @@ const ProfileSettings = (props) => {
         id: userInData.id,
         name: userInData.name,
         phoneMain: userInData.phoneMain,
-        phoneSecond: userInData.phoneSecond
-
+        phoneSecond: userInData.phoneSecond,
+        userId: user.uid
       })
     }
 
