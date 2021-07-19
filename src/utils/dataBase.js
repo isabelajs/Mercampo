@@ -44,6 +44,4 @@ const getCurrentUser = ()=>{
   return auth.currentUser
 }
 
-//TODO: Actualizar el usuario sus datos si llega a modificar name o correo -> updateUser
-
 export {addUserToStore, findUserById, getCurrentUser, updateUserInfo}

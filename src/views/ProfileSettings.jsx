@@ -213,7 +213,8 @@ const ProfileSettings = (props) => {
                       placeholder="Ingrese un correo electronico" 
                       value={form.email} 
                       autoComplete='false'
-                      // onChange={handleChange}
+                      disabled
+                      onChange={handleChange}
                       />
                   </div>
 
