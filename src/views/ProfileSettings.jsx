@@ -70,28 +70,40 @@ const ProfileSettings = (props) => {
     ,[closeAlert, user])
 
   
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault()
 
     const validation = validationForm(form)
 
 
-    try{
+    try {
       
-      if(validation){
-        openAlert({
-          error:true,
-          message:validation
-        }
-        )
-        return
+    if(validation){
+      openAlert({
+        error:true,
+        message:validation
       }
+      )
+      return
+    }
 
-      updateUserInfo(user.uid,form)
+
+    // updateUserInfo(user.uid,form)      
+      // .then(res=>console.log(res))
+      // .catch(err=>{
+      //   console.log('todo salio malito :c')
+      //   console.log(err)
+      // })
+
+      await updateUserInfo(user.uid,form)
+      console.log('melo')
+
       openAlert({
         error:false,
         message: 'Se ha actualizado la información con exito'
       })
+
+
     }catch(error){
       openAlert({
         error:true,

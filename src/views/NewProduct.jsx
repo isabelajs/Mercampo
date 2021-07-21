@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+
 import SystemLayout from "../componentes/system/SystemLayout";
-import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 
+import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
+
 const ProfileNewProduct = (props) => {
+  
+  const { user } = props
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
@@ -12,10 +17,11 @@ const ProfileNewProduct = (props) => {
 
   //TODO: VERFICIAR QUE ES MAS RAPIDO SI TENERLO TODO EN UN SOLO ESTADO O POR SEPARADO
   const [infoProduct, setInfoProduct] = useState({
-    photos: [],
-    name: "",
-    description: "",
     avaliable: true,
+    description: "",
+    keywords: [],
+    name: "",
+    photos: [],
     prices: [
       { name: "Kilogramo", value: '5000' },
       { name: "Libra", value: '' },
@@ -84,9 +90,9 @@ const ProfileNewProduct = (props) => {
     });
   };
 
+  
   const addPhoto = (e) =>{
     const inputFile = e.target
-
 
     console.log(e.target.files[0])
 
@@ -109,7 +115,6 @@ const ProfileNewProduct = (props) => {
     infoProduct.photos.forEach(photo=>{
 
       const data = new FormData()
-      
       data.append('image',photo.file)
 
       const options = {
@@ -123,6 +128,13 @@ const ProfileNewProduct = (props) => {
       .catch(error=>console.log(error))
     })
 
+    setInfoProduct({
+      ...infoProduct,
+      userId : user.uid,
+      userName: user.displayName
+    })
+
+    console.log(infoProduct)
   }
 
 
@@ -219,8 +231,10 @@ const ProfileNewProduct = (props) => {
   );
 };
 
+const mapStateToProps = (state)=>({ user: state.user})
 
-export default ProfileNewProduct;
+
+export default connect(mapStateToProps,null)(ProfileNewProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 

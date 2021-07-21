@@ -16,7 +16,7 @@ const addUserToStore = async (user) => {
 
 }
 
-const findUserById = async (id)=>{
+const findUserById = (id)=>{
 
   return new Promise ((resolve,reject)=>{
     db.collection('users').doc(id).get()
@@ -30,14 +30,8 @@ const findUserById = async (id)=>{
 
 }
 
-const updateUserInfo = async(id,info) =>{
-  db.collection('users').doc(id).set(info)
-    .then(()=>{
-      console.log('Todo fine');
-    })
-    .catch((error) =>{
-      console.error('error al sobre escribir la información:', error)
-    })
+const updateUserInfo = (id,info) =>{
+  return  db.collection('users').doc(id).set(info)
 }
 
 const getCurrentUser = ()=>{
