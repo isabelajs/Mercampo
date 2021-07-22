@@ -6,6 +6,8 @@ import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 
+import { addProductToStore } from '../utils/dataBase'
+
 const ProfileNewProduct = (props) => {
   
   const { user } = props

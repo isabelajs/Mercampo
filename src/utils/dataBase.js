@@ -38,4 +38,16 @@ const getCurrentUser = ()=>{
   return auth.currentUser
 }
 
-export {addUserToStore, findUserById, getCurrentUser, updateUserInfo}
+//funciones sobre base de dato de los productos
+
+const addProductToStore = (id,info)=>{
+  db.collection('products').doc(id).set(info)
+}
+
+
+
+
+
+
+
+export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, addProductToStore}
