@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
+
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+
 //estilos
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
+
 //funcion  firestore
 import { addProductToStore } from '../utils/dataBase'
+
+
 
 function useFormBasicProfileProduct ({displayName, uid} ){
   const [formBasic, setFormBasic] = useState({
@@ -17,6 +22,7 @@ function useFormBasicProfileProduct ({displayName, uid} ){
     name: "",
     keywords:'',
   })
+
   const handleChange = (e) =>{
     setFormBasic ({
       ...formBasic,
@@ -45,13 +51,65 @@ function useFormPhotosProfileProduct (){
 }
 
 function usePricesProfileProduct (){
-  const [prices, setPrices] = useState()
-  return[prices]
+  const [prices, setPrices] = useState(
+    [
+      { name: "Kilogramo", value: '5000' },
+      { name: "Libra", value: '' },
+      { name: "Unidad", value: '' },
+    ],
+  )
+
+  //modifica el nombre del componente
+  const handleUnitPrice = (e)=>{
+    setPrices(
+        prices.map((item) =>
+        item.name !== e.target.name ? item : { ...item, value: e.target.value })      
+    )
+  }
+   //agregar un componente UnitPrice
+  const insertNewPrice = ()=>{
+    const lastPrice = prices[prices.length-1]
+
+    //si el ultimo elemento no esta completo no dejar agregar mas
+    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
+      console.log('no puedes agregar')
+      return
+    }
+  
+    setPrices(
+      [
+        ...prices,
+        {
+          name: String(prices.length),
+          value: '',
+          isNew: true,
+        }
+      ],
+    )
+  }
+
+  const deletePrice = (index)=>{
+    prices.splice(index,1)
+
+    setPrices([
+        prices
+      ]
+    );
+  }
+  //cambiar el nombre del componente UnitPrice
+  const handleUnitName =(e)=>{
+    setPrices(
+      prices.map((item) =>
+        item.name !== e.target.name ? item : { ...item, name: e.target.value }
+      ),
+    );
+  }
+
+
+  return[prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName]
 }
 
-const ProfileNewProduct = (props) => {
-
-  
+const ProfileNewProduct = (props) => { 
   const { user } = props
 
   const links = [
@@ -59,79 +117,16 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  //TODO: VERFICIAR QUE ES MAS RAPIDO SI TENERLO TODO EN UN SOLO ESTADO O POR SEPARADO
-  const [infoProduct, setInfoProduct] = useState({
-    prices: [
-      { name: "Kilogramo", value: '5000' },
-      { name: "Libra", value: '' },
-      { name: "Unidad", value: '' },
-    ],
-  });
-
   const [formBasic, handleChange] = useFormBasicProfileProduct(user)
   const [photos, addPhoto] = useFormPhotosProfileProduct()
-
-
-  //modificar el nombre del componente UnitPrice
-  const handleUnitPrice = (e) => {
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, value: e.target.value }
-      ),
-    });
-  };
-
-  //agregar un componente UnitPrice
-  const insertNewPrice = () => {
-
-    const lastPrice = infoProduct.prices[infoProduct.prices.length-1]
-
-  //si el ultimo elemento no esta completo no dejar agregar mas
-    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
-      console.log('no puedes agregar')
-      return
-    }
-
-    setInfoProduct({
-      ...infoProduct,
-      prices: [
-        ...infoProduct.prices,
-        {
-          name: String(infoProduct.prices.length),
-          value: '',
-          isNew: true,
-        },
-      ],
-    });
-  };
-
-  const deletePrice = (index) =>{
-
-    infoProduct.prices.splice(index,1)
-
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices
-    });
-  }
-
-  //cambiar el nombre del componente UnitPrice
-  const handleUnitName = (e) => {
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices.map((item, index) =>
-        item.name !== e.target.name ? item : { ...item, name: e.target.value }
-      ),
-    });
-  };
+  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = usePricesProfileProduct()
 
 
   const handleSubmit = (e) =>{
     e.preventDefault()
 
     //Send img's to server, get a list of src links to save in firestore
-    infoProduct.photos.forEach(photos=>{
+    photos.forEach(photos=>{
 
       const data = new FormData()
       data.append('image',photos.file)
@@ -147,14 +142,7 @@ const ProfileNewProduct = (props) => {
       .catch(error=>console.log(error))
     })
 
-    // //guardar nuevo producto
-    // const dataNewProduct = {
-    //   ...infoProduct,
-    //   prices: 
-    // }
-
   }
-
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -269,7 +257,7 @@ const ProfileNewProduct = (props) => {
             <div className="l-systemSubGroup">
               <div className="form-group newProduct__unitPrices">
                 <TableUnitPrices 
-                  infoProduct={infoProduct}
+                  prices={prices}
                   deletePrice={deletePrice}
                   handleUnitName={handleUnitName}
                   handleUnitPrice={handleUnitPrice}

@@ -4,7 +4,7 @@ import '../../assets/styles/componentes/ProfileNewProduct/TableUnitPrices.scss'
 
 const TableUnitPrices = (props)=>{
 
-  const {infoProduct,handleUnitName,handleUnitPrice,insertNewPrice,deletePrice} = props
+  const {prices,handleUnitName,handleUnitPrice,insertNewPrice,deletePrice} = props
   
   return (
     <div className="l-table">
@@ -26,7 +26,7 @@ const TableUnitPrices = (props)=>{
             <td></td>
           </tr>
 
-          {infoProduct.prices.map((item, index) => (
+          {prices.map((item, index) => (
             <UnitPrice
               key={index}
               index={index}
