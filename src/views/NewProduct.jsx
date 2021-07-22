@@ -87,9 +87,6 @@ const ProfileNewProduct = (props) => {
   const addPhoto = (e) =>{
     const inputFile = e.target
 
-
-    console.log(e.target.files[0])
-
     if(inputFile.files && inputFile.files[0]){
 
       const url = URL.createObjectURL(inputFile.files[0])
@@ -122,7 +119,6 @@ const ProfileNewProduct = (props) => {
       .then(data=>console.log(data))
       .catch(error=>console.log(error))
     })
-
   }
 
 
@@ -153,6 +149,7 @@ const ProfileNewProduct = (props) => {
                   </svg>
                   <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' onChange={addPhoto}/>
                 </label>
+                
               </div>
 
             <div className="separation-line"></div>

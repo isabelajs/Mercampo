@@ -28,8 +28,6 @@ const App = (props)=> {
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
 
-      console.log('paso un cambio melo',user)
-
       //no puedo poner solo user.emailverified por que cuando es  null me tira error a si que primero evalua si existe
       //un usuario y seguido confirma si ese usuario tendria el email verificado  si no lo tiene verificado
       //lo deslogueo para que sea serio
@@ -37,8 +35,9 @@ const App = (props)=> {
           auth.signOut()
           console.log('ese man no esta autenticado', auth.currentUser)
           return
-        }
+      }
       
+      console.log('revisando estado', user)
       //en todos los otros casos lo dejo como esta.
       setUser(user)
       setLoadingUser(false)

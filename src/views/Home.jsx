@@ -1,26 +1,23 @@
-import React from 'react';
-import {auth} from '../firebase.config'
+import React from "react";
+import { signOut } from "../utils/auth";
 
+export default function Home(props) {
+  const handleCloseSesion = async () => {
+    signOut()
+      .then(() => {
+        console.log("close session");
+        props.history.push("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-export default function Home (props) {
-
-    const handleCloseSesion = async()=>{
-        auth.signOut()
-            .then(()=>{
-                console.log('cerramos sesión');
-                props.history.push('/login')
-            })
-            .catch((error)=>{
-                console.log(error);
-                
-            })
-        
-    }
-
-
-    return (
-        <>
-                <button onClick={handleCloseSesion} className='button button--second'>Cerrar sesión</button>
-        </>
-    );
-};
+  return (
+    <>
+      <button onClick={handleCloseSesion} className="button button--second">
+        Cerrar sesión
+      </button>
+    </>
+  );
+}

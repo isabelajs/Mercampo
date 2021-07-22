@@ -1,7 +1,7 @@
 import React from 'react';
 import test from '../../assets/static/img-product.png'
-import '../../assets/styles/componentes/ProfileProduct.scss'
-import '../../assets/styles/componentes/itemNewProduct.scss'
+import '../../assets/styles/componentes/ProfileProducts/ProfileProduct.scss'
+import '../../assets/styles/componentes/ProfileProducts/itemNewProduct.scss'
 import { useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom'
 

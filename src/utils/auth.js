@@ -39,25 +39,22 @@ const createUser = async (email, password, name) => {
 };
 
 //ingresa sesión con correo y contraseña
-const singInWithEmail = async (email, password) =>{
-
+const singInWithEmail = (email, password) =>{
   return new Promise((resolve,reject)=>{
     auth.signInWithEmailAndPassword(email,password)
-    .then((credential)=>resolve(credential.user))
+    .then((credential)=> resolve(credential.user))
     .catch((error)=>reject(error))
   })
 }
 
 //cierra sesión
-const signOff = async()=>{
-  auth.signOut()
-    .then( ()=>{
-      console.log('cerramos sesión')
-    })
-    .catch((error)=>{
-      console.log(error.message)
-    })
+const signOut = ()=>{
+  return new Promise ((resolve,reject)=>{
+    auth.signOut()
+    .then(()=> resolve())
+    .catch((error)=> reject(error))
+  })
 }
 
 
-export {createUser, singInWithEmail, signOff};
+export {createUser, singInWithEmail, signOut};

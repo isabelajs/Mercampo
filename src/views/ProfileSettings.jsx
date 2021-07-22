@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import Alert from "../componentes/common/Alert";
+import AddImage from "../componentes/common/addImage";
+
 
 //estilos
 import '../assets/styles/componentes/ProfileSettings.scss';
@@ -15,18 +17,18 @@ import validationsInForm from '../utils/validationsInform';
 //import actions
 import { closeAlert, openAlert } from '../actions'
 
-
 const ProfileSettings = (props) => {
   const {user,openAlert, closeAlert} = props
 
   const [form, setForm] = useState({
+    photo: {url:'', file:null},
     city: '',
     department: '',
     email: '',
     id: '',
     name: '',
     phoneMain: '',
-    phoneSecond: ''
+    phoneSecond: '',
     })
 
   const links = [
@@ -35,6 +37,7 @@ const ProfileSettings = (props) => {
   ];
 
   const handleChange = (e)=>{
+    console.log('cambiando')
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -43,50 +46,64 @@ const ProfileSettings = (props) => {
 
   const validationForm = useCallback((form)=>validationsInForm(form),[])
 
+
+  //Fetch data del usuario logueado
   useEffect( ()=>{
     //cierra el alert si esta abierto al momento de montar el componente
     closeAlert()
-    
+
+    let unmounted = false
 
     //busca el usuario actualiza el estado de form con la información de firestore
     const findUser = async ()=>{
-      let userInData = await findUserById(user.uid)
-      
-      setForm({
-        city: userInData.city,
-        department: userInData.department,
-        email: userInData.email,
-        id: userInData.id,
-        name: userInData.name,
-        phoneMain: userInData.phoneMain,
-        phoneSecond: userInData.phoneSecond
 
-      })
+      try{
+
+        let userInData = await findUserById(user.uid)
+
+        if(!unmounted){
+          setForm({
+            photo: {url:userInData.photo, file:null},
+            city: userInData.city,
+            department: userInData.department,
+            email: userInData.email,
+            id: userInData.id,
+            name: userInData.name,
+            phoneMain: userInData.phoneMain,
+            phoneSecond: userInData.phoneSecond
+          })
+        }
+
+      }
+      catch(err){
+        console.log('error desde profile ', err)
+      }
+
     }
 
     findUser()
+
+    return () => {unmounted = true}
   }
     ,[closeAlert, user])
 
-  
-  const handleSubmit = (e)=>{
+
+  const handleSubmit = async (e)=>{
     e.preventDefault()
 
     const validation = validationForm(form)
 
-
     try{
-      
       if(validation){
         openAlert({
           error:true,
           message:validation
-        }
-        )
+        })
         return
       }
 
-      updateUserInfo(user.uid,form)
+      await updateUserInfo(user.uid,form)
+
       openAlert({
         error:false,
         message: 'Se ha actualizado la información con exito'
@@ -100,6 +117,14 @@ const ProfileSettings = (props) => {
     
   }
 
+  
+  const changeImage = (image) =>{
+    setForm({
+      ...form,
+      photo: {...image}
+    })
+  }
+
 
   return (
 
@@ -111,8 +136,7 @@ const ProfileSettings = (props) => {
 
             <div className='data__photo'>
               <div className='systemSubGroup__title'>Foto:</div>
-              <img src="" alt="" />
-
+              <AddImage image={form.photo.url} callback={changeImage}/>
               <div className="separation-line"></div>
             </div>
 
@@ -276,4 +300,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect (mapStateToProps,mapDispatchToProps)(ProfileSettings)
+export default connect(mapStateToProps,mapDispatchToProps)(ProfileSettings)

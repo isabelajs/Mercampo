@@ -30,16 +30,16 @@
   }
 }
 
-.data__photo{
-  img{
-    width: 160px;
-    height: 160px;
-    border-radius: 10px;
-    background-color: gray;
-    overflow: hidden;
-  }
+// .data__photo{
+//   img{
+//     width: 160px;
+//     height: 160px;
+//     border-radius: 10px;
+//     background-color: gray;
+//     overflow: hidden;
+//   }
 
-}
+// }
 
 .profileSettings__password{
   display: flex;
@@ -55,6 +55,55 @@
       margin-right: 10px;
     }
   }
+}
+
+
+//COMPONENTE ADD PHOTO INSIDE (ONLY ONE IMG)
+.addPhoto{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  width: 160px;
+  height: 160px;
+  border-radius: 10px;
+  margin-right: 10px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  input{
+    display: none;
+  }
+
+
+  svg{
+    // display: none;
+    opacity: 0;
+    position: absolute;
+  }
+
+  &:hover{
+    svg{
+      opacity: 1;
+      // transform: scale(1.4);
+    }
+  }
+
+  img{
+     width: 160px;
+      height: 160px;
+      border-radius: 10px;
+      background-color: rgb(40, 43, 114);
+      overflow: hidden;
+      margin-right: 10px;
+      object-fit: contain;
+      text-align: center;
+      line-height: 160px;
+      color: white;
+  }
+
 }
 
 

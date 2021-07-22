@@ -17,7 +17,6 @@ const addUserToStore = async (user) => {
 }
 
 const findUserById = async (id)=>{
-
   return new Promise ((resolve,reject)=>{
     db.collection('users').doc(id).get()
     .then((userRef) =>{
@@ -30,14 +29,56 @@ const findUserById = async (id)=>{
 
 }
 
+//Upload img to server IMGBB
+const uploadImg = async (img)=>{
+
+  const data = new FormData()
+  data.append('image',img)
+
+  const options ={
+    method:'POST',
+    body:data,
+  }
+
+  try{
+    const data = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_TOKEN_IMGBB}`,options)
+    const response = await data.json()
+    return response
+  }
+  catch(err){
+    throw new Error(`UploadImg -> ${err}`)
+  }
+
+}
+
+
 const updateUserInfo = async(id,info) =>{
-  db.collection('users').doc(id).set(info)
-    .then(()=>{
-      console.log('Todo fine');
-    })
-    .catch((error) =>{
-      console.error('error al sobre escribir la información:', error)
-    })
+
+  //data by default
+  let userData = {
+    ...info,
+    photo: info.photo.url
+  }
+
+  try{
+
+    //if info has a fileImg to upload 
+    if(info.photo.file){
+      const urlImgFetched = await uploadImg(info.photo.file)
+
+      userData = {
+        ...info,
+        photo: urlImgFetched.data.url
+      }
+    }
+    
+    //post user information
+    await db.collection('users').doc(id).set(userData)
+
+  }catch(err){
+    throw new Error(`UpdateUserInfo -> ${err}`)
+  }
+
 }
 
 const getCurrentUser = ()=>{

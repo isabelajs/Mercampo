@@ -36,18 +36,6 @@ function Login (props){
 
   const validationForm = useCallback((form)=>{validationsInForm(form)},[])
 
-  // const validationsInForm = useCallback((form)=>{
-  //   let message = null
-
-  //   if(form.email === '' || (form.email.length < 10 && !form.email.includes('@'))){
-  //     message = 'Por favor ingresa un correo válido'
-  //   }else if(form.password === ' ' || form.password.length < 8){
-  //     message = 'La contraseña es muy corta'
-  //   }
-
-  //   return message
-
-  // },[])
 
   const handleInput = (event)=>{
     setForm({
@@ -62,36 +50,39 @@ function Login (props){
     
     const validation = validationForm(form)
 
+    console.log('wtf')
     if(validation){
-    openAlert({
-      error:true,
-      message: validation,
-    })
-    return
+      openAlert({
+        error:true,
+        message: validation,
+      })
+      return
     }
 
     try{
-
       //El usuario intenta loguearse
       const user = await singInWithEmail(form.email, form.password)
 
-      //si el usuario esta verificado, se confirma si esta en la base de datos
-      if(user.emailVerified){
-      
-        const userRef = await findUserById(user.uid)
-        console.log(userRef)
-        if(userRef === undefined){
-          await addUserToStore(user)
-        }
 
-      }else{
-        openAlert({
-          error: true,
-          message: 'Tu correo actualmente no se encuentra verificado'
-        })
-      }
+      // console.log(user.emailVerified)
+
+      //si el usuario esta verificado, se confirma si esta en la base de datos
+      // if(user.emailVerified){
+      
+      //   const userRef = await findUserById(user.uid)
+      //   console.log(userRef)
+      //   if(userRef === undefined){
+      //     await addUserToStore(user)
+      //   }
+
+      // }else{
+      //   openAlert({
+      //     error: true,
+      //     message: 'Tu correo actualmente no se encuentra verificado'
+      //   })
+      // }
     }catch (error){
-      console.log(error)
+      console.log('error en login', error)
       openAlert({
         error: true,
         message: error.code
