@@ -1,14 +1,56 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-
+//componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
-
+//estilos
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
-
+//funcion  firestore
 import { addProductToStore } from '../utils/dataBase'
 
+function useFormBasicProfileProduct ({displayName, uid} ){
+  const [formBasic, setFormBasic] = useState({
+    userId : displayName,
+    userName: uid,
+    avaliable: true,
+    description: '',
+    name: "",
+    keywords:'',
+  })
+  const handleChange = (e) =>{
+    setFormBasic ({
+      ...formBasic,
+      [e.target.name]: e.target.value,
+    });
+  }
+  return [formBasic, handleChange]
+}
+
+function useFormPhotosProfileProduct (){
+  const [photos, setPhotos] = useState([])
+
+  const addPhoto = (e)=>{
+    const inputFile = e.target
+
+    if(inputFile.files && inputFile.files[0]){
+
+      const url = URL.createObjectURL(inputFile.files[0])
+
+      setPhotos(
+        [...photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
+      )
+    }
+  }
+  return [photos, addPhoto]
+}
+
+function usePricesProfileProduct (){
+  const [prices, setPrices] = useState()
+  return[prices]
+}
+
 const ProfileNewProduct = (props) => {
+
   
   const { user } = props
 
@@ -19,13 +61,6 @@ const ProfileNewProduct = (props) => {
 
   //TODO: VERFICIAR QUE ES MAS RAPIDO SI TENERLO TODO EN UN SOLO ESTADO O POR SEPARADO
   const [infoProduct, setInfoProduct] = useState({
-    userId : user.uid,
-    userName: user.displayName,
-    avaliable: true,
-    description: "",
-    keywords: [],
-    name: "",
-    photos: [],
     prices: [
       { name: "Kilogramo", value: '5000' },
       { name: "Libra", value: '' },
@@ -33,12 +68,9 @@ const ProfileNewProduct = (props) => {
     ],
   });
 
-  const handleChange = (e)=> {
-    setInfoProduct({
-      ...infoProduct,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [formBasic, handleChange] = useFormBasicProfileProduct(user)
+  const [photos, addPhoto] = useFormPhotosProfileProduct()
+
 
   //modificar el nombre del componente UnitPrice
   const handleUnitPrice = (e) => {
@@ -93,30 +125,16 @@ const ProfileNewProduct = (props) => {
       ),
     });
   };
-  
-  const addPhoto = (e) =>{
-    const inputFile = e.target
 
-    if(inputFile.files && inputFile.files[0]){
-
-      const url = URL.createObjectURL(inputFile.files[0])
-
-      setInfoProduct({
-        ...infoProduct,
-        photos: [...infoProduct.photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
-      })
-
-    }
-  }
 
   const handleSubmit = (e) =>{
     e.preventDefault()
 
     //Send img's to server, get a list of src links to save in firestore
-    infoProduct.photos.forEach(photo=>{
+    infoProduct.photos.forEach(photos=>{
 
       const data = new FormData()
-      data.append('image',photo.file)
+      data.append('image',photos.file)
 
       const options = {
         method:'POST',
@@ -151,7 +169,7 @@ const ProfileNewProduct = (props) => {
 
               <div className="newProduct__photos">
 
-                {infoProduct.photos.map((item,index)=>{
+                {photos.map((item,index)=>{
                   return <img src={item.url} alt={item.alt} key={index} />
                 })}
                 
@@ -197,6 +215,36 @@ const ProfileNewProduct = (props) => {
                   placeholder="Descripcion del producto"
                   onChange={handleChange}
                 />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="">Palabras Claves</label>
+                <input
+                  className="form-input"
+                  cols="10"
+                  rows="10"
+                  name="keywords"
+                  type="text"
+                  placeholder="Palabras claves que describan tu producto Ejm: 'ganado, carne, vacas, magro' "
+                  onChange={handleChange}
+                />
+              </div>
+            
+              {/* //TODO: CREATE SELECT COMPONENT */}
+              <div className="form-group">
+                <label htmlFor="">Categoria</label>
+                <select
+                  className="form-listBox"
+                  name="category"
+                  onChange={handleChange}
+                >
+                  <option value={false}>-----</option>
+                  <option value={false}>Animales</option>
+                  <option value={false}>Granos</option>
+                  <option value={false}>Verduras</option>
+                  <option value={false}>Frutas</option>
+                  <option value={false}>Otros</option>
+                </select>
               </div>
 
               <div className="form-group">
