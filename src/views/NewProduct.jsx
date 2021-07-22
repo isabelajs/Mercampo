@@ -47,10 +47,11 @@ function useFormPhotosProfileProduct (){
       )
     }
   }
+
   return [photos, addPhoto]
 }
 
-function usePricesProfileProduct (){
+function useFormPricesProfileProduct (){
   const [prices, setPrices] = useState(
     [
       { name: "Kilogramo", value: '5000' },
@@ -119,28 +120,19 @@ const ProfileNewProduct = (props) => {
 
   const [formBasic, handleChange] = useFormBasicProfileProduct(user)
   const [photos, addPhoto] = useFormPhotosProfileProduct()
-  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = usePricesProfileProduct()
+  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProfileProduct()
 
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault()
 
-    //Send img's to server, get a list of src links to save in firestore
-    photos.forEach(photos=>{
-
-      const data = new FormData()
-      data.append('image',photos.file)
-
-      const options = {
-        method:'POST',
-        body: data,
-      }
-
-      fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_TOKEN_IMGBB}`,options)
-      .then(response => response.json())
-      .then(data=>console.log(data))
-      .catch(error=>console.log(error))
-    })
+    try{
+      await addProductToStore(formBasic,photos,prices)
+      console.log('información enviada con exito');
+      
+    }catch (error){
+      console.log(error);
+    }
 
   }
 
