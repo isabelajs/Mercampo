@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+
 import SystemLayout from "../componentes/system/SystemLayout";
-import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 
+import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
+
+import { addProductToStore } from '../utils/dataBase'
+
 const ProfileNewProduct = (props) => {
+  
+  const { user } = props
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
@@ -12,10 +19,13 @@ const ProfileNewProduct = (props) => {
 
   //TODO: VERFICIAR QUE ES MAS RAPIDO SI TENERLO TODO EN UN SOLO ESTADO O POR SEPARADO
   const [infoProduct, setInfoProduct] = useState({
-    photos: [],
-    name: "",
-    description: "",
+    userId : user.uid,
+    userName: user.displayName,
     avaliable: true,
+    description: "",
+    keywords: [],
+    name: "",
+    photos: [],
     prices: [
       { name: "Kilogramo", value: '5000' },
       { name: "Libra", value: '' },
@@ -83,7 +93,7 @@ const ProfileNewProduct = (props) => {
       ),
     });
   };
-
+  
   const addPhoto = (e) =>{
     const inputFile = e.target
 
@@ -93,7 +103,7 @@ const ProfileNewProduct = (props) => {
 
       setInfoProduct({
         ...infoProduct,
-        photos: [...infoProduct.photos,{alt:'tpepe',url:url, file:inputFile.files[0]}]
+        photos: [...infoProduct.photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
       })
 
     }
@@ -106,7 +116,6 @@ const ProfileNewProduct = (props) => {
     infoProduct.photos.forEach(photo=>{
 
       const data = new FormData()
-      
       data.append('image',photo.file)
 
       const options = {
@@ -119,6 +128,13 @@ const ProfileNewProduct = (props) => {
       .then(data=>console.log(data))
       .catch(error=>console.log(error))
     })
+
+    // //guardar nuevo producto
+    // const dataNewProduct = {
+    //   ...infoProduct,
+    //   prices: 
+    // }
+
   }
 
 
@@ -204,7 +220,12 @@ const ProfileNewProduct = (props) => {
 
             <div className="l-systemSubGroup">
               <div className="form-group newProduct__unitPrices">
-                <TableUnitPrices infoProduct={infoProduct} deletePrice={deletePrice} handleUnitName={handleUnitName} handleUnitPrice={handleUnitPrice} insertNewPrice={insertNewPrice}/>
+                <TableUnitPrices 
+                  infoProduct={infoProduct}
+                  deletePrice={deletePrice}
+                  handleUnitName={handleUnitName}
+                  handleUnitPrice={handleUnitPrice}
+                  insertNewPrice={insertNewPrice}/>
               </div>
             </div>
           </div>
@@ -216,8 +237,10 @@ const ProfileNewProduct = (props) => {
   );
 };
 
+const mapStateToProps = (state)=>({ user: state.user})
 
-export default ProfileNewProduct;
+
+export default connect(mapStateToProps,null)(ProfileNewProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 

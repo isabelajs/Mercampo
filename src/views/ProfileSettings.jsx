@@ -88,7 +88,7 @@ const ProfileSettings = (props) => {
     ,[closeAlert, user])
 
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const validation = validationForm(form)
@@ -104,18 +104,21 @@ const ProfileSettings = (props) => {
 
       await updateUserInfo(user.uid,form)
 
+
       openAlert({
         error:false,
         message: 'Se ha actualizado la información con exito'
       })
+
     }catch(error){
       openAlert({
         error:true,
         message:error.message
       })
     }
+
+}
     
-  }
 
   
   const changeImage = (image) =>{

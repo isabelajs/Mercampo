@@ -16,7 +16,8 @@ const addUserToStore = async (user) => {
 
 }
 
-const findUserById = async (id)=>{
+const findUserById = (id)=>{
+
   return new Promise ((resolve,reject)=>{
     db.collection('users').doc(id).get()
     .then((userRef) =>{
@@ -85,4 +86,16 @@ const getCurrentUser = ()=>{
   return auth.currentUser
 }
 
-export {addUserToStore, findUserById, getCurrentUser, updateUserInfo}
+//funciones sobre base de dato de los productos
+
+const addProductToStore = (id,info)=>{
+  db.collection('products').doc(id).set(info)
+}
+
+
+
+
+
+
+
+export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, addProductToStore}
