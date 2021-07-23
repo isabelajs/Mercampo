@@ -103,7 +103,7 @@ function useFormPricesProduct (){
   //eliminar un componente UnitPrice
   const deletePrice = (index)=>{
 
-    if(index > 0 ){
+    if(prices.length > 1 ){
       prices.splice(index,1)
       setPrices([...prices]);
     }
