@@ -102,7 +102,7 @@ const ProfileSettings = (props) => {
         return
       }
 
-      await updateUserInfo(user.uid,form)
+      await updateUserInfo(user,form)
 
 
       openAlert({

@@ -10,7 +10,6 @@ const PrivateRoute = ({children, ...rest}) => {
     <Route
       {...rest}
       render= {(routerProps)=>( user ? React.cloneElement(children,routerProps) : <Redirect to='/login'/>)}
-
     />
   )
 }
@@ -20,6 +19,7 @@ const mapStateToProps = state =>{
     user: state.user
   }
 }
+
 
 
 export default connect(mapStateToProps, null)(PrivateRoute)

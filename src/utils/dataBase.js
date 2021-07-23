@@ -53,7 +53,7 @@ const uploadImg = async (img)=>{
 }
 
 
-const updateUserInfo = async(id,info) =>{
+const updateUserInfo = async(user,info) =>{
 
   //data by default
   let userData = {
@@ -74,7 +74,14 @@ const updateUserInfo = async(id,info) =>{
     }
     
     //post user information
-    await db.collection('users').doc(id).set(userData)
+    await db.collection('users').doc(user.uid).set(userData)
+
+
+    // await db.collection('users').doc(id).update({photoURL: userData.photo})
+
+    await user.updateProfile({
+      photoURL: userData.photo
+    });
 
   }catch(err){
     throw new Error(`UpdateUserInfo -> ${err}`)

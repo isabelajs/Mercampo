@@ -9,7 +9,7 @@ const reducer = (state, action)=>{
           message: action.payload.message
         }
       }
-  
+
     case 'CLOSE_ALERT':
       return {
         ...state,
@@ -19,7 +19,7 @@ const reducer = (state, action)=>{
           message: null,
         }
       }
-    
+
     case 'SET_USER':
       return{
         ...state,
@@ -38,7 +38,3 @@ const reducer = (state, action)=>{
 }
 
 export default reducer;
-
-
-
-

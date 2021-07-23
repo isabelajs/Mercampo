@@ -1,13 +1,26 @@
 import React from 'react';
 import Header from '../Header';
+import HeaderPrivate from '../HeaderPrivate';
 // import MenuMobile from '../MenuMobile';
 
-export default function Layout ({children}) {
+function PublicLayout ({children}) {
     return (
     <>
-      <Header />
+      <Header/>
       {children}
-      {/* <MenuMobile /> */}
     </>
-);
-};
+)};
+
+
+function PrivateLayout ({children}){
+
+  return (
+    <>
+      <HeaderPrivate/>
+      {children}
+    </>
+  )
+}
+
+
+export {PublicLayout,PrivateLayout}

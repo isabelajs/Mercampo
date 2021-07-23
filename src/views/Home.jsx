@@ -6,7 +6,7 @@ export default function Home(props) {
     signOut()
       .then(() => {
         console.log("close session");
-        props.history.push("/login");
+        // props.history.push("/");
       })
       .catch((error) => {
         console.log(error);

@@ -6,7 +6,7 @@ import '../assets/styles/componentes/Products.scss';
 export default function Products (){
   return(
     <div className=" l-products">
-    <div className="c-products__tools">
+    {/* <div className="c-products__tools">
         <div className="products__tools">
             <div className="home__search search">
 
@@ -20,7 +20,7 @@ export default function Products (){
             <div className="categories__title"></div>
             <div className="next"></div>
         </div>
-    </div>
+    </div> */}
     
     <div className="c-products__products">
 

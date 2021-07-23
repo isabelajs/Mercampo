@@ -9,7 +9,7 @@ import Home from "../../views/Home";
 import Login from "../../views/Login";
 import Products from '../../views/Products'
 import Register from "../../views/Register";
-import LayoutLoged from "../../componentes/Layouts/LayoutLoged";
+import {PublicLayout,PrivateLayout} from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
@@ -28,17 +28,12 @@ const App = (props)=> {
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
 
-      //no puedo poner solo user.emailverified por que cuando es  null me tira error a si que primero evalua si existe
-      //un usuario y seguido confirma si ese usuario tendria el email verificado  si no lo tiene verificado
-      //lo deslogueo para que sea serio
       if(user && !user.emailVerified){
           auth.signOut()
           console.log('ese man no esta autenticado', auth.currentUser)
           return
       }
-      
-      console.log('revisando estado', user)
-      //en todos los otros casos lo dejo como esta.
+
       setUser(user)
       setLoadingUser(false)
     })
@@ -56,37 +51,51 @@ const App = (props)=> {
     return (
 
       <BrowserRouter>
+
         <Switch>
-          <Route exact path="/login">
-            {user  && <Redirect to='/profile/settings'/>}
-            {!user  && <Login/>}
-          </Route>
-  
-          <Route exact path="/register">
-            {  user && <Redirect to='profile/settings'/> }
-            {  !user && <Register/> }
-          </Route>
-
+            <Route exact path="/login">
+              { user  && <Redirect to='/profile/settings'/>}
+              { !user  && <Login/>}
+            </Route>
+    
+            <Route exact path="/register">
+              { user && <Redirect to='profile/settings'/> }
+              { !user && <Register/> }
+            </Route>
           <Switch>
-            <LayoutLoged>
 
-              <Route exact path="/" component={Home} />
+            <Route exact path={['/','/products']}>
+              <PublicLayout>
+                <Route exact path="/" component={Home} />
+                <Route exact path='/products' component={Products} />
+              </PublicLayout>
+            </Route>
 
-              <Route exact path='/products' component={Products} />
-              
-              <PrivateRoute exact path='/profile/settings'>
-                <ProfileSettings />
-              </PrivateRoute>
+            <Route exact path='/profile/*'>
+                <PrivateLayout>
+                  <PrivateRoute exact path='/profile/settings'>
+                    <ProfileSettings /> 
+                  </PrivateRoute>
 
-              <PrivateRoute exact path='/profile/products'>
-                <ProfileProducts />
-              </PrivateRoute>
+                  <PrivateRoute exact path='/profile/products'> 
+                    <ProfileProducts /> 
+                  </PrivateRoute>
 
+                  <PrivateRoute exact path='/profile/products/new'> 
+                    <ProfileNewProduct /> 
+                  </PrivateRoute>
 
-              <Route exact path="/profile/products/new" component={ProfileNewProduct} />
-              <Route exact path="/profile/products/edit/:product" />
-            </LayoutLoged>
+                  <PrivateRoute exact path='/profile/products/edit/:product'> 
+                    <ProfileNewProduct /> 
+                  </PrivateRoute>
+
+                </PrivateLayout>
+            </Route>
+
+            <Route component={()=><div>404 not found</div>}/>
+
           </Switch>
+
         </Switch>
           
       </BrowserRouter>
