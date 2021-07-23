@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 
 //componentes react
@@ -11,104 +11,9 @@ import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 //funcion  firestore
 import { addProductToStore } from '../utils/dataBase'
 
+//hooks
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
 
-
-function useFormBasicProfileProduct ({displayName, uid} ){
-  const [formBasic, setFormBasic] = useState({
-    userId : displayName,
-    userName: uid,
-    avaliable: true,
-    description: '',
-    name: "",
-    keywords:'',
-  })
-
-  const handleChange = (e) =>{
-    setFormBasic ({
-      ...formBasic,
-      [e.target.name]: e.target.value,
-    });
-  }
-  return [formBasic, handleChange]
-}
-
-function useFormPhotosProfileProduct (){
-  const [photos, setPhotos] = useState([])
-
-  const addPhoto = (e)=>{
-    const inputFile = e.target
-
-    if(inputFile.files && inputFile.files[0]){
-
-      const url = URL.createObjectURL(inputFile.files[0])
-
-      setPhotos(
-        [...photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
-      )
-    }
-  }
-
-  return [photos, addPhoto]
-}
-
-function useFormPricesProfileProduct (){
-  const [prices, setPrices] = useState(
-    [
-      { name: "Kilogramo", value: '5000' },
-      { name: "Libra", value: '' },
-      { name: "Unidad", value: '' },
-    ],
-  )
-
-  //modifica el nombre del componente
-  const handleUnitPrice = (e)=>{
-    setPrices(
-        prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, value: e.target.value })      
-    )
-  }
-   //agregar un componente UnitPrice
-  const insertNewPrice = ()=>{
-    const lastPrice = prices[prices.length-1]
-
-    //si el ultimo elemento no esta completo no dejar agregar mas
-    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
-      console.log('no puedes agregar')
-      return
-    }
-  
-    setPrices(
-      [
-        ...prices,
-        {
-          name: String(prices.length),
-          value: '',
-          isNew: true,
-        }
-      ],
-    )
-  }
-
-  const deletePrice = (index)=>{
-    prices.splice(index,1)
-
-    setPrices([
-        prices
-      ]
-    );
-  }
-  //cambiar el nombre del componente UnitPrice
-  const handleUnitName =(e)=>{
-    setPrices(
-      prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, name: e.target.value }
-      ),
-    );
-  }
-
-
-  return[prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName]
-}
 
 const ProfileNewProduct = (props) => { 
   const { user } = props
@@ -118,9 +23,9 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const [formBasic, handleChange] = useFormBasicProfileProduct(user)
-  const [photos, addPhoto] = useFormPhotosProfileProduct()
-  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProfileProduct()
+  const [formBasic, handleChange] = useFormBasicProduct(user)
+  const [photos, addPhoto] = useFormPhotosProduct()
+  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProduct()
 
 
   const handleSubmit = async (e) =>{
@@ -266,6 +171,7 @@ const ProfileNewProduct = (props) => {
 };
 
 const mapStateToProps = (state)=>({ user: state.user})
+
 
 
 export default connect(mapStateToProps,null)(ProfileNewProduct);
