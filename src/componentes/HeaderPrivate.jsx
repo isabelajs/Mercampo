@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 
 //imagenes
 import logo from '../assets/static/logo.png'
-import userIcon from '../assets/static/Group.png'
+// import userIcon from '../assets/static/Group.png'
 import menuBurger from '../assets/static/menuBurguer.png'
 import MenuMobile from './MenuMobile';
 
@@ -35,23 +35,24 @@ function HeaderPrivate (props){
     return user.displayName.split(' ').splice(0,3).join(' ')
   }
 
-
+  //como lo primero que carga es el layout la ruta de header privado solicitara el user 
   return(
+    <>
+      {user && 
+        <header className='header header--private'>
+          <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={openMenuMobile}/>
 
-    <header className='header header--private'>
+          <img onClick={handleClick} className='header__logo'src={logo} alt="" />
 
-      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={openMenuMobile}/>
+          <div className="header__userStatus" >
+            <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
+            <p className="userStatus__userName">{truncateName(user)}</p>
+          </div>
 
-      <img onClick={handleClick} className='header__logo'src={logo} alt="" />
-
-      <div className="header__userStatus" >
-        <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-        <p className="userStatus__userName">{truncateName(user)}</p>
-      </div>
-
-      <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
-    
-    </header>
+          <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
+        </header>
+      }    
+    </>
   )
 }
 
