@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+//componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
-import '../assets/styles/componentes/ProfileProducts/ProfileProducts.scss'
 import {ProfileProduct, ProfileButtonNewProduct} from "../componentes/ProfileProducts/ProfileProduct";
+//styles
+import '../assets/styles/componentes/ProfileProducts/ProfileProducts.scss'
+//funciones firestore
+import { getProductByUser } from "../utils/dataBase";
+import { useState } from "react";
+
 
 const ProfileSettings = (props) => {
+  const [ userProducts, setUserProducts ] = useState([])
+
+  const { user } = props
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
   ];
+
+  useEffect(()=>{
+    const getUserProducts = async ()=>{
+      let  elements = await getProductByUser(user.uid)
+      setUserProducts(elements)
+      
+    }
+    getUserProducts()
+  },[])
 
   return (
 
@@ -53,10 +72,20 @@ const ProfileSettings = (props) => {
         
         <div className="profileProducts__container">
           <ProfileButtonNewProduct/>
-          <ProfileProduct />
-          <ProfileProduct />
-          <ProfileProduct />
-          <ProfileProduct />
+
+          { userProducts.map((element,index)=> {
+            
+            return (
+              <ProfileProduct 
+                img = {element.photos[0]}
+                name = {element.name}
+                prices = {element.prices}
+                key={index}
+              />
+              )
+          })
+        }
+
         </div>
       
       </div>
@@ -66,5 +95,7 @@ const ProfileSettings = (props) => {
   );
 };
 
-export default ProfileSettings;
+const mapStateToProps = (state)=>({user: state.user})
+  
+export default connect(mapStateToProps,null)(ProfileSettings);
 

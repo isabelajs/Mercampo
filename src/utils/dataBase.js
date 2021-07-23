@@ -54,7 +54,7 @@ const uploadImg = async (img)=>{
 
 }
 
-
+//actualizar la info de un usuario
 const updateUserInfo = async(user,info) =>{
 
   //data by default
@@ -90,7 +90,7 @@ const updateUserInfo = async(user,info) =>{
   }
 
 }
-
+//obtener el estado actual del usuario
 const getCurrentUser = ()=>{
   return auth.currentUser
 }
@@ -122,10 +122,17 @@ const addProductToStore = async (basic, photos, prices)=>{
 
 }
 
+const getProductByUser = async ( id )=>{
+  try{
+    let querySnapshot = await db.collection('products').where('userId', '==', id).get()
+    return querySnapshot.docs.map(doc => doc.data() )
+  }catch(err){
+    throw new Error(`getProductByUser -> ${err}`)
+  }
+}
 
 
 
 
 
-
-export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, addProductToStore}
+export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, addProductToStore, getProductByUser}

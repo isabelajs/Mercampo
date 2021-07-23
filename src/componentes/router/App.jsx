@@ -86,7 +86,7 @@ const App = (props)=> {
                     <ProfileNewProduct /> 
                   </PrivateRoute>
 
-                  <PrivateRoute exact path='/profile/products/edit'> 
+                  <PrivateRoute exact path='/profile/products/edit/:idProduct'> 
                     <EditProduct /> 
                   </PrivateRoute>
 

@@ -4,8 +4,8 @@ import  {useState}from 'react';
 function useFormBasicProduct ({displayName, uid} ){
 
   const initialState = {
-      userId : displayName,
-      userName: uid,
+      userId : uid,
+      userName: displayName,
       avaliable: true,
       description: '',
       name: '',

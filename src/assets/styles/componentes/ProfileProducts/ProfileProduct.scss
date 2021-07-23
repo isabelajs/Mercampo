@@ -59,12 +59,11 @@
     flex-direction: column;
     padding:0;
     border: none;
-    height: 318px;
+    // height: 318px;
 
     .l-profileProduct__bottom{
       border: 1px solid #B8B5B5;
       border-top: none;
-      height:100%;
       width: 100%;
       grid-template-columns: none;
       grid-template-rows: auto 30px;

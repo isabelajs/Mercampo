@@ -7,16 +7,25 @@ import { useHistory } from 'react-router-dom';
 
 function ProfileProduct(props) {
 
+  const {img, name} = props
+
+  const dataPrice = Object.entries(props.prices)[0]
+
+  const price = `${dataPrice[0]} - $ ${dataPrice[1]}`
+  // console.log(price);
+  
+  
+
   return (
     <div className='profileProduct'>
       
-      <img src={test} alt='img Product' className="profileProduct__img"/>
+      <img src={img} alt='img Product' className="profileProduct__img"/>
 
       <div className="l-profileProduct__bottom">
 
         <div className="l-profileProduct__info">
-          <p className="profileProduct__name">Huevos</p>
-          <p className="ProfileProduct__price">Und. - $ 12.000</p>
+          <p className="profileProduct__name">{name}</p>
+          <p className="ProfileProduct__price">{price}</p>
         </div>
 
         <div className="l-profileProduct__buttons">
