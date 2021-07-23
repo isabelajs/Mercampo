@@ -64,7 +64,9 @@ export function useFormPhotosProduct (){
 }
 
 export function useFormPricesProduct (){
-  const [prices, setPrices] = useState([])
+  const state = [{name:'', value:''}]
+
+  const [prices, setPrices] = useState(state)
 
   //cambiar el nombre del componente UnitPrice
   const handleUnitName =(name,indexChange)=>{
@@ -115,7 +117,10 @@ export function useFormPricesProduct (){
 
   }
 
+  const resetPrices = ()=>{
+    setPrices(state)
+  }
 
-  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName}
+  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices}
 }
 

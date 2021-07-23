@@ -14,7 +14,7 @@ import '../assets/styles/componentes/Register.scss'
 
 //funciones auth
 import {createUser} from '../utils/auth'
-import validationsInForm from '../utils/validationsInform';
+import {validationsInForm} from '../utils/validationsInform';
 //actiones
 import { openAlert, closeAlert } from '../actions'
 
