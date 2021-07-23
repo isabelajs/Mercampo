@@ -27,7 +27,7 @@ const ProfileNewProduct = (props) => {
   const {formBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
   const {photos, addPhoto, resetPhotos} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName} = useFormPricesProduct()
-  const {isSendingData, setIsSendingData} = useState(false)
+  const [isSendingData, setIsSendingData] = useState(false)
 
   const handleSubmit = async (e) =>{
     e.preventDefault()

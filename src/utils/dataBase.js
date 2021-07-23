@@ -4,7 +4,7 @@ import { listToObject} from './Helpers/convertedObjetList';
 
 
 // agrega los usuarios a firestore (copia de users + info adicional)
-const addUserToStore = async (user) => {
+export const addUserToStore = async (user) => {
   db.collection('users').doc(user.uid).set({
     city: '',
     department:'',
@@ -18,7 +18,7 @@ const addUserToStore = async (user) => {
 
 }
 
-const findUserById = (id)=>{
+export const findUserById = (id)=>{
 
   return new Promise ((resolve,reject)=>{
     db.collection('users').doc(id).get()
@@ -33,7 +33,7 @@ const findUserById = (id)=>{
 }
 
 //Upload img to server IMGBB
-const uploadImg = async (img)=>{
+export const uploadImg = async (img)=>{
 
   const data = new FormData()
   data.append('image',img)
@@ -55,7 +55,7 @@ const uploadImg = async (img)=>{
 }
 
 //actualizar la info de un usuario
-const updateUserInfo = async(user,info) =>{
+export const updateUserInfo = async(user,info) =>{
 
   //data by default
   let userData = {
@@ -91,14 +91,17 @@ const updateUserInfo = async(user,info) =>{
 
 }
 //obtener el estado actual del usuario
-const getCurrentUser = ()=>{
+export const getCurrentUser = ()=>{
   return auth.currentUser
 }
+
+
+
 
 //funciones sobre base de dato de los productos
 
 //se agrega un producto
-const addProductToStore = async (basic, photos, prices)=>{
+export const addProductToStore = async (basic, photos, prices)=>{
   const results = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
   //obtengo las urls de las imagenes
   const urls = results.map( ({data:{url}}) => url )
@@ -122,8 +125,25 @@ const addProductToStore = async (basic, photos, prices)=>{
 
 }
 
+export const updateProduct = async (id,basic, photos, prices)=>{
+  try{
+    let newPhotos = photos.filter(photo=> photo.hasOwnProperty('file'))
+    let previousPhoto = photos.filter(photo=> !photo.hasOwnProperty('file'))
+
+
+    let productInfo = {
+      ...basic,
+    }
+    console.log(productInfo)
+    // await db.collection('products').doc(id).set(productInfo)
+    
+  }catch(err){
+    throw new Error(`UpdateUserInfo -> ${err}`)
+  }
+}
+
 //obtengo todos los productos de un usuario en la coleccion de productos
-const getProductByUser = async ( id )=>{
+export const getProductByUser = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').where('userId', '==', id).get()
     return querySnapshot.docs.map(doc => {
@@ -133,8 +153,9 @@ const getProductByUser = async ( id )=>{
     throw new Error(`getProductByUser -> ${err}`)
   }
 }
+
 //obtengo el producto de acuerdo a su id
-const getProductById = async ( id )=>{
+export const getProductById = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').doc(id).get()
     return querySnapshot.data()
@@ -146,5 +167,3 @@ const getProductById = async ( id )=>{
 
 
 
-
-export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, getProductById, addProductToStore, getProductByUser}

@@ -9,7 +9,7 @@ import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 import "../assets/styles/componentes/EditProduct.scss";
 
 //funcion  firestore
-import {getProductById} from '../utils/dataBase'
+import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
@@ -28,7 +28,7 @@ const EditProduct = (props) => {
   const {formBasic, setBasicData, resetBasicData, setBasicDataFromData} = useFormBasicProduct(user)
   const {photos, addPhoto, resetPhotos, addPhotosFromData} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName} = useFormPricesProduct()
-  const {isSendingData, setIsSendingData} = useState(false)
+  const [isSendingData, setIsSendingData]= useState(false)
 
   useEffect(()=>{
 
@@ -55,6 +55,8 @@ const EditProduct = (props) => {
       setIsSendingData(false)
       resetBasicData()
       resetPhotos()
+      
+      updateProduct(productId,formBasic,photos,prices)
 
     }catch (error){
       console.log(error);
