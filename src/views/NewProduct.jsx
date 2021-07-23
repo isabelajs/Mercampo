@@ -12,7 +12,7 @@ import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 import { addProductToStore } from '../utils/dataBase'
 
 
-
+//hooks
 function useFormBasicProfileProduct ({displayName, uid} ){
   const [formBasic, setFormBasic] = useState({
     userId : displayName,
@@ -61,7 +61,11 @@ function useFormPhotosProfileProduct (){
     }
   }
 
-  return [photos, addPhoto]
+  const resetPhotos = ()=>{
+    setPhotos([])
+  }
+
+  return [photos, addPhoto, resetPhotos]
 }
 
 function useFormPricesProfileProduct (){
@@ -129,13 +133,12 @@ const ProfileNewProduct = (props) => {
   ];
 
   const [formBasic, setBasicData, resetBasicData] = useFormBasicProfileProduct(user)
-  const [photos, addPhoto] = useFormPhotosProfileProduct()
+  const [photos, addPhoto, resetPhotos] = useFormPhotosProfileProduct()
   const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProfileProduct()
   const [isSendingData, setIsSendingData] = useState(false)
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
-
     setIsSendingData(true)
 
     try{
@@ -144,6 +147,7 @@ const ProfileNewProduct = (props) => {
       setIsSendingData(false)
 
       resetBasicData()
+      resetPhotos()
 
       console.log('información enviada con exito');
       
