@@ -1,5 +1,7 @@
 import {db} from '../firebase.config'
 import { auth } from "../firebase.config.js";
+import { listToObject} from './Helpers/convertedObjetList';
+
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 const addUserToStore = async (user) => {
@@ -66,7 +68,7 @@ const updateUserInfo = async(user,info) =>{
     //if info has a fileImg to upload 
     if(info.photo.file){
       const urlImgFetched = await uploadImg(info.photo.file)
-
+      console.log(urlImgFetched)
       userData = {
         ...info,
         photo: urlImgFetched.data.url
@@ -95,8 +97,29 @@ const getCurrentUser = ()=>{
 
 //funciones sobre base de dato de los productos
 
-const addProductToStore = (id,info)=>{
-  db.collection('products').doc(id).set(info)
+//se agrega un producto
+const addProductToStore = async (basic, photos, prices)=>{
+  const results = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
+  //obtengo las urls de las imagenes
+  const urls = results.map( ({data:{url}}) => url )
+  //se cambia la estructura de prices por un objeto
+  const pricesList = listToObject(prices)
+
+
+  let info = {
+    ...basic,
+    photos: urls,
+    prices: pricesList
+  }
+
+  try{
+    db.collection('products').doc().set(info)
+
+  }catch(error){
+    throw new Error(`addProduct -> ${error}`)
+  }
+
+
 }
 
 

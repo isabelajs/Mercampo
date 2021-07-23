@@ -1,15 +1,116 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 
+//componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 
+//estilos
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
 
+//funcion  firestore
 import { addProductToStore } from '../utils/dataBase'
 
-const ProfileNewProduct = (props) => {
+
+
+function useFormBasicProfileProduct ({displayName, uid} ){
+  const [formBasic, setFormBasic] = useState({
+    userId : displayName,
+    userName: uid,
+    avaliable: true,
+    description: '',
+    name: "",
+    keywords:'',
+  })
+
+  const handleChange = (e) =>{
+    setFormBasic ({
+      ...formBasic,
+      [e.target.name]: e.target.value,
+    });
+  }
+  return [formBasic, handleChange]
+}
+
+function useFormPhotosProfileProduct (){
+  const [photos, setPhotos] = useState([])
+
+  const addPhoto = (e)=>{
+    const inputFile = e.target
+
+    if(inputFile.files && inputFile.files[0]){
+
+      const url = URL.createObjectURL(inputFile.files[0])
+
+      setPhotos(
+        [...photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
+      )
+    }
+  }
+
+  return [photos, addPhoto]
+}
+
+function useFormPricesProfileProduct (){
+  const [prices, setPrices] = useState(
+    [
+      { name: "Kilogramo", value: '5000' },
+      { name: "Libra", value: '' },
+      { name: "Unidad", value: '' },
+    ],
+  )
+
+  //modifica el nombre del componente
+  const handleUnitPrice = (e)=>{
+    setPrices(
+        prices.map((item) =>
+        item.name !== e.target.name ? item : { ...item, value: e.target.value })      
+    )
+  }
+   //agregar un componente UnitPrice
+  const insertNewPrice = ()=>{
+    const lastPrice = prices[prices.length-1]
+
+    //si el ultimo elemento no esta completo no dejar agregar mas
+    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
+      console.log('no puedes agregar')
+      return
+    }
   
+    setPrices(
+      [
+        ...prices,
+        {
+          name: String(prices.length),
+          value: '',
+          isNew: true,
+        }
+      ],
+    )
+  }
+
+  const deletePrice = (index)=>{
+    prices.splice(index,1)
+
+    setPrices([
+        prices
+      ]
+    );
+  }
+  //cambiar el nombre del componente UnitPrice
+  const handleUnitName =(e)=>{
+    setPrices(
+      prices.map((item) =>
+        item.name !== e.target.name ? item : { ...item, name: e.target.value }
+      ),
+    );
+  }
+
+
+  return[prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName]
+}
+
+const ProfileNewProduct = (props) => { 
   const { user } = props
 
   const links = [
@@ -17,126 +118,23 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  //TODO: VERFICIAR QUE ES MAS RAPIDO SI TENERLO TODO EN UN SOLO ESTADO O POR SEPARADO
-  const [infoProduct, setInfoProduct] = useState({
-    userId : user.uid,
-    userName: user.displayName,
-    avaliable: true,
-    description: "",
-    keywords: [],
-    name: "",
-    photos: [],
-    prices: [
-      { name: "Kilogramo", value: '5000' },
-      { name: "Libra", value: '' },
-      { name: "Unidad", value: '' },
-    ],
-  });
+  const [formBasic, handleChange] = useFormBasicProfileProduct(user)
+  const [photos, addPhoto] = useFormPhotosProfileProduct()
+  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProfileProduct()
 
-  const handleChange = (e)=> {
-    setInfoProduct({
-      ...infoProduct,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  //modificar el nombre del componente UnitPrice
-  const handleUnitPrice = (e) => {
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, value: e.target.value }
-      ),
-    });
-  };
-
-  //agregar un componente UnitPrice
-  const insertNewPrice = () => {
-
-    const lastPrice = infoProduct.prices[infoProduct.prices.length-1]
-
-  //si el ultimo elemento no esta completo no dejar agregar mas
-    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
-      console.log('no puedes agregar')
-      return
-    }
-
-    setInfoProduct({
-      ...infoProduct,
-      prices: [
-        ...infoProduct.prices,
-        {
-          name: String(infoProduct.prices.length),
-          value: '',
-          isNew: true,
-        },
-      ],
-    });
-  };
-
-  const deletePrice = (index) =>{
-
-    infoProduct.prices.splice(index,1)
-
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices
-    });
-  }
-
-  //cambiar el nombre del componente UnitPrice
-  const handleUnitName = (e) => {
-    setInfoProduct({
-      ...infoProduct,
-      prices: infoProduct.prices.map((item, index) =>
-        item.name !== e.target.name ? item : { ...item, name: e.target.value }
-      ),
-    });
-  };
-  
-  const addPhoto = (e) =>{
-    const inputFile = e.target
-
-    if(inputFile.files && inputFile.files[0]){
-
-      const url = URL.createObjectURL(inputFile.files[0])
-
-      setInfoProduct({
-        ...infoProduct,
-        photos: [...infoProduct.photos,{alt:'pepe',url:url, file:inputFile.files[0]}]
-      })
-
-    }
-  }
-
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault()
 
-    //Send img's to server, get a list of src links to save in firestore
-    infoProduct.photos.forEach(photo=>{
-
-      const data = new FormData()
-      data.append('image',photo.file)
-
-      const options = {
-        method:'POST',
-        body: data,
-      }
-
-      fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_TOKEN_IMGBB}`,options)
-      .then(response => response.json())
-      .then(data=>console.log(data))
-      .catch(error=>console.log(error))
-    })
-
-    // //guardar nuevo producto
-    // const dataNewProduct = {
-    //   ...infoProduct,
-    //   prices: 
-    // }
+    try{
+      await addProductToStore(formBasic,photos,prices)
+      console.log('información enviada con exito');
+      
+    }catch (error){
+      console.log(error);
+    }
 
   }
-
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -151,7 +149,7 @@ const ProfileNewProduct = (props) => {
 
               <div className="newProduct__photos">
 
-                {infoProduct.photos.map((item,index)=>{
+                {photos.map((item,index)=>{
                   return <img src={item.url} alt={item.alt} key={index} />
                 })}
                 
@@ -200,6 +198,36 @@ const ProfileNewProduct = (props) => {
               </div>
 
               <div className="form-group">
+                <label htmlFor="">Palabras Claves</label>
+                <input
+                  className="form-input"
+                  cols="10"
+                  rows="10"
+                  name="keywords"
+                  type="text"
+                  placeholder="Palabras claves que describan tu producto Ejm: 'ganado, carne, vacas, magro' "
+                  onChange={handleChange}
+                />
+              </div>
+            
+              {/* //TODO: CREATE SELECT COMPONENT */}
+              <div className="form-group">
+                <label htmlFor="">Categoria</label>
+                <select
+                  className="form-listBox"
+                  name="category"
+                  onChange={handleChange}
+                >
+                  <option value={false}>-----</option>
+                  <option value={false}>Animales</option>
+                  <option value={false}>Granos</option>
+                  <option value={false}>Verduras</option>
+                  <option value={false}>Frutas</option>
+                  <option value={false}>Otros</option>
+                </select>
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="">Disponibilidad</label>
                 <select
                   className="form-listBox"
@@ -221,7 +249,7 @@ const ProfileNewProduct = (props) => {
             <div className="l-systemSubGroup">
               <div className="form-group newProduct__unitPrices">
                 <TableUnitPrices 
-                  infoProduct={infoProduct}
+                  prices={prices}
                   deletePrice={deletePrice}
                   handleUnitName={handleUnitName}
                   handleUnitPrice={handleUnitPrice}
