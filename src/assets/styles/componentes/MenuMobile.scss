@@ -22,17 +22,18 @@
   }
 
   ul{
+    width: 100%;
     list-style: none;
     padding: 0;
   }
 
   li{
-    padding: 15px 0px;
+    width: 100%;
   }
 
 
   &>ul{
-    padding: 0 25px;
+    padding: 0 15px;
 
     ul{
       transition: all 0.3s;
@@ -41,7 +42,6 @@
       padding-left: 25px;
 
       &.show{
-
         max-height: 150px;
       }
 
@@ -71,17 +71,20 @@
     display: flex;
     align-items: center;
     width: 100%;
+    padding: 15px 0px;
+    // padding-left: 20px;
   }
 
   &__optionIcon{
     width: 20px;
     height: 20px;
-    margin-bottom: 3px;
+    // margin-bottom: 3px;
     margin-right: 30px;
   }
 
   &__login{
     // align-self: flex-end;
+    
     cursor: pointer;
     position: absolute;
     bottom: 20px;
