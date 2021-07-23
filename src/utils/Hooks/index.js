@@ -2,14 +2,19 @@ import React, {useState}from 'react';
 
 
 function useFormBasicProduct ({displayName, uid} ){
-  const [formBasic, setFormBasic] = useState({
-    userId : displayName,
-    userName: uid,
-    avaliable: true,
-    description: '',
-    name: "",
-    keywords:'',
-  })
+
+  const initialState = {
+      userId : displayName,
+      userName: uid,
+      avaliable: true,
+      description: '',
+      name: '',
+      keywords:'',
+      category:'',
+    }
+
+
+  const [formBasic, setFormBasic] = useState(initialState)
 
   const handleChange = (e) =>{
     setFormBasic ({
@@ -17,7 +22,12 @@ function useFormBasicProduct ({displayName, uid} ){
       [e.target.name]: e.target.value,
     });
   }
-  return [formBasic, handleChange]
+
+  const resetBasicData = ()=>{
+    setFormBasic(initialState)
+  }
+
+  return [formBasic, handleChange, resetBasicData]
 }
 
 function useFormPhotosProduct (){
@@ -36,7 +46,11 @@ function useFormPhotosProduct (){
     }
   }
 
-  return [photos, addPhoto]
+  const resetPhotos = ()=>{
+    setPhotos([])
+  }
+
+  return [photos, addPhoto, resetPhotos]
 }
 
 function useFormPricesProduct (){
