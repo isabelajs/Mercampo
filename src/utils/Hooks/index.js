@@ -58,7 +58,6 @@ function useFormPricesProduct (){
     [
       { name: "Kilogramo", value: '5000' },
       { name: "Libra", value: '' },
-      { name: "Unidad", value: '' },
     ],
   )
 
