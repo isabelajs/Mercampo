@@ -122,6 +122,7 @@ const addProductToStore = async (basic, photos, prices)=>{
 
 }
 
+//obtengo todos los productos de un usuario en la coleccion de productos
 const getProductByUser = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').where('userId', '==', id).get()
@@ -132,11 +133,10 @@ const getProductByUser = async ( id )=>{
     throw new Error(`getProductByUser -> ${err}`)
   }
 }
-
+//obtengo el producto de acuerdo a su id
 const getProductById = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').doc(id).get()
-    // return querySnapshot.docs.map(doc => doc.data() )
     return querySnapshot.data()
   }catch(err){
     throw new Error(`getProductById -> ${err}`)

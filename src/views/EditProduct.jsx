@@ -9,7 +9,6 @@ import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 import "../assets/styles/componentes/EditProduct.scss";
 
 //funcion  firestore
-// import { addProductToStore } from '../utils/dataBase'
 import {getProductById} from '../utils/dataBase'
 
 //hooks
@@ -18,11 +17,12 @@ import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from 
 
 const EditProduct = (props) => { 
   const { user } = props
-
+  
+  const productId = props.match.params.idProduct
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
-    { name: "Nuevo producto",url: "/profile/products/new"},
+    { name: "Editar producto",url: `/profile/products/${productId}/edit`},
   ];
 
   const [formBasic, setBasicData, resetBasicData,x] = useFormBasicProduct(user)

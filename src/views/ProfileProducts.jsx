@@ -11,8 +11,8 @@ import { useState } from "react";
 
 
 const ProfileSettings = (props) => {
+  //listado de los productos del usurio
   const [ userProducts, setUserProducts ] = useState([])
-
   const { user } = props
 
   const links = [
@@ -20,10 +20,10 @@ const ProfileSettings = (props) => {
   ];
 
   useEffect(()=>{
+    //obtengo los productos respecto al usuario
     const getUserProducts = async ()=>{
       let  elements = await getProductByUser(user.uid)
       setUserProducts(elements)
-      
     }
     getUserProducts()
   },[])
@@ -79,9 +79,6 @@ const ProfileSettings = (props) => {
               <ProfileProduct 
                 {...element}
                 history = {props.history}
-                // img = {element.photos[0]}
-                // name = {element.name}
-                // prices = {element.prices}
                 key={index}
               />
               )
