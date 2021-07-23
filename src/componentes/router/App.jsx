@@ -13,6 +13,7 @@ import {PublicLayout,PrivateLayout} from "../../componentes/Layouts/LayoutLoged"
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
+import EditProduct from "../../views/EditProduct";
 import PrivateRoute from "./PrivateRoute";
 
 //estilos
@@ -85,8 +86,8 @@ const App = (props)=> {
                     <ProfileNewProduct /> 
                   </PrivateRoute>
 
-                  <PrivateRoute exact path='/profile/products/edit/:product'> 
-                    <ProfileNewProduct /> 
+                  <PrivateRoute exact path='/profile/products/edit'> 
+                    <EditProduct /> 
                   </PrivateRoute>
 
                 </PrivateLayout>
