@@ -87,7 +87,7 @@ function useFormPricesProduct (){
     const lastPrice = prices[prices.length-1]
 
     //si el ultimo elemento no esta completo no dejar agregar mas
-    if(!isNaN(lastPrice.name) ||  !lastPrice.value){
+    if(lastPrice && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
       console.log('no puedes agregar')
       return
     }

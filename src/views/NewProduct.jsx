@@ -13,6 +13,7 @@ import { addProductToStore } from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
+import { useEffect } from "react";
 
 
 const ProfileNewProduct = (props) => { 
@@ -38,6 +39,7 @@ const ProfileNewProduct = (props) => {
       setIsSendingData(false)
 
       resetBasicData()
+
       resetPhotos()
 
       console.log('información enviada con exito');
@@ -47,6 +49,12 @@ const ProfileNewProduct = (props) => {
     }
 
   }
+
+  //didMounted component
+  useEffect(()=>{
+    //charge a new price, because the list is empty
+    insertNewPrice()
+  },[])
 
   return (
     <SystemLayout links={links} type="products" props={props}>

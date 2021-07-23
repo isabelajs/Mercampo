@@ -19,7 +19,6 @@ function ProfileProduct(props) {
 
   const editProduct = () =>{
     props.history.push(`/profile/products/${id}/edit`)
-    // console.log(props)
   }
 
 
