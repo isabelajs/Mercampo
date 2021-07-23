@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import {useState}from 'react';
 
 
 function useFormBasicProduct ({displayName, uid} ){
@@ -56,25 +56,34 @@ function useFormPhotosProduct (){
 function useFormPricesProduct (){
   const [prices, setPrices] = useState(
     [
-      { name: "Kilogramo", value: '5000' },
-      { name: "Libra", value: '' },
-      { name: "Unidad", value: '' },
+      {name: "kilogramo", value: 5000 },
+      {name: "libra", value: '' },
     ],
   )
 
-  //modifica el nombre del componente
-  const handleUnitPrice = (e)=>{
+  //cambiar el nombre del componente UnitPrice
+  const handleUnitName =(name,indexChange)=>{
     setPrices(
-        prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, value: e.target.value })      
+      prices.map((item,index) =>
+        index !== indexChange ? item : {value:item.value,name}
+      ),
+    );
+  }
+  
+  //modifica el nombre del componente
+  const handleUnitPrice = (value,indexChange)=>{
+    setPrices(
+        prices.map((item,index) =>
+        index !== indexChange ? item : {name: item.name, value})
     )
   }
-   //agregar un componente UnitPrice
+
+  //agregar un componente UnitPrice
   const insertNewPrice = ()=>{
     const lastPrice = prices[prices.length-1]
 
     //si el ultimo elemento no esta completo no dejar agregar mas
-    if(lastPrice.isNew && (!isNaN(lastPrice.name) ||  !lastPrice.value)){
+    if(!isNaN(lastPrice.name) ||  !lastPrice.value){
       console.log('no puedes agregar')
       return
     }
@@ -83,7 +92,7 @@ function useFormPricesProduct (){
       [
         ...prices,
         {
-          name: String(prices.length),
+          name: '',
           value: '',
           isNew: true,
         }
@@ -91,21 +100,14 @@ function useFormPricesProduct (){
     )
   }
 
+  //eliminar un componente UnitPrice
   const deletePrice = (index)=>{
-    prices.splice(index,1)
 
-    setPrices([
-        prices
-      ]
-    );
-  }
-  //cambiar el nombre del componente UnitPrice
-  const handleUnitName =(e)=>{
-    setPrices(
-      prices.map((item) =>
-        item.name !== e.target.name ? item : { ...item, name: e.target.value }
-      ),
-    );
+    if(index > 0 ){
+      prices.splice(index,1)
+      setPrices([...prices]);
+    }
+
   }
 
 
