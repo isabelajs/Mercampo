@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
 
-function useFormBasicProduct ({displayName, uid} ){
+export function useFormBasicProduct ({displayName, uid} ){
 
-  //estado es vacio si es vacio 
-  //si no es vacio
   const state = {
       userId : uid,
       userName: displayName,
@@ -15,7 +13,6 @@ function useFormBasicProduct ({displayName, uid} ){
       category:'',
     }
 
-
   const [formBasic, setFormBasic] = useState(state)
 
   const setBasicData = (e) =>{
@@ -24,22 +21,22 @@ function useFormBasicProduct ({displayName, uid} ){
       [e.target.name]: e.target.value,
     });
   }
-
-  const x = (data)=>{
+  
+  const setBasicDataFromData = (data)=>{
     setFormBasic(
       {...data}
     )
   }
 
-
   const resetBasicData = ()=>{
     setFormBasic(state)
   }
 
-  return [formBasic, setBasicData, resetBasicData,x ]
+  return {formBasic, setBasicData, resetBasicData,setBasicDataFromData}
 }
 
-function useFormPhotosProduct (){
+export function useFormPhotosProduct (){
+
   const [photos, setPhotos] = useState([])
 
   const addPhoto = (e)=>{
@@ -55,14 +52,18 @@ function useFormPhotosProduct (){
     }
   }
 
+  const addPhotosFromData = (urls)=>{
+    setPhotos(urls.map(url => ({url: url, alt:'Imagen de producto'})))
+  }
+ 
   const resetPhotos = ()=>{
     setPhotos([])
   }
 
-  return [photos, addPhoto, resetPhotos]
+  return {photos, addPhoto, resetPhotos, addPhotosFromData}
 }
 
-function useFormPricesProduct (){
+export function useFormPricesProduct (){
   const [prices, setPrices] = useState([])
 
   //cambiar el nombre del componente UnitPrice
@@ -115,8 +116,6 @@ function useFormPricesProduct (){
   }
 
 
-  return[prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName]
+  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName}
 }
 
-
-export { useFormBasicProduct, useFormPhotosProduct, useFormPricesProduct }

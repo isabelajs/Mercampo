@@ -25,29 +25,23 @@ const EditProduct = (props) => {
     { name: "Editar producto",url: `/profile/products/${productId}/edit`},
   ];
 
-  const [formBasic, setBasicData, resetBasicData,x] = useFormBasicProduct(user)
-  const [photos, addPhoto, resetPhotos] = useFormPhotosProduct()
-  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProduct()
-  const [isSendingData, setIsSendingData] = useState(false)
+  const {formBasic, setBasicData, resetBasicData, setBasicDataFromData} = useFormBasicProduct(user)
+  const {photos, addPhoto, resetPhotos, addPhotosFromData} = useFormPhotosProduct()
+  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName} = useFormPricesProduct()
+  const {isSendingData, setIsSendingData} = useState(false)
 
   useEffect(()=>{
 
     const getProduct = async ()=>{
-
       try{
-        const data = await getProductById(props.match.params.idProduct)
-
-        x(data)
-        console.log(data);
+        const data = await getProductById(productId)
+        setBasicDataFromData(data)        
+        addPhotosFromData(data.photos)
         
-        
-
       }catch(err){
         console.log(err);
-        
       }
     }
-
 
     getProduct()
 
@@ -58,14 +52,10 @@ const EditProduct = (props) => {
     setIsSendingData(true)
 
     try{
-      // await addProductToStore(formBasic,photos,prices)
-
       setIsSendingData(false)
       resetBasicData()
       resetPhotos()
 
-      console.log('información enviada con exito');
-      
     }catch (error){
       console.log(error);
     }
@@ -88,7 +78,6 @@ const EditProduct = (props) => {
                 {photos.map((item,index)=>{
                   return <img src={item.url} alt={item.alt} key={index} />
                 })}
-                
 
                 {/* TODO PASAR ESTO A UN COMPONENTE APARTE */}
 
