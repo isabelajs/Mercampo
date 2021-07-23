@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
@@ -36,23 +36,24 @@ const ProfileNewProduct = (props) => {
   
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    setIsSendingData(true)
-    
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
+    
+    if(validation){
+      openAlert({
+        error:true,
+        message: validation
+      })
+      return
+    }
+
+    
     try{
-      if(validation){
-        openAlert({
-          error:true,
-          message: validation
-        })
-        return
-      }else{
-        closeAlert()
-      }
 
+      closeAlert()
 
-
-      // await addProductToStore(formBasic,photos,prices)
+      setIsSendingData(true)
+      
+      await addProductToStore(formBasic,photos,prices)
 
       setIsSendingData(false)
 
@@ -70,11 +71,7 @@ const ProfileNewProduct = (props) => {
 
   }
 
-  //didMounted component
-  useEffect(()=>{
-    //charge a new price, because the list is empty
-    insertNewPrice()
-  },[])
+
 
   return (
     <SystemLayout links={links} type="products" props={props}>

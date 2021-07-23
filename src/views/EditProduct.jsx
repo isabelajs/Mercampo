@@ -38,6 +38,7 @@ const EditProduct = (props) => {
         setBasicDataFromData(data)        
         addPhotosFromData(data.photos)
         
+        
       }catch(err){
         console.log(err);
       }

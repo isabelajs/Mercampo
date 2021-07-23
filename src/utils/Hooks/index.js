@@ -64,7 +64,7 @@ export function useFormPhotosProduct (){
 }
 
 export function useFormPricesProduct (){
-  const state = [{name:'', value:''}]
+  const state = [{name:'', value:'', isNew:true}]
 
   const [prices, setPrices] = useState(state)
 
