@@ -6,6 +6,7 @@ import { useHistory, Link } from 'react-router-dom';
 import logo from '../assets/static/logo.png'
 import userIcon from '../assets/static/Group.png'
 import menuBurger from '../assets/static/menuBurguer.png'
+import MenuMobile from './MenuMobile';
 
 //estilos
 // import styles from '../assets/styles/componentes/Header/HeaderPrivate.scss';
@@ -48,37 +49,8 @@ function HeaderPrivate (props){
         <p className="userStatus__userName">{truncateName(user)}</p>
       </div>
 
-      <div className={`menuUser ${isOpenMenuMobile && 'menuUser--open'}`}>
-
-        <p onClick={openMenuMobile}>X</p>
-
-        <div className="menuUser__User">
-          <img src="" alt="" />
-          <p></p>
-        </div>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Perfil</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Home</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Productos</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>About Us</p>
-        </ul>
-
-      </div>
-
+      <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
+    
     </header>
   )
 }

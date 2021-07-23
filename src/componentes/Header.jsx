@@ -9,6 +9,8 @@ import menuBurger from '../assets/static/menuBurguer.png'
 
 //estilos
 import '../assets/styles/componentes/Header/Header.scss';
+import MenuMobile from './MenuMobile';
+
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
 
@@ -77,38 +79,8 @@ function Header (props){
         </div>
       }
     
-        
-      <div className={`menuUser ${isOpenMenuMobile && 'menuUser--open'}`}>
-
-        <p onClick={openMenuMobile}>X</p>
-
-        <div className="menuUser__User">
-          <img src="" alt="" />
-          <p></p>
-        </div>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Perfil</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Home</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Productos</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>About Us</p>
-        </ul>
-
-      </div>
-
+      <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
+    
     </header>
   )
 }

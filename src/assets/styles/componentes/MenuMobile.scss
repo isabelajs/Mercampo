@@ -1,40 +1,135 @@
 .menuMobile{
-  display: flex;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  padding: 0 35px;
   position: fixed;
-  width: 100%;
-  bottom: 0;
-  border-radius: 10px 10px 0 0 ;
-  border: 1px solid #858585;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  // bottom: 0; alternativa -> top 0 bottom 0 
 
+  transition: all 0.3s;
+  transform: translateX(-100%);
+  z-index: 3;
+  
+  background-color: rgb(221, 221, 221);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 
-  &__container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 350px;
+  &--open{
+    transform: translateX(0);
+
   }
 
-  .menuMobile__option{
+  ul{
+    list-style: none;
+    padding: 0;
+  }
+
+  li{
+    padding: 15px 0px;
+  }
+
+
+  &>ul{
+    padding: 0 25px;
+
+    ul{
+      transition: all 0.3s;
+      max-height: 0;
+      overflow: hidden;
+      padding-left: 25px;
+
+      &.show{
+
+        max-height: 150px;
+      }
+
+    }
+
+    &>li{
+      cursor: pointer;
+      // margin-bottom: 35px;
+      // border-bottom: 1px solid rgb(189, 189, 189);  
+      // padding: 5px 0px;
+
+      &:first-child{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      }
+
+    }
+  }
+  
+  &>svg{
+    align-self: flex-end;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
-  &__icon{
+  &__option{
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__optionIcon{
     width: 20px;
     height: 20px;
     margin-bottom: 3px;
+    margin-right: 30px;
   }
 
-  &__title{
-    font-size: 12px;
-    font-weight: 500h;
+  &__login{
+    // align-self: flex-end;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    left:30px;
   }
+
 }
+
+
+
+// .menuMobile{
+//   display: flex;
+//   box-sizing: border-box;
+//   justify-content: center;
+//   align-items: center;
+//   height: 50px;
+//   padding: 0 35px;
+//   position: fixed;
+//   width: 100%;
+//   bottom: 0;
+//   border-radius: 10px 10px 0 0 ;
+//   border: 1px solid #858585;
+
+
+//   &__container{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     width: 100%;
+//     max-width: 350px;
+//   }
+
+//   .menuMobile__option{
+//     cursor: pointer;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+//   &__icon{
+//     width: 20px;
+//     height: 20px;
+//     margin-bottom: 3px;
+//   }
+
+//   &__title{
+//     font-size: 12px;
+//     font-weight: 500h;
+//   }
+// }
+
