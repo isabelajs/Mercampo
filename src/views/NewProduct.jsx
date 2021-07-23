@@ -21,15 +21,28 @@ function useFormBasicProfileProduct ({displayName, uid} ){
     description: '',
     name: "",
     keywords:'',
+    category:'',
   })
 
-  const handleChange = (e) =>{
+  const setBasicData = (e) =>{
     setFormBasic ({
       ...formBasic,
       [e.target.name]: e.target.value,
     });
   }
-  return [formBasic, handleChange]
+
+  const resetBasicData = ()=>{
+    setFormBasic({
+      userId : displayName,
+      userName: uid,
+      avaliable: true,
+      description: '',
+      name: '',
+      keywords:'',
+      category:'',
+    })
+  }
+  return [formBasic, setBasicData, resetBasicData]
 }
 
 function useFormPhotosProfileProduct (){
@@ -91,12 +104,9 @@ function useFormPricesProfileProduct (){
 
   const deletePrice = (index)=>{
     prices.splice(index,1)
-
-    setPrices([
-        prices
-      ]
-    );
+    setPrices([...prices]);
   }
+
   //cambiar el nombre del componente UnitPrice
   const handleUnitName =(e)=>{
     setPrices(
@@ -118,16 +128,23 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const [formBasic, handleChange] = useFormBasicProfileProduct(user)
+  const [formBasic, setBasicData, resetBasicData] = useFormBasicProfileProduct(user)
   const [photos, addPhoto] = useFormPhotosProfileProduct()
   const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProfileProduct()
-
+  const [isSendingData, setIsSendingData] = useState(false)
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
+    setIsSendingData(true)
+
     try{
       await addProductToStore(formBasic,photos,prices)
+
+      setIsSendingData(false)
+
+      resetBasicData()
+
       console.log('información enviada con exito');
       
     }catch (error){
@@ -180,8 +197,9 @@ const ProfileNewProduct = (props) => {
                   name="name"
                   type="text"
                   placeholder="Nombre del producto"
-                  onChange={handleChange}
-                />
+                  onChange={setBasicData}
+                  value={formBasic.name}
+                  />
               </div>
 
               <div className="form-group">
@@ -193,8 +211,9 @@ const ProfileNewProduct = (props) => {
                   name="description"
                   type="text"
                   placeholder="Descripcion del producto"
-                  onChange={handleChange}
-                />
+                  onChange={setBasicData}
+                  value={formBasic.description}
+                  />
               </div>
 
               <div className="form-group">
@@ -206,7 +225,8 @@ const ProfileNewProduct = (props) => {
                   name="keywords"
                   type="text"
                   placeholder="Palabras claves que describan tu producto Ejm: 'ganado, carne, vacas, magro' "
-                  onChange={handleChange}
+                  onChange={setBasicData}
+                  value={formBasic.keywords}
                 />
               </div>
             
@@ -216,14 +236,15 @@ const ProfileNewProduct = (props) => {
                 <select
                   className="form-listBox"
                   name="category"
-                  onChange={handleChange}
+                  onChange={setBasicData}
+                  value= {formBasic.category}
                 >
-                  <option value={false}>-----</option>
-                  <option value={false}>Animales</option>
-                  <option value={false}>Granos</option>
-                  <option value={false}>Verduras</option>
-                  <option value={false}>Frutas</option>
-                  <option value={false}>Otros</option>
+                  <option value={''}>-----</option>
+                  <option value={'Animales'}>Animales</option>
+                  <option value={'Granos'}>Granos</option>
+                  <option value={'Verduras'}>Verduras</option>
+                  <option value={'Frutas'}>Frutas</option>
+                  <option value='Otros'>Otros</option>
                 </select>
               </div>
 
@@ -232,7 +253,8 @@ const ProfileNewProduct = (props) => {
                 <select
                   className="form-listBox"
                   name="avaliable"
-                  onChange={handleChange}
+                  onChange={setBasicData}
+                  value={formBasic.avaliable}
                 >
                   <option value={true}>Disponible</option>
                   <option value={false}>No disponible</option>
@@ -261,6 +283,9 @@ const ProfileNewProduct = (props) => {
           <button className="button button--second">Guardar</button>
         </form>
       </div>
+    
+      {isSendingData && <div>...Enviando informacion</div>}
+
     </SystemLayout>
   );
 };
