@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 function useFormBasicProduct ({displayName, uid} ){
 
-  const initialState = {
+  //estado es vacio si es vacio 
+  //si no es vacio
+  const state = {
       userId : uid,
       userName: displayName,
       avaliable: true,
@@ -14,20 +16,27 @@ function useFormBasicProduct ({displayName, uid} ){
     }
 
 
-  const [formBasic, setFormBasic] = useState(initialState)
+  const [formBasic, setFormBasic] = useState(state)
 
-  const handleChange = (e) =>{
+  const setBasicData = (e) =>{
     setFormBasic ({
       ...formBasic,
       [e.target.name]: e.target.value,
     });
   }
 
-  const resetBasicData = ()=>{
-    setFormBasic(initialState)
+  const x = (data)=>{
+    setFormBasic(
+      {...data}
+    )
   }
 
-  return [formBasic, handleChange, resetBasicData]
+
+  const resetBasicData = ()=>{
+    setFormBasic(state)
+  }
+
+  return [formBasic, setBasicData, resetBasicData,x ]
 }
 
 function useFormPhotosProduct (){
@@ -54,12 +63,7 @@ function useFormPhotosProduct (){
 }
 
 function useFormPricesProduct (){
-  const [prices, setPrices] = useState(
-    [
-      {name: "kilogramo", value: 5000 },
-      {name: "libra", value: '' },
-    ],
-  )
+  const [prices, setPrices] = useState([])
 
   //cambiar el nombre del componente UnitPrice
   const handleUnitName =(name,indexChange)=>{

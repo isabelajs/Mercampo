@@ -125,9 +125,21 @@ const addProductToStore = async (basic, photos, prices)=>{
 const getProductByUser = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').where('userId', '==', id).get()
-    return querySnapshot.docs.map(doc => doc.data() )
+    return querySnapshot.docs.map(doc => {
+      return {id:doc.id,...doc.data()}
+    } )
   }catch(err){
     throw new Error(`getProductByUser -> ${err}`)
+  }
+}
+
+const getProductById = async ( id )=>{
+  try{
+    let querySnapshot = await db.collection('products').doc(id).get()
+    // return querySnapshot.docs.map(doc => doc.data() )
+    return querySnapshot.data()
+  }catch(err){
+    throw new Error(`getProductById -> ${err}`)
   }
 }
 
@@ -135,4 +147,4 @@ const getProductByUser = async ( id )=>{
 
 
 
-export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, addProductToStore, getProductByUser}
+export {addUserToStore, findUserById, getCurrentUser, updateUserInfo, getProductById, addProductToStore, getProductByUser}

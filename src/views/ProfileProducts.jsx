@@ -77,9 +77,11 @@ const ProfileSettings = (props) => {
             
             return (
               <ProfileProduct 
-                img = {element.photos[0]}
-                name = {element.name}
-                prices = {element.prices}
+                {...element}
+                history = {props.history}
+                // img = {element.photos[0]}
+                // name = {element.name}
+                // prices = {element.prices}
                 key={index}
               />
               )

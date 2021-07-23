@@ -9,26 +9,47 @@ import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
 import "../assets/styles/componentes/EditProduct.scss";
 
 //funcion  firestore
-import { addProductToStore } from '../utils/dataBase'
+// import { addProductToStore } from '../utils/dataBase'
+import {getProductById} from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
 
 
-const EdithProduct = (props) => { 
+const EditProduct = (props) => { 
   const { user } = props
+
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const [formBasic, setBasicData, resetBasicData] = useFormBasicProduct(user)
+  const [formBasic, setBasicData, resetBasicData,x] = useFormBasicProduct(user)
   const [photos, addPhoto, resetPhotos] = useFormPhotosProduct()
   const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
 
   useEffect(()=>{
+
+    const getProduct = async ()=>{
+
+      try{
+        const data = await getProductById(props.match.params.idProduct)
+
+        x(data)
+        console.log(data);
+        
+        
+
+      }catch(err){
+        console.log(err);
+        
+      }
+    }
+
+
+    getProduct()
 
   },[])
 
@@ -192,7 +213,7 @@ const mapStateToProps = (state)=>({ user: state.user})
 
 
 
-export default connect(mapStateToProps,null)(EdithProduct);
+export default connect(mapStateToProps,null)(EditProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 
