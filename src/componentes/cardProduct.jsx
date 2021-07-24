@@ -39,17 +39,16 @@ const CardProduct = (props)=>{
         <div className="product__description__prices">
 
           {
-            prices.current.map((price,index)=>{
+            prices.current.slice(0,2).map((price,index)=>{
 
-              const key = Math.random()
+              const key = Math.random()*100
 
                 return(
-                  <>
-                  {
-                    index <= 1 &&
-                    <DescriptionPrice key={key} name={nombres[price[0]]} value={price[1]}/>
-                  }
-                  </>
+
+                  < DescriptionPrice 
+                    key={key} 
+                    name={nombres[price[0]]} 
+                    value={price[1]}/>
                 )
             })
           }
