@@ -7,7 +7,7 @@ export function useFormBasicProduct ({displayName, uid} ){
   const state = {
       userId : uid,
       userName: displayName,
-      avaliable: true,
+      avaliable: 'true',
       description: '',
       name: '',
       keywords:'',

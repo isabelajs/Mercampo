@@ -23,7 +23,7 @@ function Header (props){
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
-  const nameTruncate = useRef()
+  const [userName, setUserName] = useState('') 
 
 
   const handleClick = ()=>{
@@ -40,7 +40,7 @@ function Header (props){
 
   useEffect(()=>{
     if(user){
-      nameTruncate.current = user.displayName.split(' ').splice(0,3).join(' ')
+      setUserName(user.displayName.split(' ').splice(0,3).join(' '))
     }
   },[user])
 
@@ -69,7 +69,7 @@ function Header (props){
       {user && 
         <div className="header__userStatus" onClick={moveToProfile}>
           <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-          <p className="userStatus__userName">{nameTruncate.current}</p>
+          <p className="userStatus__userName">{userName}</p>
         </div>
       }
 

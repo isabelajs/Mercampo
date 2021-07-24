@@ -13,6 +13,8 @@ import { useState } from "react";
 const ProfileSettings = (props) => {
   //listado de los productos del usurio
   const [ userProducts, setUserProducts ] = useState([])
+  const [avaliables, setAvaliable] = useState('')
+  const [notAvaliables, setNotAvaliable] = useState('')
   const { user } = props
 
   const links = [
@@ -22,8 +24,10 @@ const ProfileSettings = (props) => {
   useEffect(()=>{
     //obtengo los productos respecto al usuario
     const getUserProducts = async ()=>{
-      let  elements = await getProductByUser(user.uid)
-      setUserProducts(elements)
+      const  {products, productsAvaliables, productsNotAvaliables} = await getProductByUser(user.uid) 
+      setUserProducts(products)
+      setAvaliable(productsAvaliables)
+      setNotAvaliable(productsNotAvaliables)
     }
     getUserProducts()
   },[])
@@ -58,12 +62,12 @@ const ProfileSettings = (props) => {
           <h2 className="profileProducts__textList">Listado de productos</h2>
 
           <div className="profileProducts__infoList">
-            <p className="infoList__count infoList__count--green">6</p>
+            <p className="infoList__count infoList__count--green">{avaliables}</p>
             <p className="infoList__type">Disponibles</p>
           </div>
 
           <div className="profileProducts__infoList">
-            <p className="infoList__count infoList__count--red">2</p>
+            <p className="infoList__count infoList__count--red">{notAvaliables}</p>
             <p className="infoList__type">No Disponibles</p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
@@ -67,6 +67,7 @@ const EditProduct = (props) => {
         error:true,
         message: validation
       })
+      return
     }
 
     

@@ -149,9 +149,12 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 export const getProductByUser = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').where('userId', '==', id).get()
-    return querySnapshot.docs.map(doc => {
+    const products = querySnapshot.docs.map(doc => {
       return {id:doc.id,...doc.data()}
     } )
+    const productsAvaliables =products.filter(product=> product.avaliable === 'true').length
+    const productsNotAvaliables = products.length - productsAvaliables
+    return {products, productsAvaliables, productsNotAvaliables}
   }catch(err){
     throw new Error(`getProductByUser -> ${err}`)
   }
@@ -175,3 +178,6 @@ export const getAllProducts = async () => {
     throw new Error(`getAllProducts -> ${err}`);
   }
 };
+
+
+

@@ -15,7 +15,7 @@ function HeaderPrivate (props){
 
   const { user } = props
 
-  const nameTruncate = useRef()
+  const [userName, setUserName] = useState('')
 
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
@@ -31,7 +31,7 @@ function HeaderPrivate (props){
 
   useEffect(()=>{
     if(user){
-      nameTruncate.current = user.displayName.split(' ').splice(0,3).join(' ')
+      setUserName(user.displayName.split(' ').splice(0,3).join(' ')) 
     }
   },[user])
 
@@ -45,8 +45,8 @@ function HeaderPrivate (props){
           <img onClick={handleClick} className='header__logo'src={logo} alt="" />
 
           <div className="header__userStatus" >
-            <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-            <p className="userStatus__userName">{nameTruncate.current}</p>
+            <img loading='lazy' className='userStatus__icon icon' src={user.photoURL} alt=""/>
+            <p className="userStatus__userName">{userName}</p>
           </div>
 
           <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
