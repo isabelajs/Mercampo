@@ -1,29 +1,41 @@
 .product{
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; 
   border-radius: 10px;
-  width:256px ;
+  // width:190px;
+  width: 100%;
+
   &__img{
     width: 100%;
-    height: 188px;
+    height: 160px;
     background-color: hotpink;
     border-radius: 10px 10px 0 0;
     object-fit: cover;
   }
   &__description{
-    padding: 22px;
+    padding: 10px 20px;
+    padding-bottom: 20px;
     
     &__title-product{
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;          
     }
 
     &__name-producer{
-      margin-top: 7px;
-      margin-bottom: 10px;
+      color: rgb(85, 85, 85);
+      font-size: 12px;
+      margin-left: 10px;
+      margin-bottom: 5px;
     }
-    &__price{
+
+    &__prices{
       display: flex;
+      align-items: center;
       justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 0 15px;
+      height: 34px;
+      font-size: 12px;
+
       .description__price{
         display: flex;
         span{
@@ -31,13 +43,19 @@
         }
       }
     }
+
     &__others{
       margin-top: 10px;
       text-align: center;
+      height: 32px;
+      text-overflow: ellipsis;
+      margin-bottom: 5px;
     }
+
     .button{
       margin:0 auto;
       margin-top: 10px;
+      height: 30px;
     }
   }
 }

@@ -1,13 +1,16 @@
 .l-products{
   width: 100%;
   // min-height: 100vh;
+  padding: 0px 10px;
 
   .c-products__products{
     margin: 30px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 256px);
-    gap: 15px 35px;
+    grid-template-columns: repeat(auto-fill, minmax(190px,220px));
+    gap: 30px 35px;
     justify-content: center;
+    align-items: center;
+    justify-items: center;
 
 
   }

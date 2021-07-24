@@ -13,7 +13,7 @@ const CardProduct = (props)=>{
 
   const prices = useRef(pricesToList())
 
-  console.log(prices)
+  const nombres = {kilogramo:'Kg', libra:'Lb', unidad:'Und'}
 
   return(
     <div className="product">
@@ -25,8 +25,7 @@ const CardProduct = (props)=>{
 
         <div className="product__description__name-producer">{userName.current}</div>
 
-        <div className="product__description__price">
-
+        <div className="product__description__prices">
 
           {
             prices.current.map((price,index)=>{
@@ -35,7 +34,7 @@ const CardProduct = (props)=>{
                   {
                     index <= 1 &&
                     <div key={`price_${index}`} className="description__price">
-                      <div className="measured">{price[0]}</div>
+                      <div className="measured">{nombres[price[0]]}</div>
                       <span>-</span>
                       <div className="price">{`$${price[1]}`}</div>
                     </div>
@@ -43,24 +42,20 @@ const CardProduct = (props)=>{
                   </>
                 )
             })
+
+
+          }
+          {
+            prices.current.length > 2 &&
+            <div>...Otros</div>
           }
 
-          {/* <div className="description__price">
-            <div className="measured">{prices.current[0][0]}</div>
-            <span>-</span>
-            <div className="price">{`$${prices.current[0][1]}`}</div>
-          </div>
-
-          <div className="description__price">
-            <div className="measured">{prices.current[1][0]}</div>
-            <span>-</span>
-            <div className="price">{`$${prices.current[1][1]}`}</div>
-          </div> */}
         </div>
 
-        {/* <div className="product__description__others">Otros...</div> */}
 
-        <button className="button button--main">INFORMACIÓN</button>
+        {/* <div className="product__description__others">{props.description}</div> */}
+
+        <button className="button button--main">Información</button>
       </div>
     </div>
   )
