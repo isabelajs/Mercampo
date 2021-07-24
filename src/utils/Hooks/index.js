@@ -65,7 +65,7 @@ export function useFormPhotosProduct (){
 }
 
 export function useFormPricesProduct (){
-  const state = [{name:'', value:'', isNew:true}]
+  const state = [{name:'', value:''}]
 
   const [prices, setPrices] = useState(state)
 
@@ -123,6 +123,7 @@ export function useFormPricesProduct (){
   }
 
   const addPricesFromData = (prices)=>{
+    console.log(objectToList(prices));
     setPrices(objectToList(prices))
   }
 

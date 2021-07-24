@@ -69,7 +69,7 @@ const UnitPrice = (props) => {
           onChange={handlePrice}
           name={name}
           type="text"
-          value={`$ ${value}`}
+          value={value}
           placeholder='$  0'
           disabled= {!isOpenEdit}
           onClick={onClick}

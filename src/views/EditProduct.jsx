@@ -25,9 +25,9 @@ const EditProduct = (props) => {
     { name: "Editar producto",url: `/profile/products/${productId}/edit`},
   ];
 
-  const {formBasic, setBasicData, resetBasicData, setBasicDataFromData} = useFormBasicProduct(user)
-  const {photos, addPhoto, resetPhotos, addPhotosFromData} = useFormPhotosProduct()
-  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData} = useFormPricesProduct()
+  const {formBasic, setBasicData, setBasicDataFromData} = useFormBasicProduct(user)
+  const {photos, addPhoto, addPhotosFromData} = useFormPhotosProduct()
+  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
   const [isSendingData, setIsSendingData]= useState(false)
 
   useEffect(()=>{
@@ -50,15 +50,17 @@ const EditProduct = (props) => {
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    setIsSendingData(true)
-
+    
     try{
-      setIsSendingData(false)
-      // resetBasicData()
-      // resetPhotos()
+      setIsSendingData(true) 
       
-      updateProduct(productId,formBasic,photos,prices)
+      // await updateProduct(productId,formBasic,photos,prices)
 
+      setIsSendingData(false)
+         // resetBasicData()
+      // resetPhotos()
+      // resetPrices()
+      console.log('Producto actualizado con exito');
     }catch (error){
       console.log(error);
     }
