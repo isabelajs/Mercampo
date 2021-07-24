@@ -50,7 +50,6 @@ function Login (props){
     
     const validation = validationForm(form)
 
-    console.log('wtf')
     if(validation){
       openAlert({
         error:true,
@@ -63,26 +62,24 @@ function Login (props){
       //El usuario intenta loguearse
       const user = await singInWithEmail(form.email, form.password)
 
+      console.log(user.emailVerified)
 
-      // console.log(user.emailVerified)
-
-      //si el usuario esta verificado, se confirma si esta en la base de datos
-      // if(user.emailVerified){
+      // si el usuario esta verificado, se confirma si esta en la base de datos
+      if(user.emailVerified){
       
-      //   const userRef = await findUserById(user.uid)
-      //   console.log(userRef)
-      //   if(userRef === undefined){
-      //     await addUserToStore(user)
-      //   }
+        const userRef = await findUserById(user.uid)
+        console.log(userRef)
+        if(userRef === undefined){
+          await addUserToStore(user)
+        }
 
-      // }else{
-      //   openAlert({
-      //     error: true,
-      //     message: 'Tu correo actualmente no se encuentra verificado'
-      //   })
-      // }
+      }else{
+        openAlert({
+          error: true,
+          message: 'Tu correo actualmente no se encuentra verificado'
+        })
+      }
     }catch (error){
-      console.log('error en login', error)
       openAlert({
         error: true,
         message: error.code

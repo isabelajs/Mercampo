@@ -10,6 +10,7 @@ import menuBurger from '../assets/static/menuBurguer.png'
 //estilos
 import '../assets/styles/componentes/Header/Header.scss';
 import MenuMobile from './MenuMobile';
+import { useEffect } from 'react';
 
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
@@ -22,7 +23,7 @@ function Header (props){
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
-  const nameTruncate = useRef(user.displayName.split(' ').splice(0,3).join(' '))
+  const nameTruncate = useRef()
 
 
   const handleClick = ()=>{
@@ -36,6 +37,12 @@ function Header (props){
   const moveToProfile = ()=>{
     history.push('/profile/settings')
   }
+
+  useEffect(()=>{
+    if(user){
+      nameTruncate.current = user.displayName.split(' ').splice(0,3).join(' ')
+    }
+  },[user])
 
   return(
     

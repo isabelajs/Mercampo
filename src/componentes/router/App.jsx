@@ -31,7 +31,7 @@ const App = (props)=> {
 
       if(user && !user.emailVerified){
           auth.signOut()
-          console.log('ese man no esta autenticado', auth.currentUser)
+          // console.log('ese man no esta autenticado', auth.currentUser)
           return
       }
 

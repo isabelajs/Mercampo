@@ -14,6 +14,7 @@ const addUserToStore = async (user) => {
       name: user.displayName,
       phoneMain: "",
       phoneSecond: "",
+      photo:'',
     })
     .catch((error) => error);
 };

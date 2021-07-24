@@ -5,7 +5,6 @@ export default function Home(props) {
   const handleCloseSesion = async () => {
     signOut()
       .then(() => {
-        console.log("close session");
         // props.history.push("/");
       })
       .catch((error) => {
