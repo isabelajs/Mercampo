@@ -54,8 +54,8 @@ const EditProduct = (props) => {
 
     try{
       setIsSendingData(false)
-      resetBasicData()
-      resetPhotos()
+      // resetBasicData()
+      // resetPhotos()
       
       updateProduct(productId,formBasic,photos,prices)
 

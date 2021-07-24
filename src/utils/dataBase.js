@@ -3,6 +3,7 @@ import { auth } from "../firebase.config.js";
 import { listToObject} from './Helpers/convertedObjetList';
 
 
+
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const addUserToStore = async (user) => {
   db.collection('users').doc(user.uid).set({
@@ -128,13 +129,17 @@ export const addProductToStore = async (basic, photos, prices)=>{
 export const updateProduct = async (id,basic, photos, prices)=>{
   try{
     let newPhotos = photos.filter(photo=> photo.hasOwnProperty('file'))
-    let previousPhoto = photos.filter(photo=> !photo.hasOwnProperty('file'))
-
+    const results = await Promise.all(newPhotos.map((photo)=> uploadImg(photo.file)))
+    const urlsNew = results.map( ({data:{url}}) => url )
+    const previousPhoto = photos.filter(photo=> !photo.hasOwnProperty('file'))
+    const urls= previousPhoto.map(photo=>photo.url)
 
     let productInfo = {
       ...basic,
+      photos: [].concat(urls,urlsNew),
+      prices: listToObject(prices)
     }
-    console.log(productInfo)
+    console.log(productInfo);
     // await db.collection('products').doc(id).set(productInfo)
     
   }catch(err){
