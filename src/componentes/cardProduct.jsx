@@ -17,7 +17,6 @@ const CardProduct = (props)=>{
 
   const {name} = props
 
-  //nombre truncado
   const userName = useRef(props.userName.split(' ').splice(0,3).join(' '))
   
   const pricesToList = useCallback(()=>Object.entries(props.prices),[props])
@@ -40,11 +39,8 @@ const CardProduct = (props)=>{
 
           {
             prices.current.slice(0,2).map((price,index)=>{
-
               const key = Math.random()*100
-
                 return(
-
                   < DescriptionPrice 
                     key={key} 
                     name={nombres[price[0]]} 
@@ -59,9 +55,6 @@ const CardProduct = (props)=>{
           }
 
         </div>
-
-
-        {/* <div className="product__description__others">{props.description}</div> */}
 
         <button className="button button--main">Información</button>
       </div>
