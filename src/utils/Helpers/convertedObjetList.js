@@ -16,4 +16,3 @@ const objectToList = (object)=>{
 }
 
 export {listToObject, objectToList}
-

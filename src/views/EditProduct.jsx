@@ -1,71 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useCallback } from "react";
+import { connect, useDispatch } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+import Alert from "../componentes/common/Alert";
 
 //estilos
 import "../assets/styles/componentes/EditProduct.scss";
 
 //funcion  firestore
-// import { addProductToStore } from '../utils/dataBase'
-import {getProductById} from '../utils/dataBase'
+import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
+import {openAlert, closeAlert} from '../actions'
+
+//validaciones
+import {validationsInFormProducts} from "../utils/validationsInform";
 
 
 const EditProduct = (props) => { 
-  const { user } = props
+  const { user, openAlert, closeAlert } = props
 
+  const productId = props.match.params.idProduct
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
-    { name: "Nuevo producto",url: "/profile/products/new"},
+    { name: "Editar producto",url: `/profile/products/${productId}/edit`},
   ];
 
-  const [formBasic, setBasicData, resetBasicData,x] = useFormBasicProduct(user)
-  const [photos, addPhoto, resetPhotos] = useFormPhotosProduct()
-  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProduct()
-  const [isSendingData, setIsSendingData] = useState(false)
+  const {formBasic, setBasicData, setBasicDataFromData} = useFormBasicProduct(user)
+  const {photos, addPhoto, addPhotosFromData} = useFormPhotosProduct()
+  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
+  const [isSendingData, setIsSendingData]= useState(false)
+
+  const validationForm = useCallback((form)=>validationsInFormProducts(form),[])
 
   useEffect(()=>{
 
     const getProduct = async ()=>{
-
       try{
-        const data = await getProductById(props.match.params.idProduct)
-
-        x(data)
-        console.log(data);
+        const data = await getProductById(productId)
+        setBasicDataFromData(data)        
+        addPhotosFromData(data.photos)
+        addPricesFromData(data.prices)
         
-        
-
       }catch(err){
         console.log(err);
-        
       }
     }
 
-
+    closeAlert()
     getProduct()
 
   },[])
 
+
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    setIsSendingData(true)
+    
+    const validation = validationForm({...formBasic, photos:photos, prices: prices})
 
+    if(validation){
+      openAlert({
+        error:true,
+        message: validation
+      })
+    }
+
+    
     try{
-      // await addProductToStore(formBasic,photos,prices)
 
+      closeAlert()
+      setIsSendingData(true) 
+
+      await updateProduct(productId,formBasic,photos,prices)
       setIsSendingData(false)
-      resetBasicData()
-      resetPhotos()
 
-      console.log('información enviada con exito');
-      
+      console.log('Producto actualizado con exito');
     }catch (error){
       console.log(error);
     }
@@ -88,7 +101,6 @@ const EditProduct = (props) => {
                 {photos.map((item,index)=>{
                   return <img src={item.url} alt={item.alt} key={index} />
                 })}
-                
 
                 {/* TODO PASAR ESTO A UN COMPONENTE APARTE */}
 
@@ -198,11 +210,13 @@ const EditProduct = (props) => {
               </div>
             </div>
           </div>
-
+          
           <button className="button button--second">Guardar</button>
         </form>
+
       </div>
     
+      <Alert/>
       {isSendingData && <div>...Enviando informacion</div>}
 
     </SystemLayout>
@@ -211,9 +225,13 @@ const EditProduct = (props) => {
 
 const mapStateToProps = (state)=>({ user: state.user})
 
+const mapDispatchToProps = {
+  openAlert,
+  closeAlert
+}
 
 
-export default connect(mapStateToProps,null)(EditProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(EditProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 

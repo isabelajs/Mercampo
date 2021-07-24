@@ -3,7 +3,7 @@ import { auth } from "../firebase.config.js";
 import { listToObject } from "./Helpers/convertedObjetList";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
-const addUserToStore = async (user) => {
+export const addUserToStore = async (user) => {
   db.collection("users")
     .doc(user.uid)
     .set({
@@ -19,7 +19,7 @@ const addUserToStore = async (user) => {
     .catch((error) => error);
 };
 
-const findUserById = (id) => {
+export const findUserById = (id) => {
   return new Promise((resolve, reject) => {
     db.collection("users")
       .doc(id)
@@ -34,7 +34,7 @@ const findUserById = (id) => {
 };
 
 //Upload img to server IMGBB
-const uploadImg = async (img) => {
+export const uploadImg = async (img) => {
   const data = new FormData();
   data.append("image", img);
 
@@ -56,7 +56,8 @@ const uploadImg = async (img) => {
 };
 
 //actualizar la info de un usuario
-const updateUserInfo = async (user, info) => {
+export const updateUserInfo = async(user,info) =>{
+
   //data by default
   let userData = {
     ...info,
@@ -86,20 +87,26 @@ const updateUserInfo = async (user, info) => {
     throw new Error(`UpdateUserInfo -> ${err}`);
   }
 };
+
 //obtener el estado actual del usuario
-const getCurrentUser = () => {
-  return auth.currentUser;
-};
+export const getCurrentUser = ()=>{
+  return auth.currentUser
+}
+
+
+
 
 //funciones sobre base de dato de los productos
 
 //se agrega un producto
-const addProductToStore = async (basic, photos, prices) => {
-  const results = await Promise.all(
-    photos.map((photo) => uploadImg(photo.file))
-  );
+export const addProductToStore = async (basic, photos, prices)=>{
+
+  //lista de promesas (envio de photos)
+  const results = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
+
   //obtengo las urls de las imagenes
   const urls = results.map(({ data: { url } }) => url);
+
   //se cambia la estructura de prices por un objeto
   const pricesList = listToObject(prices);
 
@@ -114,49 +121,57 @@ const addProductToStore = async (basic, photos, prices) => {
   } catch (error) {
     throw new Error(`addProduct -> ${error}`);
   }
-};
+}
 
-const getProductByUser = async (id) => {
-  try {
-    let querySnapshot = await db
-      .collection("products")
-      .where("userId", "==", id)
-      .get();
-    return querySnapshot.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
-    });
-  } catch (err) {
-    throw new Error(`getProductByUser -> ${err}`);
+export const updateProduct = async (id,basic, photos, prices)=>{
+  try{
+    let newPhotos = photos.filter(photo=> photo.hasOwnProperty('file'))
+    const results = await Promise.all(newPhotos.map((photo)=> uploadImg(photo.file)))
+    const urlsNew = results.map( ({data:{url}}) => url )
+    const previousPhoto = photos.filter(photo=> !photo.hasOwnProperty('file'))
+    const urls= previousPhoto.map(photo=>photo.url)
+
+    let productInfo = {
+      ...basic,
+      photos: [].concat(urls,urlsNew),
+      prices: listToObject(prices)
+    }
+
+    console.log(productInfo)
+    await db.collection('products').doc(id).set(productInfo)
+    
+  }catch(err){
+    throw new Error(`UpdateUserInfo -> ${err}`)
+  }
+}
+
+//obtengo todos los productos de un usuario en la coleccion de productos
+export const getProductByUser = async ( id )=>{
+  try{
+    let querySnapshot = await db.collection('products').where('userId', '==', id).get()
+    return querySnapshot.docs.map(doc => {
+      return {id:doc.id,...doc.data()}
+    } )
+  }catch(err){
+    throw new Error(`getProductByUser -> ${err}`)
   }
 };
 
-const getProductById = async (id) => {
-  try {
-    let querySnapshot = await db.collection("products").doc(id).get();
-    // return querySnapshot.docs.map(doc => doc.data() )
-    return querySnapshot.data();
-  } catch (err) {
-    throw new Error(`getProductById -> ${err}`);
+//obtengo el producto de acuerdo a su id
+export const getProductById = async ( id )=>{
+  try{
+    let querySnapshot = await db.collection('products').doc(id).get()
+    return querySnapshot.data()
+  }catch(err){
+    throw new Error(`getProductById -> ${err}`)
   }
 };
 
-const getAllProducts = async () => {
+export const getAllProducts = async () => {
   try {
     let data = await db.collection("products").get();
-
     return data.docs.map((doc) => doc.data());
   } catch (err) {
     throw new Error(`getAllProducts -> ${err}`);
   }
-};
-
-export {
-  addUserToStore,
-  findUserById,
-  getCurrentUser,
-  updateUserInfo,
-  getProductById,
-  addProductToStore,
-  getProductByUser,
-  getAllProducts,
 };

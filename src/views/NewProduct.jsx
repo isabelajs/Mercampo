@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+import Alert from "../componentes/common/Alert";
 
 //estilos
 import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
@@ -13,27 +14,48 @@ import { addProductToStore } from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
-import { useEffect } from "react";
+import {openAlert, closeAlert} from '../actions'
 
+//validaciones
+import {validationsInFormProducts} from "../utils/validationsInform";
 
 const ProfileNewProduct = (props) => { 
-  const { user } = props
+  const { user, openAlert, closeAlert } = props
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const [formBasic, setBasicData, resetBasicData] = useFormBasicProduct(user)
-  const [photos, addPhoto, resetPhotos] = useFormPhotosProduct()
-  const [prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName] = useFormPricesProduct()
+  const {formBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
+  const {photos, addPhoto, resetPhotos} = useFormPhotosProduct()
+  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
 
+  const validationForm = useCallback ((form)=>validationsInFormProducts(form),[])
+  
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    setIsSendingData(true)
 
+    const validation = validationForm({...formBasic, photos:photos, prices: prices})
+    
+    if(validation){
+
+      openAlert({
+        error:true,
+        message: validation
+      })
+
+      return
+    }
+
+    
     try{
+
+      closeAlert()
+
+      setIsSendingData(true)
+      
       await addProductToStore(formBasic,photos,prices)
 
       setIsSendingData(false)
@@ -41,6 +63,8 @@ const ProfileNewProduct = (props) => {
       resetBasicData()
 
       resetPhotos()
+
+      resetPrices()
 
       console.log('información enviada con exito');
       
@@ -50,11 +74,7 @@ const ProfileNewProduct = (props) => {
 
   }
 
-  //didMounted component
-  useEffect(()=>{
-    //charge a new price, because the list is empty
-    insertNewPrice()
-  },[])
+
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -182,7 +202,8 @@ const ProfileNewProduct = (props) => {
               </div>
             </div>
           </div>
-
+          
+          <Alert/>
           <button className="button button--second">Guardar</button>
         </form>
       </div>
@@ -194,10 +215,13 @@ const ProfileNewProduct = (props) => {
 };
 
 const mapStateToProps = (state)=>({ user: state.user})
+const mapDispatchToProps = {
+  openAlert,
+  closeAlert
+}
 
 
-
-export default connect(mapStateToProps,null)(ProfileNewProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(ProfileNewProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 

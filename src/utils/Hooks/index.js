@@ -1,10 +1,9 @@
 import { useState } from 'react';
+import { objectToList } from '../Helpers/convertedObjetList';
 
 
-function useFormBasicProduct ({displayName, uid} ){
+export function useFormBasicProduct ({displayName, uid} ){
 
-  //estado es vacio si es vacio 
-  //si no es vacio
   const state = {
       userId : uid,
       userName: displayName,
@@ -15,7 +14,6 @@ function useFormBasicProduct ({displayName, uid} ){
       category:'',
     }
 
-
   const [formBasic, setFormBasic] = useState(state)
 
   const setBasicData = (e) =>{
@@ -24,22 +22,22 @@ function useFormBasicProduct ({displayName, uid} ){
       [e.target.name]: e.target.value,
     });
   }
-
-  const x = (data)=>{
+  
+  const setBasicDataFromData = (data)=>{
     setFormBasic(
       {...data}
     )
   }
 
-
   const resetBasicData = ()=>{
     setFormBasic(state)
   }
 
-  return [formBasic, setBasicData, resetBasicData,x ]
+  return {formBasic, setBasicData, resetBasicData,setBasicDataFromData}
 }
 
-function useFormPhotosProduct (){
+export function useFormPhotosProduct (){
+
   const [photos, setPhotos] = useState([])
 
   const addPhoto = (e)=>{
@@ -55,15 +53,21 @@ function useFormPhotosProduct (){
     }
   }
 
+  const addPhotosFromData = (urls)=>{
+    setPhotos(urls.map(url => ({url: url, alt:'Imagen de producto'})))
+  }
+ 
   const resetPhotos = ()=>{
     setPhotos([])
   }
 
-  return [photos, addPhoto, resetPhotos]
+  return {photos, addPhoto, resetPhotos, addPhotosFromData}
 }
 
-function useFormPricesProduct (){
-  const [prices, setPrices] = useState([])
+export function useFormPricesProduct (){
+  const state = [{name:'', value:''}]
+
+  const [prices, setPrices] = useState(state)
 
   //cambiar el nombre del componente UnitPrice
   const handleUnitName =(name,indexChange)=>{
@@ -114,9 +118,14 @@ function useFormPricesProduct (){
 
   }
 
+  const resetPrices = ()=>{
+    setPrices(state)
+  }
 
-  return[prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName]
+  const addPricesFromData = (prices)=>{
+    setPrices(objectToList(prices))
+  }
+
+  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices, addPricesFromData}
 }
 
-
-export { useFormBasicProduct, useFormPhotosProduct, useFormPricesProduct }

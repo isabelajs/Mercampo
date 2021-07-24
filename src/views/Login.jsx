@@ -16,7 +16,7 @@ import '../assets/styles/componentes/Login.scss'
 //funciones de firebase
 import { singInWithEmail } from '../utils/auth'
 import {addUserToStore, findUserById} from '../utils/dataBase';
-import validationsInForm from '../utils/validationsInform';
+import {validationsInForm} from '../utils/validationsInform';
 
 // https://dribbble.com/wenhy/collections/1631290-design
 //  https://co.pinterest.com/pin/184577284702032988/

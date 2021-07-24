@@ -1,4 +1,4 @@
-const validationsInForm = (form)=>{
+export const validationsInForm = (form)=>{
     
   let message = null
 
@@ -31,8 +31,39 @@ const validationsInForm = (form)=>{
   }
 
 
+
   return message
 }
 
+export const validationsInFormProducts = (form)=>{
+  let message = null
+  if(form.hasOwnProperty('photos') && (form.photos.length < 1)){
+    message =  'Por favor ingresa imagenes de tu producto'
+  }
+  else if(form.hasOwnProperty('name') && (form.name.length < 4 || !isNaN(form.name))){
+    message =  'Nombre invalido'
+  }
+  else if(form.hasOwnProperty('description') && (form.description.length <= 8)){
+    message =  'Descripción invalida'
+  }
+  else if(form.hasOwnProperty('category') && (form.category === '')){
+    message =  'Por favor ingrese una categoria'
+  }
+  else if(form.hasOwnProperty('keywords') && (form.keywords === '')){
+    message =  'Por favor ingresa palabras claves'
+  }
+  
+  else if(form.hasOwnProperty('prices')){
+    //estan vacios los valores?
+    let validation = form.prices.every(prices=> {
+      return (prices.name !== '' && prices.value !== '')
+    } )
+    
+    if(!validation){
+      message = 'Por favor ingresa una unidad con su valor correspondiente'
+    }
 
-export default validationsInForm
+  }
+
+    return message
+}
