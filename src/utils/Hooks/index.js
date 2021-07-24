@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { objectToList } from '../Helpers/convertedObjetList';
 
 
 export function useFormBasicProduct ({displayName, uid} ){
@@ -121,6 +122,10 @@ export function useFormPricesProduct (){
     setPrices(state)
   }
 
-  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices}
+  const addPricesFromData = (prices)=>{
+    setPrices(objectToList(prices))
+  }
+
+  return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices, addPricesFromData}
 }
 

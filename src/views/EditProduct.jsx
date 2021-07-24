@@ -27,7 +27,7 @@ const EditProduct = (props) => {
 
   const {formBasic, setBasicData, resetBasicData, setBasicDataFromData} = useFormBasicProduct(user)
   const {photos, addPhoto, resetPhotos, addPhotosFromData} = useFormPhotosProduct()
-  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName} = useFormPricesProduct()
+  const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData} = useFormPricesProduct()
   const [isSendingData, setIsSendingData]= useState(false)
 
   useEffect(()=>{
@@ -37,7 +37,7 @@ const EditProduct = (props) => {
         const data = await getProductById(productId)
         setBasicDataFromData(data)        
         addPhotosFromData(data.photos)
-        
+        addPricesFromData(data.prices)
         
       }catch(err){
         console.log(err);
