@@ -80,32 +80,6 @@
 }
 
 
-.menuUser{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 280px;
-  height: 100vh;
-  // bottom: 0; alternativa -> top 0 bottom 0 
-
-  transition: all 0.3s;
-  transform: translateX(-100%);
-  z-index: 3;
-  
-  background-color: indigo;
-
-  &--open{
-    transform: translateX(0);
-  }
-  
-  &>p{
-    cursor: pointer;
-    margin-right: 10px;
-    text-align: end;
-  }
-}
-
-
 
 @media (min-width:910px){
   .header{

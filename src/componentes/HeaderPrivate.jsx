@@ -1,14 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { connect } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
 //imagenes
 import logo from '../assets/static/logo.png'
-import userIcon from '../assets/static/Group.png'
 import menuBurger from '../assets/static/menuBurguer.png'
+import MenuMobile from './MenuMobile';
 
-//estilos
-// import styles from '../assets/styles/componentes/Header/HeaderPrivate.scss';
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
 
@@ -16,7 +14,9 @@ import menuBurger from '../assets/static/menuBurguer.png'
 function HeaderPrivate (props){
 
   const { user } = props
-  
+
+  const nameTruncate = useRef(user.displayName.split(' ').splice(0,3).join(' '))
+
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
@@ -29,57 +29,25 @@ function HeaderPrivate (props){
     setIsOpenMenuMobile(!isOpenMenuMobile)
   }
 
-  const truncateName = (user)=>{
-    console.log(user)
-    return user.displayName.split(' ').splice(0,3).join(' ')
-  }
-
-
+  //como lo primero que carga es el layout la ruta de header privado solicitara el user 
   return(
+    <>
+      {user && 
+        <header className='header header--private'>
+          <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={openMenuMobile}/>
 
-    <header className='header header--private'>
+          <img onClick={handleClick} className='header__logo'src={logo} alt="" />
 
-      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={openMenuMobile}/>
+          <div className="header__userStatus" >
+            <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
+            <p className="userStatus__userName">{nameTruncate.current}</p>
+          </div>
 
-      <img onClick={handleClick} className='header__logo'src={logo} alt="" />
+          <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
 
-      <div className="header__userStatus" >
-        <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-        <p className="userStatus__userName">{truncateName(user)}</p>
-      </div>
-
-      <div className={`menuUser ${isOpenMenuMobile && 'menuUser--open'}`}>
-
-        <p onClick={openMenuMobile}>X</p>
-
-        <div className="menuUser__User">
-          <img src="" alt="" />
-          <p></p>
-        </div>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Perfil</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Home</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Productos</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>About Us</p>
-        </ul>
-
-      </div>
-
-    </header>
+        </header>
+      }    
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useRef, useState} from 'react';
 import { connect } from 'react-redux';
 import { Link , useHistory} from 'react-router-dom';
 
@@ -9,9 +9,10 @@ import menuBurger from '../assets/static/menuBurguer.png'
 
 //estilos
 import '../assets/styles/componentes/Header/Header.scss';
+import MenuMobile from './MenuMobile';
+
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
-
 
 //header login and not login
 function Header (props){
@@ -21,6 +22,8 @@ function Header (props){
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
+  const nameTruncate = useRef(user.displayName.split(' ').splice(0,3).join(' '))
+
 
   const handleClick = ()=>{
     history.push('/')
@@ -28,11 +31,6 @@ function Header (props){
 
   const openMenuMobile = ()=>{
     setIsOpenMenuMobile(!isOpenMenuMobile)
-  }
-
-  const truncateName = (user)=>{
-    console.log(user)
-    return user.displayName.split(' ').splice(0,3).join(' ')
   }
 
   const moveToProfile = ()=>{
@@ -64,7 +62,7 @@ function Header (props){
       {user && 
         <div className="header__userStatus" onClick={moveToProfile}>
           <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-          <p className="userStatus__userName">{truncateName(user)}</p>
+          <p className="userStatus__userName">{nameTruncate.current}</p>
         </div>
       }
 
@@ -77,38 +75,8 @@ function Header (props){
         </div>
       }
     
-        
-      <div className={`menuUser ${isOpenMenuMobile && 'menuUser--open'}`}>
-
-        <p onClick={openMenuMobile}>X</p>
-
-        <div className="menuUser__User">
-          <img src="" alt="" />
-          <p></p>
-        </div>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Perfil</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Home</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>Productos</p>
-        </ul>
-
-        <ul className="menuMobile">
-          <img src="" alt="" />
-          <p>About Us</p>
-        </ul>
-
-      </div>
-
+      <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
+    
     </header>
   )
 }

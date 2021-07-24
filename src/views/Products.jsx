@@ -1,12 +1,44 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 //estilos
-import '../assets/styles/componentes/Products.scss';
+import "../assets/styles/componentes/Products.scss";
+import CardProduct from "../componentes/cardProduct";
+import { getAllProducts } from "../utils/dataBase";
 
-export default function Products (){
-  return(
+export default function Products() {
+
+	const [listProducts, setListProducts] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
+	const [isError,setIsError] = useState(null)
+
+	useEffect(()=>{
+
+		const fetchData = async ()=>{
+
+			setIsLoading(true)
+			setIsError(null)
+
+			try{
+				const data = await getAllProducts()
+				setListProducts(data)
+				setIsLoading(false)
+			}catch(err){
+				// console.log(err)
+				setIsError(err)
+				
+			}
+		}
+
+		fetchData()
+
+	},[])
+
+
+  return (
     <div className=" l-products">
-    {/* <div className="c-products__tools">
+        {/* <div className="c-products__tools">
         <div className="products__tools">
             <div className="home__search search">
 
@@ -21,177 +53,16 @@ export default function Products (){
             <div className="next"></div>
         </div>
     </div> */}
-    
-    <div className="c-products__products">
+		{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
+		{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
 
-        <div className="product">
+		<div className="c-products__products">
 
-            <div className="product__img"></div>
+			{
+				listProducts.map((product,index)=> <CardProduct key={`${product.userId}${index}`} {...product}/>)
+			}
 
-            <div className="product__description">
-
-                <div className="product__description__title-product">Aguacates</div>
-
-                <div className="product__description__name-producer">Pepe Jimenez</div>
-
-                <div className="product__description__price">
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-                </div>
-                
-                <div className="product__description__others">Otros...</div>
-                
-                <button className='button button--main'>INFORMACIÓN</button>
-
-            </div>
-        
-        </div>
-    
-        <div className="product">
-
-            <div className="product__img"></div>
-
-            <div className="product__description">
-
-                <div className="product__description__title-product">Aguacates</div>
-
-                <div className="product__description__name-producer">Pepe Jimenez</div>
-
-                <div className="product__description__price">
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-                </div>
-                
-                <div className="product__description__others">Otros...</div>
-                
-                <button className='button button--main'>INFORMACIÓN</button>
-
-            </div>
-        
-        </div>
-
-        <div className="product">
-
-            <div className="product__img"></div>
-
-            <div className="product__description">
-
-                <div className="product__description__title-product">Aguacates</div>
-
-                <div className="product__description__name-producer">Pepe Jimenez</div>
-
-                <div className="product__description__price">
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-                </div>
-                
-                <div className="product__description__others">Otros...</div>
-                
-                <button className='button button--main'>INFORMACIÓN</button>
-
-            </div>
-        
-        </div>
-
-        <div className="product">
-
-            <div className="product__img"></div>
-
-            <div className="product__description">
-
-                <div className="product__description__title-product">Aguacates</div>
-
-                <div className="product__description__name-producer">Pepe Jimenez</div>
-
-                <div className="product__description__price">
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-                </div>
-                
-                <div className="product__description__others">Otros...</div>
-                
-                <button className='button button--main'>INFORMACIÓN</button>
-
-            </div>
-        
-        </div>
-
-        <div className="product">
-
-            <div className="product__img"></div>
-
-            <div className="product__description">
-
-                <div className="product__description__title-product">Aguacates</div>
-
-                <div className="product__description__name-producer">Pepe Jimenez</div>
-
-                <div className="product__description__price">
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-
-                    <div className="description__price">
-                        <div className="measured">kg</div>
-                        <span>-</span>
-                        <div className="price">$12000</div>
-                    </div>
-                </div>
-                
-                <div className="product__description__others">Otros...</div>
-                
-                <button className='button button--main'>INFORMACIÓN</button>
-
-            </div>
-        
-        </div>
-    
+			</div>
     </div>
-
-</div>
-
-  )
+  );
 }

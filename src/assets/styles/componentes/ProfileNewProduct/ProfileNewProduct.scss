@@ -57,7 +57,7 @@
       background-color: rgb(40, 43, 114);
       overflow: hidden;
       margin-right: 10px;
-      object-fit: contain;
+      object-fit: cover;
 
       @media(min-width:910px){
         background-color: rgb(237, 237, 237);
