@@ -2,6 +2,17 @@ import React, { useRef } from 'react'
 import { useCallback } from 'react'
 import '../assets/styles/componentes/CardProduct.scss'
 
+const DescriptionPrice = ({name,value})=>{
+
+  return(
+  <div className="description__price">
+    <div className="measured">{name}</div>
+    <span>-</span>
+    <div className="price">{`$${value}`}</div>
+  </div>
+  )
+}
+
 const CardProduct = (props)=>{
 
   const {name} = props
@@ -29,22 +40,20 @@ const CardProduct = (props)=>{
 
           {
             prices.current.map((price,index)=>{
+
+              const key = Math.random()
+
                 return(
                   <>
                   {
                     index <= 1 &&
-                    <div key={`price_${index}`} className="description__price">
-                      <div className="measured">{nombres[price[0]]}</div>
-                      <span>-</span>
-                      <div className="price">{`$${price[1]}`}</div>
-                    </div>
+                    <DescriptionPrice key={key} name={nombres[price[0]]} value={price[1]}/>
                   }
                   </>
                 )
             })
-
-
           }
+          
           {
             prices.current.length > 2 &&
             <div>...Otros</div>
@@ -61,4 +70,7 @@ const CardProduct = (props)=>{
   )
 }
 
+
+
 export default CardProduct
+

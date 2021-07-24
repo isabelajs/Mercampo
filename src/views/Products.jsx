@@ -53,14 +53,18 @@ export default function Products() {
             <div className="next"></div>
         </div>
     </div> */}
-		{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
-		{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
+			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
+			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
 
-		<div className="c-products__products">
+			<div className="c-products__products">
 
-			{
-				listProducts.map((product,index)=> <CardProduct key={`${product.userId}${index}`} {...product}/>)
-			}
+				{
+					listProducts.map((product,index)=> {
+						return(
+							<CardProduct key={index} {...product}/>
+						)
+					})
+				}
 
 			</div>
     </div>
