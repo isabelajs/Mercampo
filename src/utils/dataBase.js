@@ -146,7 +146,7 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 }
 
 //obtengo todos los productos de un usuario en la coleccion de productos
-export const getProductByUser = async ( id )=>{
+export const getProductsByUser = async ( id )=>{
   try{
     let querySnapshot = await db.collection('products').where('userId', '==', id).get()
     const products = querySnapshot.docs.map(doc => {
@@ -172,7 +172,7 @@ export const getProductById = async ( id )=>{
 
 export const getAllProducts = async () => {
   try {
-    let data = await db.collection("products").get();
+    let data = await db.collection("products").where('avaliable','==','true').get();
     return data.docs.map((doc) => doc.data());
   } catch (err) {
     throw new Error(`getAllProducts -> ${err}`);

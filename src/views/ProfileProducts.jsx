@@ -6,7 +6,7 @@ import {ProfileProduct, ProfileButtonNewProduct} from "../componentes/ProfilePro
 //styles
 import '../assets/styles/componentes/ProfileProducts/ProfileProducts.scss'
 //funciones firestore
-import { getProductByUser } from "../utils/dataBase";
+import { getProductsByUser } from "../utils/dataBase";
 import { useState } from "react";
 
 
@@ -24,7 +24,7 @@ const ProfileSettings = (props) => {
   useEffect(()=>{
     //obtengo los productos respecto al usuario
     const getUserProducts = async ()=>{
-      const  {products, productsAvaliables, productsNotAvaliables} = await getProductByUser(user.uid) 
+      const  {products, productsAvaliables, productsNotAvaliables} = await getProductsByUser(user.uid) 
       setUserProducts(products)
       setAvaliable(productsAvaliables)
       setNotAvaliable(productsNotAvaliables)
