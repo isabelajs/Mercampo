@@ -9,48 +9,7 @@
     gap: 15px 35px;
     justify-content: center;
 
-    .product{
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; 
-      border-radius: 10px;
-      width:256px ;
-      &__img{
-        width: 100%;
-        height: 188px;
-        background-color: hotpink;
-        border-radius: 10px 10px 0 0;
-      }
-      &__description{
-        padding: 22px;
-        
-        &__title-product{
-          font-size: 18px;
-          font-weight: 600;          
-        }
 
-        &__name-producer{
-          margin-top: 7px;
-          margin-bottom: 10px;
-        }
-        &__price{
-          display: flex;
-          justify-content: space-around;
-          .description__price{
-            display: flex;
-            span{
-              margin: 0 5px;
-            }
-          }
-        }
-        &__others{
-          margin-top: 10px;
-          text-align: center;
-        }
-        .button{
-          margin:0 auto;
-          margin-top: 10px;
-        }
-      }
-    }
   }
   
 

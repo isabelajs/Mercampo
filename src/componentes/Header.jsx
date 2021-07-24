@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useRef, useState} from 'react';
 import { connect } from 'react-redux';
 import { Link , useHistory} from 'react-router-dom';
 
@@ -14,7 +14,6 @@ import MenuMobile from './MenuMobile';
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
 
-
 //header login and not login
 function Header (props){
 
@@ -23,6 +22,8 @@ function Header (props){
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
+  const nameTruncate = useRef(user.displayName.split(' ').splice(0,3).join(' '))
+
 
   const handleClick = ()=>{
     history.push('/')
@@ -30,11 +31,6 @@ function Header (props){
 
   const openMenuMobile = ()=>{
     setIsOpenMenuMobile(!isOpenMenuMobile)
-  }
-
-  const truncateName = (user)=>{
-    console.log(user)
-    return user.displayName.split(' ').splice(0,3).join(' ')
   }
 
   const moveToProfile = ()=>{
@@ -66,7 +62,7 @@ function Header (props){
       {user && 
         <div className="header__userStatus" onClick={moveToProfile}>
           <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
-          <p className="userStatus__userName">{truncateName(user)}</p>
+          <p className="userStatus__userName">{nameTruncate.current}</p>
         </div>
       }
 

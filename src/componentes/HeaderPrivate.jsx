@@ -15,8 +15,8 @@ function HeaderPrivate (props){
 
   const { user } = props
 
-  const nameTruncate = useRef()
-  
+  const nameTruncate = useRef(user.displayName.split(' ').splice(0,3).join(' '))
+
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
 
   const history = useHistory()
@@ -28,11 +28,6 @@ function HeaderPrivate (props){
   const openMenuMobile = ()=>{
     setIsOpenMenuMobile(!isOpenMenuMobile)
   }
-
-  useEffect(()=>{
-    nameTruncate.current = user.displayName.split(' ').splice(0,3).join(' ')
-  },[user])
-
 
   //como lo primero que carga es el layout la ruta de header privado solicitara el user 
   return(
