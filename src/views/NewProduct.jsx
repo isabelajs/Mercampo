@@ -36,13 +36,16 @@ const ProfileNewProduct = (props) => {
   
   const handleSubmit = async (e) =>{
     e.preventDefault()
+
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
     
     if(validation){
+
       openAlert({
         error:true,
         message: validation
       })
+
       return
     }
 

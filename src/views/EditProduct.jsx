@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useCallback } from "react";
+import { connect, useDispatch } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+import Alert from "../componentes/common/Alert";
 
 //estilos
 import "../assets/styles/componentes/EditProduct.scss";
@@ -13,11 +14,15 @@ import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
+import {openAlert, closeAlert} from '../actions'
+
+//validaciones
+import {validationsInFormProducts} from "../utils/validationsInform";
 
 
 const EditProduct = (props) => { 
-  const { user } = props
-  
+  const { user, openAlert, closeAlert } = props
+
   const productId = props.match.params.idProduct
 
   const links = [
@@ -29,6 +34,8 @@ const EditProduct = (props) => {
   const {photos, addPhoto, addPhotosFromData} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
   const [isSendingData, setIsSendingData]= useState(false)
+
+  const validationForm = useCallback((form)=>validationsInFormProducts(form),[])
 
   useEffect(()=>{
 
@@ -44,22 +51,33 @@ const EditProduct = (props) => {
       }
     }
 
+    closeAlert()
     getProduct()
 
   },[])
 
+
   const handleSubmit = async (e) =>{
     e.preventDefault()
     
-    try{
-      setIsSendingData(true) 
-      
-      // await updateProduct(productId,formBasic,photos,prices)
+    const validation = validationForm({...formBasic, photos:photos, prices: prices})
 
+    if(validation){
+      openAlert({
+        error:true,
+        message: validation
+      })
+    }
+
+    
+    try{
+
+      closeAlert()
+      setIsSendingData(true) 
+
+      await updateProduct(productId,formBasic,photos,prices)
       setIsSendingData(false)
-         // resetBasicData()
-      // resetPhotos()
-      // resetPrices()
+
       console.log('Producto actualizado con exito');
     }catch (error){
       console.log(error);
@@ -192,11 +210,13 @@ const EditProduct = (props) => {
               </div>
             </div>
           </div>
-
+          
           <button className="button button--second">Guardar</button>
         </form>
+
       </div>
     
+      <Alert/>
       {isSendingData && <div>...Enviando informacion</div>}
 
     </SystemLayout>
@@ -205,9 +225,13 @@ const EditProduct = (props) => {
 
 const mapStateToProps = (state)=>({ user: state.user})
 
+const mapDispatchToProps = {
+  openAlert,
+  closeAlert
+}
 
 
-export default connect(mapStateToProps,null)(EditProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(EditProduct);
 
 //TODO: VALIDACIONES DEL FORMULARIO
 

@@ -139,6 +139,8 @@ export const updateProduct = async (id,basic, photos, prices)=>{
       photos: [].concat(urls,urlsNew),
       prices: listToObject(prices)
     }
+
+    console.log(productInfo)
     await db.collection('products').doc(id).set(productInfo)
     
   }catch(err){

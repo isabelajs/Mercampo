@@ -123,7 +123,6 @@ export function useFormPricesProduct (){
   }
 
   const addPricesFromData = (prices)=>{
-    console.log(objectToList(prices));
     setPrices(objectToList(prices))
   }
 
