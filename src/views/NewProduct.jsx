@@ -56,7 +56,7 @@ const ProfileNewProduct = (props) => {
 
       setIsSendingData(true)
       
-      await addProductToStore(formBasic,photos,prices)
+      await addProductToStore(formBasic,photos,prices)      
 
       setIsSendingData(false)
 

@@ -47,20 +47,6 @@ function Register(props){
 
   const validationForm = useCallback((form)=>validationsInForm(form),[])
 
-  //function to validate register form use hook 'useCallback' why it not need to change in every render
-  // const validationsInForm = useCallback((form)=>{
-    
-  //   let message = null
-  
-  //   if (form.name.length <= 8 || !isNaN(form.name)){
-  //     message =  'Nombre invalido'
-  //   }
-  //   else if(form.password.length < 8 ){
-  //     message = 'La contraseña es demasiado corta'
-  //   }
-  
-  //   return message
-  // },[])
 
   //validate and do stuff to create a user in firebase
   const handleSubmit = async (e)=>{
