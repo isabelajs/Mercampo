@@ -27,6 +27,8 @@ export default function CarouselCategories  (){
 		refCategories.current.scrollLeft += 150
 	},[])
 
+  const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']
+
   useEffect(()=>{	
 		
 		visibilityArrows()
@@ -59,14 +61,12 @@ export default function CarouselCategories  (){
       </div>
 
       <div className='carrousel__categories'  ref={refCategories} onScroll={handleScroll}>
-        <div className="categories__title categories__title--selected">All</div>
-        <div className="categories__title">Huevos</div>
-        <div className="categories__title">Frutas</div>
-        <div className="categories__title">Vegetales</div>
-        <div className="categories__title">Granos</div>
-        <div className="categories__title">Animales</div>
-        <div className="categories__title">Carne</div>
-        <div className="categories__title">Pescado</div>
+        {categoriesList.map(categorie =>{
+          return(
+            <div key={categorie} className="categories__title ">{categorie}</div>
+          )
+        })}
+
       </div>
           
     </div>

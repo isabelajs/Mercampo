@@ -20,10 +20,14 @@
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
+      &:hover{
+      background-color: #EBF1F3;
+
+      }
     }
 
     .categories__title--selected{
-      background-color: #EBF1F3;
+      background-color: #49c2eb;
     }
   }
 
