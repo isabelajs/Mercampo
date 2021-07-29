@@ -60,12 +60,12 @@ export default function Products() {
 
 	const handleScroll = ()=> visibilityArrows() 
 
-	const moveLeftScroll = ()=>{
-		refCategories.current.scrollLeft -= 50
-	}
-	const moveRightScroll = ()=>{
-		refCategories.current.scrollLeft += 50
-	}
+	const moveLeftScroll = useCallback(()=>{
+		refCategories.current.scrollLeft -= 150
+	},[])
+	const moveRightScroll = useCallback(()=>{
+		refCategories.current.scrollLeft += 150
+	},[])
 
   return (
     <div className=" l-products">

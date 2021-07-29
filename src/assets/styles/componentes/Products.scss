@@ -32,6 +32,8 @@
         display: flex;
         overflow: scroll;
         flex-direction: row;
+        scroll-behavior: smooth;
+        
         &::-webkit-scrollbar {
           display: none;
         }
