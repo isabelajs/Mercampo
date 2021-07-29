@@ -8,9 +8,6 @@ import { useState } from 'react';
 import { signOut } from '../utils/auth';
 
 
-//TODO: Revisar 
-//tenemos 2 headers diferentes asi que el menu mobile cuando cambia entre ruta privada y ruta normal cambia de header y por ende se cierra y se ejecuta otro
-//creo que mover el menu mobile a global
 function MenuMobile(props){
 
   const history = useHistory()
@@ -25,6 +22,7 @@ function MenuMobile(props){
 
 const closeSession = () =>{
   history.push('/')
+  toggleMenuMobile()
   signOut()
 }
 
