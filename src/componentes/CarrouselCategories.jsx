@@ -21,10 +21,11 @@ export default function CarouselCategories  (){
   const handleScroll = ()=> visibilityArrows() 
 
 	const moveLeftScroll = useCallback(()=>{
-		refCategories.current.scrollLeft -= 150
+		refCategories.current.scrollLeft -= 200
 	},[])
+
 	const moveRightScroll = useCallback(()=>{
-		refCategories.current.scrollLeft += 150
+		refCategories.current.scrollLeft += 200
 	},[])
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']

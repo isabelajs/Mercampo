@@ -58,10 +58,10 @@ export default function Products() {
         </div>
 
 				<CarrouselCategories/>
+				
     	</div>
 
-			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
-			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
+
 
 			<div className="c-products__products">
 
@@ -72,6 +72,9 @@ export default function Products() {
 						)
 					})
 				}
+
+			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
+			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
 
 			</div>
     </div>
