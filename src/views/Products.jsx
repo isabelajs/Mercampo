@@ -61,10 +61,7 @@ export default function Products() {
 				
     	</div>
 
-
-
 			<div className="c-products__products">
-
 				{
 					listProducts.map((product,index)=> {
 						return(
@@ -72,11 +69,11 @@ export default function Products() {
 						)
 					})
 				}
+			</div>
 
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
-			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>...Loading</h1>}
+			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>... Loading</h1>}
 
-			</div>
     </div>
   );
 }
