@@ -33,6 +33,7 @@ const EditProduct = (props) => {
   const {formBasic, setBasicData, setBasicDataFromData} = useFormBasicProduct(user)
   const {photos, addPhoto, addPhotosFromData} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
+  const [isLoading, setIsLoading] = useState(true)
   const [isSendingData, setIsSendingData]= useState(false)
 
   const validationForm = useCallback((form)=>validationsInFormProducts(form),[])
@@ -45,6 +46,7 @@ const EditProduct = (props) => {
         setBasicDataFromData(data)        
         addPhotosFromData(data.photos)
         addPricesFromData(data.prices)
+        setIsLoading(false)
         
       }catch(err){
         console.log(err);
@@ -72,7 +74,6 @@ const EditProduct = (props) => {
 
     
     try{
-
       closeAlert()
       setIsSendingData(true) 
 
@@ -91,7 +92,10 @@ const EditProduct = (props) => {
 
       <div className="l-editProduct">
 
-        <form className="editProduct form" onSubmit={handleSubmit}>
+        {
+          isLoading ? <h1 style={{textAlign:'center'}}>... Loading</h1>
+          :
+          <form className="editProduct form" onSubmit={handleSubmit}>
 
           <div className="l-editProduct__photos">
 
@@ -214,10 +218,11 @@ const EditProduct = (props) => {
           
           <button className="button button--second">Guardar</button>
         </form>
-
+        }
       </div>
     
       <Alert/>
+
       {isSendingData && <div>...Enviando informacion</div>}
 
     </SystemLayout>

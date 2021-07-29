@@ -6,12 +6,11 @@ import SystemLayout from "../componentes/system/SystemLayout";
 import Alert from "../componentes/common/Alert";
 import AddImage from "../componentes/common/addImage";
 
-
 //estilos
 import '../assets/styles/componentes/ProfileSettings.scss';
 
 //funciones de auth
-import { findUserById, updateUserInfo } from "../utils/dataBase";
+import {findUserById, updateUserInfo} from "../utils/dataBase";
 import {validationsInForm} from '../utils/validationsInform';
 
 //import actions
@@ -19,6 +18,7 @@ import { closeAlert, openAlert } from '../actions'
 
 const ProfileSettings = (props) => {
   const {user,openAlert, closeAlert} = props
+  const [isLoading,setIsLoading] = useState(true)
 
   const [form, setForm] = useState({
     photo: {url:'', file:null},
@@ -52,8 +52,6 @@ const ProfileSettings = (props) => {
     //cierra el alert si esta abierto al momento de montar el componente
     closeAlert()
 
-    let unmounted = false
-
     //busca el usuario actualiza el estado de form con la información de firestore
     const findUser = async ()=>{
 
@@ -61,32 +59,27 @@ const ProfileSettings = (props) => {
 
         let userInData = await findUserById(user.uid)
 
-        if(!unmounted){
-          setForm({
-            photo: {url:userInData.photo, file:null},
-            city: userInData.city,
-            department: userInData.department,
-            email: userInData.email,
-            id: userInData.id,
-            name: userInData.name,
-            phoneMain: userInData.phoneMain,
-            phoneSecond: userInData.phoneSecond
-          })
-        }
-
+        setForm({
+          photo: {url:userInData.photo, file:null},
+          city: userInData.city,
+          department: userInData.department,
+          email: userInData.email,
+          id: userInData.id,
+          name: userInData.name,
+          phoneMain: userInData.phoneMain,
+          phoneSecond: userInData.phoneSecond
+        })
+        setIsLoading(false)
       }
       catch(err){
         console.log('error desde profile ', err)
       }
-
+      
     }
-
+    
     findUser()
 
-    return () => {unmounted = true}
-  }
-    ,[closeAlert, user])
-
+  },[closeAlert, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -118,9 +111,7 @@ const ProfileSettings = (props) => {
     }
 
 }
-    
 
-  
   const changeImage = (image) =>{
     setForm({
       ...form,
@@ -128,14 +119,15 @@ const ProfileSettings = (props) => {
     })
   }
 
-
   return (
 
     <SystemLayout links={links} type='settings'  props={props}>
 
         <div className="l-profileSettings">
 
-          <form className='profileSettings__data form' onSubmit = {handleSubmit}>
+        { isLoading ? <h1 style={{textAlign:'center'}}>... Loading</h1>
+          :<>
+            <form className='profileSettings__data form' onSubmit = {handleSubmit}>
 
             <div className='data__photo'>
               <div className='systemSubGroup__title'>Foto:</div>
@@ -256,35 +248,30 @@ const ProfileSettings = (props) => {
             <button className='button button--second'>Guardar</button>
 
           </form>
-
-          <form className="profileSettings__password l-systemSubGroup form ">
-
-            <div className='systemSubGroup__title'>Cambiar contraseña</div>
-
-            <div className="l-password">
-              <div className="form-group">
-                <label htmlFor="">Contraseña actual: </label>
-                <input className='form-input' type="password" placeholder='Contraseña Actual' autoComplete='false'/>
+            <form className="profileSettings__password l-systemSubGroup form ">
+              <div className='systemSubGroup__title'>Cambiar contraseña</div>
+              <div className="l-password">
+                <div className="form-group">
+                  <label htmlFor="">Contraseña actual: </label>
+                  <input className='form-input' type="password" placeholder='Contraseña Actual' autoComplete='false'/>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="">Nueva contraseña:  </label>
+                  <input className='form-input' type="password" placeholder='Contraseña Nueva' autoComplete='false'/>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="">Repite tu nueva contraseña: </label>
+                  <input className='form-input' type="password" placeholder='Repite tu nueva contraseña' autoComplete='false'/>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="">Nueva contraseña:  </label>
-                <input className='form-input' type="password" placeholder='Contraseña Nueva' autoComplete='false'/>
+
+              <div className="l-buttons">
+                <button className='button button--second'>Cambiar</button>
+                <button className='button button--second'>Cancelar</button>
               </div>
-              <div className="form-group">
-                <label htmlFor="">Repite tu nueva contraseña: </label>
-                <input className='form-input' type="password" placeholder='Repite tu nueva contraseña' autoComplete='false'/>
-              </div>
-            </div>
-
-
-
-            <div className="l-buttons">
-              <button className='button button--second'>Cambiar</button>
-              <button className='button button--second'>Cancelar</button>
-            </div>
-
-          </form>
-  
+            </form>
+          </>
+        }
         </div>
 
     </SystemLayout>
