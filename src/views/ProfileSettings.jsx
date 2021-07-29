@@ -264,15 +264,15 @@ const ProfileSettings = (props) => {
             <div className="l-password">
               <div className="form-group">
                 <label htmlFor="">Contraseña actual: </label>
-                <input className='form-input' type="password" placeholder='Contraseña Actual'/>
+                <input className='form-input' type="password" placeholder='Contraseña Actual' autoComplete='false'/>
               </div>
               <div className="form-group">
                 <label htmlFor="">Nueva contraseña:  </label>
-                <input className='form-input' type="password" placeholder='Contraseña Nueva'/>
+                <input className='form-input' type="password" placeholder='Contraseña Nueva' autoComplete='false'/>
               </div>
               <div className="form-group">
                 <label htmlFor="">Repite tu nueva contraseña: </label>
-                <input className='form-input' type="password" placeholder='Repite tu nueva contraseña'/>
+                <input className='form-input' type="password" placeholder='Repite tu nueva contraseña' autoComplete='false'/>
               </div>
             </div>
 

@@ -9,7 +9,7 @@ import Home from "../../views/Home";
 import Login from "../../views/Login";
 import Products from '../../views/Products'
 import Register from "../../views/Register";
-import {PublicLayout,PrivateLayout} from "../../componentes/Layouts/LayoutLoged";
+import { Layout } from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
@@ -42,7 +42,6 @@ const App = (props)=> {
     return () => unSub()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-  
 
   if(isLoadingAuthentication){
     return <div>...Loading</div>
@@ -54,6 +53,7 @@ const App = (props)=> {
       <BrowserRouter>
 
         <Switch>
+
             <Route exact path="/login">
               { user  && <Redirect to='/profile/settings'/>}
               { !user  && <Login/>}
@@ -63,39 +63,33 @@ const App = (props)=> {
               { user && <Redirect to='profile/settings'/> }
               { !user && <Register/> }
             </Route>
-          <Switch>
 
-            <Route exact path={['/','/products']}>
-              <PublicLayout>
-                <Route exact path="/" component={Home} />
-                <Route exact path='/products' component={Products} />
-              </PublicLayout>
-            </Route>
 
-            <Route exact path='/profile/*'>
-                <PrivateLayout>
-                  <PrivateRoute exact path='/profile/settings'>
-                    <ProfileSettings /> 
-                  </PrivateRoute>
+          <Layout>
 
-                  <PrivateRoute exact path='/profile/products'> 
-                    <ProfileProducts /> 
-                  </PrivateRoute>
+              <Route exact path="/" component={Home} />
 
-                  <PrivateRoute exact path='/profile/products/new'> 
-                    <ProfileNewProduct /> 
-                  </PrivateRoute>
+              <Route exact path='/products' component={Products} />
 
-                  <PrivateRoute exact path='/profile/products/:idProduct/edit'> 
-                    <EditProduct /> 
-                  </PrivateRoute>
+              <PrivateRoute exact path='/profile/settings'>
+                <ProfileSettings /> 
+              </PrivateRoute>
 
-                </PrivateLayout>
-            </Route>
+              <PrivateRoute exact path='/profile/products'> 
+                <ProfileProducts /> 
+              </PrivateRoute>
 
-            <Route component={()=><div>404 not found</div>}/>
+              <PrivateRoute exact path='/profile/products/new'> 
+                <ProfileNewProduct /> 
+              </PrivateRoute>
 
-          </Switch>
+              <PrivateRoute exact path='/profile/products/:idProduct/edit'> 
+                <EditProduct /> 
+              </PrivateRoute>
+
+          </Layout>
+
+          <Route component={()=><div>404 not found</div>}/>
 
         </Switch>
           

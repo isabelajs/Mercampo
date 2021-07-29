@@ -1,78 +1,76 @@
-import React, { useRef, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link , useHistory} from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 //imagenes
 import logo from '../assets/static/logo.png'
-import userIcon from '../assets/static/Group.png'
 import menuBurger from '../assets/static/menuBurguer.png'
-
-//estilos
-import '../assets/styles/componentes/Header/Header.scss';
 import MenuMobile from './MenuMobile';
-import { useEffect } from 'react';
+
+//styles
+import '../assets/styles/componentes/Header/Header.scss'
 
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071
 
-//header login and not login
 function Header (props){
 
-  const { user } = props
-  
+  const { user, isPrivate} = props
+  const [userName, setUserName] = useState('')
   const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
-
   const history = useHistory()
-  const [userName, setUserName] = useState('') 
 
-
-  const handleClick = ()=>{
+  const moveToHome = ()=>{
     history.push('/')
-  }
-
-  const openMenuMobile = ()=>{
-    setIsOpenMenuMobile(!isOpenMenuMobile)
   }
 
   const moveToProfile = ()=>{
     history.push('/profile/settings')
   }
 
+  const toggleMenuMobile = ()=>{
+    setIsOpenMenuMobile(!isOpenMenuMobile)
+  }
+
   useEffect(()=>{
     if(user){
-      setUserName(user.displayName.split(' ').splice(0,3).join(' '))
+      setUserName(user.displayName.split(' ').splice(0,3).join(' ')) 
     }
   },[user])
 
+
   return(
-    
-    <header className='header'>
 
-      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={openMenuMobile}/>
-  
-      <img onClick={handleClick} className='header__logo'src={logo} alt="" />
+    <header className={`header ${isPrivate ? 'header--private' : ''}`}>
 
-      <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/products'>Products</Link>
-          </li>
-          <li>
-            <Link to='/contact'>About Us</Link>
-          </li>
-        </ul>
-      </nav>
+      <MenuMobile userName={userName} isOpenMenuMobile={isOpenMenuMobile} toggleMenuMobile={toggleMenuMobile}/>
+      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={toggleMenuMobile}/>
+
+      <img onClick={moveToHome} className='header__logo'src={logo} alt="" />
+
+      {
+        !isPrivate &&
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/products'>Products</Link>
+            </li>
+            <li>
+              <Link to='/contact'>About Us</Link>
+            </li>
+          </ul>
+        </nav>
+      }
 
       {user && 
         <div className="header__userStatus" onClick={moveToProfile}>
-          <img className='userStatus__icon icon' src={user.photoURL} alt=""/>
+          <img loading='lazy' className='userStatus__icon icon' src={user.photoURL} alt=""/>
           <p className="userStatus__userName">{userName}</p>
         </div>
-      }
-
+      }  
 
       {!user &&
         <div className="header__buttons">
@@ -81,13 +79,10 @@ function Header (props){
           <Link className= "button button--second header__signUp" to='/register'>Sign Up</Link>
         </div>
       }
-    
-      <MenuMobile isOpenMenuMobile={isOpenMenuMobile} openMenuMobile={openMenuMobile}/>
-    
+
     </header>
   )
 }
-
 
 const mapStateToProps = (state)=>{
   return{
@@ -96,9 +91,3 @@ const mapStateToProps = (state)=>{
 }
 
 export default connect(mapStateToProps,null)(Header)
-
-
-
-
-
-
