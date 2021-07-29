@@ -17,9 +17,9 @@ function MenuMobile(props){
 
   const [isOpenProfileMenu,setIsOpenProfileMenu] = useState(false)
 
-  const toggleProfileMenu = (e) =>[
+  const toggleProfileMenu = (e) =>{
     setIsOpenProfileMenu(!isOpenProfileMenu)
-  ]
+}
 
   return(
 
@@ -59,21 +59,21 @@ function MenuMobile(props){
         </ul>
       </li>
 
-      <li>
+      <li onClick={openMenuMobile}>
         <Link className="menuMobile__option" to='/'  >
           <img className='menuMobile__optionIcon' src={home} alt="" />
           <div className='menuMobile__optionTitle'>Home</div>
         </Link>
       </li>
 
-      <li>
+      <li onClick={openMenuMobile}>
         <Link className="menuMobile__option" to='/products'>
           <img className='menuMobile__optionIcon' src="" alt="" />
           <div className='menuMobile__optionTitle' >Productos</div>
         </Link>
       </li>
 
-      <li>
+      <li onClick={openMenuMobile}>
         <Link className="menuMobile__option" to='/contact' >
           <img className='menuMobile__optionIcon' src={aboutUs} alt="" />
           <div className='menuMobile__optionTitle' >About Us</div>

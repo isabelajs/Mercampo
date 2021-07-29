@@ -9,8 +9,8 @@
   flex-direction: column;
   padding: 10px;
   // bottom: 0; alternativa -> top 0 bottom 0 
+  transition: transform 0.3s;
 
-  transition: all 0.3s;
   transform: translateX(-100%);
   z-index: 3;
   
