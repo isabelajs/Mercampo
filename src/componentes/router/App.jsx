@@ -54,18 +54,19 @@ const App = (props)=> {
 
         <Switch>
 
-            <Route exact path="/login">
-              { user  && <Redirect to='/profile/settings'/>}
-              { !user  && <Login/>}
-            </Route>
-    
-            <Route exact path="/register">
-              { user && <Redirect to='profile/settings'/> }
-              { !user && <Register/> }
-            </Route>
-
+          <Route exact path="/login">
+            { user  && <Redirect to='/profile/settings'/>}
+            { !user  && <Login/>}
+          </Route>
+  
+          <Route exact path="/register">
+            { user && <Redirect to='profile/settings'/> }
+            { !user && <Register/> }
+          </Route>
 
           <Layout>
+            
+            <Switch>
 
               <Route exact path="/" component={Home} />
 
@@ -87,9 +88,11 @@ const App = (props)=> {
                 <EditProduct /> 
               </PrivateRoute>
 
-          </Layout>
+              <Route component={()=><h1 style={{textAlign:'center'}}>404 not found</h1>}/>
+            
+            </Switch>
 
-          <Route component={()=><div>404 not found</div>}/>
+          </Layout>
 
         </Switch>
           
