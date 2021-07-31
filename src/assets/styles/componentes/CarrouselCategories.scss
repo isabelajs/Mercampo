@@ -21,13 +21,16 @@
       border-radius: 8px;
       cursor: pointer;
       &:hover{
-      background-color: #EBF1F3;
-
+        background-color: #EBF1F3;
       }
     }
 
     .categories__title--selected{
-      background-color: #49c2eb;
+      background-color: #35CD8C;
+
+      &:hover{
+        background-color: #35CD8C;
+      }
     }
   }
 
