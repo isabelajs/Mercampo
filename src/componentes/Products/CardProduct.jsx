@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useCallback } from 'react'
-import '../assets/styles/componentes/CardProduct.scss'
+import '../../assets/styles/componentes/CardProduct.scss'
 
 const DescriptionPrice = ({name,value})=>{
 

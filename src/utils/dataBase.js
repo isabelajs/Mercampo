@@ -179,5 +179,17 @@ export const getAllProducts = async () => {
   }
 };
 
-
-
+export const getProductsBySearch = async (queryString) =>{
+  console.log('busqueda',queryString);
+  try{
+    if(queryString === ''){
+      return await getAllProducts()
+    }else{
+      let data = await db.collection("products").where("name","array-contains",'Pirata el guapo').get();
+      console.log(data);
+      return data.docs.map((doc) => doc.data());
+    }
+  }catch(err){
+    throw new Error(`getProductsBySearch ${err}`)
+  }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { objectToList } from '../Helpers/convertedObjetList';
 
 
@@ -129,3 +129,13 @@ export function useFormPricesProduct (){
   return {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices, addPricesFromData}
 }
 
+export const useCounter = () =>{
+
+  const refCounter = useRef(1)
+
+  useEffect(()=>{
+    refCounter.current +=1
+  })
+
+  return refCounter.current
+}
