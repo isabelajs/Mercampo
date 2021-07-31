@@ -1,26 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header';
-import HeaderPrivate from '../HeaderPrivate';
-// import MenuMobile from '../MenuMobile';
 
-function PublicLayout ({children}) {
-    return (
-    <>
-      <Header/>
-      {children}
-    </>
-)};
+function Layout ({children,location}){
 
+  const [isPrivate, setIsPrivate] = useState(false)
 
-function PrivateLayout ({children}){
+  useEffect(()=>{
+
+    location.pathname.includes('profile') ? setIsPrivate(true) : setIsPrivate(false)
+
+  },[location])
 
   return (
     <>
-      <HeaderPrivate/>
+      <Header isPrivate={isPrivate}/>
       {children}
     </>
   )
 }
 
 
-export {PublicLayout,PrivateLayout}
+export {Layout}

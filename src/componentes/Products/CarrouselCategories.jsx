@@ -30,11 +30,11 @@ export default function CarouselCategories ({children}){
 	},[])
 
   const moveLeftScroll = useCallback(()=>{
-		refCategoriesContainer.current.scrollLeft -= 150
+		refCategoriesContainer.current.scrollLeft -= 200
 	},[])
 
 	const moveRightScroll = useCallback(()=>{
-		refCategoriesContainer.current.scrollLeft += 150
+		refCategoriesContainer.current.scrollLeft += 200
 	},[])
 
 
