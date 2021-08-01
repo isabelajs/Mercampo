@@ -1,5 +1,5 @@
 //creo un  objeto a partir de un array
-const listToObject = (array)=>{
+export const listToObject = (array)=>{
  let object = {}
 
   array.forEach(element => {
@@ -10,9 +10,11 @@ const listToObject = (array)=>{
   return object
 }
 
-const objectToList = (object)=>{
+export const objectToList = (object)=>{
   let values =Object.entries(object)
   return values.map(element => ({name:element[0], value:element[1]}))
 }
 
-export {listToObject, objectToList}
+export const textToList = (text)=>{
+  return text.split(' ')
+}

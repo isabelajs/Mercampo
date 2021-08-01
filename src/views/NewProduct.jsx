@@ -16,7 +16,7 @@ import { addProductToStore } from '../utils/dataBase'
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
 import {openAlert, closeAlert} from '../actions'
 
-//validaciones
+//validaciones del formulario
 import {validationsInFormProducts} from "../utils/validationsInform";
 
 const ProfileNewProduct = (props) => { 
@@ -32,6 +32,7 @@ const ProfileNewProduct = (props) => {
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
 
+  //validaciones que nada falta
   const validationForm = useCallback ((form)=>validationsInFormProducts(form),[])
   
   const handleSubmit = async (e) =>{
