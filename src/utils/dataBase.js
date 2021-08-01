@@ -169,7 +169,7 @@ export const getProductById = async ( id )=>{
     throw new Error(`getProductById -> ${err}`)
   }
 };
-
+//obtengo todos los productos disponibles
 export const getAllProducts = async () => {
   try {
     let data = await db.collection("products").where('avaliable','==','true').get();
@@ -180,16 +180,25 @@ export const getAllProducts = async () => {
 };
 
 export const getProductsBySearch = async (queryString) =>{
-  console.log('busqueda',queryString);
   try{
     if(queryString === ''){
       return await getAllProducts()
     }else{
-      let data = await db.collection("products").where("name","array-contains",'Pirata el guapo').get();
-      console.log(data);
-      return data.docs.map((doc) => doc.data());
-    }
+      let data = await db.collection("products").where("keywords","array-contains", queryString).get();
+      return data.docs.map((doc) => doc.data())
+    } 
   }catch(err){
     throw new Error(`getProductsBySearch ${err}`)
+  }
+}
+
+export const prueba = async(searchText)=>{
+  try{
+    let data = await db.collection('products').orderBy("name").startAt(searchText).endAt(searchText + '\uf8ff').get()
+    // let data = await db.collection('products').where('name','==',searchText).get()
+    let datos = data.docs.map(doc=>doc.data())
+    console.log(datos)
+  }catch(err){
+    throw new Error(`holis un error ${err}`)
   }
 }

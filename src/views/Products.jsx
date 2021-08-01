@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback,useMemo } from "react";
 
 //estilos
 import "../assets/styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";
-import { getAllProducts, getProductsBySearch } from "../utils/dataBase";
+import { getAllProducts, getProductsBySearch, prueba } from "../utils/dataBase";
 import CarrouselCategories from '../componentes/Products/CarrouselCategories'
 import  CardCategory  from '../componentes/Products/CardCategory'
-import { useMemo } from "react";
 
 
 //Todos siempre se aplican
@@ -49,14 +48,14 @@ function useFilterProducts (initialCategory, initialProducts){
 	//toda la data
 
 	//value input search
-	const [querySearch, setQuerySearch] = useState('')
+	// const [querySearch, setQuerySearch] = useState('')
 
 	// const [filteredProducts,setFilteredProducts] = useState(initialProducts)
 
-	const filteredProducts = useMemo(()=>{
-		return initialProducts.filter((item)=>item.name.toLowerCase().includes(querySearch.toLocaleLowerCase()))
+	// const filteredProducts = useMemo(()=>{
+	// 	return initialProducts.filter((item)=>item.name.toLowerCase().includes(querySearch.toLocaleLowerCase()))
 
-	},[initialProducts,querySearch])
+	// },[initialProducts,querySearch])
 
 	//value category selected
 	const [selectedCategory, setSelectedCategory] = useState(initialCategory)
@@ -64,9 +63,9 @@ function useFilterProducts (initialCategory, initialProducts){
 	return {
 		selectedCategory,
 		setSelectedCategory,
-		setQuerySearch,
-		querySearch,
-		filteredProducts,
+		// setQuerySearch,
+		// querySearch,
+		// filteredProducts,
 	}
 }
 
@@ -76,10 +75,11 @@ export default function Products() {
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
+	const [querySearch, setQuerySearch] = useState('')
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']
 
-	const {selectedCategory, setSelectedCategory, querySearch, setQuerySearch, filteredProducts} = useFilterProducts('All', listProducts)
+	const {selectedCategory, setSelectedCategory, filteredProducts} = useFilterProducts('All', listProducts)
 	
 	//Fetch-Data
 	useEffect(()=>{
@@ -95,7 +95,6 @@ export default function Products() {
 				setIsLoading(false)
 
 			}catch(err){
-				// console.log(err)
 				setIsError(err)
 			}
 		}
@@ -111,14 +110,14 @@ export default function Products() {
 
 		try{
 			const data = await getProductsBySearch(querySearch)
-			console.log(data);
+			prueba(querySearch)
 			setListProducts(data)
 			setIsLoading(false)
 
 		}catch(err){
 			setIsError(err)
 		}
-	},[])
+	},[querySearch])
 
 
   return (
@@ -136,8 +135,6 @@ export default function Products() {
 								placeholder='Buscar...' 
 								onChange={(e)=>{
 									setQuerySearch(e.target.value)
-									console.log('seteando el input');
-									
 								}}
 								value={querySearch}
 								/>
