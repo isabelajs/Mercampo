@@ -15,6 +15,21 @@ export const objectToList = (object)=>{
   return values.map(element => ({name:element[0], value:element[1]}))
 }
 
-export const textToList = (text)=>{
+
+export const textToList = (queryText)=>{
+  let caractersNotAllowed = `!¡?¿|"#$%&/\()='´+{}[]-_.,;:*`
+  let listCaractersNotAllowed = caractersNotAllowed.split('')
+  let text = queryText
+
+  listCaractersNotAllowed.forEach(caracter=>{
+    if(text.includes(caracter)){
+      text = text.replace(caracter,'')
+    }
+  })
   return text.split(' ')
+  
 }
+
+
+
+

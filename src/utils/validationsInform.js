@@ -49,10 +49,12 @@ export const validationsInFormProducts = (form)=>{
   else if(form.hasOwnProperty('category') && (form.category === '')){
     message =  'Por favor ingrese una categoria'
   }
-  else if(form.hasOwnProperty('keywords') && (form.keywords === '')){
+  else if(form.hasOwnProperty('keywords') && (form.keywords === '' )){
     message =  'Por favor ingresa palabras claves'
   }
-  
+  else if(form.hasOwnProperty('keywords') && (form.keywords.includes(',') )){
+    message =  'Por favor ingresa las palabras separadas por espacios'
+  }
   else if(form.hasOwnProperty('prices')){
     //estan vacios los valores?
     let validation = form.prices.every(prices=> {

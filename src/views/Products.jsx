@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback,useMemo } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 
 //estilos
 import "../assets/styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";
-import { getAllProducts, getProductsBySearch, prueba } from "../utils/dataBase";
+import { getAllProducts, getProductsBySearch } from "../utils/dataBase";
 import CarrouselCategories from '../componentes/Products/CarrouselCategories'
 import  CardCategory  from '../componentes/Products/CardCategory'
 
@@ -48,7 +48,7 @@ function useFilterProducts (initialCategory, initialProducts){
 	//toda la data
 
 	//value input search
-	// const [querySearch, setQuerySearch] = useState('')
+	const [querySearch, setQuerySearch] = useState('')
 
 	// const [filteredProducts,setFilteredProducts] = useState(initialProducts)
 
@@ -63,8 +63,8 @@ function useFilterProducts (initialCategory, initialProducts){
 	return {
 		selectedCategory,
 		setSelectedCategory,
-		// setQuerySearch,
-		// querySearch,
+		setQuerySearch,
+		querySearch,
 		// filteredProducts,
 	}
 }
@@ -75,11 +75,10 @@ export default function Products() {
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
-	const [querySearch, setQuerySearch] = useState('')
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']
 
-	const {selectedCategory, setSelectedCategory, filteredProducts} = useFilterProducts('All', listProducts)
+	const {selectedCategory, setSelectedCategory,querySearch, setQuerySearch, filteredProducts} = useFilterProducts('All', listProducts)
 	
 	//Fetch-Data
 	useEffect(()=>{
@@ -110,7 +109,6 @@ export default function Products() {
 
 		try{
 			const data = await getProductsBySearch(querySearch)
-			prueba(querySearch)
 			setListProducts(data)
 			setIsLoading(false)
 
