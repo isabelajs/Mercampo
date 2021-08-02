@@ -18,6 +18,10 @@ firebase.initializeApp(firebaseConfig)
 
 const auth = firebase.auth()
 const db = firebase.firestore()
+const authGoogleProvider = new firebase.auth.GoogleAuthProvider();
+const sessionPersistence = firebase.auth.Auth.Persistence.SESSION
+const localPersistence = firebase.auth.Auth.Persistence.LOCAL
 
 
-export {auth,db}
+
+export {auth,db , authGoogleProvider, localPersistence}

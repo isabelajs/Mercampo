@@ -13,7 +13,7 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
 //funciones auth
-import {createUser} from '../utils/auth'
+import {signUpWithEmail, signInWithGoogle} from '../utils/auth'
 import {validationsInForm} from '../utils/validationsInform';
 //actiones
 import { openAlert, closeAlert } from '../actions'
@@ -21,8 +21,6 @@ import { openAlert, closeAlert } from '../actions'
 
 //TODO deberia exister un elemento que me retorne a home?
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
-
-
 
 function Register(props){
   const {openAlert, closeAlert} = props
@@ -63,7 +61,7 @@ function Register(props){
     }
 
     try{
-      await createUser(form.email,form.password, form.name)
+      await signUpWithEmail(form.email,form.password, form.name)
       openAlert({
         error:false,
         message: 'Se ha enviado un correo de verificación, por favor revisa tu bandeja de entrada'
@@ -136,7 +134,7 @@ function Register(props){
         <div className="login__options">
           <div className="login__options--text">Registrate con:</div>
           <div className="login__options--options">
-            <img className='method-icon' src={google} alt="" />
+            <img onClick={signInWithGoogle} className='method-icon' src={google} alt="" />
             <img className='method-icon' src={facebook} alt="" />
             <img className='method-icon' src={phone} alt="" />
           </div>

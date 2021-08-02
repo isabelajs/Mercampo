@@ -14,8 +14,8 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { singInWithEmail } from '../utils/auth'
-import {addUserToStore, findUserById} from '../utils/dataBase';
+import { signInWithEmail, signInWithGoogle, signOut } from '../utils/auth'
+import {registerUser, findUserById} from '../utils/dataBase';
 import {validationsInForm} from '../utils/validationsInform';
 
 // https://dribbble.com/wenhy/collections/1631290-design
@@ -60,20 +60,19 @@ function Login (props){
 
     try{
       //El usuario intenta loguearse
-      const user = await singInWithEmail(form.email, form.password)
-
-      console.log(user.emailVerified)
+      const user = await signInWithEmail(form.email, form.password)
 
       // si el usuario esta verificado, se confirma si esta en la base de datos
       if(user.emailVerified){
       
         const userRef = await findUserById(user.uid)
-        console.log(userRef)
+        // console.log(userRef)
         if(userRef === undefined){
-          await addUserToStore(user)
+          await registerUser(user)
         }
 
       }else{
+        await signOut()
         openAlert({
           error: true,
           message: 'Tu correo actualmente no se encuentra verificado'

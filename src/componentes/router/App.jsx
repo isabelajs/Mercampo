@@ -28,10 +28,8 @@ const App = (props)=> {
 
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
-
+      
       if(user && !user.emailVerified){
-          auth.signOut()
-          // console.log('ese man no esta autenticado', auth.currentUser)
           return
       }
 

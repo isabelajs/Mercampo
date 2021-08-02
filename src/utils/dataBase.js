@@ -3,7 +3,7 @@ import { auth } from "../firebase.config.js";
 import { listToObject } from "./Helpers/convertedObjetList";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
-export const addUserToStore = async (user) => {
+export const registerUser = async (user) => {
   db.collection("users")
     .doc(user.uid)
     .set({

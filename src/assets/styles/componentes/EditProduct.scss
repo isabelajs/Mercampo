@@ -24,11 +24,13 @@
 
   .editProduct__photos{
     display: flex;
+    flex-wrap: wrap;
 
     // interfaz agregar foto
     .newProduct__addPhoto{
-      width: 160px;
-      height: 160px;
+      width: 120px;
+      height: 120px;
+      margin-top: 10px;
       border-radius: 10px;
       background-color: rgb(40, 43, 114);
       overflow: hidden;
@@ -51,9 +53,10 @@
     }
 
     img{
-      width: 160px;
-      height: 160px;
+      width: 120px;
+      height: 120px;
       border-radius: 10px;
+      margin-top: 10px;
       background-color: rgb(40, 43, 114);
       overflow: hidden;
       margin-right: 10px;
@@ -67,6 +70,22 @@
 
 }
 
+@media(min-width:890px){
+  .l-editProduct__photos{
+    .editProduct__photos{
+      img{
+        width: 160px;
+        height: 160px;
+        margin-top: 0px;
+      }
+      .newProduct__addPhoto{
+        width: 160px;
+        height: 160px;
+        margin-top: 0px;
+      }
+    }
+  }
+}
 
 
 
