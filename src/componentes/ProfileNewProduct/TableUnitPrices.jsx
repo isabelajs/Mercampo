@@ -67,7 +67,6 @@ const TableUnitPrices = (props)=>{
                     fill="#2EC4B6"
                   />
                 </svg>
-
                 <p>Nuevo</p>
               </div>
             </td>

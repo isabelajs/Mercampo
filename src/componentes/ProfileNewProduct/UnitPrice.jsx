@@ -33,7 +33,6 @@ const UnitPrice = (props) => {
 
   const handlePrice  = (e)=>{
     handleUnitPrice(e.target.value,index)
-    // console.log(e.target.value,index)
   }
 
   const handleName = (e)=>{
@@ -53,8 +52,7 @@ const UnitPrice = (props) => {
           data-
           value={isNaN(name) ? name : ''}
           placeholder="Tipo de und"
-          disabled= {!isOpenEdit}
-          >
+          disabled= {!isOpenEdit}>
             <option value=''>--</option>
             <option value='unidad'>Unidad</option>
             <option value='libra'>libra</option>
