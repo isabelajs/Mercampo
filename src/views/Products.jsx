@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 
 //estilos
 import "../assets/styles/componentes/Products.scss";
@@ -8,7 +8,6 @@ import CardProduct from "../componentes/Products/CardProduct";
 import { getAllProducts, getProductsBySearch } from "../utils/dataBase";
 import CarrouselCategories from '../componentes/Products/CarrouselCategories'
 import  CardCategory  from '../componentes/Products/CardCategory'
-import { useMemo } from "react";
 
 
 //Todos siempre se aplican
@@ -53,10 +52,10 @@ function useFilterProducts (initialCategory, initialProducts){
 
 	// const [filteredProducts,setFilteredProducts] = useState(initialProducts)
 
-	const filteredProducts = useMemo(()=>{
-		return initialProducts.filter((item)=>item.name.toLowerCase().includes(querySearch.toLocaleLowerCase()))
+	// const filteredProducts = useMemo(()=>{
+	// 	return initialProducts.filter((item)=>item.name.toLowerCase().includes(querySearch.toLocaleLowerCase()))
 
-	},[initialProducts,querySearch])
+	// },[initialProducts,querySearch])
 
 	//value category selected
 	const [selectedCategory, setSelectedCategory] = useState(initialCategory)
@@ -66,7 +65,7 @@ function useFilterProducts (initialCategory, initialProducts){
 		setSelectedCategory,
 		setQuerySearch,
 		querySearch,
-		filteredProducts,
+		// filteredProducts,
 	}
 }
 
@@ -79,7 +78,7 @@ export default function Products() {
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']
 
-	const {selectedCategory, setSelectedCategory, querySearch, setQuerySearch, filteredProducts} = useFilterProducts('All', listProducts)
+	const {selectedCategory, setSelectedCategory,querySearch, setQuerySearch, filteredProducts} = useFilterProducts('All', listProducts)
 	
 	//Fetch-Data
 	useEffect(()=>{
@@ -95,7 +94,6 @@ export default function Products() {
 				setIsLoading(false)
 
 			}catch(err){
-				// console.log(err)
 				setIsError(err)
 			}
 		}
@@ -111,14 +109,13 @@ export default function Products() {
 
 		try{
 			const data = await getProductsBySearch(querySearch)
-			console.log(data);
 			setListProducts(data)
 			setIsLoading(false)
 
 		}catch(err){
 			setIsError(err)
 		}
-	},[])
+	},[querySearch])
 
 
   return (
@@ -135,9 +132,7 @@ export default function Products() {
 								type="text" 
 								placeholder='Buscar...' 
 								onChange={(e)=>{
-									setQuerySearch(e.target.value)
-									console.log('seteando el input');
-									
+									setQuerySearch(e.target.value.toLocaleLowerCase())
 								}}
 								value={querySearch}
 								/>
@@ -187,8 +182,9 @@ export default function Products() {
 			<div className="c-products__products">
 				{
 					listProducts.map((product,index)=> {
+						
 						return(
-							<CardProduct key={index} {...product}/>
+							<CardProduct key={product.id} {...product}/>
 						)
 					})
 				}

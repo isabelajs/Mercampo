@@ -1,69 +1,132 @@
+import { textToKeywords } from '../utils/Helpers/convertedObjetList'
+
 export const validationsInForm = (form)=>{
     
   let message = null
 
-  if(form.hasOwnProperty('name') && (form.name.length <= 8 || !isNaN(form.name))){
-    message =  'Nombre invalido'
+  if(form.hasOwnProperty('name') && !isValidInputString(form.name,[8,20])){
+    message = 'Nombre invalido [a-zA-z]{8,20}'
   }
 
-  if(form.hasOwnProperty('password') && form.password.length < 8){
-    message = 'La contraseña es demasiado corta'
+  else if( form.hasOwnProperty('email') &&  !isValidInputEmail(form.email)){
+    message = 'Por favor ingresa un correo válido'
+  }
+  
+  else if(form.hasOwnProperty('password') && !isValidInputGeneric(form.password,[8,20])){
+    message = 'Contraseña invalida {8,20} digitos'
   }
 
-  if(form.hasOwnProperty('id') && form.id.length < 5){
+  else if(form.hasOwnProperty('id') && !isValidInputNumber(form.id,[6,12],false)){
     message = 'El número de cédula no es válido'
   }
 
-  if(form.hasOwnProperty('department') && form.department.length < 3){
+  else if(form.hasOwnProperty('department') && !isValidInputString(form.department,[4,15])){
     message = 'Nombre de departamento inválido'
   }
 
-  if(form.hasOwnProperty('city') && form.city.length < 4){
+  else if(form.hasOwnProperty('city') && !isValidInputString(form.city,[4,15])){
     message = 'Nombre de ciudad inválido'
   }
 
-  if( form.hasOwnProperty('email') &&  form.email.length < 10 && !form.email.includes('@')){
-    message = 'Por favor ingresa un correo válido'
-  }
-
-  if(form.hasOwnProperty('phoneMain') && form.phoneMain.length !== 10){
+  else if(form.hasOwnProperty('phoneMain') && !isValidInputNumber(form.id,[10,10],false)){
     message = 'Número de telefono inválido'
   }
-
-
 
   return message
 }
 
+
+
 export const validationsInFormProducts = (form)=>{
+
   let message = null
-  if(form.hasOwnProperty('photos') && (form.photos.length < 1)){
+
+  let listKeywords = textToKeywords({text:form.keywords,typeSplit:','})
+  let pricesAreValid = form.prices.every(price=>  price.name !== '' && isValidInputNumber(price.value,[3,10]))
+  let keywordsAreValid = listKeywords.every(keyword=> keyword.includes(' ') === false)
+
+  if(form.photos.length < 1){
     message =  'Por favor ingresa imagenes de tu producto'
   }
-  else if(form.hasOwnProperty('name') && (form.name.length < 4 || !isNaN(form.name))){
+  else if (!isValidInputString(form.name,[3,15])){
     message =  'Nombre invalido'
   }
-  else if(form.hasOwnProperty('description') && (form.description.length <= 8)){
+
+  else if(!isValidInputGeneric(form.description,[25,150])){
     message =  'Descripción invalida'
   }
-  else if(form.hasOwnProperty('category') && (form.category === '')){
+
+  else if(form.category === ''){
     message =  'Por favor ingrese una categoria'
   }
-  else if(form.hasOwnProperty('keywords') && (form.keywords === '')){
-    message =  'Por favor ingresa palabras claves'
-  }
-  
-  else if(form.hasOwnProperty('prices')){
-    //estan vacios los valores?
-    let validation = form.prices.every(prices=> {
-      return (prices.name !== '' && prices.value !== '')
-    } )
-    
-    if(!validation){
-      message = 'Por favor ingresa una unidad con su valor correspondiente'
-    }
 
+  else if(!form.keywords.includes(',') || !keywordsAreValid){
+    message =  `Por favor ingresa las palabras separadas sin espacios y separadas por comas ejemplo: 'huevos, gallinas, campo'`
   }
+
+  else if(listKeywords.length < 3 || listKeywords.length > 10){
+    message =  'Ingresa minimo 3 o maximo 10 palabras claves'
+  }
+
+  else if(!pricesAreValid){
+    message = 'Por favor ingrese una unidad con su respectivo precio valido ejm: Unidad: Libra valor: 22000'
+  }
+
 
     return message
+}
+
+
+export function validateOnlyLetters (texto){
+  const re = new RegExp(/^[a-zA-Z\s]*$/);
+  if (re.test(texto)) {
+      return true
+  } else {
+      return false
+  }
+}
+
+
+function isValidInputString(text,minMax,required = true){
+
+  //si no es requerido y el texto es vacio devolver valido
+  if (!required && text === ''){return true}
+
+  let re = new RegExp(`^[a-zA-Z\\s]{${minMax[0]},${minMax[1]}}$`);
+
+  if(re.test(text)){ return true } else{ return false}
+
+}
+
+
+function isValidInputGeneric(text,minMax,required = true){
+
+  //si no es requerido y el texto es vacio devolver valido
+  if (!required && text === ''){return true}
+
+  let re = new RegExp(`.{${minMax[0]},${minMax[1]}}`);
+
+  if(re.test(text)){ return true } else{ return false}
+
+}
+
+
+function isValidInputNumber(text,minMax,required = true){
+
+  //si no es requerido y el texto es vacio devolver valido
+  if (!required && text === ''){return true}
+
+  let re = new RegExp(`^[0-9]{${minMax[0]},${minMax[1]}}$`);
+
+  if(re.test(text)){ return true } else{ return false}
+
+}
+
+
+function isValidInputEmail(text){
+
+  let re = new RegExp(/^[\w-\\.]{4,}@([\w-]+\.)+[\w-]{2,4}$/);
+
+  if(re.test(text)){ return true } else{ return false}
+
 }

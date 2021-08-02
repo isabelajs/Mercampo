@@ -1,5 +1,5 @@
 //creo un  objeto a partir de un array
-const listToObject = (array)=>{
+export const listToObject = (array)=>{
  let object = {}
 
   array.forEach(element => {
@@ -10,9 +10,34 @@ const listToObject = (array)=>{
   return object
 }
 
-const objectToList = (object)=>{
+export const objectToList = (object)=>{
   let values =Object.entries(object)
   return values.map(element => ({name:element[0], value:element[1]}))
 }
 
-export {listToObject, objectToList}
+export const textToKeywords = ({text,typeSplit = ' '})=>{
+  let caractersNotAllowed
+
+  switch (typeSplit) {
+    case ',':
+      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.;:*`
+      break;
+    case ' ':
+      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.,;:*`
+      break;
+    default:
+      throw new Error(`${typeSplit} TypeSplit not allow`)
+  }
+
+  let listCaractersNotAllowed = caractersNotAllowed.split('')
+
+  listCaractersNotAllowed.forEach(caracter=>{
+    if(text.includes(caracter)){
+      text = text.replace(caracter,'')
+    }
+  })
+
+  return text.split(typeSplit)
+    .map(word => word.trim().toLowerCase())
+    .filter(word => word)
+}
