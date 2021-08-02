@@ -28,7 +28,7 @@
     width: 95%;
     margin: 30px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px,210px));
+    grid-template-columns: repeat(auto-fill, minmax(190px,250px));
     gap: 30px 35px;
     justify-content: center;
     align-items: center;
@@ -39,6 +39,11 @@
 
 @media (min-width:520px){
   .l-products{
+    
+    .c-products__products{
+      grid-template-columns: repeat(auto-fill, minmax(190px,210px));
+    }
+
     .c-products__tools{
       .products__tools{
         .button{
