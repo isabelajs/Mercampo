@@ -11,7 +11,7 @@ import '../assets/styles/componentes/ProfileSettings.scss';
 
 //funciones de auth
 import {findUserById, updateUserInfo} from "../utils/dataBase";
-import {validationsInForm} from '../utils/validationsInform';
+import { validationsInForm } from '../utils/validationsInform';
 
 //import actions
 import { closeAlert, openAlert } from '../actions'
@@ -37,7 +37,7 @@ const ProfileSettings = (props) => {
   ];
 
   const handleChange = (e)=>{
-    console.log('cambiando')
+    
     setForm({
       ...form,
       [e.target.name]: e.target.value

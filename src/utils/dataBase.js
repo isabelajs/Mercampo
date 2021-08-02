@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToList } from "./Helpers/convertedObjetList";
+import { listToObject,textToKeywords } from "./Helpers/convertedObjetList";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const addUserToStore = async (user) => {
@@ -95,17 +95,16 @@ export const getCurrentUser = ()=>{
 
 
 
-
 //funciones sobre base de dato de los productos
 
 //se agrega un producto
 export const addProductToStore = async (basic, photos, prices)=>{
 
   //lista de promesas (envio de photos)
-  const results = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
+  const resultPostPhotos = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
 
   //obtengo las urls de las imagenes
-  const urls = results.map(({ data: { url } }) => url);
+  const photosUrls = resultPostPhotos.map(({ data: { url } }) => url);
 
   //se cambia la estructura de prices por un objeto
   const pricesList = listToObject(prices);
@@ -115,9 +114,9 @@ export const addProductToStore = async (basic, photos, prices)=>{
 
   let info = {
     ...basic,
-    photos: urls,
+    photos: photosUrls,
     prices: pricesList,
-    search: [].concat(textToList(userName), textToList(keywords), textToList(name), textToList(description))
+    search: [].concat(textToKeywords({text:userName}), textToKeywords({text:keywords,typeSplit:','}), textToKeywords({text:name}), textToKeywords({text:description}))
   };
 
   try {
@@ -128,27 +127,32 @@ export const addProductToStore = async (basic, photos, prices)=>{
 }
 
 export const updateProduct = async (id,basic, photos, prices)=>{
+
   try{
-    let newPhotos = photos.filter(photo=> photo.hasOwnProperty('file'))
-    const results = await Promise.all(newPhotos.map((photo)=> uploadImg(photo.file)))
-    const urlsNew = results.map( ({data:{url}}) => url )
-    const previousPhoto = photos.filter(photo=> !photo.hasOwnProperty('file'))
-    const urls= previousPhoto.map(photo=>photo.url)
 
-  const { userName, keywords, name, description }= basic 
+    const { userName, keywords, name, description }= basic 
+    
+    const previousPhotosUrls = photos.filter(photo=> !photo.hasOwnProperty('file')).map( photo => photo.url)
 
+    const newPhotos = photos.filter(photo=> photo.hasOwnProperty('file'))
+
+    const resultPostPhotos = await Promise.all(newPhotos.map((photo)=> uploadImg(photo.file)))
+
+    const newPhotosUrls = resultPostPhotos.map( ({data:{url}}) => url )
+ 
+    const pricesList = listToObject(prices);
 
     let productInfo = {
       ...basic,
-      photos: [].concat(urls,urlsNew),
-      prices: listToObject(prices),
-      search: [].concat(textToList(userName), textToList(keywords), textToList(name), textToList(description))
+      photos: [].concat(previousPhotosUrls,newPhotosUrls),
+      prices: pricesList,
+      search: [].concat(textToKeywords({text:userName}), textToKeywords({text:keywords,typeSplit:','}), textToKeywords({text:name}), textToKeywords({text:description}))
     }
 
     await db.collection('products').doc(id).set(productInfo)
     
   }catch(err){
-    throw new Error(`UpdateUserInfo -> ${err}`)
+    throw new Error(`UpdateProduct -> ${err}`)
   }
 }
 
@@ -180,7 +184,7 @@ export const getProductById = async ( id )=>{
 export const getAllProducts = async () => {
   try {
     let data = await db.collection("products").where('avaliable','==','true').limit(20).get();
-    return data.docs.map((doc) => doc.data());
+    return data.docs.map((doc) =>({...doc.data(),id:doc.id}))
   } catch (err) {
     throw new Error(`getAllProducts -> ${err}`);
   }
@@ -193,7 +197,9 @@ export const getProductsBySearch = async (queryString) =>{
       return await getAllProducts()
     }else{
       let data = await db.collection("products").where("search","array-contains", queryString).limit(20).get();
-      return data.docs.map((doc) => doc.data())
+      let datos = data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+      console.log(datos)
+      return datos
     } 
   }catch(err){
     throw new Error(`getProductsBySearch ${err}`)

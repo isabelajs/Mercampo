@@ -43,6 +43,9 @@ const EditProduct = (props) => {
     const getProduct = async ()=>{
       try{
         const data = await getProductById(productId)
+
+        console.log(data);
+        
         setBasicDataFromData(data)        
         addPhotosFromData(data.photos)
         addPricesFromData(data.prices)

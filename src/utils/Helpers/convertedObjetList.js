@@ -15,21 +15,29 @@ export const objectToList = (object)=>{
   return values.map(element => ({name:element[0], value:element[1]}))
 }
 
+export const textToKeywords = ({text,typeSplit = ' '})=>{
+  let caractersNotAllowed
 
-export const textToList = (queryText)=>{
-  let caractersNotAllowed = `!¡?¿|"#$%&/\()='´+{}[]-_.,;:*`
+  switch (typeSplit) {
+    case ',':
+      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.;:*`
+      break;
+    case ' ':
+      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.,;:*`
+      break;
+    default:
+      throw new Error(`${typeSplit} TypeSplit not allow`)
+  }
+
   let listCaractersNotAllowed = caractersNotAllowed.split('')
-  let text = queryText
 
   listCaractersNotAllowed.forEach(caracter=>{
     if(text.includes(caracter)){
       text = text.replace(caracter,'')
     }
   })
-  return text.split(' ')
-  
+
+  return text.split(typeSplit)
+    .map(word => word.trim().toLowerCase())
+    .filter(word => word)
 }
-
-
-
-

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { objectToList } from '../Helpers/convertedObjetList';
 
-
 export function useFormBasicProduct ({displayName, uid} ){
 
   const state = {
@@ -17,6 +16,7 @@ export function useFormBasicProduct ({displayName, uid} ){
   const [formBasic, setFormBasic] = useState(state)
 
   const setBasicData = (e) =>{
+
     setFormBasic ({
       ...formBasic,
       [e.target.name]: e.target.value,

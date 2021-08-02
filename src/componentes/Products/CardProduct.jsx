@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import { useCallback } from 'react'
+import { memo } from 'react'
 import '../../assets/styles/componentes/CardProduct.scss'
 
 const DescriptionPrice = ({name,value})=>{
-
+  
   return(
   <div className="description__price">
     <div className="measured">{name}</div>
@@ -13,21 +13,15 @@ const DescriptionPrice = ({name,value})=>{
   )
 }
 
-const CardProduct = (props)=>{
+const CardProduct = memo(({name,userName,prices,photos})=>{
 
-  const {name} = props
-
-  const userName = useRef(props.userName.split(' ').splice(0,3).join(' '))
-  
-  const pricesToList = useCallback(()=>Object.entries(props.prices),[props])
-
-  const prices = useRef(pricesToList())
-
-  const nombres = {kilogramo:'Kg', libra:'Lb', unidad:'Und'}
+  const refUserName = useRef(userName.split(' ').splice(0,3).join(' '))
+  const refPrices = useRef(Object.entries(prices))
+  const refUnitsTranslate = useRef({kilogramo:'Kg', libra:'Lb', unidad:'Und'})
 
   return(
     <div className="product">
-      <img className="product__img" src={props.photos[0]} alt='img product'></img>
+      <img className="product__img" src={photos[0]} alt='img product'></img>
 
       <div className="product__description">
 
@@ -41,24 +35,24 @@ const CardProduct = (props)=>{
         
         <div className="product__description__title-product">{name}</div>
 
-        <div className="product__description__name-producer">{userName.current}</div>
+        <div className="product__description__name-producer">{refUserName.current}</div>
 
         <div className="product__description__prices">
 
           {
-            prices.current.slice(0,2).map((price,index)=>{
+            refPrices.current.slice(0,2).map((price)=>{
               const key = Math.random()*100
                 return(
                   < DescriptionPrice 
                     key={key} 
-                    name={nombres[price[0]]} 
+                    name={refUnitsTranslate.current[price[0]]} 
                     value={price[1]}/>
                 )
             })
           }
           
           {
-            prices.current.length > 2 &&
+            refPrices.current.length > 2 &&
             <div>...Otros</div>
           }
 
@@ -71,8 +65,7 @@ const CardProduct = (props)=>{
 
     </div>
   )
-}
-
+})
 
 
 export default CardProduct

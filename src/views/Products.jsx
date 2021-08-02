@@ -132,7 +132,7 @@ export default function Products() {
 								type="text" 
 								placeholder='Buscar...' 
 								onChange={(e)=>{
-									setQuerySearch(e.target.value)
+									setQuerySearch(e.target.value.toLocaleLowerCase())
 								}}
 								value={querySearch}
 								/>
@@ -182,8 +182,9 @@ export default function Products() {
 			<div className="c-products__products">
 				{
 					listProducts.map((product,index)=> {
+						
 						return(
-							<CardProduct key={index} {...product}/>
+							<CardProduct key={product.id} {...product}/>
 						)
 					})
 				}
