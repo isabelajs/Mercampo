@@ -62,10 +62,12 @@ const App = (props)=> {
             { !user && <Register/> }
           </Route>
 
+
+
           <Layout>
             
             <Switch>
-
+              
               <Route exact path="/" component={Home} />
 
               <Route exact path='/products' component={Products} />
