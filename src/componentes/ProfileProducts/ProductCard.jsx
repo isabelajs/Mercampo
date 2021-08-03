@@ -3,7 +3,7 @@ import '../../assets/styles/componentes/ProfileProducts/ProfileProduct.scss'
 import '../../assets/styles/componentes/ProfileProducts/itemNewProduct.scss'
 import { useHistory } from 'react-router-dom';
 
-function ProfileProduct(props) {
+function ProductCard(props) {
 
   const {name, id} = props
 
@@ -59,7 +59,7 @@ function ProfileProduct(props) {
 };
 
 
-const ProfileButtonNewProduct = (props) => {
+const CardAddProduct = (props) => {
 
   const history = useHistory()
 
@@ -105,4 +105,4 @@ const ProfileButtonNewProduct = (props) => {
   )
 }
 
-export {ProfileProduct,ProfileButtonNewProduct}
+export { ProductCard , CardAddProduct }

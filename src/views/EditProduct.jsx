@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import { connect } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
-import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import Alert from "../componentes/common/Alert";
 
 //estilos
-import "../assets/styles/componentes/EditProduct.scss";
+import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 
 //funcion  firestore
 import {getProductById, updateProduct} from '../utils/dataBase'
@@ -18,6 +18,8 @@ import {openAlert, closeAlert} from '../actions'
 
 //validaciones
 import {validationsInFormProducts} from "../utils/validationsInform";
+import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
+import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
 
 
 const EditProduct = (props) => { 
@@ -31,7 +33,7 @@ const EditProduct = (props) => {
   ];
 
   const {formBasic, setBasicData, setBasicDataFromData} = useFormBasicProduct(user)
-  const {photos, addPhoto, addPhotosFromData} = useFormPhotosProduct()
+  const {photos, addPhoto, removePhoto,  addPhotosFromData} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
   const [isLoading, setIsLoading] = useState(true)
   const [isSendingData, setIsSendingData]= useState(false)
@@ -43,8 +45,6 @@ const EditProduct = (props) => {
     const getProduct = async ()=>{
       try{
         const data = await getProductById(productId)
-
-        console.log(data);
         
         setBasicDataFromData(data)        
         addPhotosFromData(data.photos)
@@ -56,9 +56,9 @@ const EditProduct = (props) => {
       }
     }
 
-    closeAlert()
     getProduct()
-
+    closeAlert()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
 
@@ -83,7 +83,6 @@ const EditProduct = (props) => {
       await updateProduct(productId,formBasic,photos,prices)
       setIsSendingData(false)
 
-      console.log('Producto actualizado con exito');
     }catch (error){
       console.log(error);
     }
@@ -106,20 +105,10 @@ const EditProduct = (props) => {
 
               <div className="editProduct__photos">
 
-                {photos.map((item,index)=>{
-                  return <img src={item.url} alt={item.alt} key={index} />
-                })}
+                {photos.map((item,index)=> <ProductPhoto removePhoto={removePhoto} key={index} src={item.url} alt={item.alt}/> )}
 
-                {/* TODO PASAR ESTO A UN COMPONENTE APARTE */}
+                <NewProductPhoto addPhoto={addPhoto}/>
 
-                <label className="newProduct__addPhoto" name='file'>
-                  <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="20.1923" width="6.73077" height="35" rx="3.36538" transform="rotate(-90 0 20.1923)" fill="#2EC4B6"/>
-                    <rect x="14.8076" width="6.73077" height="35" rx="3.36538" fill="#2EC4B6"/>
-                  </svg>
-                  <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' onChange={addPhoto}/>
-                </label>
-                
               </div>
 
             <div className="separation-line"></div>
