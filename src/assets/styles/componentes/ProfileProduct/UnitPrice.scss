@@ -1,7 +1,19 @@
 .newProduct__unitPrices{
+  
+  .unitPrice--edit{
+    // background-color: rgba(189, 189, 189, 0.679);
+
+    input,select{
+      // background-color: transparent;
+      // border: solid 0.8px #ffffff;
+    }
+
+  }
 
   td{
     height: 50px;
+
+
 
     &:first-child{
       padding-left: 10px;
@@ -27,16 +39,17 @@
       }
     }
 
+    select.form-input {
+      width: 85%;
+    }
 
     .form-input{
-      // padding-left: 0;
       width: 100%;
       margin: 0;
-
+      padding: 0;
       border: 0;
       box-shadow: none;
     }
-
 
   }
   
