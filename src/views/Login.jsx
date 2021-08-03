@@ -63,15 +63,7 @@ function Login (props){
       const user = await signInWithEmail(form.email, form.password)
 
       // si el usuario esta verificado, se confirma si esta en la base de datos
-      if(user.emailVerified){
-      
-        const userRef = await findUserById(user.uid)
-        // console.log(userRef)
-        if(userRef === undefined){
-          await registerUser(user)
-        }
-
-      }else{
+      if(!user.emailVerified){
         await signOut()
         openAlert({
           error: true,

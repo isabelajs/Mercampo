@@ -12,12 +12,12 @@ import facebook from '../assets/static/facebook-icon.svg'
 import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
-//funciones auth
+//funciones auth and database
 import {signUpWithEmail, signInWithGoogle} from '../utils/auth'
 import {validationsInForm} from '../utils/Helpers/validationsInform';
+
 //actiones
 import { openAlert, closeAlert } from '../actions'
-
 
 //TODO deberia exister un elemento que me retorne a home?
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
@@ -61,7 +61,9 @@ function Register(props){
     }
 
     try{
+
       await signUpWithEmail(form.email,form.password, form.name)
+      
       openAlert({
         error:false,
         message: 'Se ha enviado un correo de verificación, por favor revisa tu bandeja de entrada'

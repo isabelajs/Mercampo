@@ -3,20 +3,25 @@ import { auth } from "../firebase.config.js";
 import { listToObject,textToKeywords } from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
-export const registerUser = async (user) => {
-  db.collection("users")
+export const registerUser = (user) => {
+
+  return new Promise((resolve,reject)=>{
+    db.collection('users')
     .doc(user.uid)
     .set({
       city: "",
       department: "",
       email: user.email,
-      id: user.uid,
-      name: user.displayName,
+      id: '',
+      name: user.name,
       phoneMain: "",
       phoneSecond: "",
-      photo:'',
+      photo:user.gravatar,
     })
-    .catch((error) => error);
+    .then(()=>resolve(user))
+    .catch(err=>reject(`RegisterUser -> ${err}`))
+  })
+
 };
 
 //encuentra un usuaruo por su id
@@ -93,8 +98,6 @@ export const updateUserInfo = async(user,info) =>{
 export const getCurrentUser = ()=>{
   return auth.currentUser
 }
-
-
 
 //funciones sobre base de dato de los productos
 

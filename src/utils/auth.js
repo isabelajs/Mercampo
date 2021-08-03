@@ -1,36 +1,43 @@
 import { auth, authGoogleProvider, localPersistence, sessionPersistence } from "../firebase.config.js";
-
+import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
 //FIXME: Viabilidad de crear el usuario en store inmediatamente o solo cuando se loguee por primera vez...
 const signUpWithEmail = async (email, password, name) => {
+
+  const nameForAvatar = name.split(' ').slice(0,2).join('+')
+  const randomColor = Math.floor(Math.random()*16777215).toString(16)
+  const gravatar= `https://ui-avatars.com/api/?name=${nameForAvatar}&background=${randomColor}`
+
   return new Promise((resolve, reject) => {
     auth
       .createUserWithEmailAndPassword(email, password)
 
-      //creo el dato en display name
+      // Update user of auth
       .then((credential) => {
         credential.user.updateProfile({
           displayName: name,
+          photoURL:gravatar,
         });
-        return credential;
+
+        return credential.user;
+      })
+      
+      // send verification email -> user{original}
+      .then((user) => {
+        user.sendEmailVerification();
+        return user;
       })
 
-      //espero que el usuario se cree y envio un correo de verificacion
-      .then((credential) => {
-        credential.user.sendEmailVerification();
-        return credential;
+      //add user in store (is not equal tu user of auth) 
+      .then((user)=>{
+        return registerUser({email,name,gravatar})
       })
 
-      //ejecuto el signout para no estar logueado
-      .then((credential) => {
-        auth.signOut();
-        return credential;
-      })
-
-      //resuelvo la promesa original
-      .then((credential) => {
-        resolve(credential.user);
+      //return -> user{name,email,uid} and logout (if not logout error in login without refresh)
+      .then((user) => {
+        // auth.signOut()
+        resolve(user);
       })
 
       //detecto si fallo algo en alguna parte de las promesas
