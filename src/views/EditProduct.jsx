@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback} from "react";
 import { connect } from 'react-redux';
 
-//componentes react
+//componentes
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import Alert from "../componentes/common/Alert";
+import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
+import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+
 
 //estilos
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
@@ -18,8 +21,7 @@ import {openAlert, closeAlert} from '../actions'
 
 //validaciones
 import {validationsInFormProducts} from "../utils/validationsInform";
-import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
-import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+
 
 
 const EditProduct = (props) => { 

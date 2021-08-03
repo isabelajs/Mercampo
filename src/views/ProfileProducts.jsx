@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
-import {
-  ProfileButtonNewProduct,
-  ProductCard,
-} from "../componentes/ProfileProducts/ProductCard";
+import { ProductCard } from "../componentes/ProfileProducts/ProductCard";
 //styles
 import "../assets/styles/componentes/ProfileProducts/ProfileProducts.scss";
 //funciones firestore
