@@ -65,8 +65,6 @@ const App = (props)=> {
             { !user && <Register/> }
           </Route>
 
-
-
           <Layout>
             
             <Switch>
