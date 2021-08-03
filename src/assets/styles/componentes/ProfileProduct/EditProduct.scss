@@ -55,9 +55,6 @@
     }
 
     .editProduct__photo{
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;;
 
       &:hover{
@@ -70,12 +67,9 @@
         }
       }
 
-
       svg{
-        display: flex;
-        align-items: center;
         top: 10px;
-        right: 10px;
+        right: 5px;
         padding: 3px;
         justify-content: center;
         transform: scale(0.7);
@@ -115,6 +109,11 @@
           width: 160px;
           height: 160px;
           margin-top: 0px;
+        }
+
+        svg{
+          top: 5px;
+          right: 10px;
         }
       }
 

@@ -14,9 +14,6 @@ function MenuMobile(props){
 
   const {isOpenMenuMobile,toggleMenuMobile, userName, userImg} = props
 
-
-  console.log(userImg)
-
   const [isOpenProfileMenu,setIsOpenProfileMenu] = useState(false)
 
   const toggleProfileMenu = (e) =>{
