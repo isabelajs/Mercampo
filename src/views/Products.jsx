@@ -5,59 +5,16 @@ import "../assets/styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";
-import { getAllProducts, getProductsBySearch } from "../utils/dataBase";
+import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
 import CarrouselCategories from '../componentes/Products/CarrouselCategories'
 import  CardCategory  from '../componentes/Products/CardCategory'
 
 
-//Todos siempre se aplican
+function useFilterProducts (initialCategory){
 
-
-// const filtros = {categorias:'', units:['kg','lb'], ubication:''}
-
-
-// dataRef = db.colelction('products')
-
-// if categories !== 'All'
-	// dataRef = dataRef.where('category' == 'All')
-
-// if units.length > 0 then
-	// dataRef = dataRef.where('category' == 'All')
-
-
-
-// data = dataref.get()
-
-
-
-
-
-//filtros js  / firestore
-	// categories -> // deme todas las categories
-	// price			-> // where price['libra'] > 0'
-									 // where ListPrices contains 'libra'
-	// ubicacion 	-> // where ubication == 'ubication'
-
-
-//-> todos? -> filter by search... 
-		// nombre 		-> //  userName
-		// pepe -> (name.contains('pepe' || description.contains('pepe') keywords.contains('pepe')))
-	
-//hooks son re ejecutados siempre tambien..
-function useFilterProducts (initialCategory, initialProducts){
-	//toda la data
-
-	//value input search
 	const [querySearch, setQuerySearch] = useState('')
 
-	// const [filteredProducts,setFilteredProducts] = useState(initialProducts)
 
-	// const filteredProducts = useMemo(()=>{
-	// 	return initialProducts.filter((item)=>item.name.toLowerCase().includes(querySearch.toLocaleLowerCase()))
-
-	// },[initialProducts,querySearch])
-
-	//value category selected
 	const [selectedCategory, setSelectedCategory] = useState(initialCategory)
 
 	return {
@@ -65,7 +22,6 @@ function useFilterProducts (initialCategory, initialProducts){
 		setSelectedCategory,
 		setQuerySearch,
 		querySearch,
-		// filteredProducts,
 	}
 }
 
@@ -76,9 +32,9 @@ export default function Products() {
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
 
-  const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias']
+  const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias','Otros']
 
-	const {selectedCategory, setSelectedCategory,querySearch, setQuerySearch, filteredProducts} = useFilterProducts('All', listProducts)
+	const {selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All', listProducts)
 	
 	//Fetch-Data
 	useEffect(()=>{
@@ -103,19 +59,30 @@ export default function Products() {
 
 	},[])
 
-	const fetchDataFilter = useCallback(async () => {
+	const fetchDataSearch = useCallback(async (querySearch,selectedCategory) => {
 		setIsLoading(true)
 		setIsError(null)
 
 		try{
-			const data = await getProductsBySearch(querySearch)
+			const data = await getProductsByFilters(querySearch.toLowerCase(),selectedCategory)
 			setListProducts(data)
 			setIsLoading(false)
 
 		}catch(err){
 			setIsError(err)
 		}
-	},[querySearch])
+	},[])
+
+
+	const handleSelecteCategory = useCallback((category)=>{
+
+		setSelectedCategory(category)
+
+		fetchDataSearch(querySearch,category)
+
+	},[fetchDataSearch, querySearch, setSelectedCategory])
+
+	const handleClickSearch = () => fetchDataSearch(querySearch,selectedCategory)
 
 
   return (
@@ -124,7 +91,7 @@ export default function Products() {
         <div className="products__tools">
 
             <div className="search">		
-							<svg style={{cursor:'pointer'}} onClick={fetchDataFilter} className='search__icon' width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<svg style={{cursor:'pointer'}} onClick={handleClickSearch} className='search__icon' width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M14.9549 13.9218L10.0856 9.05246C10.8412 8.07559 11.25 6.88122 11.25 5.62498C11.25 4.12123 10.6631 2.71124 9.60183 1.64812C8.54059 0.584997 7.12684 0 5.62498 0C4.12311 0 2.70936 0.586872 1.64812 1.64812C0.584997 2.70936 0 4.12123 0 5.62498C0 7.12684 0.586872 8.54059 1.64812 9.60183C2.70936 10.665 4.12123 11.25 5.62498 11.25C6.88122 11.25 8.07372 10.8412 9.05059 10.0875L13.9199 14.9549C13.9342 14.9692 13.9512 14.9806 13.9698 14.9883C13.9885 14.996 14.0085 15 14.0287 15C14.0489 15 14.0689 14.996 14.0875 14.9883C14.1062 14.9806 14.1232 14.9692 14.1374 14.9549L14.9549 14.1393C14.9692 14.125 14.9806 14.1081 14.9883 14.0894C14.996 14.0708 15 14.0508 15 14.0306C15 14.0104 14.996 13.9904 14.9883 13.9717C14.9806 13.953 14.9692 13.9361 14.9549 13.9218V13.9218ZM8.59496 8.59496C7.79997 9.38808 6.74622 9.82496 5.62498 9.82496C4.50373 9.82496 3.44999 9.38808 2.65499 8.59496C1.86187 7.79997 1.42499 6.74622 1.42499 5.62498C1.42499 4.50373 1.86187 3.44811 2.65499 2.65499C3.44999 1.86187 4.50373 1.42499 5.62498 1.42499C6.74622 1.42499 7.80184 1.85999 8.59496 2.65499C9.38808 3.44999 9.82496 4.50373 9.82496 5.62498C9.82496 6.74622 9.38808 7.80184 8.59496 8.59496Z" fill="#B8B5B5"/>
 							</svg>
 							<input 
@@ -132,7 +99,7 @@ export default function Products() {
 								type="text" 
 								placeholder='Buscar...' 
 								onChange={(e)=>{
-									setQuerySearch(e.target.value.toLocaleLowerCase())
+									setQuerySearch(e.target.value)
 								}}
 								value={querySearch}
 								/>
@@ -154,11 +121,10 @@ export default function Products() {
 								return (
 									<CardCategory
 										key={category}
-										handleClick = {setSelectedCategory}
+										handleClick = {handleSelecteCategory}
 										title={category}
 										isSelect = {true}
 									>
-
 									</CardCategory>
 								)
 							}
@@ -166,7 +132,7 @@ export default function Products() {
 							return(
 								<CardCategory
 										key={category}
-										handleClick = {setSelectedCategory}
+										handleClick = {handleSelecteCategory}
 										title={category}
 										isSelect = {false}
 									>
@@ -181,7 +147,7 @@ export default function Products() {
 
 			<div className="c-products__products">
 				{
-					listProducts.map((product,index)=> {
+					listProducts.map((product)=> {
 						
 						return(
 							<CardProduct key={product.id} {...product}/>

@@ -19,6 +19,7 @@ export const addUserToStore = async (user) => {
     .catch((error) => error);
 };
 
+//encuentra un usuaruo por su id
 export const findUserById = (id) => {
   return new Promise((resolve, reject) => {
     db.collection("users")
@@ -126,6 +127,7 @@ export const addProductToStore = async (basic, photos, prices)=>{
   }
 }
 
+//se actualiza un producto
 export const updateProduct = async (id,basic, photos, prices)=>{
 
   try{
@@ -180,6 +182,7 @@ export const getProductById = async ( id )=>{
     throw new Error(`getProductById -> ${err}`)
   }
 };
+
 //obtengo todos los productos disponibles
 export const getAllProducts = async () => {
   try {
@@ -190,18 +193,30 @@ export const getAllProducts = async () => {
   }
 };
 
-//obtengo los productos gracias al search
-export const getProductsBySearch = async (queryString) =>{
+//obtengo los productos por medio del search
+export const getProductsByFilters = async (queryString, category) =>{
   try{
-    if(queryString === ''){
-      return await getAllProducts()
+    if(category === 'All'){
+      if(queryString === ''){
+        let data =  await db.collection("products").where('avaliable','==','true').limit(20).get()
+        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+      }else{
+        let data =  await db.collection("products").where("search","array-contains", queryString).where('avaliable','==','true').limit(20).get()
+        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+      }
     }else{
-      let data = await db.collection("products").where("search","array-contains", queryString).limit(20).get();
-      let datos = data.docs.map((doc) =>({...doc.data(),id:doc.id}))
-      console.log(datos)
-      return datos
-    } 
+      if(queryString ===''){
+        let data =  await db.collection("products").where('avaliable','==','true').where('category','==',category).limit(20).get()
+        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+      }else{
+        let data = await db.collection("products").where('category','==',category).where("search","array-contains", queryString).where('avaliable','==','true').limit(20).get()
+        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+      }
+    }
+
+
   }catch(err){
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
+

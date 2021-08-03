@@ -49,27 +49,29 @@ export const validationsInFormProducts = (form)=>{
     message =  'Por favor ingresa imagenes de tu producto'
   }
   else if (!isValidInputString(form.name,[3,15])){
-    message =  'Nombre invalido'
+    message =  'Por favor ingresa un nombre válido [a-zA-Z]'
   }
 
-  else if(!isValidInputGeneric(form.description,[25,150])){
-    message =  'Descripción invalida'
+  else if(!isValidInputGeneric(form.description,[15,150])){
+    message =  'Descripción inválida, debe contener entre 15 y 150 caracteres'
   }
+
+  //TODO validaciones mejor por palabras
 
   else if(form.category === ''){
     message =  'Por favor ingrese una categoria'
   }
 
   else if(!form.keywords.includes(',') || !keywordsAreValid){
-    message =  `Por favor ingresa las palabras separadas sin espacios y separadas por comas ejemplo: 'huevos, gallinas, campo'`
+    message =  `Por favor ingresa las palabras claves sin espacios y separadas por comas ejemplo: 'huevos, gallinas, campo'`
   }
 
-  else if(listKeywords.length < 3 || listKeywords.length > 10){
-    message =  'Ingresa minimo 3 o maximo 10 palabras claves'
+  else if(listKeywords.length < 2 || listKeywords.length > 10){
+    message =  'Por favor, ingresa entre 2 y 10 palabras claves'
   }
 
   else if(!pricesAreValid){
-    message = 'Por favor ingrese una unidad con su respectivo precio valido ejm: Unidad: Libra valor: 22000'
+    message = 'Por favor ingrese una unidad con su respectivo precio válido ejm: Unidad: Libra valor: 22000'
   }
 
 
