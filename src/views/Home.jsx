@@ -1,5 +1,7 @@
 import React from "react";
 import { signOut } from "../utils/auth";
+import homeImg from '../assets/static/hero-1.jpg'
+import '../assets/styles/Home.scss'
 
 export default function Home(props) {
   const handleCloseSesion = async () => {
@@ -12,11 +14,16 @@ export default function Home(props) {
       });
   };
 
+  // {/* <button onClick={handleCloseSesion} className="button button--second">Cerrar sesión</button> */}
+
   return (
-    <>
-      <button onClick={handleCloseSesion} className="button button--second">
-        Cerrar sesión
-      </button>
-    </>
+    <div className='home-container'>
+      <div className='home__info'>
+        <h2 className='home__infoTitle'>Productos Campesinos <span> Frescos & asequibles </span></h2>
+        <p className='home__infoText'>Apoya tu economía local descubriendo cientos de productos</p>
+        <button className='button button--main'>Nuestro Calendario</button>
+      </div>
+      <img loading='lazy' src={homeImg} alt="" />
+    </div>
   );
 }

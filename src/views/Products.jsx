@@ -55,8 +55,7 @@ export default function Products() {
 		}
 
 		fetchData()
-		
-
+	
 	},[])
 
 	const fetchDataSearch = useCallback(async (querySearch,selectedCategory) => {
@@ -85,6 +84,13 @@ export default function Products() {
 	const handleClickSearch = () => fetchDataSearch(querySearch,selectedCategory)
 
 
+	const handleKeyUp = useCallback((e) =>{
+		if(e.keyCode === 13){
+			fetchDataSearch(querySearch,selectedCategory)
+		}
+	},[fetchDataSearch, querySearch, selectedCategory])
+
+
   return (
     <div className=" l-products">
       <div className="c-products__tools">
@@ -98,10 +104,9 @@ export default function Products() {
 								className='search__input' 
 								type="text" 
 								placeholder='Buscar...' 
-								onChange={(e)=>{
-									setQuerySearch(e.target.value)
-								}}
 								value={querySearch}
+								onChange={(e)=> setQuerySearch(e.target.value)}
+								onKeyUp={handleKeyUp}
 								/>
             </div>
 

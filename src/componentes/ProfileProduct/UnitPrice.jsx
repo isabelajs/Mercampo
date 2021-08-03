@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../../assets/styles/componentes/ProfileNewProduct/UnitPrice.scss";
+import "../../assets/styles/componentes/ProfileProduct/UnitPrice.scss";
 
 
 const UnitPrice = (props) => {
@@ -33,7 +33,6 @@ const UnitPrice = (props) => {
 
   const handlePrice  = (e)=>{
     handleUnitPrice(e.target.value,index)
-    // console.log(e.target.value,index)
   }
 
   const handleName = (e)=>{
@@ -43,18 +42,16 @@ const UnitPrice = (props) => {
 
 
   return (
-    <tr>
+    <tr className={isOpenEdit ? 'unitPrice--edit' : ''}>
       
       <td>
         <select
-          className="form-input"
+          className={`form-input`}
           onChange={handleName}
           name={name}
-          data-
           value={isNaN(name) ? name : ''}
           placeholder="Tipo de und"
-          disabled= {!isOpenEdit}
-          >
+          disabled= {!isOpenEdit}>
             <option value=''>--</option>
             <option value='unidad'>Unidad</option>
             <option value='libra'>libra</option>

@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
-import TableUnitPrices from "../componentes/ProfileNewProduct/TableUnitPrices";
+import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import Alert from "../componentes/common/Alert";
+import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
+import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+
 
 //estilos
-import "../assets/styles/componentes/ProfileNewProduct/ProfileNewProduct.scss";
+import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 
 //funcion  firestore
 import { addProductToStore } from '../utils/dataBase'
@@ -17,7 +20,7 @@ import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from 
 import {openAlert, closeAlert} from '../actions'
 
 //validaciones del formulario
-import {validationsInFormProducts} from "../utils/validationsInform";
+import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
 
 const ProfileNewProduct = (props) => { 
   const { user, openAlert, closeAlert } = props
@@ -28,7 +31,7 @@ const ProfileNewProduct = (props) => {
   ];
 
   const {formBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
-  const {photos, addPhoto, resetPhotos} = useFormPhotosProduct()
+  const {photos, addPhoto, removePhoto, resetPhotos} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
 
@@ -80,37 +83,26 @@ const ProfileNewProduct = (props) => {
   return (
     <SystemLayout links={links} type="products" props={props}>
 
-      <div className="l-profileNewProduct">
+      <div className="l-editProduct">
 
-        <form className="profileNewProduct form" onSubmit={handleSubmit}>
+        <form className="editProduct form" onSubmit={handleSubmit}>
 
-          <div className="l-newProduct__photos">
+          <div className="l-editProduct__photos">
 
             <div className="systemSubGroup__title">Fotos:</div>
 
-              <div className="newProduct__photos">
+              <div className="editProduct__photos">
 
-                {photos.map((item,index)=>{
-                  return <img src={item.url} alt={item.alt} key={index} />
-                })}
+                {photos.map((item,index)=> <ProductPhoto removePhoto={removePhoto} key={index} src={item.url} alt={item.alt}/> )}
                 
-
-                {/* TODO PASAR ESTO A UN COMPONENTE APARTE */}
-
-                <label className="newProduct__addPhoto" name='file'>
-                  <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="20.1923" width="6.73077" height="35" rx="3.36538" transform="rotate(-90 0 20.1923)" fill="#2EC4B6"/>
-                    <rect x="14.8076" width="6.73077" height="35" rx="3.36538" fill="#2EC4B6"/>
-                  </svg>
-                  <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' onChange={addPhoto}/>
-                </label>
-                
+                <NewProductPhoto addPhoto={addPhoto}/>
+              
               </div>
 
             <div className="separation-line"></div>
           </div>
 
-          <div className="newProduct__info">
+          <div className="editProduct__info">
             <div className="systemSubGroup__title">Datos iniciales:</div>
 
             <div className="l-systemSubGroup">
@@ -189,7 +181,7 @@ const ProfileNewProduct = (props) => {
             </div>
           </div>
 
-          <div className="newProduct__unitPrices">
+          <div className="editProduct__unitPrices">
             <div className="systemSubGroup__title">Precios Unitarios</div>
 
             <div className="l-systemSubGroup">

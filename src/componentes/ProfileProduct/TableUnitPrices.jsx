@@ -1,6 +1,6 @@
 import React from 'react'
 import UnitPrice from './UnitPrice'
-import '../../assets/styles/componentes/ProfileNewProduct/TableUnitPrices.scss'
+import '../../assets/styles/componentes/ProfileProduct/TableUnitPrices.scss'
 
 const TableUnitPrices = (props)=>{
 
@@ -67,7 +67,6 @@ const TableUnitPrices = (props)=>{
                     fill="#2EC4B6"
                   />
                 </svg>
-
                 <p>Nuevo</p>
               </div>
             </td>

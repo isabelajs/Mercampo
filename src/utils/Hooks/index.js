@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { objectToList } from '../Helpers/convertedObjetList';
+import { objectToList } from '../Helpers/conversionFunctions';
 
 export function useFormBasicProduct ({displayName, uid} ){
 
@@ -56,12 +56,16 @@ export function useFormPhotosProduct (){
   const addPhotosFromData = (urls)=>{
     setPhotos(urls.map(url => ({url: url, alt:'Imagen de producto'})))
   }
+
+  const removePhoto = (url) =>{
+    setPhotos(photos.filter((photo)=> photo.url !== url))
+  }
  
   const resetPhotos = ()=>{
     setPhotos([])
   }
 
-  return {photos, addPhoto, resetPhotos, addPhotosFromData}
+  return {photos, addPhoto, removePhoto, resetPhotos, addPhotosFromData}
 }
 
 export function useFormPricesProduct (){

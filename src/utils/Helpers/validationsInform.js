@@ -1,4 +1,4 @@
-import { textToKeywords } from '../utils/Helpers/convertedObjetList'
+import { textToKeywords } from './conversionFunctions'
 
 export const validationsInForm = (form)=>{
     

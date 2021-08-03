@@ -1,12 +1,21 @@
 .header{
+  width: 100%;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
   background-color:#fcfcfc;
-  height: 50px;
   border-bottom: 1px solid #D2DAD8;
   padding: 0 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  z-index: 3;
+
+  nav{
+    position: absolute;
+    left: 200px;
+  }
 
   &__logo{
     width: 150px;
