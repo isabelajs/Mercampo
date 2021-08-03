@@ -1,5 +1,4 @@
-import react, {memo} from 'react'
-
+import React, {memo} from 'react'
 
 const ProductPhoto = memo(({src,alt,removePhoto}) => {
 

@@ -42,14 +42,13 @@ const UnitPrice = (props) => {
 
 
   return (
-    <tr>
+    <tr className={isOpenEdit ? 'unitPrice--edit' : ''}>
       
       <td>
         <select
-          className="form-input"
+          className={`form-input`}
           onChange={handleName}
           name={name}
-          data-
           value={isNaN(name) ? name : ''}
           placeholder="Tipo de und"
           disabled= {!isOpenEdit}>
