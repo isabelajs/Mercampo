@@ -43,7 +43,8 @@ function Header (props){
 
     <header className={`header ${isPrivate ? 'header--private' : ''}`}>
 
-      <MenuMobile userName={userName} isOpenMenuMobile={isOpenMenuMobile} toggleMenuMobile={toggleMenuMobile}/>
+      <MenuMobile userImg={user ? user.photoURL : ''} userName={userName} isOpenMenuMobile={isOpenMenuMobile} toggleMenuMobile={toggleMenuMobile}/>
+
       <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={toggleMenuMobile}/>
 
       <img onClick={moveToHome} className='header__logo'src={logo} alt="" />
