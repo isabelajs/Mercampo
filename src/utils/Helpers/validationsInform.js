@@ -56,7 +56,7 @@ export const validationsInFormProducts = (form)=>{
     message =  'Descripción inválida, debe contener entre 15 y 150 caracteres'
   }
 
-  //TODO validaciones mejor por palabras
+  //TODO validaciones description por palabras
 
   else if(form.category === ''){
     message =  'Por favor ingrese una categoria'

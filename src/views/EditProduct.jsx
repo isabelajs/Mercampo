@@ -160,7 +160,6 @@ const EditProduct = (props) => {
                 />
               </div>
             
-              {/* //TODO: CREATE SELECT COMPONENT */}
               <div className="form-group">
                 <label htmlFor="">Categoria</label>
                 <select
@@ -232,12 +231,3 @@ const mapDispatchToProps = {
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(EditProduct);
-
-//TODO: VALIDACIONES DEL FORMULARIO
-
-  //DEBE EXISTIR ALMENOS 1 PRECIO UNITARIO CON PRECIO
-  //LOS PRECIOS QUE NO TENGAN UN VALOR NO LOS ENVIO LA BD?
-  //PUEDO GUARDAR UN PRODUCTO SIN PRECIOS PERO NO DISPONIBLE?
-  //Utilizar todo esto en redux?
-
-//TODO: ESTUDIAR COMO OPTIMIZAR LOS RENDERIZADOS CON USEMEMO Y USECALLBACK

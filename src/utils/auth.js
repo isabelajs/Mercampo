@@ -2,7 +2,6 @@ import { auth, authGoogleProvider, localPersistence, sessionPersistence } from "
 import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
-//FIXME: Viabilidad de crear el usuario en store inmediatamente o solo cuando se loguee por primera vez...
 const signUpWithEmail = async (email, password, name) => {
 
   const nameForAvatar = name.split(' ').slice(0,2).join('+')

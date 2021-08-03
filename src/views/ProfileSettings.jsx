@@ -16,6 +16,8 @@ import { validationsInForm } from '../utils/Helpers/validationsInform';
 //import actions
 import { closeAlert, openAlert } from '../actions'
 
+//BUG: Cuando el form no halla cambiado y se hace un guardar evitar, que envie informacion
+//TODO: Cuando el nombre del usuario cambie se debe cambiar todos los productos asociados, el nombre del usuario
 const ProfileSettings = (props) => {
   const {user,openAlert, closeAlert} = props
   const [isLoading,setIsLoading] = useState(true)

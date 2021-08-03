@@ -2,6 +2,7 @@ import React from 'react';
 import '../../assets/styles/componentes/ProfileProducts/itemNewProduct.scss'
 import { useHistory } from 'react-router-dom';
 
+//FIXME: cuando no hay productos el height de esta card .... se contrae
 const CardAddProduct = (props) => {
 
   const history = useHistory()
