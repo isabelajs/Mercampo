@@ -115,9 +115,6 @@ function isValidInputGeneric(text,minMax,required = true){
 
 function isValidInputNumber(text,minMax,required = true){
 
-  //si no es requerido y el texto es vacio devolver valido
-
-  console.log(text,required);
   if (!required && text === ''){return true}
 
   let re = new RegExp(`^[0-9]{${minMax[0]},${minMax[1]}}$`);

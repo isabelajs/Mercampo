@@ -1,0 +1,13 @@
+
+.menuModal{
+  .modalMenuSubMenu{
+    transition: all 0.3s;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 0 0 25px;
+  
+    &.show{
+      max-height: 150px;
+    }
+  }
+}
