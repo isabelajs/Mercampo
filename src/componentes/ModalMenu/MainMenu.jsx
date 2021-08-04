@@ -7,15 +7,15 @@ import profileIcon from '../../assets/static/profile-icon.svg'
 import aboutUsIcon from '../../assets/static/aboutUs-icon.svg'
 
 //componentes 
-import MenuModal from './MenuModal';
-import LinkMenu  from './LinkMenu'
-import SubMenu from './SubMenu';
+import ModalMenu from './ModalMenu';
+import MenuLink  from './MenuLink'
+import SubMenu from './SubMenu'
 
 import { signOut } from '../../utils/auth'
 
-import '../../assets/styles/componentes/MenuModal/MenuMain.scss'
+import '../../assets/styles/componentes/ModalMenu/MainMenu.scss'
 
-const MenuMain = ({isOpenMenu,toggleMenu, userName, userImg})=>{
+const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{
   const history = useHistory()
 
   const closeSession = () =>{
@@ -25,7 +25,7 @@ const MenuMain = ({isOpenMenu,toggleMenu, userName, userImg})=>{
   }
 
   return(
-    <MenuModal isOpen={isOpenMenu} toggleMenu={toggleMenu}>
+    <ModalMenu isOpen={isOpenMenu} toggleMenu={toggleMenu}>
       <div className="menuMain__user">
           {
             userImg ? 
@@ -42,13 +42,13 @@ const MenuMain = ({isOpenMenu,toggleMenu, userName, userImg})=>{
 
       <ul>
         <SubMenu icon={profileIcon} title={'Perfil'}>
-          <LinkMenu callback={toggleMenu} to={'/profile/settings'} icon={homeIcon} title={'Configuración de perfil'}/>
-          <LinkMenu callback={toggleMenu} to={'/profile/products'} icon={homeIcon} title={'Mis productos'}/>
+          <MenuLink callback={toggleMenu} to={'/profile/settings'} icon={homeIcon} title={'Configuración de perfil'}/>
+          <MenuLink callback={toggleMenu} to={'/profile/products'} icon={homeIcon} title={'Mis productos'}/>
         </SubMenu>
 
-        <LinkMenu callback={toggleMenu} to={'/'} icon={homeIcon} title={'Home'}/>
-        <LinkMenu callback={toggleMenu} to={'/products'} icon={''} title={'Products'}/>
-        <LinkMenu callback={toggleMenu} to={'/contact'} icon={aboutUsIcon} title={'About us'}/>
+        <MenuLink callback={toggleMenu} to={'/'} icon={homeIcon} title={'Home'}/>
+        <MenuLink callback={toggleMenu} to={'/products'} icon={''} title={'Products'}/>
+        <MenuLink callback={toggleMenu} to={'/contact'} icon={aboutUsIcon} title={'About us'}/>
       </ul>
       
       {
@@ -58,7 +58,7 @@ const MenuMain = ({isOpenMenu,toggleMenu, userName, userImg})=>{
         <Link className='menuMain__login' to='/login'>Log In</Link>
       }
   
-    </MenuModal>
+    </ModalMenu>
   )
 }
 
@@ -68,4 +68,4 @@ const MenuMain = ({isOpenMenu,toggleMenu, userName, userImg})=>{
 
 
 
-export default MenuMain
+export default MainMenu

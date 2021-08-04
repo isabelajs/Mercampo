@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
-import '../../assets/styles/componentes/MenuModal/subMenu.scss'
+
+import '../../assets/styles/componentes/ModalMenu/SubMenu.scss'
 
 export default function SubMenu ({icon,title,children}){
   const [isOpenOptions,setIsOpenOptions] = useState(false)

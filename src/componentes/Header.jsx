@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ import logo from '../assets/static/logo.png'
 import menuBurger from '../assets/static/menuBurguer.png'
 
 //components
-import MenuMain from './menuModal/MenuMain';
+import MainMenu from './ModalMenu/MainMenu';
 
 //styles
 import '../assets/styles/componentes/Header/Header.scss'
@@ -44,8 +45,8 @@ function Header (props){
   return(
 
     <header className={`header ${isPrivate ? 'header--private' : ''}`}>
-
-      <MenuMain userImg={user ? user.photoURL : ''} userName={userName} isOpenMenu={isOpenMenu} toggleMenu={toggleMenu}/>
+      
+      <MainMenu userImg={user ? user.photoURL : ''} userName={userName} isOpenMenu={isOpenMenu} toggleMenu={toggleMenu}/>
 
       <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={toggleMenu}/>
 
