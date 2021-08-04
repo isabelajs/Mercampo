@@ -15,13 +15,8 @@
 @media (min-width:910px){
   .l-signMethod{
     justify-content: space-between;
-    .login{
+    .login,.register,.recovery{
       padding:0 40px;
-      width: 450px;
-    }
-
-    .register{
-      padding: 0 40px;
       width: 450px;
     }
   }

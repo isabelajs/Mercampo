@@ -7,8 +7,9 @@ import { setUser,setLoadingUser } from '../../actions'
 //componentes de react
 import Home from "../../views/Home";
 import Login from "../../views/Login";
-import Products from '../../views/Products'
 import Register from "../../views/Register";
+import PasswordRecovery from "../../views/PasswordRecovery";
+import Products from '../../views/Products'
 import { Layout } from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
@@ -63,6 +64,11 @@ const App = (props)=> {
           <Route exact path="/register">
             { user && <Redirect to='profile/settings'/> }
             { !user && <Register/> }
+          </Route>
+
+          <Route exact path="/recovery">
+            { user && <Redirect to='profile/settings'/> }
+            { !user && <PasswordRecovery/> }
           </Route>
 
           <Layout>
