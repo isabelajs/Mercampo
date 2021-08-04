@@ -14,7 +14,8 @@ export default function SubMenu ({icon,title,children}){
     <li className='modalMenuOption' onClick={toggleOpenOptions}>
       
       <div className='modalMenuOption__option' >
-        <img className='modalMenuOption__optionIcon' src={icon} alt="" />
+        {icon && <img className='modalMenuOption__optionIcon' src={icon} alt="" />}
+        
         <div className='modalMenuOption__optionTitle'>{title}</div>
       </div>
 

@@ -5,7 +5,29 @@
     max-height: 0;
     overflow: hidden;
     padding: 0 0 0 25px;
-  
+
+    .c-options__check{
+      display: flex;
+      flex-direction: column;
+      .option__check{
+        margin-top:15px;
+        input{
+          margin-right: 20px;
+        }
+
+        & :first-child{
+          margin-top: 0;
+        }
+
+        &:last-child{
+          margin-bottom: 15px;
+        }
+      
+        
+      }
+
+
+    }
     &.show{
       max-height: 150px;
     }

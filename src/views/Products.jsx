@@ -8,7 +8,7 @@ import CardProduct from "../componentes/Products/CardProduct";
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
 import CarrouselCategories from '../componentes/Products/CarrouselCategories'
 import  CardCategory  from '../componentes/Products/CardCategory'
-
+import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 
 function useFilterProducts (initialCategory){
 
@@ -31,11 +31,16 @@ export default function Products() {
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
+	const [isOpenFilter, setIsOpenFilter] = useState(false)
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias','Otros']
 
 	const {selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All', listProducts)
 	
+	const toggleIsOpenFilter = ()=>{
+		setIsOpenFilter(!isOpenFilter)
+	}
+
 	//Fetch-Data
 	useEffect(()=>{
 
@@ -110,7 +115,7 @@ export default function Products() {
 								/>
             </div>
 
-            <div className="button button--icon">
+            <div className="filter button button--icon" onClick={toggleIsOpenFilter} >
 								<svg className='button__icon' width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M5 9.28571C5 9.09627 5.06585 8.91459 5.18306 8.78064C5.30027 8.64668 5.45924 8.57143 5.625 8.57143H9.375C9.54076 8.57143 9.69973 8.64668 9.81694 8.78064C9.93415 8.91459 10 9.09627 10 9.28571C10 9.47515 9.93415 9.65684 9.81694 9.79079C9.69973 9.92475 9.54076 10 9.375 10H5.625C5.45924 10 5.30027 9.92475 5.18306 9.79079C5.06585 9.65684 5 9.47515 5 9.28571ZM2.5 5C2.5 4.81056 2.56585 4.62888 2.68306 4.49492C2.80027 4.36097 2.95924 4.28571 3.125 4.28571H11.875C12.0408 4.28571 12.1997 4.36097 12.3169 4.49492C12.4342 4.62888 12.5 4.81056 12.5 5C12.5 5.18944 12.4342 5.37112 12.3169 5.50508C12.1997 5.63903 12.0408 5.71429 11.875 5.71429H3.125C2.95924 5.71429 2.80027 5.63903 2.68306 5.50508C2.56585 5.37112 2.5 5.18944 2.5 5ZM0 0.714286C0 0.524845 0.0658481 0.343164 0.183058 0.20921C0.300269 0.075255 0.45924 0 0.625 0H14.375C14.5408 0 14.6997 0.075255 14.8169 0.20921C14.9342 0.343164 15 0.524845 15 0.714286C15 0.903726 14.9342 1.08541 14.8169 1.21936C14.6997 1.35332 14.5408 1.42857 14.375 1.42857H0.625C0.45924 1.42857 0.300269 1.35332 0.183058 1.21936C0.0658481 1.08541 0 0.903726 0 0.714286Z" fill="black"/>
 								</svg>
@@ -160,6 +165,8 @@ export default function Products() {
 					})
 				}
 			</div>
+			
+			<FilterMenu isOpen={isOpenFilter} toggleMenu={toggleIsOpenFilter}/>
 
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
 			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>... Loading</h1>}
