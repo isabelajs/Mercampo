@@ -104,7 +104,6 @@ const closeSession = () =>{
 
     }
     
-
     <span onScroll={toggleMenuMobile} onClick={toggleMenuMobile}></span>
 
   </div>

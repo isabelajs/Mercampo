@@ -2,7 +2,7 @@ import { auth, authGoogleProvider, localPersistence, sessionPersistence } from "
 import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
-const signUpWithEmail = async (email, password, name) => {
+const signUpWithEmail = (email, password, name) => {
 
   const nameForAvatar = name.split(' ').slice(0,2).join('+')
   const randomColor = Math.floor(Math.random()*16777215).toString(16)
@@ -76,7 +76,17 @@ const signOut = () => {
   });
 };
 
-export { signUpWithEmail,
+const passwordReset = (email) =>{
+  return new Promise((resolve,reject)=>{
+    auth.sendPasswordResetEmail(email)
+    .then(()=>resolve('Mensaje enviado'))
+    .catch((err)=>reject(err))
+  })
+
+}
+
+export {signUpWithEmail,
         signInWithEmail,
         signOut,
-        signInWithGoogle};
+        passwordReset,
+      };

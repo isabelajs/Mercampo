@@ -23,5 +23,4 @@ const sessionPersistence = firebase.auth.Auth.Persistence.SESSION
 const localPersistence = firebase.auth.Auth.Persistence.LOCAL
 
 
-
 export {auth,db , authGoogleProvider, localPersistence}
