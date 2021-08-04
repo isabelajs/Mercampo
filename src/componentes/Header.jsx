@@ -5,7 +5,9 @@ import { useHistory, Link } from 'react-router-dom';
 //imagenes
 import logo from '../assets/static/logo.png'
 import menuBurger from '../assets/static/menuBurguer.png'
-import MenuMobile from './MenuMobile';
+
+//components
+import MenuMain from './menuModal/MenuMain';
 
 //styles
 import '../assets/styles/componentes/Header/Header.scss'
@@ -17,7 +19,7 @@ function Header (props){
 
   const { user, isPrivate} = props
   const [userName, setUserName] = useState('')
-  const [isOpenMenuMobile, setIsOpenMenuMobile] = useState(false)
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const history = useHistory()
 
   const moveToHome = ()=>{
@@ -28,8 +30,8 @@ function Header (props){
     history.push('/profile/settings')
   }
 
-  const toggleMenuMobile = ()=>{
-    setIsOpenMenuMobile(!isOpenMenuMobile)
+  const toggleMenu = ()=>{
+    setIsOpenMenu(!isOpenMenu)
   }
 
   useEffect(()=>{
@@ -43,9 +45,9 @@ function Header (props){
 
     <header className={`header ${isPrivate ? 'header--private' : ''}`}>
 
-      <MenuMobile userImg={user ? user.photoURL : ''} userName={userName} isOpenMenuMobile={isOpenMenuMobile} toggleMenuMobile={toggleMenuMobile}/>
+      <MenuMain userImg={user ? user.photoURL : ''} userName={userName} isOpenMenu={isOpenMenu} toggleMenu={toggleMenu}/>
 
-      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={toggleMenuMobile}/>
+      <img className='header__menuBurguer icon' src={menuBurger} alt="" onClick={toggleMenu}/>
 
       <img onClick={moveToHome} className='header__logo'src={logo} alt="" />
 
