@@ -31,6 +31,7 @@ input:-webkit-autofill:active {
   margin-bottom: 15px;
   
   .form-input, .form-textArea, .form-listBox{
+    width: 100%;
     display: flex;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     border: solid 0.8px #B8B5B5;

@@ -16,6 +16,17 @@ export const validationsInForm = (form)=>{
     message = 'Contraseña invalida {8,25} digitos'
   }
 
+  else if(form.hasOwnProperty('newPassword')){
+
+    if( !isValidInputGeneric(form.newPassword,[8,25])){
+      message = 'Nueva contraseña invalida {8,25} digitos'
+    }
+
+    else if(form.newPassword !== form.verifyNewPassword){
+      message = 'Las contraseñas no coinciden'
+    }
+  }
+
   else if(form.hasOwnProperty('id') && !isValidInputNumber(form.id,[6,12],false)){
     message = 'El número de cédula no es válido'
   }

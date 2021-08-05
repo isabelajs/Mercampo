@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { objectToList } from '../Helpers/conversionFunctions';
 
 export function useFormBasicProduct ({displayName, uid} ){
@@ -142,4 +142,32 @@ export const useCounter = () =>{
   })
 
   return refCounter.current
+}
+
+
+export const useAlert = () =>{
+
+  const [alertStatus, setStateAlert] = useState({
+    isOpen:false,
+    error: null,
+    message: ''
+  })
+
+  const openAlert = useCallback((newState)=> {
+    setStateAlert({
+      isOpen:true,
+      ...newState,
+    })
+  },[setStateAlert])
+
+  const closeAlert = useCallback(()=>{
+    setStateAlert({
+      isOpen:false,
+      error: null,
+      message: ''
+    })
+  },[setStateAlert])
+
+
+  return {alertStatus,openAlert,closeAlert}
 }

@@ -1,4 +1,4 @@
-import { auth, authGoogleProvider, localPersistence, sessionPersistence } from "../firebase.config.js";
+import { auth, authGoogleProvider, localPersistence, credentialWithEmail} from "../firebase.config.js";
 import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
@@ -82,11 +82,23 @@ const passwordReset = (email) =>{
     .then(()=>resolve('Mensaje enviado'))
     .catch((err)=>reject(err))
   })
+}
 
+const changePassword = (password,newPassword) =>{
+
+  const user = auth.currentUser
+
+  return new Promise((resolve,reject)=>{
+    user.reauthenticateWithCredential(credentialWithEmail(user.email,password))
+      .then(()=> user.updatePassword(newPassword))
+      .then(()=> resolve({user:user,message:'Password Cambiado con exito'}))
+      .catch((err)=>reject(err))
+  })
 }
 
 export {signUpWithEmail,
         signInWithEmail,
         signOut,
         passwordReset,
+        changePassword
       };
