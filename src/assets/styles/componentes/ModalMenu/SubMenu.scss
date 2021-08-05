@@ -1,26 +1,29 @@
 
 .menuModal{
   .modalMenuSubMenu{
+    background-color: burlywood;
     transition: all 0.3s;
     max-height: 0;
     overflow: hidden;
     padding: 0 0 0 25px;
 
     .c-options__check{
+      overflow-y: scroll;
       display: flex;
       flex-direction: column;
       .option__check{
-        margin-top:15px;
+        padding-top:15px;
+        background-color: blueviolet;
         input{
-          margin-right: 20px;
+          padding-right: 20px;
         }
 
         & :first-child{
-          margin-top: 0;
+          padding-top: 0;
         }
 
         &:last-child{
-          margin-bottom: 15px;
+          padding-bottom: 15px;
         }
       
         

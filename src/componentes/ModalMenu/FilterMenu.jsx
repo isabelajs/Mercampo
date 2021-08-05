@@ -2,25 +2,50 @@ import React from 'react';
 
 //componentes 
 import ModalMenu from './ModalMenu';
-import SubMenu from './SubMenu'
+import SubMenu from './SubMenu';
+import OptionCheck from './OptionCheck';
 
 //icons
 
 //estilos
 import '../../assets/styles/componentes/ModalMenu/FilterMenu.scss'
-import { useState } from 'react';
 
-const MainMenu = ({isOpen ,toggleMenu})=>{
-  const [checked, setChecked]=useState(false)
+//funciones
+const MainMenu = ({filterList, setFilterList, isOpen ,toggleMenu})=>{
 
-  const selectedOptionChecked = (e)=>{
+  const unidades = ['gramo','libra', 'kilogramo','Unidad', 'Docena', 'tonelada','Otros']
+  //lista = [{name:'kilogramo', status:true},
+          // {name:'libra', status:false},
+          // {name:'gramo', status:true},]
+
+
+  //lista.map(unit=> <Check status={unit.status}>)
+
+
+  //const Check = (status) =>  <input type='checkbox' checked={stats}
+
+  //componente checkbox -> input checked -> onClick (se agrega o se elimina a si mismo)
+
+
+  const test = ({target})=>{
+
+    console.log(target.value);
     
-    if(!checked){
-      console.log( e.target.value)
 
+    if(target.checked){
+      setFilterList({
+        type: 'prices',
+        units: [...filterList.units, target.value ]
+      })
     }
-    setChecked(!checked)
-  } 
+    else{
+      setFilterList({
+        type: 'prices',
+        units: filterList.units.filter(price=> price !== target.value)
+      })
+    }
+  }
+
 
   return(
     <ModalMenu isOpen={isOpen} toggleMenu={toggleMenu}>
@@ -29,50 +54,10 @@ const MainMenu = ({isOpen ,toggleMenu})=>{
       <ul>
         <SubMenu title={'Unidades'}>
           <div className='c-options__check'>
-
-            <label className= 'option__check'>
-                <input 
-                  type="checkbox" 
-                  name="libra" 
-                  value='libra'
-                  defaultChecked ={checked}
-                  onClick ={selectedOptionChecked}
-                />
-                Libra
-            </label>
-
-            <label className= 'option__check'>
-              <input 
-                type="checkbox" 
-                name="kilogramo" 
-                value='kilogramo'
-                defaultChecked ={checked}
-                onClick ={selectedOptionChecked}
-              />
-              Kilogramo
-            </label>
-
-            <label className= 'option__check'>
-              <input 
-                type="checkbox" 
-                name="tonelada" 
-                value='tonelada'
-                defaultChecked ={checked}
-                onClick ={selectedOptionChecked}
-              />
-              Tonelada
-            </label>
-
-            <label className= 'option__check'>
-              <input 
-                type="checkbox" 
-                name="Otros" 
-                value='otros'
-                defaultChecked ={checked}
-                onClick ={selectedOptionChecked}
-              />
-              Otros
-            </label>
+              {
+                unidades.map(und=> <OptionCheck key={und} title = {und} toggleMenu= {test}></OptionCheck> )
+              }
+            
 
           </div>
           
@@ -86,7 +71,6 @@ const MainMenu = ({isOpen ,toggleMenu})=>{
   )
 }
 
-{/* <input type="checkbox" defaultChecked={this.state.chkbox} onChange={this.handleChangeChk} /> */}
 
 
 

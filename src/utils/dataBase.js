@@ -197,29 +197,40 @@ export const getAllProducts = async () => {
 };
 
 //obtengo los productos por medio del search
-export const getProductsByFilters = async (queryString, category) =>{
+export const getProductsByFilters = async (querySearch, category, filter) =>{
+
   try{
-    if(category === 'All'){
-      if(queryString === ''){
-        let data =  await db.collection("products").where('avaliable','==','true').limit(20).get()
-        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
-      }else{
-        let data =  await db.collection("products").where("search","array-contains", queryString).where('avaliable','==','true').limit(20).get()
-        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+
+    let products = db.collection('products').where('avaliable','==','true')
+
+    if(category !== 'All'){
+        products = products.where('category','==',category)
       }
-    }else{
-      if(queryString ===''){
-        let data =  await db.collection("products").where('avaliable','==','true').where('category','==',category).limit(20).get()
-        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
-      }else{
-        let data = await db.collection("products").where('category','==',category).where("search","array-contains", queryString).where('avaliable','==','true').limit(20).get()
-        return  data.docs.map((doc) =>({...doc.data(),id:doc.id}))
-      }
+    
+      
+    // if(filter.length > 0){
+    //   products = products.where(`${'prices'.filter[0]}, '>=','0'`)
+    // }
+
+    if(querySearch !== ''){
+      products = products.where('search','array-contains',querySearch)
     }
+    
+    
+    let data = await products.limit(20).get()
+
+    return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+
+
+
+
+ 
 
 
   }catch(err){
+
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
+
 
