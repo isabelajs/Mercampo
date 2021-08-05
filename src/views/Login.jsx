@@ -77,18 +77,6 @@ function Login (props){
     }
   }
 
-
-  const resetPassword = async()=>{
-    try{
-      await passwordReset(form.email)
-    }catch(err){
-      openAlert({
-        error: true,
-        message: err.code
-      })
-    }
-  }
-  
   return(
 
     <LayoutSignMethod>
@@ -124,7 +112,7 @@ function Login (props){
             autoComplete='false'/>
         </div>
 
-        <p onClick={resetPassword} className='form__text'>¿Olvidaste tu contraseña?</p>
+        <Link to='/recovery' className='form__text'>¿Olvidaste tu contraseña?</Link>
         <button className="button button--main">Ingresar</button>
 
 
