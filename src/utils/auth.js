@@ -30,7 +30,7 @@ const signUpWithEmail = (email, password, name) => {
 
       //add user in store (is not equal tu user of auth) 
       .then((user)=>{
-        return registerUser({email,name,gravatar})
+        return registerUser({email,name,gravatar,uid:user.uid})
       })
 
       //return -> user{name,email,uid} and logout (if not logout error in login without refresh)

@@ -25,7 +25,7 @@ const ProfileSettings = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [dataForm, setDataForm] = useState({
-    photo: { url: "", file: null },
+    photo: { url: '', file: null },
     city: "",
     department: "",
     email: "",
@@ -42,6 +42,8 @@ const ProfileSettings = (props) => {
       try {
         let userInData = await findUserById(user.uid);
 
+        console.log(userInData)
+
         setDataForm({
           ...userInData,
           photo: { url: userInData.photo, file: null },
@@ -56,7 +58,7 @@ const ProfileSettings = (props) => {
 
     findUser();
 
-  },[setDataForm,setIsLoading,user]);
+  },[user]);
 
 
   return (
