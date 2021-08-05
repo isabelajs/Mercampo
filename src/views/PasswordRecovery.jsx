@@ -70,7 +70,7 @@ function RecoverPassword (props){
       <div className="recovery">
 
       <div className="recovery__title">
-        <div className='title'>Recuperacion</div>
+        <div className='title'>Recupera tu contraseña</div>
         <div className='subtitle'>Ingresa tu correo para continuar</div>
       </div>
 
@@ -87,7 +87,7 @@ function RecoverPassword (props){
           />
         </div>
 
-        <button className="button button--main">Verificacion</button>
+        <button className="button button--main">Confirmar</button>
 
       </form>
 
