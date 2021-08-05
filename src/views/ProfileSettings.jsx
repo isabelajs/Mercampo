@@ -35,7 +35,7 @@ const ProfileSettings = (props) => {
     phoneSecond: "",
   });
 
-  //fetch data
+  //fetch data user
   useEffect(() => {
     const findUser = async () => {
 
@@ -68,7 +68,6 @@ const ProfileSettings = (props) => {
           : 
           <>
             <DataForm data={dataForm} setData={setDataForm} />
-
             <PasswordForm />
           </>
         }

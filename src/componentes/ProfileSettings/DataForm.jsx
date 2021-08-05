@@ -1,7 +1,7 @@
 import React from 'react'
 
 //hooks
-import { useAlert, useCounter } from '../../utils/Hooks';
+import { useAlert } from '../../utils/Hooks';
 
 //components
 import AddImage from '../common/addImage';
@@ -15,7 +15,6 @@ import { updateUserInfo } from '../../utils/dataBase';
 
 const DataForm = ({data,setData}) => {
 
-  const counter = useCounter()
   const {alertStatus,openAlert} = useAlert()
 
   const handleChangeInput = (e) => {
@@ -66,7 +65,7 @@ const DataForm = ({data,setData}) => {
 
   return (
     <form className="profileSettings__data form" onSubmit={handleSubmit}>
-      {counter}
+      
       <div className="data__photo">
         <div className="systemSubGroup__title">Foto:</div>
         <AddImage image={data.photo.url} callback={changeImage} />

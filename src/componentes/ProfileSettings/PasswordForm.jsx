@@ -1,14 +1,13 @@
 import React , { memo, useState }from 'react'
 import { changePassword } from '../../utils/auth';
 import { validationsInForm } from '../../utils/Helpers/validationsInform';
-import { useAlert, useCounter } from '../../utils/Hooks';
+import { useAlert } from '../../utils/Hooks';
 import LocalAlert from '../common/LocalAlert';
 
 
 
 const PasswordForm = memo((props) => {
 
-  const counter = useCounter()
   const {alertStatus,openAlert} = useAlert()
 
   const [state, setState] = useState({
@@ -47,6 +46,12 @@ const PasswordForm = memo((props) => {
         message:response.message,
       })
 
+      setState({
+        password: "",
+        newPassword:'',
+        verifyNewPassword:'',
+      })
+
     }catch(err){
       openAlert({
         error:true,
@@ -57,7 +62,7 @@ const PasswordForm = memo((props) => {
 
   return (
     <form className="profileSettings__password l-systemSubGroup form" onSubmit={handleSubmit}>
-      {counter}
+      
       <div className="systemSubGroup__title">Cambiar contraseña</div>
 
       <div className="l-password">
