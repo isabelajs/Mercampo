@@ -217,6 +217,7 @@ export const getAllProducts = async () => {
 export const getProductsByFilters = async (querySearch, category, filter) =>{
 
   try{
+    // console.log(filter);  
 
     let products = db.collection('products').where('avaliable','==','true')
 
@@ -238,9 +239,3 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
-
-
-
-const test = new Set([1,2,3,3,3,3,4])
-
-console.log([...test]);

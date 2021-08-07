@@ -20,7 +20,7 @@ function useFilterProducts (initialCategory){
 
 	const [querySearch, setQuerySearch] = useState('')
 
-	const [filterList, setFilterList, filterListRef] = useStateRef({type:'',units:[]})
+	const [filterList, setFilterList, filterListRef] = useStateRef([])
 
 	const [selectedCategory, setSelectedCategory, selectedCategoryRef] = useStateRef(initialCategory)
 

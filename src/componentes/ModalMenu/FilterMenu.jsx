@@ -1,6 +1,6 @@
 import React from 'react';
 
-//componentes 
+//componentes
 import ModalMenu from './ModalMenu';
 import SubMenu from './SubMenu';
 import OptionCheck from './OptionCheck';
@@ -17,23 +17,14 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 
   //TODO deberia memorizar esta funcion o un callback
   const addItemsFilterList = ({target})=>{
-    let type = target.parentElement.parentElement.parentElement.previousSibling.children[0].textContent
-    
-    let filterType = type === 'Unidades' ?'prices' : type
-    
-    
+
     
     if(target.checked){
-      setFilterList({
-        type: filterType,
-        units: [...filterList.units,target.value ]
-      })
+      setFilterList( [...filterList, target.value])
+
     }
     else{
-      setFilterList({
-        type: filterType,
-        units: filterList.units.filter(price=> price !== target.value)
-      })
+      setFilterList(filterList.filter(item => item !== target.value))
     }
 
     callback()
@@ -50,10 +41,10 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
               {
                 unidades.map(und=> <OptionCheck key={und} title = {und} changeFilterList = {addItemsFilterList}></OptionCheck> )
               }
-            
+
           </div>
               <div>button</div>
-          
+
         </SubMenu>
 
         <SubMenu title={'Ubicación'}>
@@ -69,3 +60,6 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 
 
 export default MainMenu
+
+
+
