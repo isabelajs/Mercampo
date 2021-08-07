@@ -44,6 +44,8 @@ const EditProduct = (props) => {
 
   useEffect(()=>{
 
+    closeAlert()
+    
     const getProduct = async ()=>{
       try{
         const data = await getProductById(productId)

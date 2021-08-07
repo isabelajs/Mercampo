@@ -39,6 +39,9 @@ const ProfileNewProduct = (props) => {
   const validationForm = useCallback ((form)=>validationsInFormProducts(form),[])
   
   const handleSubmit = async (e) =>{
+
+    closeAlert()
+    
     e.preventDefault()
 
     const validation = validationForm({...formBasic, photos:photos, prices: prices})

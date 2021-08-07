@@ -11,23 +11,5 @@
 @media(min-width:910px){
   .product{
     flex-direction: row;
-    // justify-content: space-between;
   }
 }
-
-.product__info{
-  width: 95%;
-  // padding: 30px;
-  height: 530px; 
-
-  .product__userContact{
-    display: flex;
-    align-items: center;
-
-    span{
-      margin-right: 10px;
-    }
-  }
-}
-
-
