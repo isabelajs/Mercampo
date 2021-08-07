@@ -39,5 +39,5 @@ export const textToKeywords = ({text,typeSplit = ' '})=>{
 
   return text.split(typeSplit)
     .map(word => word.trim().toLowerCase())
-    .filter(word => word)
+    .filter(word => word.length > 2)
 }

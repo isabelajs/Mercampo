@@ -110,9 +110,11 @@ export const addProductToStore = async (basic, photos, prices)=>{
   //obtengo las urls de las imagenes
   const photosUrls = resultPostPhotos.map(({ data: { url } }) => url);
 
-  //se cambia la estructura de prices por un objeto
-  const pricesList = listToObject(prices);
+  //se cambia la estructura de prices por un objeto 
+  const pricesKeywords = prices.map(price => `price__${price.name}`)
 
+  const pricesList = listToObject(prices);
+  console.log(pricesKeywords);
   //agrego el campo search
   const { userName, keywords, name, description }= basic 
 
@@ -120,7 +122,13 @@ export const addProductToStore = async (basic, photos, prices)=>{
     ...basic,
     photos: photosUrls,
     prices: pricesList,
-    search: [].concat(textToKeywords({text:userName}), textToKeywords({text:keywords,typeSplit:','}), textToKeywords({text:name}), textToKeywords({text:description}))
+    search: [].concat(
+      textToKeywords({text:userName}), 
+      textToKeywords({text:keywords,typeSplit:','}), 
+      textToKeywords({text:name}),
+      textToKeywords({text:description}),
+      pricesKeywords
+    )
   };
 
   try {
@@ -144,14 +152,23 @@ export const updateProduct = async (id,basic, photos, prices)=>{
     const resultPostPhotos = await Promise.all(newPhotos.map((photo)=> uploadImg(photo.file)))
 
     const newPhotosUrls = resultPostPhotos.map( ({data:{url}}) => url )
- 
+    
+    //se cambia la estructura de prices por un objeto 
+    const pricesKeywords = prices.map(price => `price__${price.name}`)
+
     const pricesList = listToObject(prices);
 
     let productInfo = {
       ...basic,
       photos: [].concat(previousPhotosUrls,newPhotosUrls),
       prices: pricesList,
-      search: [].concat(textToKeywords({text:userName}), textToKeywords({text:keywords,typeSplit:','}), textToKeywords({text:name}), textToKeywords({text:description}))
+      search: [].concat(
+          textToKeywords({text:userName}), 
+          textToKeywords({text:keywords,typeSplit:','}), 
+          textToKeywords({text:name}),
+          textToKeywords({text:description}),
+          pricesKeywords
+          )
     }
 
     await db.collection('products').doc(id).set(productInfo)
