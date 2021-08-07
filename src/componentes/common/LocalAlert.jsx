@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import '../../assets/styles/componentes/Alert.scss'
 
-//input the password is wrond
+function LocalAlert ({alertStatus}){
 
-function Alert (props){
-  const {statusAlert} = props
     let message = ' '
-    switch (statusAlert.message){
+
+    switch (alertStatus.message){
       case ('auth/email-already-in-use'):
         message = 'El correo que intentas registrar, ya se encuentra en uso'
         break
@@ -21,17 +19,20 @@ function Alert (props){
       case ('auth/user-not-found'):
         message = 'El usuario no se encuentra registrado'
         break
-    
+      case ('auth/too-many-requests'):
+        message = 'A ocurrido un error porfavor intentelo mas tarde'
+        break
+      
       default:
-        message = statusAlert.message
+        message = alertStatus.message
     }
 
 
     return (
       <>
       {
-        statusAlert.isOpen && 
-          <div className={`containerAlert ${statusAlert.error ? 'containerAlert--error' :'containerAlert--successful' }`}>
+        alertStatus.isOpen && 
+          <div className={`containerAlert ${alertStatus.error ? 'containerAlert--error' :'containerAlert--successful' }`}>
             <div className="alert"> { message }  </div>
           </div>
       }
@@ -40,12 +41,4 @@ function Alert (props){
 }
 
 
-const mapStateToProps = state => {
-  return{
-    statusAlert : state.statusAlert
-  }
-}
-
-export default connect (mapStateToProps,null)(Alert)
-
-
+export default LocalAlert

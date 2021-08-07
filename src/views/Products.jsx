@@ -37,7 +37,6 @@ function useFilterProducts (initialCategory){
 }
 
 
-
 export default function Products() {
 
 	const counter = useCounter()

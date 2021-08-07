@@ -13,8 +13,8 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
 //funciones auth and database
-import {signUpWithEmail, signInWithGoogle} from '../utils/auth'
-import {validationsInForm} from '../utils/Helpers/validationsInform';
+import { signUpWithEmail } from '../utils/auth'
+import { validationsInForm } from '../utils/Helpers/validationsInform';
 
 //actiones
 import { openAlert, closeAlert } from '../actions'
@@ -136,7 +136,7 @@ function Register(props){
         <div className="login__options">
           <div className="login__options--text">Registrate con:</div>
           <div className="login__options--options">
-            <img onClick={signInWithGoogle} className='method-icon' src={google} alt="" />
+            <img className='method-icon' src={google} alt="" />
             <img className='method-icon' src={facebook} alt="" />
             <img className='method-icon' src={phone} alt="" />
           </div>

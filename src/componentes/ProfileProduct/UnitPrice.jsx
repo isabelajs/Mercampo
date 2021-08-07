@@ -65,7 +65,7 @@ const UnitPrice = (props) => {
           className="form-input"
           onChange={handlePrice}
           name={name}
-          type="text"
+          type='number'
           value={value}
           placeholder='$  0'
           disabled= {!isOpenEdit}

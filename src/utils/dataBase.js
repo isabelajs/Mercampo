@@ -62,7 +62,9 @@ export const uploadImg = async (img) => {
 };
 
 //actualizar la info de un usuario
-export const updateUserInfo = async(user,info) =>{
+export const updateUserInfo = async(info) =>{
+
+  const user = auth.currentUser
 
   //data by default
   let userData = {
@@ -98,6 +100,7 @@ export const updateUserInfo = async(user,info) =>{
 export const getCurrentUser = ()=>{
   return auth.currentUser
 }
+
 
 //funciones sobre base de dato de los productos
 

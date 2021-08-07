@@ -21,7 +21,7 @@ const db = firebase.firestore()
 const authGoogleProvider = new firebase.auth.GoogleAuthProvider();
 const sessionPersistence = firebase.auth.Auth.Persistence.SESSION
 const localPersistence = firebase.auth.Auth.Persistence.LOCAL
+const credentialWithEmail = firebase.auth.EmailAuthProvider.credential
 
 
-
-export {auth,db , authGoogleProvider, localPersistence}
+export {auth,db , authGoogleProvider, localPersistence, credentialWithEmail}

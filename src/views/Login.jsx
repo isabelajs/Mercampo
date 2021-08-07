@@ -14,8 +14,7 @@ import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { signInWithEmail, signOut } from '../utils/auth'
-import {registerUser, findUserById} from '../utils/dataBase';
+import { signInWithEmail, signOut , passwordReset} from '../utils/auth'
 import {validationsInForm} from '../utils/Helpers/validationsInform';
 
 // https://dribbble.com/wenhy/collections/1631290-design
@@ -78,7 +77,6 @@ function Login (props){
     }
   }
 
-  
   return(
 
     <LayoutSignMethod>
@@ -114,7 +112,7 @@ function Login (props){
             autoComplete='false'/>
         </div>
 
-        <Link to={'/register'} className='form__text'>¿Olvidaste tu contraseña?</Link>
+        <Link to='/recovery' className='form__text'>¿Olvidaste tu contraseña?</Link>
         <button className="button button--main">Ingresar</button>
 
 

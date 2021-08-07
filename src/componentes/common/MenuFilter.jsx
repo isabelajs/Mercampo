@@ -78,7 +78,6 @@ function MenuMobile(props){
     </ul>
 
     
-
     <span onScroll={toggleMenuMobile} onClick={toggleMenuMobile}></span>
 
   </div>

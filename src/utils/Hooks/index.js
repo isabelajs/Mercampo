@@ -144,8 +144,6 @@ export const useCounter = () =>{
   return refCounter.current
 }
 
-
-
 export const useStateRef = (initialState) =>{
 
 	const [state,setState] = useState(initialState)
@@ -159,3 +157,29 @@ export const useStateRef = (initialState) =>{
 	return [state,setStateRef,stateRef]
 }
 
+export const useAlert = () =>{
+
+  const [alertStatus, setStateAlert] = useState({
+    isOpen:false,
+    error: null,
+    message: ''
+  })
+
+  const openAlert = useCallback((newState)=> {
+    setStateAlert({
+      isOpen:true,
+      ...newState,
+    })
+  },[setStateAlert])
+
+  const closeAlert = useCallback(()=>{
+    setStateAlert({
+      isOpen:false,
+      error: null,
+      message: ''
+    })
+  },[setStateAlert])
+
+
+  return {alertStatus,openAlert,closeAlert}
+}

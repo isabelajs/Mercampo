@@ -1,8 +1,8 @@
-import { auth, authGoogleProvider, localPersistence, sessionPersistence } from "../firebase.config.js";
+import { auth, authGoogleProvider, localPersistence, credentialWithEmail} from "../firebase.config.js";
 import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
-const signUpWithEmail = async (email, password, name) => {
+const signUpWithEmail = (email, password, name) => {
 
   const nameForAvatar = name.split(' ').slice(0,2).join('+')
   const randomColor = Math.floor(Math.random()*16777215).toString(16)
@@ -30,7 +30,7 @@ const signUpWithEmail = async (email, password, name) => {
 
       //add user in store (is not equal tu user of auth) 
       .then((user)=>{
-        return registerUser({email,name,gravatar})
+        return registerUser({email,name,gravatar,uid:user.uid})
       })
 
       //return -> user{name,email,uid} and logout (if not logout error in login without refresh)
@@ -76,7 +76,29 @@ const signOut = () => {
   });
 };
 
-export { signUpWithEmail,
+const passwordReset = (email) =>{
+  return new Promise((resolve,reject)=>{
+    auth.sendPasswordResetEmail(email)
+    .then(()=>resolve('Mensaje enviado'))
+    .catch((err)=>reject(err))
+  })
+}
+
+const changePassword = (password,newPassword) =>{
+
+  const user = auth.currentUser
+
+  return new Promise((resolve,reject)=>{
+    user.reauthenticateWithCredential(credentialWithEmail(user.email,password))
+      .then(()=> user.updatePassword(newPassword))
+      .then(()=> resolve({user:user,message:'Password Cambiado con exito'}))
+      .catch((err)=>reject(err))
+  })
+}
+
+export {signUpWithEmail,
         signInWithEmail,
         signOut,
-        signInWithGoogle};
+        passwordReset,
+        changePassword
+      };
