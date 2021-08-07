@@ -41,7 +41,7 @@ const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{
         </div>
 
       <ul>
-        <SubMenu icon={profileIcon} title={'Perfil'}>
+        <SubMenu icon={profileIcon} title={'Perfil'} >
           <MenuLink callback={toggleMenu} to={'/profile/settings'} icon={homeIcon} title={'Configuración de perfil'}/>
           <MenuLink callback={toggleMenu} to={'/profile/products'} icon={homeIcon} title={'Mis productos'}/>
         </SubMenu>

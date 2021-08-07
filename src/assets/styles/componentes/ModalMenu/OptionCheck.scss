@@ -1,0 +1,16 @@
+.option__check{
+  padding-top:15px;
+
+  input{
+    margin-right: 20px;
+  }
+
+  &:first-child{
+    padding-top: 0px; 
+  }
+
+  &:last-child{
+    padding-bottom: 15px;
+  }
+}
+

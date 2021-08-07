@@ -207,11 +207,6 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
         products = products.where('category','==',category)
       }
     
-      
-    // if(filter.length > 0){
-    //   products = products.where(`${'prices'.filter[0]}, '>=','0'`)
-    // }
-
     if(querySearch !== ''){
       products = products.where('search','array-contains',querySearch)
     }
@@ -221,16 +216,8 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
 
     return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
 
-
-
-
- 
-
-
   }catch(err){
 
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
-
-

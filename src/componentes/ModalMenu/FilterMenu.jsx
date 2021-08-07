@@ -11,39 +11,32 @@ import OptionCheck from './OptionCheck';
 import '../../assets/styles/componentes/ModalMenu/FilterMenu.scss'
 
 //funciones
-const MainMenu = ({filterList, setFilterList, isOpen ,toggleMenu})=>{
+const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 
-  const unidades = ['gramo','libra', 'kilogramo','Unidad', 'Docena', 'tonelada','Otros']
-  //lista = [{name:'kilogramo', status:true},
-          // {name:'libra', status:false},
-          // {name:'gramo', status:true},]
+  const unidades = ['Gramo','Libra', 'Kilogramo','Unidad', 'Docena', 'Tonelada','Otros']
 
-
-  //lista.map(unit=> <Check status={unit.status}>)
-
-
-  //const Check = (status) =>  <input type='checkbox' checked={stats}
-
-  //componente checkbox -> input checked -> onClick (se agrega o se elimina a si mismo)
-
-
-  const test = ({target})=>{
-
-    console.log(target.value);
+  //TODO deberia memorizar esta funcion o un callback
+  const addItemsFilterList = ({target})=>{
+    let type = target.parentElement.parentElement.parentElement.previousSibling.children[0].textContent
     
-
+    let filterType = type === 'Unidades' ?'prices' : type
+    
+    
+    
     if(target.checked){
       setFilterList({
-        type: 'prices',
-        units: [...filterList.units, target.value ]
+        type: filterType,
+        units: [...filterList.units,target.value ]
       })
     }
     else{
       setFilterList({
-        type: 'prices',
+        type: filterType,
         units: filterList.units.filter(price=> price !== target.value)
       })
     }
+
+    callback()
   }
 
 
@@ -52,14 +45,14 @@ const MainMenu = ({filterList, setFilterList, isOpen ,toggleMenu})=>{
       <div className='filterMenu__title'>Filtrar</div>
       <div className="separation-line"></div>
       <ul>
-        <SubMenu title={'Unidades'}>
+        <SubMenu title={'Unidades'} typeSubmenu={'options'}>
           <div className='c-options__check'>
               {
-                unidades.map(und=> <OptionCheck key={und} title = {und} toggleMenu= {test}></OptionCheck> )
+                unidades.map(und=> <OptionCheck key={und} title = {und} changeFilterList = {addItemsFilterList}></OptionCheck> )
               }
             
-
           </div>
+              <div>button</div>
           
         </SubMenu>
 

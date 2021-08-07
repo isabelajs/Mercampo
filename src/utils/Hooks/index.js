@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { objectToList } from '../Helpers/conversionFunctions';
 
 export function useFormBasicProduct ({displayName, uid} ){
@@ -143,3 +143,19 @@ export const useCounter = () =>{
 
   return refCounter.current
 }
+
+
+
+export const useStateRef = (initialState) =>{
+
+	const [state,setState] = useState(initialState)
+	const stateRef = useRef(initialState)
+
+	const setStateRef = useCallback((newState) =>{
+		stateRef.current = newState
+		setState(newState)
+	},[])
+
+	return [state,setStateRef,stateRef]
+}
+
