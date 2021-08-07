@@ -26,7 +26,6 @@ function useFilterProducts (initialCategory){
 }
 
 
-
 export default function Products() {
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)

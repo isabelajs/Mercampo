@@ -10,12 +10,15 @@ import Login from "../../views/Login";
 import Register from "../../views/Register";
 import PasswordRecovery from "../../views/PasswordRecovery";
 import Products from '../../views/Products'
-import { Layout } from "../../componentes/Layouts/LayoutLoged";
+import Product from '../../views/Product'
+import Layout  from "../../componentes/Layouts/LayoutLoged";
 import ProfileSettings from "../../views/ProfileSettings";
 import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
 import EditProduct from "../../views/EditProduct";
 import PrivateRoute from "./PrivateRoute";
+
+
 
 //estilos
 import "../../assets/styles/App.scss";
@@ -78,6 +81,8 @@ const App = (props)=> {
               <Route exact path="/" component={Home} />
 
               <Route exact path='/products' component={Products} />
+
+              <Route exact path='/product/:id' component={Product}/>
 
               <PrivateRoute exact path='/profile/settings'>
                 <ProfileSettings /> 

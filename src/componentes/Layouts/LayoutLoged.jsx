@@ -20,4 +20,4 @@ function Layout ({children,location}){
 }
 
 
-export {Layout}
+export default Layout
