@@ -15,7 +15,6 @@ import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
 
 
 
-
 function useFilterProducts (initialCategory){
 
 	const [querySearch, setQuerySearch] = useState('')
@@ -44,8 +43,6 @@ export default function Products() {
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
-
-
 
   const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias','Otros']
 
@@ -111,7 +108,6 @@ export default function Products() {
   return (
     <div className=" l-products">
       <div className="c-products__tools">
-					<div>{counter}</div>
 
         <div className="products__tools">
 

@@ -56,7 +56,6 @@ const Product = (props) => {
   
   return(
     <div className='product'>
-      {/* <p>renders {counter}</p> */}
       {
         status.isLoading ? <h2>... Loading</h2>
         :
@@ -65,6 +64,8 @@ const Product = (props) => {
           <ProductInfo data={status.data} userData={status.userData}/>
         </>
       }
+
+      
     </div>
   )
 }
