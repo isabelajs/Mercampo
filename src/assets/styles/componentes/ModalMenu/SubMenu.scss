@@ -5,14 +5,16 @@
     max-height: 0;
     overflow: hidden;
     padding: 0 0 0 25px;
-
-    .c-options__check{
-      height: 150px;
-      display: flex;
-      overflow: auto;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    &::-webkit-scrollbar{
+      width: 8px;
     }
-
+    &::-webkit-scrollbar-thumb {
+      background: rgb(181, 177, 177);
+      border-radius: 4px;
+    }
     &.show{
       max-height: 150px;
     }

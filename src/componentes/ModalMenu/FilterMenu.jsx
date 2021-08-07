@@ -17,7 +17,6 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 
   //TODO deberia memorizar esta funcion o un callback
   const addItemsFilterList = ({target})=>{
-
     
     if(target.checked){
       setFilterList( [...filterList, target.value])
@@ -36,15 +35,10 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
       <div className='filterMenu__title'>Filtrar</div>
       <div className="separation-line"></div>
       <ul>
-        <SubMenu title={'Unidades'} typeSubmenu={'options'}>
-          <div className='c-options__check'>
-              {
-                unidades.map(und=> <OptionCheck key={und} title = {und} changeFilterList = {addItemsFilterList}></OptionCheck> )
-              }
-
-          </div>
-              <div>button</div>
-
+        <SubMenu title={'Unidades'} typeOptionsSubmenu={true} type={'price'}>
+          {
+            unidades.map(und=> <OptionCheck key={und} title={und} changeFilterList = {addItemsFilterList}> </OptionCheck> )
+          }
         </SubMenu>
 
         <SubMenu title={'Ubicación'}>
@@ -54,6 +48,13 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
     </ModalMenu>
   )
 }
+
+
+<ul>
+  <div>
+    <a href=""></a>
+  </div>
+</ul>
 
 
 

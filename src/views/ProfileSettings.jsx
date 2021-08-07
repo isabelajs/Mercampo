@@ -41,9 +41,7 @@ const ProfileSettings = (props) => {
 
       try {
         let userInData = await findUserById(user.uid);
-
-        console.log(userInData)
-
+        
         setDataForm({
           ...userInData,
           photo: { url: userInData.photo, file: null },
