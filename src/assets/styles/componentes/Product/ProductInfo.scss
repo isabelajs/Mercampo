@@ -1,11 +1,28 @@
 .product__info{
   width: 95%;
 
+  p{
+    font-size: 16px;
+  }
+
+  h2{
+    margin-top: 0;
+    margin-bottom: 0px;
+    font-size: 28px;
+  }
+
+  h3{
+    font-weight: 500;
+    margin-top: 0;
+    margin-left: 40px;
+  }
+
   .product__userContact{
     display: flex;
     align-items: center;
 
     span{
+      cursor: pointer;
       margin-right: 10px;
     }
   }
@@ -15,5 +32,9 @@
   .product__info{
     margin-left: 20px;
     height: 530px;
+
+    h2{
+      font-size: 40px;
+    }
   }
 }
