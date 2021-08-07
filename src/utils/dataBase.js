@@ -122,13 +122,13 @@ export const addProductToStore = async (basic, photos, prices)=>{
     ...basic,
     photos: photosUrls,
     prices: pricesList,
-    search: [].concat(
+    search: [...new Set([].concat(
       textToKeywords({text:userName}), 
       textToKeywords({text:keywords,typeSplit:','}), 
       textToKeywords({text:name}),
       textToKeywords({text:description}),
       pricesKeywords
-    )
+    ))],
   };
 
   try {
@@ -162,13 +162,13 @@ export const updateProduct = async (id,basic, photos, prices)=>{
       ...basic,
       photos: [].concat(previousPhotosUrls,newPhotosUrls),
       prices: pricesList,
-      search: [].concat(
+      search: [...new Set([].concat(
           textToKeywords({text:userName}), 
           textToKeywords({text:keywords,typeSplit:','}), 
           textToKeywords({text:name}),
           textToKeywords({text:description}),
           pricesKeywords
-          )
+          ))],
     }
 
     await db.collection('products').doc(id).set(productInfo)
@@ -238,3 +238,9 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
+
+
+
+const test = new Set([1,2,3,3,3,3,4])
+
+console.log([...test]);
