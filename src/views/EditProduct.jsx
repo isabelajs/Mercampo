@@ -190,6 +190,31 @@ const EditProduct = (props) => {
                 </select>
               </div>
 
+              <div className="form-group">
+                <label>Departamento</label>
+                <input
+                  className="form-input"
+                  name="department"
+                  type="text"
+                  placeholder="Ingrese el departamento donde se encuentra el producto"
+                  onChange={setBasicData}
+                  value={formBasic.department}
+                  autoComplete="false"
+                />
+              </div>
+  
+              <div className="form-group">
+                <label>Ciudad</label>
+                <input
+                  className="form-input"
+                  name="city"
+                  type="text"
+                  placeholder="Ingrese ciudad en donde se encuentra el producto"
+                  value={formBasic.city}
+                  onChange={setBasicData}
+                />
+                </div>  
+              
               <div className="separation-line"></div>
             </div>
           </div>

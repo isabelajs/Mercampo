@@ -68,7 +68,7 @@ export const validationsInFormProducts = (form)=>{
   }
 
   //TODO validaciones description por palabras
-
+//FIXME hay que hacer las validaciones para deparmento y ciudad pero dentro de un menu de opciones
   else if(form.category === ''){
     message =  'Por favor ingrese una categoria'
   }

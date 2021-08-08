@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
@@ -8,12 +8,11 @@ import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
 
-
 //estilos
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 
 //funcion  firestore
-import { addProductToStore } from '../utils/dataBase'
+import { addProductToStore, findUserById } from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
@@ -30,7 +29,7 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const {formBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
+  const {formBasic, setFormBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
   const {photos, addPhoto, removePhoto, resetPhotos} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
@@ -77,6 +76,23 @@ const ProfileNewProduct = (props) => {
     }
 
   }
+
+  useEffect(()=>{
+    const findUser = async ()=>{
+      try{
+        let userInData = await findUserById(user.uid);
+        setFormBasic({
+          ...formBasic,
+          department: userInData.department,
+          city: userInData.city,
+        })
+        
+      }catch(err){
+        throw new Error(`NewProduct obtener un usuario ${err}`)
+      }
+    }
+    findUser()
+  },[user])
 
 
 
@@ -176,6 +192,32 @@ const ProfileNewProduct = (props) => {
                   <option value={false}>No disponible</option>
                 </select>
               </div>
+{/* //FIXME los departementos y ciudad debe ser un menu desplegable */}
+              <div className="form-group">
+                <label>Departamento</label>
+                <input
+                  className="form-input"
+                  name="department"
+                  type="text"
+                  placeholder="Ingrese el departamento donde se encuentra el producto"
+                  onChange={setBasicData}
+                  value={formBasic.department}
+                  autoComplete="false"
+                />
+              </div>
+  
+              <div className="form-group">
+                <label>Ciudad</label>
+                <input
+                  className="form-input"
+                  name="city"
+                  type="text"
+                  placeholder="Ingrese ciudad en donde se encuentra el producto"
+                  value={formBasic.city}
+                  onChange={setBasicData}
+                />
+                </div>  
+
 
               <div className="separation-line"></div>
             </div>

@@ -11,6 +11,8 @@ export function useFormBasicProduct ({displayName, uid} ){
       name: '',
       keywords:'',
       category:'',
+      department: '',
+      city: '',
     }
 
   const [formBasic, setFormBasic] = useState(state)
@@ -33,7 +35,7 @@ export function useFormBasicProduct ({displayName, uid} ){
     setFormBasic(state)
   }
 
-  return {formBasic, setBasicData, resetBasicData,setBasicDataFromData}
+  return {formBasic, setFormBasic,setBasicData, resetBasicData,setBasicDataFromData}
 }
 
 export function useFormPhotosProduct (){
