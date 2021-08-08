@@ -218,27 +218,122 @@ export const getAllProducts = async () => {
 
 //obtengo los productos por medio del search
 export const getProductsByFilters = async (querySearch, category, filter) =>{
+  console.log(filter);
 
   try{
-    // console.log(filter);  
 
     let products = db.collection('products').where('avaliable','==','true')
+    let searchList = []
 
     if(category !== 'All'){
         products = products.where('category','==',category)
       }
-    
-    if(querySearch !== ''){
-      products = products.where('search','array-contains',querySearch)
+
+
+    if(querySearch){
+      searchList.push(querySearch)
     }
+
+
+    //if(filter.length > 0){
+    //   listaBuscar = listBuscar.concat(filter)
+    // }
+
+    if(searchList.length > 0){
+      products = products.where('search','array-contains-any',searchList)
+    }
+
     
+    //uvas
+
+      //u__price__libra__ubicacion__villavicencio
+      //uv
+      //uva
+      //uvas
+
+      //v
+      //va
+      //vas
+
+      //a
+      //as
+
+
+    //videño
+
+      //v
+      //vi
+  
+    // n * m * 1 * 1 * 1
+
+    // uvas__price__libra__ubicacion__villavicencio
+    // uvas__price__libra__ubicacion__villavicencio
+    // uvas__price__libra__ubicacion__villavicencio
+
+    // uvas__price__libra__ubicacion__puertolleras
+
+
+    //where('search','array-contains-any',[uvas,price__libra])       //todos los que contenga libra o contengan buenas 
+
+    //where('search','array-contains-any',[uvas__price__libra])      //todos los que contenga (libra y buenas)
+
+
+    //where('search','array-contains-any',[uvas__price__libra,villavicencio]) //todos los que contenga (uvas y libra) o contengan (villavicencio)
+
+
+    //filtro multiple? [villavicencio,puerto lleras]
+
+  
+
     
     let data = await products.limit(20).get()
+
+    console.log(data);
 
     return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
 
   }catch(err){
-
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
+
+// function buildKeyWords(text){
+
+//   const listWords = text.split(' ')
+
+//   const keyWords = {}
+
+//   listWords.forEach(word=>{
+    
+//     const listWord = word.split('')
+
+//     for(const i = 0; i < listWord.length; i++){
+//       keyWords[word.slice()]
+//     }
+
+//   })
+
+// }
+
+
+// buildKeyWords('hola esto sera un texto')
+
+
+// //hola
+//   //h
+//   //ho
+//   //hol
+//   //hola
+
+//   //o
+//   //ol
+//   //ola
+
+//   //l
+//   //la
+
+// //esto
+//   //e
+//   //es
+//   //est
+  //esto

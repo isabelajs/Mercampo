@@ -16,14 +16,14 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
   const unidades = ['Gramo','Libra', 'Kilogramo','Unidad', 'Docena', 'Tonelada','Otros']
 
   //TODO deberia memorizar esta funcion o un callback
-  const addItemsFilterList = ({target})=>{
+  const addItemsFilterList = ({target},type)=>{
     
     if(target.checked){
-      setFilterList( [...filterList, target.value])
+      setFilterList( [...filterList, `${type}__${target.value}`])
 
     }
     else{
-      setFilterList(filterList.filter(item => item !== target.value))
+      setFilterList(filterList.filter(item => item !== `${type}__${target.value}`))
     }
 
     callback()
