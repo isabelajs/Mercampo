@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords } from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords,concatItems } from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {
@@ -113,13 +113,14 @@ export const addProductToStore = async (basic, photos, prices)=>{
   //obtengo las urls de las imagenes
   const photosUrls = resultPostPhotos.map(({ data: { url } }) => url);
 
-  //se cambia la estructura de prices por un objeto 
+  //lista de precios concatenada con price ejm price__unidad
   const pricesKeywords = prices.map(price => `price__${price.name}`)
 
+  //se cambia la estructura de prices por un objeto 
   const pricesList = listToObject(prices);
-  console.log(pricesKeywords);
-  //agrego el campo search
-  const { userName, keywords, name, description }= basic 
+    
+  //obtengo los elementos de la información básica
+  const { userName, keywords, name, description,city }= basic 
 
   let info = {
     ...basic,
@@ -127,9 +128,10 @@ export const addProductToStore = async (basic, photos, prices)=>{
     prices: pricesList,
     search: [...new Set([].concat(
       textToKeywords({text:userName}), 
-      textToKeywords({text:keywords,typeSplit:','}), 
       textToKeywords({text:name}),
+      textToKeywords({text:keywords,typeSplit:','}), 
       textToKeywords({text:description}),
+      textToKeywords({text:city}),
       pricesKeywords
     ))],
   };
@@ -156,9 +158,10 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 
     const newPhotosUrls = resultPostPhotos.map( ({data:{url}}) => url )
     
-    //se cambia la estructura de prices por un objeto 
+    //a cada unidad de precio le concateno price
     const pricesKeywords = prices.map(price => `price__${price.name}`)
-
+    
+    //se cambia la estructura de prices por un objeto 
     const pricesList = listToObject(prices);
 
     let productInfo = {
@@ -167,10 +170,10 @@ export const updateProduct = async (id,basic, photos, prices)=>{
       prices: pricesList,
       search: [...new Set([].concat(
           textToKeywords({text:userName}), 
-          textToKeywords({text:keywords,typeSplit:','}), 
           textToKeywords({text:name}),
-          textToKeywords({text:description}),
-          pricesKeywords
+          concatItems(textToKeywords({text:keywords,typeSplit:','}),name.toLowerCase()), 
+          concatItems(textToKeywords({text:description}), name.toLowerCase()),
+          concatItems(pricesKeywords, name.toLowerCase())
           ))],
     }
 

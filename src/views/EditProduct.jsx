@@ -215,7 +215,7 @@ const EditProduct = (props) => {
                 />
                 </div>  
               
-              <div className="separation-line"></div>
+                <div className="separation-line"></div>
             </div>
           </div>
 

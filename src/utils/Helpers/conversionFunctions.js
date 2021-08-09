@@ -41,3 +41,9 @@ export const textToKeywords = ({text,typeSplit = ' '})=>{
     .map(word => word.trim().toLowerCase())
     .filter(word => word.length > 2)
 }
+
+export const concatItems = (list, itemName)=>{
+  return list.map(item=> `${itemName}__${item}`)
+}
+
+
