@@ -2,13 +2,12 @@ import React, {useState, useRef, useCallback, useEffect} from 'react';
 
 import '../../assets/styles/componentes/CarrouselCategories.scss'
 
-
 export default function CarouselCategories ({children,widthItems = 200}){
 
   const [visibilityArrowLeft, setVisibilityArrowLeft] = useState(false)
 	const [visibilityArrowRight, setVisibilityArrowRight] = useState(false)
   const refCategoriesContainer = useRef()
-
+  
   const visibilityArrows =  useCallback(()=>{
 
     const realScrollWidth = refCategoriesContainer.current.scrollWidth - refCategoriesContainer.current.offsetWidth
@@ -24,12 +23,13 @@ export default function CarouselCategories ({children,widthItems = 200}){
 	},[])
 
 	const moveRightScroll = useCallback(()=>{
+
 		refCategoriesContainer.current.scrollLeft += widthItems
 	},[])
 
 
   useEffect(()=>{	
-		
+
 		visibilityArrows()
 
 		window.addEventListener('resize',visibilityArrows)

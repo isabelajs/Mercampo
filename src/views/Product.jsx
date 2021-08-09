@@ -4,14 +4,13 @@ import { useEffect } from 'react';
 import ProductInfo from '../componentes/Product/ProductInfo';
 import ProductPhotos from '../componentes/Product/ProductPhotos';
 import { findUserById, getProductById } from '../utils/dataBase';
-import { useCounter } from '../utils/Hooks';
 
 import '../assets/styles/componentes/Product/Product.scss'
+import MoreProducts from '../componentes/Product/MoreProducts';
+import { Link } from 'react-router-dom';
 
 //TODO: sistema de denormalization of product
 const Product = (props) => {
-
-  const counter = useCounter()
 
   const [status,setStatus] = useState({
     data:null,
@@ -55,18 +54,20 @@ const Product = (props) => {
 
   
   return(
-    <div className='product'>
-      {
-        status.isLoading ? <h2>... Loading</h2>
-        :
-        <>
-          <ProductPhotos imgs={status.data.photos}/>
-          <ProductInfo data={status.data} userData={status.userData}/>
-        </>
-      }
+      <div className='product'>
+        {
+          status.isLoading ? <h2>... Loading</h2>
+          :
+          <>
+            <div className='l-product__top'>
+              <ProductPhotos imgs={status.data.photos}/>
+              <ProductInfo data={status.data} userData={status.userData}/>
+            </div>
+            <MoreProducts />
+          </>
+        }
 
-      
-    </div>
+      </div>
   )
 }
 

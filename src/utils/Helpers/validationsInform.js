@@ -59,7 +59,7 @@ export const validationsInFormProducts = (form)=>{
   if(form.photos.length < 1){
     message =  'Por favor ingresa imagenes de tu producto'
   }
-  else if (!isValidInputString(form.name,[3,15])){
+  else if (!isValidInputString(form.name,[3,20])){
     message =  'Por favor ingresa un nombre válido [a-zA-Z]'
   }
 
