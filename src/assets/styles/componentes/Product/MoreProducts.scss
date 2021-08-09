@@ -1,4 +1,5 @@
 .moreProducts{
+
   h3{
     margin-left: 10px;
   }
@@ -6,20 +7,20 @@
   .c-carouselCategories{
     width: calc(100% - 20px);
     margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
   }
 
   &__card{
     cursor: pointer;
     min-width: 200px;
-    // height: 180px;
     margin-right: 20px;
     position: relative;
     border-radius: 5px;
     overflow: hidden;
     background: white;
     box-shadow: 0px 5px 8px rgba(65, 65, 65, 0.3);
-    // border: 1px solid gray;
-    // background-color: rgb(21, 169, 223);
+
 
     &:last-child{
       margin-right: 0;

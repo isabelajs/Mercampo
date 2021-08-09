@@ -40,12 +40,30 @@ const MoreProducts = memo(() =>{
           
           <CarouselCategories widthItems={420}>
             {
-            data.map(product=>{
+            data.map(product =>{
               return( 
                 <div className='moreProducts__card' key={product.id} onClick={()=>test(product.id)}>
-                  <img loading='lazy' src={product.photos[0]} alt="" />
+                  <img loading='lazy' src={product.photos[0]} alt="Imagen de producto" />
                   <p>
                     {product.name}
+                  </p>
+                </div>
+              )
+            })
+            }
+          </CarouselCategories>
+        }
+
+        {
+          data.length === 0 &&
+          <CarouselCategories widthItems={420}>
+            {
+            Array.from(Array(7).keys()).map(product =>{
+              return(
+                <div className='moreProducts__card' key={product} >
+                  <img loading='lazy' src={''} alt="Imagen de producto" />
+                  <p>
+                    
                   </p>
                 </div>
               )
@@ -58,3 +76,7 @@ const MoreProducts = memo(() =>{
 })
 
 export default MoreProducts
+
+
+
+

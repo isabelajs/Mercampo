@@ -1,5 +1,4 @@
 .c-carouselCategories{
-  // margin: 16px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -53,19 +52,5 @@
         right: 0px;
       }
     }
-  }
-}
-
-
-@media (min-width:910px){
-  .c-carouselCategories{
-    justify-content: flex-start;
-    // width: 50%;
-  }
-}
-
-@media (min-width:1024px) {
-  .c-carouselCategories{
-    // width: 60%;
   }
 }

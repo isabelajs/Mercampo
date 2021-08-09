@@ -24,7 +24,6 @@
   }
 
   .c-products__products{
-    // width: 90%;
     width: 95%;
     margin: 30px auto;
     display: grid;
@@ -34,8 +33,13 @@
     align-items: center;
   }
 
+  .c-carouselCategories{
+    margin: 16px;
+    .carrousel__categories{
+      width: fit-content;
+    }
+  }
 }
-
 
 @media (min-width:520px){
   .l-products{
@@ -57,6 +61,11 @@
 
 @media (min-width:910px){
   .l-products{
+
+    .c-carouselCategories{
+      justify-content: flex-start;
+      width: 50%;
+    }
 
     .c-products__tools{
       display: flex;
@@ -81,6 +90,10 @@
 
 @media (min-width:1024px){
   .l-products{
+
+    .c-carouselCategories{
+      width: 60%;
+    }
 
     .c-products__tools{
 
