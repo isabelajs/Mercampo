@@ -129,10 +129,9 @@ export const addProductToStore = async (basic, photos, prices)=>{
     search: [...new Set([].concat(
       textToKeywords({text:userName}), 
       textToKeywords({text:name}),
-      textToKeywords({text:keywords,typeSplit:','}), 
-      textToKeywords({text:description}),
-      textToKeywords({text:city}),
-      pricesKeywords
+      concatItems(textToKeywords({text:keywords,typeSplit:','}),name.toLowerCase()), 
+      concatItems(textToKeywords({text:description}), name.toLowerCase()),
+      concatItems(pricesKeywords, name.toLowerCase()),
     ))],
   };
 
