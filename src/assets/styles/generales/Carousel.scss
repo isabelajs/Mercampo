@@ -1,10 +1,10 @@
-.c-carouselCategories{
+.c-carousel{
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: relative;
 
-  .carrousel__categories{
+  .carousel__items{
     width: 100%;
     display: flex;
     overflow: scroll;
@@ -14,27 +14,9 @@
     &::-webkit-scrollbar {
       display: none;
     }
-
-    .categories__title{
-      padding: 10px 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      &:hover{
-        background-color: #EBF1F3;
-      }
-    }
-
-    .categories__title--selected{
-      background-color: #35CD8C;
-
-      &:hover{
-        background-color: #35CD8C;
-      }
-    }
   }
 
-  .carrousel__buttons--arrow{
+  .carousel__buttons--arrow{
     .arrow{
       cursor: pointer;
       position: absolute;

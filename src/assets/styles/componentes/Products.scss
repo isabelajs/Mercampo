@@ -33,10 +33,28 @@
     align-items: center;
   }
 
-  .c-carouselCategories{
+  .c-carousel{
     margin: 16px;
-    .carrousel__categories{
+    .carousel__items{
       width: fit-content;
+    }
+  }
+
+  .categories__title{
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover{
+      background-color: #EBF1F3;
+    }
+  }
+
+  .categories__title--selected{
+    background-color: #35CD8C;
+
+    &:hover{
+      background-color: #35CD8C;
     }
   }
 }
@@ -62,7 +80,7 @@
 @media (min-width:910px){
   .l-products{
 
-    .c-carouselCategories{
+    .c-carousel{
       justify-content: flex-start;
       width: 50%;
     }
@@ -91,7 +109,7 @@
 @media (min-width:1024px){
   .l-products{
 
-    .c-carouselCategories{
+    .c-carousel{
       width: 60%;
     }
 

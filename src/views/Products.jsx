@@ -5,14 +5,13 @@ import "../assets/styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";
-import CarrouselCategories from '../componentes/Products/CarrouselCategories'
-import  CardCategory  from '../componentes/Products/CardCategory'
+import Carousel from '../componentes/common/Carousel'
+import CardCategory  from '../componentes/Products/CardCategory'
 import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 
 //funciones
 import {useCounter, useStateRef} from  '../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
-
 
 
 function useFilterProducts (initialCategory){
@@ -141,7 +140,7 @@ export default function Products() {
 
         </div>
 
-				<CarrouselCategories>
+				<Carousel>
 					{
 						categoriesList.map( (category) => {
 							if(selectedCategory === category){
@@ -168,7 +167,7 @@ export default function Products() {
 
 						})
 					}				
-				</CarrouselCategories> 
+				</Carousel> 
 
     	</div>
 

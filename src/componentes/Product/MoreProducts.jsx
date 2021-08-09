@@ -1,17 +1,14 @@
 import React from 'react'
 import { useState, memo, useEffect } from 'react'
 import { getAllProducts } from '../../utils/dataBase'
-import CarouselCategories from '../Products/CarrouselCategories'
+import Carousel from '../common/Carousel'
 
 
 import '../../assets/styles/componentes/Product/MoreProducts.scss'
-import { Link, useHistory } from 'react-router-dom'
 
 const MoreProducts = memo(() =>{
 
   const [data,setData] = useState([])
-
-  const history = useHistory()
 
   useEffect(()=>{
     
@@ -38,7 +35,7 @@ const MoreProducts = memo(() =>{
         {
           data.length > 0 &&
           
-          <CarouselCategories widthItems={420}>
+          <Carousel widthItems={420}>
             {
             data.map(product =>{
               return( 
@@ -51,12 +48,12 @@ const MoreProducts = memo(() =>{
               )
             })
             }
-          </CarouselCategories>
+          </Carousel>
         }
 
         {
           data.length === 0 &&
-          <CarouselCategories widthItems={420}>
+          <Carousel widthItems={420}>
             {
             Array.from(Array(7).keys()).map(product =>{
               return(
@@ -69,7 +66,7 @@ const MoreProducts = memo(() =>{
               )
             })
             }
-          </CarouselCategories>
+          </Carousel>
         }
     </div>
   )

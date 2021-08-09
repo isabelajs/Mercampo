@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 
 import '../../assets/styles/componentes/Product/ProductPhotos.scss'
-import CarouselCategories from '../Products/CarrouselCategories'
+import Carousel from '../common/Carousel'
 
 const ProductPhotos = ({imgs}) =>{
 
@@ -17,7 +17,7 @@ const ProductPhotos = ({imgs}) =>{
 
       <img  className='photos__firstPhoto' src={firstImg} alt="" />
 
-      <CarouselCategories>
+      <Carousel>
 
         {
           imgs.map((img,index) => {
@@ -44,7 +44,7 @@ const ProductPhotos = ({imgs}) =>{
           })
         }
 
-      </CarouselCategories>
+      </Carousel>
 
     </div>
   )

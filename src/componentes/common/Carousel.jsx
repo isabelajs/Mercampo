@@ -1,6 +1,7 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 
-import '../../assets/styles/componentes/CarrouselCategories.scss'
+// import '../../assets/styles/componentes/generales/Carousel.scss'
+import '../../assets/styles/generales/Carousel.scss'
 
 export default function CarouselCategories ({children,widthItems = 200}){
 
@@ -40,9 +41,9 @@ export default function CarouselCategories ({children,widthItems = 200}){
 	},[])
 
   return(
-    <div className="c-carouselCategories">
+    <div className="c-carousel">
 
-      <div className='carrousel__buttons--arrow'>
+      <div className='carousel__buttons--arrow'>
 
         { visibilityArrowLeft && <div className='arrow arrow--previous' onClick={moveLeftScroll}>
           <svg  width="7" height="15" viewBox="0 0 7 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +61,7 @@ export default function CarouselCategories ({children,widthItems = 200}){
 
       </div>
 
-      <div className='carrousel__categories' ref={refCategoriesContainer} onScroll={visibilityArrows}>
+      <div className='carousel__items' ref={refCategoriesContainer} onScroll={visibilityArrows}>
 
         {children}
 
