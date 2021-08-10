@@ -173,7 +173,7 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 
     const filtersType = {
       prices: Object.keys(pricesObject),
-      ubication: [city]
+      ubication: [city.toLowerCase().replace(new RegExp(/\s/,'g'),'-')]
     }
         
 

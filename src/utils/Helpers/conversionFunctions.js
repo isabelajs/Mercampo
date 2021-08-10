@@ -55,7 +55,7 @@ export const newNameList = (name)=>{
   const listName = textToKeywords({text:name})
 
   if(listName.length > 1){
-    listName.push(name.replace(' ','-'))
+    listName.push(name.replace(new RegExp(/\s/,'g'),'-'))
   }
   return listName
 }
