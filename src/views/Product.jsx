@@ -4,14 +4,11 @@ import { useEffect } from 'react';
 import ProductInfo from '../componentes/Product/ProductInfo';
 import ProductPhotos from '../componentes/Product/ProductPhotos';
 import { findUserById, getProductById } from '../utils/dataBase';
-import { useCounter } from '../utils/Hooks';
 
 import '../assets/styles/componentes/Product/Product.scss'
 
 //TODO: sistema de denormalization of product
 const Product = (props) => {
-
-  const counter = useCounter()
 
   const [status,setStatus] = useState({
     data:null,
