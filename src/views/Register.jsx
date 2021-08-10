@@ -1,9 +1,8 @@
 import React , { useState,useEffect,useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
 
 //componentes react
-import Alert from '../componentes/common/Alert'
+import LocalAlert from '../componentes/common/LocalAlert';
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes y estilos css
@@ -17,13 +16,14 @@ import { signUpWithEmail } from '../utils/auth'
 import { validationsInForm } from '../utils/Helpers/validationsInform';
 
 //actiones
-import { openAlert, closeAlert } from '../actions'
+import { useAlert } from '../utils/Hooks';
 
-//TODO deberia exister un elemento que me retorne a home?
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
 
 function Register(props){
-  const {openAlert, closeAlert} = props
+
+  const { alertStatus ,openAlert, closeAlert} = useAlert()
+
   const [form, setForm ]=  useState({
     name:'',
     email: '',
@@ -44,7 +44,6 @@ function Register(props){
   }        
 
   const validationForm = useCallback((form)=>validationsInForm(form),[])
-
 
   //validate and do stuff to create a user in firebase
   const handleSubmit = async (e)=>{
@@ -85,13 +84,15 @@ function Register(props){
       <div className="register">
 
         <div className="register__title">
+          
         <div className='title'>Bienvenido</div>
+
           <div className='subtitle'>Registrate para continuar</div>
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
           
-          <Alert/>
+          <LocalAlert alertStatus={alertStatus}/>
 
           <div className="form-group">
             <label>Nombre</label>   
@@ -153,11 +154,4 @@ function Register(props){
   )
 }
 
-
-const mapDispatchToProps = {
-  openAlert,
-  closeAlert
-}
-
-
-export default connect(null,mapDispatchToProps)(Register);
+export default Register
