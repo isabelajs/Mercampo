@@ -81,7 +81,7 @@ const EditProduct = (props) => {
 
       openAlert({
         error:false,
-        message:'Se ha Acutalizado la información con exito'
+        message:'La informacion se ha actualizado con exito'
       })
 
     }catch (error){

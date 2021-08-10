@@ -3,15 +3,19 @@ import { connect } from "react-redux";
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import { ProductCard } from "../componentes/ProfileProducts/ProductCard";
+
 //styles
 import "../assets/styles/componentes/ProfileProducts/ProfileProducts.scss";
+
 //funciones firestore
-import { getProductsByUser } from "../utils/dataBase";
+import { getProductsByUser, removeProduct } from "../utils/dataBase";
 import { useState } from "react";
 import { CardAddProduct } from "../componentes/ProfileProducts/CardAddProduct";
 import Loading from "../componentes/common/Loading";
+import { useModal } from "../utils/Hooks";
 
-//TODO: Mover el modal de eliminacion aca
+import EliminationModal from '../componentes/common/EliminationModal'
+
 const ProfileSettings = (props) => {
   const [userProducts, setUserProducts] = useState({
     list: [],
@@ -19,7 +23,7 @@ const ProfileSettings = (props) => {
     notAvaliables: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
-
+  const {modalStatus,openModal,closeModal,modalData} = useModal()
   const { user } = props;
 
   const links = [{ name: "Mis productos", url: "/profile/products" }];
@@ -37,6 +41,39 @@ const ProfileSettings = (props) => {
     getUserProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+  const deleteProduct = async (element) =>{
+
+    const {id, avaliable} = element.current
+
+    let {avaliables, notAvaliables} = userProducts
+
+
+    if(avaliable === 'true'){
+      avaliables--
+    }else{
+      notAvaliables--
+    }
+
+    try{
+
+      await removeProduct(id)
+
+      setUserProducts({
+        list:userProducts.list.filter(product => product.id !== id),
+        avaliables: avaliables,
+        notAvaliables: notAvaliables
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
+
+    closeModal()
+
+  }
+
 
 
   if(isLoading) return <Loading/>
@@ -115,13 +152,17 @@ const ProfileSettings = (props) => {
                   {...element}
                   history={props.history}
                   key={index}
+                  openEliminationModal = {()=> openModal(element)}
+                  acceptCallback
                 />
               );
             })
           }
         </div>
       </div>
-          
+      
+      <EliminationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={()=>deleteProduct(modalData)}/>
+
     </SystemLayout>
   );
 };
