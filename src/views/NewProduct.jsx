@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 //componentes react
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
-import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+import LocalAlert from '../componentes/common/LocalAlert'
 
 
 //estilos
@@ -16,17 +16,19 @@ import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 import { addProductToStore } from '../utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
-import {openAlert, closeAlert} from '../actions'
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
 
 //validaciones del formulario
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
+import ConfirmationModal from "../componentes/common/ConfirmationModal";
 
-
-//TODO: IMPLEMENTAR MODAL
 
 const ProfileNewProduct = (props) => { 
-  const { user, openAlert, closeAlert } = props
+  const { user } = props
+
+  const {modalStatus,openModal,closeModal} = useModal()
+
+  const {alertStatus,openAlert,closeAlert} = useAlert()
 
   const links = [
     { name: "Mis productos", url: "/profile/products" },
@@ -41,10 +43,30 @@ const ProfileNewProduct = (props) => {
   //validaciones que nada falta
   const validationForm = useCallback ((form)=>validationsInFormProducts(form),[])
   
-  const handleSubmit = async (e) =>{
-
-    closeAlert()
+  const sendData = async () =>{
     
+    try{
+
+      setIsSendingData(true)
+      
+      await addProductToStore(formBasic,photos,prices)      
+
+      resetBasicData()
+      resetPhotos()
+      resetPrices()
+      
+    }catch (error){
+      openAlert({
+        error: true,
+        message: error.code,
+      })
+    }
+    
+    closeModal()
+    setIsSendingData(false)
+  }
+
+  const handleSubmit = async (e) =>{
     e.preventDefault()
 
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
@@ -59,29 +81,10 @@ const ProfileNewProduct = (props) => {
       return
     }
 
-    
-    try{
-
-      closeAlert()
-
-      setIsSendingData(true)
-      
-      await addProductToStore(formBasic,photos,prices)      
-
-      setIsSendingData(false)
-
-      resetBasicData()
-
-      resetPhotos()
-
-      resetPrices()
-      
-    }catch (error){
-      console.log(error);
-    }
+    closeAlert()
+    openModal()
 
   }
-
 
 
   return (
@@ -200,24 +203,24 @@ const ProfileNewProduct = (props) => {
             </div>
           </div>
           
-          <Alert/>
+          <LocalAlert alertStatus={alertStatus}/>
+
           <button className="button button--second">Guardar</button>
         </form>
+      
       </div>
     
       {isSendingData && <div>...Enviando informacion</div>}
+
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
     </SystemLayout>
   );
 };
 
 const mapStateToProps = (state)=>({ user: state.user})
-const mapDispatchToProps = {
-  openAlert,
-  closeAlert
-}
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProfileNewProduct);
+export default connect(mapStateToProps,null)(ProfileNewProduct);
 
 
