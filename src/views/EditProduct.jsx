@@ -72,8 +72,6 @@ const EditProduct = (props) => {
 
 
   const sendData = async (e) =>{
-
-    // setIsSendingData(true) 
     
     try{
 
@@ -93,13 +91,15 @@ const EditProduct = (props) => {
     }
     
     closeModal()
-    // setIsSendingData(false)
-
   }
 
   const handleSubmit = (e) => {
 
     e.preventDefault()
+
+    closeAlert()
+    
+    console.log('cerrando alerta')
 
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
 
@@ -110,8 +110,6 @@ const EditProduct = (props) => {
       })
       return
     }
-
-    closeAlert()
 
     openModal()
 
@@ -234,7 +232,7 @@ const EditProduct = (props) => {
             </div>
           </div>
           
-          <LocalAlert alertStatus={alertStatus}/>
+          <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
           <button className="button button--second">Guardar</button>
         
@@ -242,7 +240,6 @@ const EditProduct = (props) => {
       
       </div>
     
-
 
       <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 

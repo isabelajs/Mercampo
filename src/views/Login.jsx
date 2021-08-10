@@ -25,10 +25,7 @@ function Login (props){
 
   const {alertStatus,openAlert,closeAlert} = useAlert()
 
-  useEffect(()=>{
-    closeAlert()
-  },[closeAlert])
-
+  
   const [form, setForm ] =  useState({
                               email: '',
                               password: '',
@@ -91,7 +88,7 @@ function Login (props){
 
       <form className='form' onSubmit={handleSubmit} >
 
-        <LocalAlert alertStatus={alertStatus}/>
+        <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
         <div className="form-group">
           <label >Usuario</label>

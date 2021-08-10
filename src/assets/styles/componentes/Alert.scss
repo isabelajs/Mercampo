@@ -1,16 +1,57 @@
 .containerAlert{
+  position: fixed;
   display: flex;
-  padding: 10px;
-  border-radius: 3px;
   margin: 0 auto;
-  margin-bottom: 10px;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  z-index: 10;
   width: 100%;
-    &--successful{
+  padding: 20px;
+  animation: move 4s ease forwards;
+
+  &>div{
+    border-radius: 7px;
+    padding: 20px;
+    // margin: 5px;
+    max-width: 750px;
+  }
+
+  &--successful{
+    &>div{
       background-color: rgb(144, 209, 144);
     }
-    &--error{
-      background-color: rgb(221, 128, 125);
-    }
+  }
 
+  &--error{
+    &>div{
+      background-color: #19212B;
+      color: white;
+    }
+  }
 }
 
+
+@keyframes move {
+
+  0% {
+    transform:  translateY(-1.25rem);
+    opacity: 0;
+  }
+
+  10%{
+    transform: translateY(3.25rem);
+    opacity: 1;
+  }
+
+  90%{
+    transform: translateY(3.25rem);
+    opacity: 1;
+  }
+
+  100%{
+    transform:  translateY(-1.25rem);
+    opacity: 0;
+  }
+}

@@ -1,8 +1,25 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 
 import '../../assets/styles/componentes/Alert.scss'
 
-function LocalAlert ({alertStatus}){
+function LocalAlert ({alertStatus,closeAlert}){
+
+  useEffect(()=>{
+
+    let timer 
+
+    if(alertStatus.isOpen){
+      timer = setTimeout(() => {
+        
+        closeAlert()
+      }, 4000);
+    }
+
+    return () => clearTimeout(timer)
+
+  },[alertStatus])
+
 
     let message = ' '
 
@@ -33,7 +50,9 @@ function LocalAlert ({alertStatus}){
       {
         alertStatus.isOpen && 
           <div className={`containerAlert ${alertStatus.error ? 'containerAlert--error' :'containerAlert--successful' }`}>
-            <div className="alert"> { message }  </div>
+            <div>
+              <div className="alert"> { message }  </div>
+            </div>
           </div>
       }
       </>

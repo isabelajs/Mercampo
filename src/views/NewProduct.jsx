@@ -203,7 +203,7 @@ const ProfileNewProduct = (props) => {
             </div>
           </div>
           
-          <LocalAlert alertStatus={alertStatus}/>
+          <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
           <button className="button button--second">Guardar</button>
         </form>

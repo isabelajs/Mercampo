@@ -208,7 +208,7 @@ const DataForm = ({data,setData}) => {
 
       </div>
 
-      <LocalAlert alertStatus={alertStatus}/>
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
       <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
       

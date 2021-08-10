@@ -30,10 +30,6 @@ function Register(props){
     password: '',
   })
 
-  //cierro el alert al montar el componente
-  useEffect(()=>{
-    closeAlert();
-  },[closeAlert])
   
   //agrega información a mi estado form
   const handleChange = (event)=>{
@@ -92,7 +88,7 @@ function Register(props){
 
         <form className="form" onSubmit={handleSubmit}>
           
-          <LocalAlert alertStatus={alertStatus}/>
+          <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
           <div className="form-group">
             <label>Nombre</label>   
