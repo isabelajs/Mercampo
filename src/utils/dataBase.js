@@ -256,7 +256,6 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
     
     let data = await products.limit(20).get()
 
-    console.log(data);
 
     return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
 

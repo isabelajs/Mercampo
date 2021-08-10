@@ -7,6 +7,7 @@ import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+import FormListbox from "../componentes/common/formListbox";
 
 //estilos
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
@@ -20,6 +21,11 @@ import {openAlert, closeAlert} from '../actions'
 
 //validaciones del formulario
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
+
+//import listado de categorias
+import { categoriesList } from "../utils/Helpers/listElements";
+import { departments, cities } from '../utils/Helpers/dataBaseCities'
+
 
 const ProfileNewProduct = (props) => { 
   const { user, openAlert, closeAlert } = props
@@ -94,7 +100,7 @@ const ProfileNewProduct = (props) => {
     findUser()
   },[user])
 
-
+  
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -135,7 +141,7 @@ const ProfileNewProduct = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="">Descripcion</label>
+                <label htmlFor="">Descripción</label>
                 <textarea
                   className="form-textArea"
                   cols="10"
@@ -162,63 +168,60 @@ const ProfileNewProduct = (props) => {
                 />
               </div>
             
-              {/* //TODO: CREATE SELECT COMPONENT */}
-              <div className="form-group">
-                <label htmlFor="">Categoria</label>
-                <select
-                  className="form-listBox"
-                  name="category"
-                  onChange={setBasicData}
-                  value= {formBasic.category}
-                >
-                  <option value={''}>-----</option>
-                  <option value={'Animales'}>Animales</option>
-                  <option value={'Granos'}>Granos</option>
-                  <option value={'Verduras'}>Verduras</option>
-                  <option value={'Frutas'}>Frutas</option>
-                  <option value='Otros'>Otros</option>
-                </select>
-              </div>
+              <FormListbox 
+                titleName='Categoria' 
+                name={'category'}
+                setValue = {setBasicData} 
+                value= {formBasic.category}>
 
-              <div className="form-group">
-                <label htmlFor="">Disponibilidad</label>
-                <select
-                  className="form-listBox"
-                  name="avaliable"
-                  onChange={setBasicData}
-                  value={formBasic.avaliable}
-                >
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </div>
-{/* //FIXME los departementos y ciudad debe ser un menu desplegable */}
-              <div className="form-group">
-                <label>Departamento</label>
-                <input
-                  className="form-input"
-                  name="department"
-                  type="text"
-                  placeholder="Ingrese el departamento donde se encuentra el producto"
-                  onChange={setBasicData}
-                  value={formBasic.department}
-                  autoComplete="false"
-                />
-              </div>
-  
-              <div className="form-group">
-                <label>Ciudad</label>
-                <input
-                  className="form-input"
-                  name="city"
-                  type="text"
-                  placeholder="Ingrese ciudad en donde se encuentra el producto"
-                  value={formBasic.city}
-                  onChange={setBasicData}
-                />
-                </div>  
+                  {
+                    categoriesList.map(category => {
+                      if(category === 'All'){
+                        return <option key={''} value={''}>-----</option>
+                      }
+                      return (<option key={category} value={category}>{category}</option>)
+                    })
+                  }
 
+              </FormListbox>
+              
+              <FormListbox
+                titleName = {'Departamento'}
+                name = {'department'}
+                setValue = {setBasicData}
+                value = {formBasic.department}
+              >
+                {
+                  departments.map(department=>{
+                    return (<option key={department} value={department}>{department}</option>)
+                  })
+                }
+              </FormListbox>
 
+              <FormListbox
+                titleName = {'Ciudad'}
+                name = {'city'}
+                setValue = {setBasicData}
+                value = {formBasic.city}
+              >
+                {
+                  cities(formBasic.department).map(city=>{
+                    return (<option key={city} value={city}>{city}</option>)
+                  })
+                }
+              </FormListbox>
+              
+
+              <FormListbox
+                titleName = {'Disponibilidad'}
+                name = {'avaliable'}
+                setValue ={setBasicData}
+                value ={formBasic.avaliable}
+              >
+                <option value={true}>Disponible</option>
+                <option value={false}>No disponible</option>
+              </FormListbox>
+    
               <div className="separation-line"></div>
             </div>
           </div>

@@ -17,7 +17,6 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 
   //TODO deberia memorizar esta funcion o un callback
   const addItemsFilterList = ({target},type)=>{
-    
     if(target.checked){
       setFilterList( [...filterList, `${type}__${target.value}`])
 
@@ -50,11 +49,6 @@ const MainMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu})=>{
 }
 
 
-<ul>
-  <div>
-    <a href=""></a>
-  </div>
-</ul>
 
 
 

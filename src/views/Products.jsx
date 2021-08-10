@@ -13,7 +13,8 @@ import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 import {useCounter, useStateRef} from  '../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
 
-
+//lista de elementos de categoria
+import { categoriesList } from "../utils/Helpers/listElements.js";
 
 
 function useFilterProducts (initialCategory){
@@ -44,10 +45,6 @@ export default function Products() {
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
-
-
-
-  const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias','Lacteos','Otros']
 
 	const {filterList,filterListRef,setFilterList,selectedCategoryRef,selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All')
 	
