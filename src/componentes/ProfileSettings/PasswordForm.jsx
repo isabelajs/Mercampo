@@ -26,10 +26,21 @@ const PasswordForm = memo((props) => {
     });
   }
 
-  const handleSubmit = (e) =>{
+  const resetState = (e) => {
     e.preventDefault()
 
+    closeAlert()
 
+    setState({
+      password: '',
+      newPassword:'',
+      verifyNewPassword:'',
+    }
+  )}
+
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
 
     const validation = validationsInForm(state) 
 
@@ -58,11 +69,7 @@ const PasswordForm = memo((props) => {
       })
 
       //reset form
-      setState({
-        password: "",
-        newPassword:'',
-        verifyNewPassword:'',
-      })
+      resetState()
 
     }catch(err){
       openAlert({
@@ -73,8 +80,6 @@ const PasswordForm = memo((props) => {
 
     closeModal()
   }
-
-
 
   return (
     <form className="profileSettings__password l-systemSubGroup form" onSubmit={handleSubmit}>
@@ -129,7 +134,7 @@ const PasswordForm = memo((props) => {
 
       <div className="l-buttons">
         <button className="button button--second">Cambiar</button>
-        <button className="button button--second">Cancelar</button>
+        <button onClick={resetState} className="button button--second">Cancelar</button>
       </div>
    
       

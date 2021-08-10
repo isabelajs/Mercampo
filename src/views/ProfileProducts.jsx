@@ -11,6 +11,7 @@ import { useState } from "react";
 import { CardAddProduct } from "../componentes/ProfileProducts/CardAddProduct";
 import Loading from "../componentes/common/Loading";
 
+//TODO: Mover el modal de eliminacion aca
 const ProfileSettings = (props) => {
   const [userProducts, setUserProducts] = useState({
     list: [],
@@ -36,7 +37,8 @@ const ProfileSettings = (props) => {
     getUserProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
+
   if(isLoading) return <Loading/>
 
   return (
@@ -103,6 +105,7 @@ const ProfileSettings = (props) => {
 
       <div className="l-profileProducts__products">
         <div className="profileProducts__container">
+
           <CardAddProduct />
 
           {
@@ -118,6 +121,7 @@ const ProfileSettings = (props) => {
           }
         </div>
       </div>
+          
     </SystemLayout>
   );
 };

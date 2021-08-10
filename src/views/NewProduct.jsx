@@ -22,6 +22,9 @@ import {openAlert, closeAlert} from '../actions'
 //validaciones del formulario
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
 
+
+//TODO: IMPLEMENTAR MODAL
+
 const ProfileNewProduct = (props) => { 
   const { user, openAlert, closeAlert } = props
 
@@ -72,8 +75,6 @@ const ProfileNewProduct = (props) => {
       resetPhotos()
 
       resetPrices()
-
-      console.log('información enviada con exito');
       
     }catch (error){
       console.log(error);

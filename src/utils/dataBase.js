@@ -117,7 +117,7 @@ export const addProductToStore = async (basic, photos, prices)=>{
   const pricesKeywords = prices.map(price => `price__${price.name}`)
 
   const pricesList = listToObject(prices);
-  console.log(pricesKeywords);
+  
   //agrego el campo search
   const { userName, keywords, name, description }= basic 
 
@@ -135,9 +135,17 @@ export const addProductToStore = async (basic, photos, prices)=>{
   };
 
   try {
-    db.collection("products").doc().set(info);
+    await db.collection("products").doc().set(info);
   } catch (error) {
     throw new Error(`addProduct -> ${error}`);
+  }
+}
+
+export const removeProduct = async (id) => {
+  try{
+    await db.collection('products').doc(id).delete()
+  }catch(err){
+    throw new Error(err)
   }
 }
 

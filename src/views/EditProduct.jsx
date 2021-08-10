@@ -8,7 +8,7 @@ import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
 import Loading from "../componentes/common/Loading";
-
+import LocalAlert from "../componentes/common/LocalAlert";
 
 //estilos
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
@@ -17,16 +17,20 @@ import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
-import {openAlert, closeAlert} from '../actions'
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
 
 //validaciones
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
+import ConfirmationModal from "../componentes/common/ConfirmationModal";
 
 
 
 const EditProduct = (props) => { 
-  const { user, openAlert, closeAlert } = props
+  const { user } = props
+
+  const {modalStatus,closeModal,openModal} = useModal()
+
+  const {alertStatus,closeAlert,openAlert} = useAlert()
 
   const productId = props.match.params.idProduct
 
@@ -67,9 +71,36 @@ const EditProduct = (props) => {
   },[])
 
 
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
+  const sendData = async (e) =>{
+
+    // setIsSendingData(true) 
     
+    try{
+
+      await updateProduct(productId,formBasic,photos,prices)
+
+      openAlert({
+        error:false,
+        message:'Se ha Acutalizado la información con exito'
+      })
+
+    }catch (error){
+      openAlert({
+        error: true,
+        message: error.code,
+      })
+
+    }
+    
+    closeModal()
+    // setIsSendingData(false)
+
+  }
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault()
+
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
 
     if(validation){
@@ -80,17 +111,9 @@ const EditProduct = (props) => {
       return
     }
 
-    
-    try{
-      closeAlert()
-      setIsSendingData(true) 
+    closeAlert()
 
-      await updateProduct(productId,formBasic,photos,prices)
-      setIsSendingData(false)
-
-    }catch (error){
-      console.log(error);
-    }
+    openModal()
 
   }
 
@@ -211,11 +234,17 @@ const EditProduct = (props) => {
             </div>
           </div>
           
+          <LocalAlert alertStatus={alertStatus}/>
+
           <button className="button button--second">Guardar</button>
+        
         </form>
+      
       </div>
     
-      <Alert/>
+
+
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
       {isSendingData && <div>...Enviando informacion</div>}
 
@@ -225,10 +254,5 @@ const EditProduct = (props) => {
 
 const mapStateToProps = (state)=>({ user: state.user})
 
-const mapDispatchToProps = {
-  openAlert,
-  closeAlert
-}
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(EditProduct);
+export default connect(mapStateToProps,null)(EditProduct);
