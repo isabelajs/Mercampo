@@ -6,9 +6,9 @@ import LocalAlert from '../componentes/common/LocalAlert';
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes y estilos css
-import google from '../assets/static/google-icon.svg'
-import facebook from '../assets/static/facebook-icon.svg'
-import phone from '../assets/static/phone-icon.svg'
+// import google from '../assets/static/google-icon.svg'
+// import facebook from '../assets/static/facebook-icon.svg'
+// import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
 //funciones auth and database
@@ -134,14 +134,14 @@ function Register(props){
           <button className='button button--main'>Registrate</button>
         </form>
 
-        <div className="login__options">
+        {/* <div className="login__options">
           <div className="login__options--text">Registrate con:</div>
           <div className="login__options--options">
             <img className='method-icon' src={google} alt="" />
             <img className='method-icon' src={facebook} alt="" />
             <img className='method-icon' src={phone} alt="" />
           </div>
-        </div>
+        </div> */}
 
         <div className="login__register">
           <div className="login__register--text">¿Ya estas registrado? <Link to={'/login'} className='bold'>Ingresa</Link>   </div>

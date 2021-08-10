@@ -34,6 +34,7 @@ const App = (props)=> {
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
 
+      console.log(user)
       //possible error when register, the user change ( we dont want to re-render) 
       //we need to prevent the user state change when email is not verified ()
       //and aproach maybe (register out of provider user to prevent re-render)

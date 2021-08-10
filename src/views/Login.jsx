@@ -6,13 +6,13 @@ import LocalAlert from '../componentes/common/LocalAlert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes
-import google from '../assets/static/google-icon.svg'
-import facebook from '../assets/static/facebook-icon.svg'
-import phone from '../assets/static/phone-icon.svg'
+// import google from '../assets/static/google-icon.svg'
+// import facebook from '../assets/static/facebook-icon.svg'
+// import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { signInWithEmail, signOut} from '../utils/auth'
+import { signInWithEmail, signOut } from '../utils/auth'
 import {validationsInForm} from '../utils/Helpers/validationsInform';
 
 import {useAlert} from '../utils/Hooks'
@@ -77,6 +77,7 @@ function Login (props){
     }
   }
 
+
   return(
 
     <LayoutSignMethod>
@@ -120,14 +121,14 @@ function Login (props){
 
       </form>
 
-      <div className="login__options">
+      {/* <div className="login__options">
         <div className="login__options--text">Ingresar con:</div>
         <div className="login__options--options">
-          <img className='method-icon' src={google} alt="" />
+          <img onClick={googleLog} className='method-icon' src={google} alt="" />
           <img className='method-icon' src={facebook} alt="" />
           <img className='method-icon' src={phone} alt="" />
         </div>
-      </div>
+      </div> */}
 
       <div className="login__register">
         <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>

@@ -39,6 +39,18 @@ export const findUserById = (id) => {
   });
 };
 
+// export const findUserByEmail = (email) =>{
+//   return new Promise((resolve,reject)=>{-
+//     db.collection('users')
+//       .where('email','==', email)
+//       .get()
+//       .then(users=>{
+//         resolve(users.docs.map(user=>user.data()))
+//       })
+//       .catch(err=> reject(err))
+//   })
+// }
+
 //Upload img to server IMGBB
 export const uploadImg = async (img) => {
   const data = new FormData();
