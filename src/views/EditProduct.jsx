@@ -7,6 +7,7 @@ import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+import Loading from "../componentes/common/Loading";
 
 
 //estilos
@@ -93,14 +94,13 @@ const EditProduct = (props) => {
 
   }
 
+  if(isLoading) return <Loading />
+
   return (
     <SystemLayout links={links} type="products" props={props}>
 
       <div className="l-editProduct">
 
-        {
-          isLoading ? <h1 style={{textAlign:'center'}}>... Loading</h1>
-          :
           <form className="editProduct form" onSubmit={handleSubmit}>
 
           <div className="l-editProduct__photos">
@@ -213,7 +213,6 @@ const EditProduct = (props) => {
           
           <button className="button button--second">Guardar</button>
         </form>
-        }
       </div>
     
       <Alert/>

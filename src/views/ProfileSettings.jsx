@@ -9,6 +9,7 @@ import DataForm from "../componentes/ProfileSettings/DataForm";
 //estilos
 import "../assets/styles/componentes/ProfileSettings.scss";
 import { findUserById } from "../utils/dataBase";
+import Loading from "../componentes/common/Loading";
 
 
 //BUG: Cuando el form no halla cambiado y se hace un guardar evitar, que envie informacion
@@ -61,18 +62,14 @@ const ProfileSettings = (props) => {
   },[user]);
 
 
+  if(isLoading) return <Loading/>
+
   return (
+
     <SystemLayout links={links} type="settings" props={props}>
       <div className="l-profileSettings">
-        
-        {isLoading ? 
-            <h1 style={{ textAlign: "center" }}>... Loading userData </h1> 
-          : 
-          <>
-            <DataForm data={dataForm} setData={setDataForm} />
-            <PasswordForm />
-          </>
-        }
+          <DataForm data={dataForm} setData={setDataForm} />
+          <PasswordForm />
       </div>
     </SystemLayout>
   );

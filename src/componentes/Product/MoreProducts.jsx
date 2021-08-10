@@ -13,7 +13,7 @@ const MoreProducts = memo(() =>{
   useEffect(()=>{
     
     const fetch = async () =>{
-      const data = await getAllProducts(7)
+      const data = await getAllProducts(15)
 
       setData(data)
     }
@@ -55,12 +55,12 @@ const MoreProducts = memo(() =>{
           data.length === 0 &&
           <Carousel widthItems={420}>
             {
-            Array.from(Array(7).keys()).map(product =>{
+            Array.from(Array(15).keys()).map(product =>{
               return(
                 <div className='moreProducts__card' key={product} >
-                  <img loading='lazy' src={''} alt="Imagen de producto" />
+                  <img loading='lazy' src={''} alt="" />
                   <p>
-                    
+                    Producto
                   </p>
                 </div>
               )

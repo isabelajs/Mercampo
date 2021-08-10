@@ -7,7 +7,7 @@ import { findUserById, getProductById } from '../utils/dataBase';
 
 import '../assets/styles/componentes/Product/Product.scss'
 import MoreProducts from '../componentes/Product/MoreProducts';
-import { Link } from 'react-router-dom';
+import Loading from '../componentes/common/Loading';
 
 //TODO: sistema de denormalization of product
 const Product = (props) => {
@@ -52,11 +52,10 @@ const Product = (props) => {
     fetchData()
   },[props.match.params.id])
 
-  
   return(
       <div className='product'>
         {
-          status.isLoading ? <h2>... Loading</h2>
+          status.isLoading ? <Loading />
           :
           <>
             <div className='l-product__top'>

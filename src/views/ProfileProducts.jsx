@@ -9,6 +9,7 @@ import "../assets/styles/componentes/ProfileProducts/ProfileProducts.scss";
 import { getProductsByUser } from "../utils/dataBase";
 import { useState } from "react";
 import { CardAddProduct } from "../componentes/ProfileProducts/CardAddProduct";
+import Loading from "../componentes/common/Loading";
 
 const ProfileSettings = (props) => {
   const [userProducts, setUserProducts] = useState({
@@ -35,6 +36,8 @@ const ProfileSettings = (props) => {
     getUserProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  if(isLoading) return <Loading/>
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -100,23 +103,19 @@ const ProfileSettings = (props) => {
 
       <div className="l-profileProducts__products">
         <div className="profileProducts__container">
-          {isLoading ? (
-            <h1 style={{ textAlign: "center" }}>... Loading</h1>
-          ) : (
-            <>
-              <CardAddProduct />
+          <CardAddProduct />
 
-              {userProducts.list.map((element, index) => {
-                return (
-                  <ProductCard
-                    {...element}
-                    history={props.history}
-                    key={index}
-                  />
-                );
-              })}
-            </>
-          )}
+          {
+            userProducts.list.map((element, index) => {
+              return (
+                <ProductCard
+                  {...element}
+                  history={props.history}
+                  key={index}
+                />
+              );
+            })
+          }
         </div>
       </div>
     </SystemLayout>

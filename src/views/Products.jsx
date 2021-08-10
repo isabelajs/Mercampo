@@ -12,6 +12,7 @@ import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 //funciones
 import {useCounter, useStateRef} from  '../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
+import Loading from "../componentes/common/Loading";
 
 
 function useFilterProducts (initialCategory){
@@ -78,6 +79,7 @@ export default function Products() {
 		
 		setIsLoading(true)
 		setIsError(null)
+		setListProducts([])
 
 		try{
 			const data = await getProductsByFilters( querySearch.toLowerCase() , selectedCategoryRef.current , filterListRef.current )
@@ -184,7 +186,7 @@ export default function Products() {
 			
 
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
-			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>... Loading</h1>}
+			{isLoading &&  <Loading />}
 
     </div>
   );

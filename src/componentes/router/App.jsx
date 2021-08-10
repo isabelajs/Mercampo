@@ -17,6 +17,7 @@ import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
 import EditProduct from "../../views/EditProduct";
 import PrivateRoute from "./PrivateRoute";
+import Loading from "../common/Loading";
 
 
 
@@ -49,7 +50,7 @@ const App = (props)=> {
   },[])
 
   if(isLoadingAuthentication){
-    return <div>...Loading</div>
+    return true 
   }
   else{
 
