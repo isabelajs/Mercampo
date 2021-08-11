@@ -40,7 +40,7 @@ export default function Footer() {
       </div>
 
       <div className="copyright">
-        C JuanCJC & IsabelaJS - All Rights Reserved
+        © Develop by JuanCJC & IsabelaJS - All Rights Reserved
       </div>
     </footer>
   );

@@ -186,6 +186,7 @@ export default function Products() {
 			
 
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
+			
 			{isLoading &&  <Loading />}
 
     </div>

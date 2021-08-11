@@ -16,7 +16,7 @@ function Layout ({children,location}){
     <>
       <Header isPrivate={isPrivate}/>
       {children}
-      <Footer />
+      {!isPrivate  && <Footer />}
     </>
   )
 }
