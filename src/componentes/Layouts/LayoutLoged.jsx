@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Footer from '../Footer';
 import Header from '../Header';
 
 function Layout ({children,location}){
@@ -15,6 +16,7 @@ function Layout ({children,location}){
     <>
       <Header isPrivate={isPrivate}/>
       {children}
+      <Footer />
     </>
   )
 }
