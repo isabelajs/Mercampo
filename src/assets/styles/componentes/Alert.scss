@@ -11,23 +11,31 @@
   padding: 20px;
   animation: move 4s ease forwards;
 
+  
+
   &>div{
+    display: flex;
     border-radius: 7px;
     padding: 20px;
     // margin: 5px;
     max-width: 750px;
+    align-items: center;
+    color: white;
+
+    svg{
+      margin-right: 20px;
+    }
   }
 
   &--successful{
     &>div{
-      background-color: rgb(144, 209, 144);
+      background-color: #19212B;
     }
   }
 
   &--error{
     &>div{
       background-color: #19212B;
-      color: white;
     }
   }
 }
