@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
@@ -6,6 +6,7 @@ import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
+import FormListbox from "../componentes/common/formListbox";
 import LocalAlert from '../componentes/common/LocalAlert'
 
 
@@ -13,7 +14,7 @@ import LocalAlert from '../componentes/common/LocalAlert'
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 
 //funcion  firestore
-import { addProductToStore } from '../utils/dataBase'
+import { addProductToStore, findUserById } from '../utils/dataBase'
 
 //hooks
 import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
@@ -21,6 +22,11 @@ import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useMod
 //validaciones del formulario
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
 import ConfirmationModal from "../componentes/common/ConfirmationModal";
+
+
+//import listado de categorias
+import { categoriesList } from "../utils/Helpers/listElements";
+import { departments, cities } from '../utils/Helpers/dataBaseCities'
 
 
 const ProfileNewProduct = (props) => { 
@@ -35,7 +41,7 @@ const ProfileNewProduct = (props) => {
     { name: "Nuevo producto",url: "/profile/products/new"},
   ];
 
-  const {formBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
+  const {formBasic, setFormBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
   const {photos, addPhoto, removePhoto, resetPhotos} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
   const [isSendingData, setIsSendingData] = useState(false)
@@ -86,6 +92,24 @@ const ProfileNewProduct = (props) => {
 
   }
 
+  useEffect(()=>{
+    const findUser = async ()=>{
+      try{
+        let userInData = await findUserById(user.uid);
+        setFormBasic({
+          ...formBasic,
+          department: userInData.department,
+          city: userInData.city,
+        })
+        
+      }catch(err){
+        throw new Error(`NewProduct obtener un usuario ${err}`)
+      }
+    }
+    findUser()
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[user])
 
   return (
     <SystemLayout links={links} type="products" props={props}>
@@ -126,7 +150,7 @@ const ProfileNewProduct = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="">Descripcion</label>
+                <label htmlFor="">Descripción</label>
                 <textarea
                   className="form-textArea"
                   cols="10"
@@ -153,37 +177,66 @@ const ProfileNewProduct = (props) => {
                 />
               </div>
             
-              {/* //TODO: CREATE SELECT COMPONENT */}
-              <div className="form-group">
-                <label htmlFor="">Categoria</label>
-                <select
-                  className="form-listBox"
-                  name="category"
-                  onChange={setBasicData}
-                  value= {formBasic.category}
-                >
-                  <option value={''}>-----</option>
-                  <option value={'Animales'}>Animales</option>
-                  <option value={'Granos'}>Granos</option>
-                  <option value={'Verduras'}>Verduras</option>
-                  <option value={'Frutas'}>Frutas</option>
-                  <option value='Otros'>Otros</option>
-                </select>
-              </div>
+              <FormListbox 
+                titleName='Categoria' 
+                name={'category'}
+                setValue = {setBasicData} 
+                value= {formBasic.category}>
 
-              <div className="form-group">
-                <label htmlFor="">Disponibilidad</label>
-                <select
-                  className="form-listBox"
-                  name="avaliable"
-                  onChange={setBasicData}
-                  value={formBasic.avaliable}
-                >
-                  <option value={true}>Disponible</option>
-                  <option value={false}>No disponible</option>
-                </select>
-              </div>
+                  {
+                    categoriesList.map(category => {
+                      if(category === 'All'){
+                        return <option key={''} value={''}>-----</option>
+                      }
+                      return (<option key={category} value={category}>{category}</option>)
+                    })
+                  }
 
+              </FormListbox>
+              
+              <FormListbox
+                titleName = {'Departamento'}
+                name = {'department'}
+                setValue = {setBasicData}
+                value = {formBasic.department}
+              >
+                {
+                  departments.map(department=>{
+                    if(department === ''){
+                      return (<option key={department} value={''}>----</option>)
+                    }
+                    return (<option key={department} value={department}>{department}</option>)
+                  })
+                }
+              </FormListbox>
+
+              <FormListbox
+                titleName = {'Ciudad'}
+                name = {'city'}
+                setValue = {setBasicData}
+                value = {formBasic.city}
+              >
+                {
+                  cities(formBasic.department).map(city=>{
+
+                    if(city === ''){
+                      return (<option key={city} value=''>----</option>)
+                    }
+                    return (<option key={city} value={city}>{city}</option>)
+                  })
+                }
+              </FormListbox>
+              
+              <FormListbox
+                titleName = {'Disponibilidad'}
+                name = {'avaliable'}
+                setValue ={setBasicData}
+                value ={formBasic.avaliable}
+              >
+                <option value={true}>Disponible</option>
+                <option value={false}>No disponible</option>
+              </FormListbox>
+    
               <div className="separation-line"></div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 //componentes react
@@ -42,7 +42,7 @@ const ProfileSettings = (props) => {
 
       try {
         let userInData = await findUserById(user.uid);
-
+        
         setDataForm({
           ...userInData,
           photo: { url: userInData.photo, file: null },

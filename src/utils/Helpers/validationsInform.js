@@ -31,12 +31,8 @@ export const validationsInForm = (form)=>{
     message = 'El número de cédula no es válido'
   }
 
-  else if(form.hasOwnProperty('department') && !isValidInputString(form.department,[4,15],false)){
-    message = 'Nombre de departamento inválido'
-  }
-
-  else if(form.hasOwnProperty('city') && !isValidInputString(form.city,[4,15],false)){
-    message = 'Nombre de ciudad inválido'
+  else if(form.hasOwnProperty('department')  && form.department === ''){
+    message =  'Por favor seleccione un departamento'
   }
 
   else if(form.hasOwnProperty('phoneMain') && !isValidInputNumber(form.id,[10,10],false)){
@@ -59,7 +55,7 @@ export const validationsInFormProducts = (form)=>{
   if(form.photos.length < 1){
     message =  'Por favor ingresa imagenes de tu producto'
   }
-  else if (!isValidInputString(form.name,[3,20])){
+  else if (!isValidInputString(form.name,[3,25])){
     message =  'Por favor ingresa un nombre válido [a-zA-Z]'
   }
 
@@ -67,10 +63,12 @@ export const validationsInFormProducts = (form)=>{
     message =  'Descripción inválida, debe contener entre 15 y 150 caracteres'
   }
 
-  //TODO validaciones description por palabras
-
   else if(form.category === ''){
-    message =  'Por favor ingrese una categoria'
+    message =  'Por favor seleccione una categoria'
+  }
+  
+  else if(form.department === ''){
+    message =  'Por favor seleccione un departamento'
   }
 
   else if(!form.keywords.includes(',') || !keywordsAreValid){
@@ -91,7 +89,7 @@ export const validationsInFormProducts = (form)=>{
 
 
 export function validateOnlyLetters (texto){
-  const re = new RegExp(/^[a-zA-Z\s]*$/);
+  const re = new RegExp(/^[a-zA-Zñ\s]*$/);
   if (re.test(texto)) {
       return true
   } else {
@@ -105,9 +103,9 @@ function isValidInputString(text,minMax,required = true){
   //si no es requerido y el texto es vacio devolver valido
   if (!required && text === ''){return true}
 
-  let re = new RegExp(`^[a-zA-Zñ\\s]{${minMax[0]},${minMax[1]}}$`);
+  let re = new RegExp(`^[a-zA-Zñáéíóú\\s]{${minMax[0]},${minMax[1]}}$`);
 
-  if(re.test(text)){ return true } else{ return false}
+  if(re.test(text.toLowerCase())){ return true } else{ return false}
 
 }
 

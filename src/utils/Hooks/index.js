@@ -1,6 +1,30 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { objectToList } from '../Helpers/conversionFunctions';
 
+import { cities } from '../Helpers/dataBaseCities';
+
+
+export function useFilterProducts (initialCategory){
+
+	const [querySearch, setQuerySearch] = useState('')
+
+	const [filterList, setFilterList, filterListRef] = useStateRef([])
+
+	const [selectedCategory, setSelectedCategory, selectedCategoryRef] = useStateRef(initialCategory)
+
+	return {
+		selectedCategory,
+		setSelectedCategory,
+		selectedCategoryRef,
+		setQuerySearch,
+		filterList,
+		setFilterList,
+		filterListRef,
+		querySearch,
+	}
+}
+
+
 export function useFormBasicProduct ({displayName, uid} ){
 
   const state = {
@@ -11,16 +35,27 @@ export function useFormBasicProduct ({displayName, uid} ){
       name: '',
       keywords:'',
       category:'',
+      department: '',
+      city: '',
     }
 
   const [formBasic, setFormBasic] = useState(state)
 
-  const setBasicData = (e) =>{
+  const setBasicData = ({target}) =>{
+    if(target.name === 'department'){
+      setFormBasic({
+        ...formBasic,
+        [target.name]: target.value,
+        'city': cities(target.value)[0],
+      })
+    }
+    else{
+      setFormBasic ({
+        ...formBasic,
+        [target.name]: target.value,
+      });
+    }
 
-    setFormBasic ({
-      ...formBasic,
-      [e.target.name]: e.target.value,
-    });
   }
   
   const setBasicDataFromData = (data)=>{
@@ -33,7 +68,7 @@ export function useFormBasicProduct ({displayName, uid} ){
     setFormBasic(state)
   }
 
-  return {formBasic, setBasicData, resetBasicData,setBasicDataFromData}
+  return {formBasic, setFormBasic,setBasicData, resetBasicData,setBasicDataFromData}
 }
 
 export function useFormPhotosProduct (){

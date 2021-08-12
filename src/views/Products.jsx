@@ -10,42 +10,19 @@ import CardCategory  from '../componentes/Products/CardCategory'
 import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 
 //funciones
-import {useCounter, useStateRef} from  '../utils/Hooks'
+import { useFilterProducts } from  '../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
+
+//lista de elementos de categoria
+import { categoriesList } from "../utils/Helpers/listElements.js";
 import Loading from "../componentes/common/Loading";
-
-
-function useFilterProducts (initialCategory){
-
-	const [querySearch, setQuerySearch] = useState('')
-
-	const [filterList, setFilterList, filterListRef] = useStateRef([])
-
-	const [selectedCategory, setSelectedCategory, selectedCategoryRef] = useStateRef(initialCategory)
-
-	return {
-		selectedCategory,
-		setSelectedCategory,
-		selectedCategoryRef,
-		setQuerySearch,
-		filterList,
-		setFilterList,
-		filterListRef,
-		querySearch,
-	}
-}
-
 
 export default function Products() {
 
-	const counter = useCounter()
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
-
-  const categoriesList =['All','Huevos','Frutas','Vegetales','Granos','Animales','Carne','Pescado','Artesanias','Otros']
-
 	const {filterList,filterListRef,setFilterList,selectedCategoryRef,selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All')
 	
 	const toggleIsOpenFilter = ()=>{

@@ -11,7 +11,10 @@ import ConfirmationModal from '../common/ConfirmationModal';
 //functions
 import { validationsInForm } from '../../utils/Helpers/validationsInform';
 import { updateUserInfo } from '../../utils/dataBase';
+import FormListbox from '../common/formListbox';
 
+//listas
+import { departments,cities } from '../../utils/Helpers/dataBaseCities';
 
 const DataForm = ({data,setData}) => {
 
@@ -19,11 +22,22 @@ const DataForm = ({data,setData}) => {
 
   const {modalStatus,closeModal,openModal} = useModal()
 
-  const handleChangeInput = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+
+  const handleChangeInput = ({target}) => {
+
+    if(target.name === 'department'){
+      setData({
+        ...data,
+        [target.name]: target.value,
+        'city': cities(target.value)[0],
+      })
+    }
+    else{
+      setData({
+        ...data,
+        [target.name]: target.value,
+      });
+    }
   }
 
   const changeImage = (image) => {
@@ -126,30 +140,41 @@ const DataForm = ({data,setData}) => {
               />
             </div>
 
-            <div className="form-group">
-              <label>Departamento</label>
-              <input
-                className="form-input"
-                name="department"
-                type="text"
-                value={data.department}
-                placeholder="Ingrese el departamento de residencia"
-                autoComplete="false"
-                onChange={handleChangeInput}
-              />
-            </div>
+            <FormListbox
+              titleName = {'Departamento'}
+              name = {'department'}
+              setValue = {handleChangeInput}
+              value = {data.department}
+            > 
+              {
+                  departments.map(department=>{
 
-            <div className="form-group">
-              <label>Ciudad</label>
-              <input
-                className="form-input"
-                name="city"
-                type="text"
-                value={data.city}
-                placeholder="Ingrese ciudad de residencia"
-                onChange={handleChangeInput}
-              />
-            </div>
+                    if(department === ''){
+                      return (<option key={department} value=''>----</option>)
+                    }
+
+                    return <option key={department} value={department}>{department}</option>
+                  })
+                }
+            </FormListbox>
+
+            <FormListbox
+                titleName = {'Ciudad'}
+                name = {'city'}
+                setValue = {handleChangeInput}
+                value = {data.city}
+              >
+                {
+                  cities(data.department).map(city=>{
+
+                    if(city === ''){
+                      return (<option key={city} value=''>----</option>)
+                    }
+                    return (<option key={city} value={city}>{city}</option>)
+                  })
+                }
+              </FormListbox>
+
           </div>
 
           <div className="separation-line"></div>
