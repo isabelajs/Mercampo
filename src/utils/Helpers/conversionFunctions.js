@@ -16,8 +16,8 @@ export const objectToList = (object)=>{
 }
 
 export const textToKeywords = ({text,typeSplit = ' '})=>{
-  
-  text = replaceVowelstick(text)
+
+  text = replaceVowelsTick(text)
 
   switch (typeSplit) {
     case ',':
@@ -36,7 +36,7 @@ export const textToKeywords = ({text,typeSplit = ' '})=>{
 }
 
 
-export const replaceVowelstick = (text)=>{
+export const replaceVowelsTick = (text)=>{
   text = text.toLowerCase()
   const vowelsDict = {á:'a',é:'e',í:'i',ó:'o',ú:'u'}
 

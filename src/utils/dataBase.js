@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelstick} from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick} from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {
@@ -202,7 +202,7 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 
     const filtersType = {
       prices: Object.keys(pricesObject),
-      ubication: [replaceVowelstick(city).replace(new RegExp(' ','g'),'-')]
+      ubication: [replaceVowelsTick(city).replace(new RegExp(' ','g'),'-')]
     }
 
     let productInfo = {
