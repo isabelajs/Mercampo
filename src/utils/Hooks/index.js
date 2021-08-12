@@ -3,6 +3,28 @@ import { objectToList } from '../Helpers/conversionFunctions';
 
 import { cities } from '../Helpers/dataBaseCities';
 
+
+export function useFilterProducts (initialCategory){
+
+	const [querySearch, setQuerySearch] = useState('')
+
+	const [filterList, setFilterList, filterListRef] = useStateRef([])
+
+	const [selectedCategory, setSelectedCategory, selectedCategoryRef] = useStateRef(initialCategory)
+
+	return {
+		selectedCategory,
+		setSelectedCategory,
+		selectedCategoryRef,
+		setQuerySearch,
+		filterList,
+		setFilterList,
+		filterListRef,
+		querySearch,
+	}
+}
+
+
 export function useFormBasicProduct ({displayName, uid} ){
 
   const state = {
