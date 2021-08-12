@@ -117,7 +117,7 @@ export const getCurrentUser = ()=>{
 //funciones sobre base de dato de los productos
 
 //se agrega un producto
-export const addProductToStore = async (basic, photos, prices, city)=>{
+export const addProductToStore = async (basic, photos, prices)=>{
 
   //lista de promesas (envio de photos)
   const resultPostPhotos = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
@@ -129,21 +129,22 @@ export const addProductToStore = async (basic, photos, prices, city)=>{
   const pricesObject = listToObject(prices);
     
   //obtengo los elementos de la información básica
-  const { userName, keywords, name, description }= basic 
+  const { userName, keywords, name, description,city }= basic 
 
   //concateno todos los valores
   const newKeywords = [...new Set([].concat(
-    newNameList(userName.toLowerCase()),
-    newNameList(name).toLowerCase(),
+    newNameList(userName),
+    newNameList(name),
     textToKeywords({text:keywords,typeSplit:','}),
     textToKeywords({text:description}),
     ))]
-
+  console.log(city)
   const filtersType = {
     prices: Object.keys(pricesObject),
-    ubication: [city]
+    ubication: textToKeywords({text:city})
   }
-  let info = {
+
+  let productInfo = {
     ...basic,
     photos: photosUrls,
     prices: pricesObject,
@@ -151,7 +152,7 @@ export const addProductToStore = async (basic, photos, prices, city)=>{
   };
 
   try {
-    await db.collection("products").doc().set(info);
+    await db.collection("products").doc().set(productInfo);
   } catch (error) {
     throw new Error(`addProduct -> ${error}`);
   }

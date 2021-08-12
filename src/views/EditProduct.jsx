@@ -102,8 +102,6 @@ const EditProduct = (props) => {
     e.preventDefault()
 
     closeAlert()
-    
-    console.log('cerrando alerta')
 
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
 

@@ -60,8 +60,14 @@ const ProfileNewProduct = (props) => {
       resetBasicData()
       resetPhotos()
       resetPrices()
+
+      openAlert({
+        error:false,
+        message:'Producto agregado con exito!'
+      })
       
     }catch (error){
+      
       openAlert({
         error: true,
         message: error.code,
