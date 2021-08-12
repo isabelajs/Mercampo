@@ -16,20 +16,8 @@ export const objectToList = (object)=>{
 }
 
 export const textToKeywords = ({text,typeSplit = ' '})=>{
-
-  text = text.toLowerCase()
-
-  const vowelsDict = {á:'a',é:'e',í:'i',ó:'o',ú:'u'}
-
-  'áéíóú'.split('').forEach(caracter=>{
-    
-    if(vowelsDict[caracter]){
-      
-      text = text.replace(new RegExp(caracter,'g'),vowelsDict[caracter])
-      
-    }
-    
-  })
+  
+  text = replaceVowelstick(text)
 
   switch (typeSplit) {
     case ',':
@@ -45,6 +33,25 @@ export const textToKeywords = ({text,typeSplit = ' '})=>{
   return text.split(typeSplit)
     .map(word => word.trim())
     .filter(word => word.length > 2)
+}
+
+
+export const replaceVowelstick = (text)=>{
+  text = text.toLowerCase()
+  const vowelsDict = {á:'a',é:'e',í:'i',ó:'o',ú:'u'}
+
+  'áéíóú'.split('').forEach(caracter=>{
+    
+    if(vowelsDict[caracter]){
+      
+      text = text.replace(new RegExp(caracter,'g'),vowelsDict[caracter])
+      
+    }
+    
+  })
+
+  return text
+
 }
 
 export const concatItems = (name,list)=>{

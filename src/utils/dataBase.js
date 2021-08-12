@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords, newNameList, buildKeywords} from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelstick} from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {
@@ -138,11 +138,16 @@ export const addProductToStore = async (basic, photos, prices)=>{
     textToKeywords({text:keywords,typeSplit:','}),
     textToKeywords({text:description}),
     ))]
-  console.log(city)
+  
+  console.log(textToKeywords({text:city}))
+  console.log('hola')
+  // console.log(city.toLowerCase().replace(new RegExp('','g'),'-'))
+
   const filtersType = {
     prices: Object.keys(pricesObject),
     ubication: textToKeywords({text:city})
   }
+
 
   let productInfo = {
     ...basic,
@@ -183,6 +188,9 @@ export const updateProduct = async (id,basic, photos, prices)=>{
     
     //se cambia la estructura de prices por un objeto 
     const pricesObject = listToObject(prices);
+    console.log(textToKeywords({text:city}))
+    console.log('hola')
+    console.log(city.toLowerCase().replace(new RegExp(' ','g'),'-'))
 
     //Creo una lista con las palabras claves necesarias
     const newKeywords = [...new Set([].concat(
@@ -194,7 +202,7 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 
     const filtersType = {
       prices: Object.keys(pricesObject),
-      ubication: textToKeywords({text:city})
+      ubication: [replaceVowelstick(city).replace(new RegExp(' ','g'),'-')]
     }
 
     let productInfo = {
