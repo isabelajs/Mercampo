@@ -163,19 +163,18 @@ export const updateProduct = async (id,basic, photos, prices)=>{
     //se cambia la estructura de prices por un objeto 
     const pricesObject = listToObject(prices);
 
-    //concateno todos los valores
+    //Creo una lista con las palabras claves necesarias
     const newKeywords = [...new Set([].concat(
-      newNameList(userName.toLowerCase()),
-      newNameList(name.toLowerCase()),
+      newNameList(userName),
+      newNameList(name),
       textToKeywords({text:keywords,typeSplit:','}),
       textToKeywords({text:description}),
       ))]
 
     const filtersType = {
       prices: Object.keys(pricesObject),
-      ubication: [city.toLowerCase().replace(new RegExp(/\s/,'g'),'-')]
+      ubication: textToKeywords({text:city})
     }
-        
 
     let productInfo = {
       ...basic,

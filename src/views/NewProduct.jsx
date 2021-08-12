@@ -193,6 +193,9 @@ const ProfileNewProduct = (props) => {
               >
                 {
                   departments.map(department=>{
+                    if(department === ''){
+                      return (<option key={department} value={''}>----</option>)
+                    }
                     return (<option key={department} value={department}>{department}</option>)
                   })
                 }
@@ -206,12 +209,15 @@ const ProfileNewProduct = (props) => {
               >
                 {
                   cities(formBasic.department).map(city=>{
+
+                    if(city === ''){
+                      return (<option key={city} value=''>----</option>)
+                    }
                     return (<option key={city} value={city}>{city}</option>)
                   })
                 }
               </FormListbox>
               
-
               <FormListbox
                 titleName = {'Disponibilidad'}
                 name = {'avaliable'}

@@ -16,33 +16,34 @@ export const objectToList = (object)=>{
 }
 
 export const textToKeywords = ({text,typeSplit = ' '})=>{
-  let caractersNotAllowed
+
+  text = text.toLowerCase()
+
+  const vowelsDict = {á:'a',é:'e',í:'i',ó:'o',ú:'u'}
+
+  'áéíóú'.split('').forEach(caracter=>{
+    
+    if(vowelsDict[caracter]){
+      
+      text = text.replace(new RegExp(caracter,'g'),vowelsDict[caracter])
+      
+    }
+    
+  })
 
   switch (typeSplit) {
     case ',':
-      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.;:*`
+      text = text.replace(/([^,a-zñ\s])/gi,'')
       break;
     case ' ':
-      caractersNotAllowed = `!¡?¿|"#$%&/\\()='´+{}[]-_.,;:*`
+      text = text.replace(/([^a-zñ\s])/gi,'')
       break;
     default:
       throw new Error(`${typeSplit} TypeSplit not allow`)
   }
 
-  let listCaractersNotAllowed = caractersNotAllowed.split('')
-
-  listCaractersNotAllowed.forEach(caracter=>{
-
-    if(text.includes(caracter)){
-      
-      text = text.replace(new RegExp(caracter,'g'),'')
-      
-    }
-  })
-
-
   return text.split(typeSplit)
-    .map(word => word.trim().toLowerCase())
+    .map(word => word.trim())
     .filter(word => word.length > 2)
 }
 
@@ -50,6 +51,8 @@ export const concatItems = (name,list)=>{
   return list.map(itemList=> `${name}__${itemList}`)
 }
 
+
+//Explicar esta funcion
 export const newNameList = (name)=>{
 
   const listName = textToKeywords({text:name})
@@ -90,7 +93,6 @@ export const buildKeywords = (keywords = [] ,filtersType)=>{
   return itemsList
 
 }
-
 
 
 // const concatItems = (name,list)=>{

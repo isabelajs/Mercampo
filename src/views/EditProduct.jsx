@@ -165,7 +165,7 @@ const EditProduct = (props) => {
               </div>
                           
               <FormListbox 
-                titleName='Categoria' 
+                titleName=  {'Categoria'}
                 name={'category'}
                 setValue = {setBasicData} 
                 value= {formBasic.category}>
@@ -189,6 +189,9 @@ const EditProduct = (props) => {
               >
                 {
                   departments.map(department=>{
+                    if(department === ''){
+                      return (<option key={department} value={''}>----</option>)
+                    }
                     return (<option key={department} value={department}>{department}</option>)
                   })
                 }
@@ -202,6 +205,10 @@ const EditProduct = (props) => {
               >
                 {
                   cities(formBasic.department).map(city=>{
+
+                    if(city === ''){
+                      return (<option key={city} value=''>----</option>)
+                    }
                     return (<option key={city} value={city}>{city}</option>)
                   })
                 }
