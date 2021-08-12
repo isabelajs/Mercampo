@@ -17,8 +17,6 @@ import ProfileProducts from '../../views/ProfileProducts'
 import ProfileNewProduct from "../../views/NewProduct";
 import EditProduct from "../../views/EditProduct";
 import PrivateRoute from "./PrivateRoute";
-import Loading from "../common/Loading";
-
 
 
 //estilos
@@ -34,7 +32,6 @@ const App = (props)=> {
   useEffect(()=>{
     const unSub = auth.onAuthStateChanged((user)=>{
 
-      console.log(user)
       //possible error when register, the user change ( we dont want to re-render) 
       //we need to prevent the user state change when email is not verified ()
       //and aproach maybe (register out of provider user to prevent re-render)
