@@ -15,6 +15,7 @@ import { signOut } from '../../utils/auth'
 
 import '../../assets/styles/componentes/ModalMenu/MainMenu.scss'
 
+
 const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{
   const history = useHistory()
 
