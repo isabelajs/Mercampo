@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 //componentes
 import SystemLayout from "../componentes/system/SystemLayout";
 import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
-import Alert from "../componentes/common/Alert";
 import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
 import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
 import FormListbox from "../componentes/common/formListbox";
 
+import Loading from "../componentes/common/Loading";
+import LocalAlert from "../componentes/common/LocalAlert";
 
 //estilos
 import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
@@ -17,11 +18,11 @@ import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct } from "../utils/Hooks";
-import {openAlert, closeAlert} from '../actions'
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
 
 //validaciones
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
+import ConfirmationModal from "../componentes/common/ConfirmationModal";
 
 //listado de elementos
 import { categoriesList } from '../utils/Helpers/listElements.js'
@@ -29,7 +30,11 @@ import { departments, cities } from '../utils/Helpers/dataBaseCities'
 
 
 const EditProduct = (props) => { 
-  const { user, openAlert, closeAlert } = props
+  const { user } = props
+
+  const {modalStatus,closeModal,openModal} = useModal()
+
+  const {alertStatus,closeAlert,openAlert} = useAlert()
 
   const productId = props.match.params.idProduct
 
@@ -48,6 +53,8 @@ const EditProduct = (props) => {
 
   useEffect(()=>{
 
+    closeAlert()
+    
     const getProduct = async ()=>{
       try{
         const data = await getProductById(productId)
@@ -68,9 +75,36 @@ const EditProduct = (props) => {
   },[])
 
 
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
+  const sendData = async (e) =>{
     
+    try{
+
+      await updateProduct(productId,formBasic,photos,prices)
+
+      openAlert({
+        error:false,
+        message:'La informacion se ha actualizado con exito'
+      })
+
+    }catch (error){
+      openAlert({
+        error: true,
+        message: error.code,
+      })
+
+    }
+    
+    closeModal()
+  }
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault()
+
+    closeAlert()
+    
+    console.log('cerrando alerta')
+
     const validation = validationForm({...formBasic, photos:photos, prices: prices})
 
     if(validation){
@@ -81,28 +115,17 @@ const EditProduct = (props) => {
       return
     }
 
-    
-    try{
-      closeAlert()
-      setIsSendingData(true) 
-
-      await updateProduct(productId,formBasic,photos,prices)
-      setIsSendingData(false)
-
-    }catch (error){
-      console.log(error);
-    }
+    openModal()
 
   }
+
+  if(isLoading) return <Loading />
 
   return (
     <SystemLayout links={links} type="products" props={props}>
 
       <div className="l-editProduct">
 
-        {
-          isLoading ? <h1 style={{textAlign:'center'}}>... Loading</h1>
-          :
           <form className="editProduct form" onSubmit={handleSubmit}>
 
           <div className="l-editProduct__photos">
@@ -243,12 +266,16 @@ const EditProduct = (props) => {
             </div>
           </div>
           
+          <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
+
           <button className="button button--second">Guardar</button>
+        
         </form>
-        }
+      
       </div>
     
-      <Alert/>
+
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
       {isSendingData && <div>...Enviando informacion</div>}
 
@@ -258,10 +285,5 @@ const EditProduct = (props) => {
 
 const mapStateToProps = (state)=>({ user: state.user})
 
-const mapDispatchToProps = {
-  openAlert,
-  closeAlert
-}
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(EditProduct);
+export default connect(mapStateToProps,null)(EditProduct);

@@ -196,3 +196,23 @@ export const useAlert = () =>{
 
   return {alertStatus,openAlert,closeAlert}
 }
+
+export const useModal = () =>{
+
+  const [modalStatus,setModalStatus] = useState()
+
+  const modalData = useRef(null)
+
+  const closeModal = useCallback(() =>{
+    setModalStatus(false)
+    modalData.current = null
+  },[])
+
+  const openModal = useCallback((data) =>{
+    setModalStatus(true)
+    modalData.current = data
+  },[])
+
+
+  return {modalStatus,closeModal,openModal,modalData}
+}

@@ -1,14 +1,17 @@
 import React , { memo, useState }from 'react'
 import { changePassword } from '../../utils/auth';
 import { validationsInForm } from '../../utils/Helpers/validationsInform';
-import { useAlert } from '../../utils/Hooks';
+import { useAlert, useModal } from '../../utils/Hooks';
+import ConfirmationModal from '../common/ConfirmationModal';
 import LocalAlert from '../common/LocalAlert';
 
 
 
 const PasswordForm = memo((props) => {
 
-  const {alertStatus,openAlert} = useAlert()
+  const {alertStatus,openAlert,closeAlert} = useAlert()
+
+  const {modalStatus,closeModal,openModal} = useModal()
 
   const [state, setState] = useState({
     password: "",
@@ -23,34 +26,50 @@ const PasswordForm = memo((props) => {
     });
   }
 
-  const handleSubmit = async(e) =>{
-
+  const resetState = (e) => {
     e.preventDefault()
 
-    const validation = validationsInForm(state);
+    closeAlert()
+
+    setState({
+      password: '',
+      newPassword:'',
+      verifyNewPassword:'',
+    }
+  )}
+
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+
+    const validation = validationsInForm(state) 
 
     if(validation) {
       openAlert({
         error:true,
         message: validation,
       })
-      return
+    }else{
+      closeAlert()
+      openModal()
     }
+
+  }
+
+  const sendData = async() =>{
 
     try{
 
       const response = await changePassword(state.password,state.newPassword)
 
+      //open alert ok!
       openAlert({
         error:null,
         message:response.message,
       })
 
-      setState({
-        password: "",
-        newPassword:'',
-        verifyNewPassword:'',
-      })
+      //reset form
+      resetState()
 
     }catch(err){
       openAlert({
@@ -58,6 +77,8 @@ const PasswordForm = memo((props) => {
         message:err.code,
       })
     }
+
+    closeModal()
   }
 
   return (
@@ -107,12 +128,16 @@ const PasswordForm = memo((props) => {
         </div>
       </div>
 
-      <LocalAlert alertStatus={alertStatus}/>
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
+
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
       <div className="l-buttons">
         <button className="button button--second">Cambiar</button>
-        <button className="button button--second">Cancelar</button>
+        <button onClick={resetState} className="button button--second">Cancelar</button>
       </div>
+   
+      
     </form>
   )
 })

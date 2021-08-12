@@ -1,4 +1,4 @@
-import { auth, authGoogleProvider, localPersistence, credentialWithEmail} from "../firebase.config.js";
+import { auth, localPersistence, credentialWithEmail} from "../firebase.config.js";
 import { registerUser } from "./dataBase.js";
 //  https://stackoverflow.com/questions/43503377/cloud-functions-for-firebase-action-on-email-verified -> no existe funcion que dispare el evento de confirmacion
 
@@ -57,14 +57,25 @@ const signInWithEmail = (email, password) => {
   });
 };
 
-const signInWithGoogle = () => {
-  return new Promise((resolve, reject) => {
-    auth
-      .signInWithPopup(authGoogleProvider)
-      .then((credential) =>resolve(credential))
-      .catch((error) => reject(error));
-  });
-};
+//test
+// const signInWithGoogle = () => {
+//   return new Promise((resolve, reject) => {
+//     auth
+//       .signInWithPopup(authGoogleProvider)
+//       .then((credential) => {
+
+//        return findUserByEmail(credential.additionalUserInfo.profile.email)
+//       })
+//       .then(user=>{
+//         if(!user){
+//           auth.signOut()
+//         }
+//         resolve(user)
+      
+//       })
+//       .catch((error) => reject(error));
+//   });
+// };
 
 //cierra sesión
 const signOut = () => {
@@ -100,5 +111,5 @@ export {signUpWithEmail,
         signInWithEmail,
         signOut,
         passwordReset,
-        changePassword
+        changePassword,
       };

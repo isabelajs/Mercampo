@@ -1,24 +1,14 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 
-import '../../assets/styles/componentes/CarrouselCategories.scss'
+// import '../../assets/styles/componentes/generales/Carousel.scss'
+import '../../assets/styles/generales/Carousel.scss'
 
-
-
-//carousel -> permite manejar item seleccionado
-  //flechas y {children}
-// card - categories
-
-
-//categories
-  //carousel
-    //cards
-
-export default function CarouselCategories ({children}){
+export default function CarouselCategories ({children,widthItems = 200}){
 
   const [visibilityArrowLeft, setVisibilityArrowLeft] = useState(false)
 	const [visibilityArrowRight, setVisibilityArrowRight] = useState(false)
   const refCategoriesContainer = useRef()
-
+  
   const visibilityArrows =  useCallback(()=>{
 
     const realScrollWidth = refCategoriesContainer.current.scrollWidth - refCategoriesContainer.current.offsetWidth
@@ -30,16 +20,17 @@ export default function CarouselCategories ({children}){
 	},[])
 
   const moveLeftScroll = useCallback(()=>{
-		refCategoriesContainer.current.scrollLeft -= 200
+		refCategoriesContainer.current.scrollLeft -= widthItems
 	},[])
 
 	const moveRightScroll = useCallback(()=>{
-		refCategoriesContainer.current.scrollLeft += 200
+
+		refCategoriesContainer.current.scrollLeft += widthItems
 	},[])
 
 
   useEffect(()=>{	
-		
+
 		visibilityArrows()
 
 		window.addEventListener('resize',visibilityArrows)
@@ -50,12 +41,12 @@ export default function CarouselCategories ({children}){
 	},[])
 
   return(
-    <div className="c-carouselCategories">
+    <div className="c-carousel">
 
-      <div className='carrousel__buttons--arrow'>
+      <div className='carousel__buttons--arrow'>
 
         { visibilityArrowLeft && <div className='arrow arrow--previous' onClick={moveLeftScroll}>
-          <svg  width="7" height="20" viewBox="0 0 7 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg  width="7" height="15" viewBox="0 0 7 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6.00665 14.9981C6.23834 14.9986 6.46287 14.9116 6.64128 14.7522C6.74169 14.6624 6.82468 14.5522 6.88552 14.4278C6.94636 14.3035 6.98384 14.1674 6.99581 14.0273C7.00779 13.8873 6.99402 13.7461 6.9553 13.6118C6.91659 13.4776 6.85368 13.3528 6.77019 13.2448L2.32779 7.51466L6.61153 1.77382C6.6939 1.66447 6.75541 1.53865 6.79253 1.40358C6.82964 1.26852 6.84163 1.12688 6.82781 0.986799C6.81399 0.846722 6.77463 0.710971 6.71198 0.587349C6.64934 0.463727 6.56465 0.354671 6.46279 0.266449C6.36019 0.169126 6.24004 0.0957163 6.10988 0.0508276C5.97972 0.0059389 5.84236 -0.00945949 5.70641 0.00559807C5.57047 0.0206556 5.43888 0.0658444 5.31991 0.138329C5.20093 0.210813 5.09714 0.309027 5.01504 0.426808L0.225578 6.84116C0.079731 7.03244 0 7.27239 0 7.52001C0 7.76763 0.079731 8.00757 0.225578 8.19886L5.18361 14.6132C5.28309 14.7426 5.40945 14.8448 5.55245 14.9117C5.69545 14.9786 5.85106 15.0082 6.00665 14.9981Z" fill="black"/>
           </svg>
         </div>
@@ -70,7 +61,7 @@ export default function CarouselCategories ({children}){
 
       </div>
 
-      <div className='carrousel__categories' ref={refCategoriesContainer} onScroll={visibilityArrows}>
+      <div className='carousel__items' ref={refCategoriesContainer} onScroll={visibilityArrows}>
 
         {children}
 

@@ -39,6 +39,18 @@ export const findUserById = (id) => {
   });
 };
 
+// export const findUserByEmail = (email) =>{
+//   return new Promise((resolve,reject)=>{-
+//     db.collection('users')
+//       .where('email','==', email)
+//       .get()
+//       .then(users=>{
+//         resolve(users.docs.map(user=>user.data()))
+//       })
+//       .catch(err=> reject(err))
+//   })
+// }
+
 //Upload img to server IMGBB
 export const uploadImg = async (img) => {
   const data = new FormData();
@@ -139,9 +151,17 @@ export const addProductToStore = async (basic, photos, prices, city)=>{
   };
 
   try {
-    db.collection("products").doc().set(info);
+    await db.collection("products").doc().set(info);
   } catch (error) {
     throw new Error(`addProduct -> ${error}`);
+  }
+}
+
+export const removeProduct = async (id) => {
+  try{
+    await db.collection('products').doc(id).delete()
+  }catch(err){
+    throw new Error(err)
   }
 }
 
@@ -214,10 +234,10 @@ export const getProductById = async ( id )=>{
   }
 };
 
-//obtengo todos los productos disponibles
-export const getAllProducts = async () => {
+//obtengo todos los productos disponibles -> only 20
+export const getAllProducts = async (number = 20) => {
   try {
-    let data = await db.collection("products").where('avaliable','==','true').limit(20).get();
+    let data = await db.collection("products").where('avaliable','==','true').limit(number).get();
     return data.docs.map((doc) =>({...doc.data(),id:doc.id}))
   } catch (err) {
     throw new Error(`getAllProducts -> ${err}`);

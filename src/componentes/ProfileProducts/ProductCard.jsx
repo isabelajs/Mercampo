@@ -5,18 +5,17 @@ import { useHistory } from 'react-router-dom';
 
 function ProductCard(props) {
 
-  const {name, id} = props
+  const {name, id, photos, prices, history, openEliminationModal} = props
 
-  const img = props.photos[0]
+  const img = photos[0]
 
-  const dataPrice = Object.entries(props.prices)[0]
+  const dataPrice = Object.entries(prices)[0]
 
   const price = `${dataPrice[0]} - $ ${dataPrice[1]}`
 
   const editProduct = () =>{
-    props.history.push(`/profile/products/${id}/edit`)
+    history.push(`/profile/products/${id}/edit`)
   }
-
 
   return (
     <div className='profileProductCard'>
@@ -32,10 +31,10 @@ function ProductCard(props) {
 
         <div className="l-profileProductCard__buttons">
 
-
           <svg className='profileProductCard__date' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.0333 10.06L13.8556 9L8.43333 13.88L6.07778 11.76L4.9 12.82L8.43333 16L15.0333 10.06ZM17.7778 2H16.6667V0H14.4444V2H5.55556V0H3.33333V2H2.22222C0.988889 2 0.0111111 2.9 0.0111111 4L0 18C0 18.5304 0.234126 19.0391 0.650874 19.4142C1.06762 19.7893 1.63285 20 2.22222 20H17.7778C19 20 20 19.1 20 18V4C20 2.9 19 2 17.7778 2ZM17.7778 18H2.22222V7H17.7778V18Z" fill="#111111"/>
           </svg>
+
 
           <div className='profileProductCard__edit' onClick={editProduct}>
             <svg  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,12 +43,11 @@ function ProductCard(props) {
           </div>
 
 
-          <div className='profileProductCard__delete'>
+          <div onClick={openEliminationModal} className='profileProductCard__delete'>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19.1667 3.6H17.8333C16.7288 3.6 15.8333 2.70457 15.8333 1.6C15.8333 0.7175 15.0859 0 14.1667 0H5.83333C4.91406 0 4.16667 0.7175 4.16667 1.6C4.16667 2.70457 3.27124 3.6 2.16667 3.6H0.833333C0.372396 3.6 0 3.9575 0 4.4V5.2C0 5.31 0.09375 5.4 0.208333 5.4C1.08926 5.4 1.81525 6.09115 1.85854 6.97102L2.42448 18.475C2.46615 19.3275 3.20052 20 4.08854 20H15.9115C16.8021 20 17.5339 19.33 17.5755 18.475L18.1415 6.97102C18.1847 6.09115 18.9107 5.4 19.7917 5.4C19.9062 5.4 20 5.31 20 5.2V4.4C20 3.9575 19.6276 3.6 19.1667 3.6ZM6.04167 2.7C6.04167 2.20294 6.44461 1.8 6.94167 1.8H13.0583C13.5554 1.8 13.9583 2.20294 13.9583 2.7C13.9583 3.19706 13.5554 3.6 13.0583 3.6H6.94167C6.44461 3.6 6.04167 3.19706 6.04167 2.7ZM15.8982 14.3967C15.7933 16.5268 14.0357 18.2 11.903 18.2H8.09697C5.96429 18.2 4.20668 16.5268 4.10181 14.3967L3.86548 9.59671C3.75305 7.31309 5.57426 5.4 7.86064 5.4H12.1394C14.4257 5.4 16.247 7.31308 16.1345 9.5967L15.8982 14.3967Z" fill="#EA3449"/>
             </svg>
           </div>
-
 
         </div>
 

@@ -5,47 +5,24 @@ import "../assets/styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";
-import CarrouselCategories from '../componentes/Products/CarrouselCategories'
-import  CardCategory  from '../componentes/Products/CardCategory'
+import Carousel from '../componentes/common/Carousel'
+import CardCategory  from '../componentes/Products/CardCategory'
 import FilterMenu from '../componentes/ModalMenu/FilterMenu'
 
 //funciones
-import {useCounter, useStateRef} from  '../utils/Hooks'
+import { useFilterProducts } from  '../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
 
 //lista de elementos de categoria
 import { categoriesList } from "../utils/Helpers/listElements.js";
-
-
-function useFilterProducts (initialCategory){
-
-	const [querySearch, setQuerySearch] = useState('')
-
-	const [filterList, setFilterList, filterListRef] = useStateRef([])
-
-	const [selectedCategory, setSelectedCategory, selectedCategoryRef] = useStateRef(initialCategory)
-
-	return {
-		selectedCategory,
-		setSelectedCategory,
-		selectedCategoryRef,
-		setQuerySearch,
-		filterList,
-		setFilterList,
-		filterListRef,
-		querySearch,
-	}
-}
-
+import Loading from "../componentes/common/Loading";
 
 export default function Products() {
 
-	const counter = useCounter()
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError,setIsError] = useState(null)
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
-
 	const {filterList,filterListRef,setFilterList,selectedCategoryRef,selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All')
 	
 	const toggleIsOpenFilter = ()=>{
@@ -79,6 +56,7 @@ export default function Products() {
 		
 		setIsLoading(true)
 		setIsError(null)
+		setListProducts([])
 
 		try{
 			const data = await getProductsByFilters( querySearch.toLowerCase() , selectedCategoryRef.current , filterListRef.current )
@@ -108,7 +86,6 @@ export default function Products() {
   return (
     <div className=" l-products">
       <div className="c-products__tools">
-					<div>{counter}</div>
 
         <div className="products__tools">
 
@@ -142,7 +119,7 @@ export default function Products() {
 
         </div>
 
-				<CarrouselCategories>
+				<Carousel>
 					{
 						categoriesList.map( (category) => {
 							if(selectedCategory === category){
@@ -169,7 +146,7 @@ export default function Products() {
 
 						})
 					}				
-				</CarrouselCategories> 
+				</Carousel> 
 
     	</div>
 
@@ -186,7 +163,8 @@ export default function Products() {
 			
 
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
-			{isLoading &&  <h1 style={{width:'100%', textAlign:'center'}}>... Loading</h1>}
+			
+			{isLoading &&  <Loading />}
 
     </div>
   );

@@ -6,6 +6,8 @@ import ProductPhotos from '../componentes/Product/ProductPhotos';
 import { findUserById, getProductById } from '../utils/dataBase';
 
 import '../assets/styles/componentes/Product/Product.scss'
+import MoreProducts from '../componentes/Product/MoreProducts';
+import Loading from '../componentes/common/Loading';
 
 //TODO: sistema de denormalization of product
 const Product = (props) => {
@@ -50,19 +52,21 @@ const Product = (props) => {
     fetchData()
   },[props.match.params.id])
 
-  
   return(
-    <div className='product'>
-      {/* <p>renders {counter}</p> */}
-      {
-        status.isLoading ? <h2>... Loading</h2>
-        :
-        <>
-          <ProductPhotos imgs={status.data.photos}/>
-          <ProductInfo data={status.data} userData={status.userData}/>
-        </>
-      }
-    </div>
+      <div className='product'>
+        {
+          status.isLoading ? <Loading />
+          :
+          <>
+            <div className='l-product__top'>
+              <ProductPhotos imgs={status.data.photos}/>
+              <ProductInfo data={status.data} userData={status.userData}/>
+            </div>
+            <MoreProducts />
+          </>
+        }
+
+      </div>
   )
 }
 

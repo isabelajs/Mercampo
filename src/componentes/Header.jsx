@@ -23,7 +23,7 @@ function Header (props){
   const history = useHistory()
 
   const moveToHome = ()=>{
-    history.push('/')
+    history.push('/products')
   }
 
   const moveToProfile = ()=>{

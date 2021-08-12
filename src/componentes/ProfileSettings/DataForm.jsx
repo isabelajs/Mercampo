@@ -1,11 +1,12 @@
 import React from 'react'
 
 //hooks
-import { useAlert } from '../../utils/Hooks';
+import { useAlert, useModal } from '../../utils/Hooks';
 
 //components
 import AddImage from '../common/addImage';
 import LocalAlert from '../common/LocalAlert';
+import ConfirmationModal from '../common/ConfirmationModal';
 
 
 //functions
@@ -18,7 +19,10 @@ import { departments,cities } from '../../utils/Helpers/dataBaseCities';
 
 const DataForm = ({data,setData}) => {
 
-  const {alertStatus,openAlert} = useAlert()
+  const {alertStatus,openAlert, closeAlert} = useAlert()
+
+  const {modalStatus,closeModal,openModal} = useModal()
+
 
   const handleChangeInput = ({target}) => {
 
@@ -45,39 +49,55 @@ const DataForm = ({data,setData}) => {
   };
 
   //send data to update
-  const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    const validation = validationsInForm(data);
-
-    if (validation) {
-      openAlert({
-        error: true,
-        message: validation,
-      })
-      return
-    }
+  const sendData = async () => {
 
     try {
-
+      
       await updateUserInfo(data);
-
+      
       openAlert({
         error: false,
         message: "Se ha actualizado la información con exito",
       });
+      
+      
     } catch (error) {
       openAlert({
         error: true,
         message: error.code,
       });
     }
+    
+    closeModal()
   };
+
+  const handleSubmit = (e) => {
+    
+    e.preventDefault()
+
+    const validation = validationsInForm(data)
+
+    if (validation) {
+
+      openAlert({
+        error: true,
+        message: validation,
+      })
+
+    }
+
+    else{
+
+      closeAlert()
+  
+      openModal()
+    }
+    
+  } 
 
   return (
     <form className="profileSettings__data form" onSubmit={handleSubmit}>
-      
+
       <div className="data__photo">
         <div className="systemSubGroup__title">Foto:</div>
         <AddImage image={data.photo.url} callback={changeImage} />
@@ -212,8 +232,10 @@ const DataForm = ({data,setData}) => {
 
       </div>
 
-      <LocalAlert alertStatus={alertStatus}/>
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
+      
       <button className="button button--second">Guardar</button>
   
   </form>

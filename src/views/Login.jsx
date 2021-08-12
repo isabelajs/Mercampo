@@ -1,40 +1,37 @@
 import React, {useState, useEffect, useCallback  } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { openAlert,closeAlert } from '../actions';
 
 //componentes de react
-import Alert from '../componentes/common/Alert'
+import LocalAlert from '../componentes/common/LocalAlert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes
-import google from '../assets/static/google-icon.svg'
-import facebook from '../assets/static/facebook-icon.svg'
-import phone from '../assets/static/phone-icon.svg'
+// import google from '../assets/static/google-icon.svg'
+// import facebook from '../assets/static/facebook-icon.svg'
+// import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase
-import { signInWithEmail, signOut , passwordReset} from '../utils/auth'
+import { signInWithEmail, signOut } from '../utils/auth'
 import {validationsInForm} from '../utils/Helpers/validationsInform';
+
+import {useAlert} from '../utils/Hooks'
 
 // https://dribbble.com/wenhy/collections/1631290-design
 //  https://co.pinterest.com/pin/184577284702032988/
 
 
 function Login (props){
-  const {openAlert, closeAlert} = props
 
-  useEffect(()=>{
-    closeAlert()
-  },[closeAlert])
+  const {alertStatus,openAlert,closeAlert} = useAlert()
 
+  
   const [form, setForm ] =  useState({
                               email: '',
                               password: '',
-  })
+                            })
 
   const validationForm = useCallback((form)=>{validationsInForm(form)},[])
-
 
   const handleInput = (event)=>{
     setForm({
@@ -77,6 +74,7 @@ function Login (props){
     }
   }
 
+
   return(
 
     <LayoutSignMethod>
@@ -89,7 +87,9 @@ function Login (props){
       </div>
 
       <form className='form' onSubmit={handleSubmit} >
-        <Alert/>
+
+        <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
+
         <div className="form-group">
           <label >Usuario</label>
           <input 
@@ -118,14 +118,14 @@ function Login (props){
 
       </form>
 
-      <div className="login__options">
+      {/* <div className="login__options">
         <div className="login__options--text">Ingresar con:</div>
         <div className="login__options--options">
-          <img className='method-icon' src={google} alt="" />
+          <img onClick={googleLog} className='method-icon' src={google} alt="" />
           <img className='method-icon' src={facebook} alt="" />
           <img className='method-icon' src={phone} alt="" />
         </div>
-      </div>
+      </div> */}
 
       <div className="login__register">
         <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>
@@ -137,9 +137,6 @@ function Login (props){
   )
 }
 
-const mapDispatchToProps ={
-  openAlert,
-  closeAlert
-}
 
-export default connect (null, mapDispatchToProps)(Login)
+
+export default Login

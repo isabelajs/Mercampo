@@ -1,15 +1,14 @@
 import React , { useState,useEffect,useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
 
 //componentes react
-import Alert from '../componentes/common/Alert'
+import LocalAlert from '../componentes/common/LocalAlert';
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 //imagenes y estilos css
-import google from '../assets/static/google-icon.svg'
-import facebook from '../assets/static/facebook-icon.svg'
-import phone from '../assets/static/phone-icon.svg'
+// import google from '../assets/static/google-icon.svg'
+// import facebook from '../assets/static/facebook-icon.svg'
+// import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Register.scss'
 
 //funciones auth and database
@@ -17,23 +16,20 @@ import { signUpWithEmail } from '../utils/auth'
 import { validationsInForm } from '../utils/Helpers/validationsInform';
 
 //actiones
-import { openAlert, closeAlert } from '../actions'
+import { useAlert } from '../utils/Hooks';
 
-//TODO deberia exister un elemento que me retorne a home?
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
 
 function Register(props){
-  const {openAlert, closeAlert} = props
+
+  const { alertStatus ,openAlert, closeAlert} = useAlert()
+
   const [form, setForm ]=  useState({
     name:'',
     email: '',
     password: '',
   })
 
-  //cierro el alert al montar el componente
-  useEffect(()=>{
-    closeAlert();
-  },[closeAlert])
   
   //agrega información a mi estado form
   const handleChange = (event)=>{
@@ -44,7 +40,6 @@ function Register(props){
   }        
 
   const validationForm = useCallback((form)=>validationsInForm(form),[])
-
 
   //validate and do stuff to create a user in firebase
   const handleSubmit = async (e)=>{
@@ -85,13 +80,15 @@ function Register(props){
       <div className="register">
 
         <div className="register__title">
+          
         <div className='title'>Bienvenido</div>
+
           <div className='subtitle'>Registrate para continuar</div>
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
           
-          <Alert/>
+          <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
           <div className="form-group">
             <label>Nombre</label>   
@@ -133,14 +130,14 @@ function Register(props){
           <button className='button button--main'>Registrate</button>
         </form>
 
-        <div className="login__options">
+        {/* <div className="login__options">
           <div className="login__options--text">Registrate con:</div>
           <div className="login__options--options">
             <img className='method-icon' src={google} alt="" />
             <img className='method-icon' src={facebook} alt="" />
             <img className='method-icon' src={phone} alt="" />
           </div>
-        </div>
+        </div> */}
 
         <div className="login__register">
           <div className="login__register--text">¿Ya estas registrado? <Link to={'/login'} className='bold'>Ingresa</Link>   </div>
@@ -153,11 +150,4 @@ function Register(props){
   )
 }
 
-
-const mapDispatchToProps = {
-  openAlert,
-  closeAlert
-}
-
-
-export default connect(null,mapDispatchToProps)(Register);
+export default Register
