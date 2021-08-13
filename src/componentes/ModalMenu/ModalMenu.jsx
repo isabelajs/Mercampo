@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import '../../assets/styles/componentes/ModalMenu/ModalMenu.scss'
 import '../../assets/styles/componentes/ModalMenu/MenuOption.scss'
 
+//WTF esto tenia la prop onScroll={toggleMenu} en span por que?
 function ModalMenu(props){
 
   const {isOpen,toggleMenu} = props
@@ -21,7 +22,7 @@ function ModalMenu(props){
 
               {props.children}
 
-              <span onScroll={toggleMenu} onClick={toggleMenu}></span>
+              <span onClick={toggleMenu}></span>
 
             </div>
             

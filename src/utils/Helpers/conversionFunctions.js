@@ -9,12 +9,12 @@ export const listToObject = (array)=>{
   })
   return object
 }
-
+//crea una lista a partir de un objeto
 export const objectToList = (object)=>{
   let values =Object.entries(object)
   return values.map(element => ({name:element[0], value:element[1]}))
 }
-
+//reemplaza caracteres especiales y hace un split segun se necesite, returna una lista
 export const textToKeywords = ({text,typeSplit = ' '})=>{
 
   text = replaceVowelsTick(text)
@@ -35,7 +35,7 @@ export const textToKeywords = ({text,typeSplit = ' '})=>{
     .filter(word => word.length > 2)
 }
 
-
+//reemplaza las vocales con tildes, por elementos sin ellos
 export const replaceVowelsTick = (text)=>{
   text = text.toLowerCase()
   const vowelsDict = {á:'a',é:'e',í:'i',ó:'o',ú:'u'}
@@ -53,13 +53,12 @@ export const replaceVowelsTick = (text)=>{
   return text
 
 }
-
+//concatena un nombre con una lista
 export const concatItems = (name,list)=>{
   return list.map(itemList=> `${name}__${itemList}`)
 }
 
-
-//Explicar esta funcion
+//concatena una frase de dos palabras en una ejm: isabela, jimenez, isabela-jimenez
 export const newNameList = (name)=>{
 
   const listName = textToKeywords({text:name})
@@ -71,6 +70,7 @@ export const newNameList = (name)=>{
 }
 
 //FIXME arreglar esta función
+//construte las palabras claves
 export const buildKeywords = (keywords = [] ,filtersType)=>{
   let itemsList = [].concat(keywords)
   const filters = {}

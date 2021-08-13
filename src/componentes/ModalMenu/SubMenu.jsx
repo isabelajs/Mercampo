@@ -2,7 +2,7 @@ import React, {cloneElement, useState} from 'react';
 
 import '../../assets/styles/componentes/ModalMenu/SubMenu.scss'
 
-export default function SubMenu ({icon,title,children, typeOptionsSubMenu = false, type}){
+export default function SubMenu ({icon,title,children, typeOptionsSubmenu = false, type}){
   const [isOpenOptions,setIsOpenOptions] = useState(false)
 
   const toggleOpenOptions = ()=>{
@@ -14,15 +14,14 @@ export default function SubMenu ({icon,title,children, typeOptionsSubMenu = fals
       
       <div className='modalMenuOption__option' onClick={toggleOpenOptions} >
         {icon && <img className='modalMenuOption__optionIcon' src={icon} alt="" />}
-        
         <div className='modalMenuOption__optionTitle'>{title}</div>
       </div>
 
-        <ul onClick={typeOptionsSubMenu  ? undefined : toggleOpenOptions } className={ `modalMenuSubMenu ${isOpenOptions ? 'show' : ''}`}>
-          {
-            React.Children.map(children,(child)=> cloneElement(child,{type}))
-          }
-        </ul>
+      <ul onClick={typeOptionsSubmenu  ? undefined : toggleOpenOptions } className={ `modalMenuSubMenu ${isOpenOptions ? 'show' : ''}`}>
+        {
+          React.Children.map(children,(child)=> cloneElement(child,{type}))
+        }
+      </ul>
 
     </li>
   )
