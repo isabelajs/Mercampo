@@ -35,7 +35,6 @@ export default function Products() {
 		const fetchData = async ()=>{
 
 			try{
-				// no sería bueno utilizar la función getProductsByFilters??
 				const data = await getAllProducts()
 				setListProducts(data)
 				setIsLoading(false)
@@ -85,16 +84,19 @@ export default function Products() {
 
   return (
     <div className=" l-products">
+
+			<FilterMenu 
+				filterList={filterList} 
+				setFilterList={setFilterList} 
+				isOpen={isOpenFilter} 
+				toggleMenu={toggleIsOpenFilter}
+				callback={fetchDataSearch}
+			/>
+
       <div className="c-products__tools">
 
-        <div className="products__tools">
 
-					<FilterMenu 
-						filterList={filterList} 
-						setFilterList={setFilterList} 
-						isOpen={isOpenFilter} 
-						toggleMenu={toggleIsOpenFilter}
-						callback={fetchDataSearch}/>
+        <div className="products__tools">
 
 					<div className="search"	>		
 						<svg style={{cursor:'pointer'}} onClick={fetchDataSearch} className='search__icon' width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +163,6 @@ export default function Products() {
 				}
 			</div>
 			
-
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
 			
 			{isLoading &&  <Loading />}
