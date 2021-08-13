@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick} from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick, concatItems} from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {
@@ -249,28 +249,33 @@ export const getAllProducts = async (number = 20) => {
 
 //obtengo los productos por medio del search
 export const getProductsByFilters = async (querySearch, category, filter) =>{
-  console.log(filter)
-  console.log(querySearch)
-
   try{
 
     let products = db.collection('products').where('avaliable','==','true')
     let searchList = []
 
+  
+    //
     if(category !== 'All'){
         products = products.where('category','==',category)
       }
 
-    if(querySearch){      
-      searchList.push(querySearch)
+    if(querySearch){
+      if(filter){
+        searchList = searchList.concat(...newNameList(querySearch).map(query=>concatItems(query,filter)))
+      }else{
+        searchList = searchList.concat(...newNameList(querySearch))
+      }
     }
 
 
-    // if(filter.length > 0){
-    //   listaBuscar = listBuscar.concat(filter)
-    // }
+    if(filter.length > 0 && querySearch === ''){
+      console.log('filter =>',filter)
+      searchList = searchList.concat(...filter)
+    }
 
     if(searchList.length > 0){
+      console.log(searchList)
       products = products.where('search','array-contains-any',searchList)
     }
     

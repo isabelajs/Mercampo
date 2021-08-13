@@ -30,7 +30,7 @@ const FilterMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu, han
       setFilterList(filterList.filter(item => item !== `${type}__${target.value}`))
     }
 
-    // callback()
+    callback()
   }
 
   return(
@@ -38,7 +38,7 @@ const FilterMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu, han
       <div className='filterMenu__title'>Filtrar</div>
       <div className="separation-line"></div>
       <ul>
-        <SubMenu title={'Unidades'} typeOptionsSubmenu={true} type={'price'}>
+        <SubMenu title={'Unidades'} typeOptionsSubmenu={true} type={'prices'}>
           {
             unidades.map(und=> <OptionCheck key={und} title={und} changeFilterList = {addItemsFilterList}> </OptionCheck> )
           }
