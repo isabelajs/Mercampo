@@ -200,20 +200,20 @@ export const useAlert = () =>{
     message: ''
   })
 
-  const openAlert = useCallback((newState)=> {
+  const openAlert = (newState)=> {
     setStateAlert({
       isOpen:true,
       ...newState,
     })
-  },[setStateAlert])
+  }
 
-  const closeAlert = useCallback(()=>{
+  const closeAlert = ()=>{
     setStateAlert({
       isOpen:false,
       error: null,
       message: ''
     })
-  },[setStateAlert])
+  }
 
 
   return {alertStatus,openAlert,closeAlert}

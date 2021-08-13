@@ -6,7 +6,6 @@ import ConfirmationModal from '../common/ConfirmationModal';
 import LocalAlert from '../common/LocalAlert';
 
 
-
 const PasswordForm = memo((props) => {
 
   const {alertStatus,openAlert,closeAlert} = useAlert()
@@ -128,7 +127,7 @@ const PasswordForm = memo((props) => {
         </div>
       </div>
 
-      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert} />
 
       <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 

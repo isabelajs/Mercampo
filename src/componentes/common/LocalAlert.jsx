@@ -1,23 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 
 import '../../assets/styles/componentes/Alert.scss'
 
-//TODO: BUG doble click , no aparece de nuevo el alert
-function LocalAlert ({alertStatus,closeAlert}){
+
+//closeAlert debe ser memorizado para poder eliminar correctamente la funcion
+export default function LocalAlert ({alertStatus,closeAlert}) {
+
+  const ref = useRef();
 
   useEffect(()=>{
 
     let timer 
 
-    if(alertStatus.isOpen){
-      timer = setTimeout(() => {
-        
-        closeAlert()
-      }, 4000);
+    if(ref.current){
+      ref.current.addEventListener('animationend',closeAlert)
     }
 
-    return () => clearTimeout(timer)
+    // if(alertStatus.isOpen){
+
+    //   timer = setTimeout(() => {
+    //     closeAlert()
+    //   }, 4000);
+    // }
+
+    return () => {
+      if(ref.current) ref.current.removeEventListener('animationend',closeAlert)
+      // clearTimeout(timer)
+    }
 
   },[alertStatus])
 
@@ -46,11 +58,9 @@ function LocalAlert ({alertStatus,closeAlert}){
     }
 
 
-    return (
-      <>
-      {
-        alertStatus.isOpen && 
-          <div className={`containerAlert ${alertStatus.error ? 'containerAlert--error' :'containerAlert--successful' }`}>
+    if(alertStatus.isOpen){
+      return (
+        <div ref={ref} className={`containerAlert ${alertStatus.error ? 'containerAlert--error' :'containerAlert--successful' }`}>
             <div>
               {
                 alertStatus.error ? 
@@ -65,10 +75,9 @@ function LocalAlert ({alertStatus,closeAlert}){
               { message }
             </div>
           </div>
-      }
-      </>
-    )
+      )
+    }
+    else{
+      return null
+    }
 }
-
-
-export default LocalAlert

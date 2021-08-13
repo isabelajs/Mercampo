@@ -8,7 +8,6 @@ import AddImage from '../common/addImage';
 import LocalAlert from '../common/LocalAlert';
 import ConfirmationModal from '../common/ConfirmationModal';
 
-
 //functions
 import { validationsInForm } from '../../utils/Helpers/validationsInform';
 import { updateUserInfo } from '../../utils/dataBase';
@@ -72,7 +71,7 @@ const DataForm = ({data,setData}) => {
   };
 
   const handleSubmit = (e) => {
-    
+
     e.preventDefault()
 
     const validation = validationsInForm(data)
@@ -89,7 +88,7 @@ const DataForm = ({data,setData}) => {
     else{
 
       closeAlert()
-  
+
       openModal()
     }
     
@@ -97,6 +96,9 @@ const DataForm = ({data,setData}) => {
 
   return (
     <form className="profileSettings__data form" onSubmit={handleSubmit}>
+
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
+
 
       <div className="data__photo">
         <div className="systemSubGroup__title">Foto:</div>
@@ -232,7 +234,6 @@ const DataForm = ({data,setData}) => {
 
       </div>
 
-      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
 
       <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
       

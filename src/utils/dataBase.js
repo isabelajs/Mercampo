@@ -261,21 +261,21 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
       }
 
     if(querySearch){
-      if(filter){
+
+      if(filter.length > 0 ){
         searchList = searchList.concat(...newNameList(querySearch).map(query=>concatItems(query,filter)))
       }else{
         searchList = searchList.concat(...newNameList(querySearch))
       }
+
     }
 
 
     if(filter.length > 0 && querySearch === ''){
-      console.log('filter =>',filter)
       searchList = searchList.concat(...filter)
     }
 
     if(searchList.length > 0){
-      console.log(searchList)
       products = products.where('search','array-contains-any',searchList)
     }
     
