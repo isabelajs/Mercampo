@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords, newNameList, buildKeywords} from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick, concatItems} from "./Helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {
@@ -117,7 +117,7 @@ export const getCurrentUser = ()=>{
 //funciones sobre base de dato de los productos
 
 //se agrega un producto
-export const addProductToStore = async (basic, photos, prices, city)=>{
+export const addProductToStore = async (basic, photos, prices)=>{
 
   //lista de promesas (envio de photos)
   const resultPostPhotos = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
@@ -129,21 +129,24 @@ export const addProductToStore = async (basic, photos, prices, city)=>{
   const pricesObject = listToObject(prices);
     
   //obtengo los elementos de la información básica
-  const { userName, keywords, name, description }= basic 
+  const { userName, keywords, name, description,city }= basic 
 
   //concateno todos los valores
   const newKeywords = [...new Set([].concat(
-    newNameList(userName.toLowerCase()),
-    newNameList(name).toLowerCase(),
+    newNameList(userName),
+    newNameList(name),
     textToKeywords({text:keywords,typeSplit:','}),
     textToKeywords({text:description}),
     ))]
 
   const filtersType = {
     prices: Object.keys(pricesObject),
-    ubication: [city]
+    ubication: [replaceVowelsTick(city).replace(new RegExp(' ','g'),'-')]
+
   }
-  let info = {
+
+
+  let productInfo = {
     ...basic,
     photos: photosUrls,
     prices: pricesObject,
@@ -151,7 +154,7 @@ export const addProductToStore = async (basic, photos, prices, city)=>{
   };
 
   try {
-    await db.collection("products").doc().set(info);
+    await db.collection("products").doc().set(productInfo);
   } catch (error) {
     throw new Error(`addProduct -> ${error}`);
   }
@@ -193,7 +196,7 @@ export const updateProduct = async (id,basic, photos, prices)=>{
 
     const filtersType = {
       prices: Object.keys(pricesObject),
-      ubication: textToKeywords({text:city})
+      ubication: [replaceVowelsTick(city).replace(new RegExp(' ','g'),'-')]
     }
 
     let productInfo = {
@@ -246,193 +249,43 @@ export const getAllProducts = async (number = 20) => {
 
 //obtengo los productos por medio del search
 export const getProductsByFilters = async (querySearch, category, filter) =>{
-  console.log(filter);
-
   try{
 
     let products = db.collection('products').where('avaliable','==','true')
     let searchList = []
 
+  
+    //
     if(category !== 'All'){
         products = products.where('category','==',category)
       }
 
-
     if(querySearch){
-      searchList.push(querySearch)
+
+      if(filter.length > 0 ){
+        searchList = searchList.concat(...newNameList(querySearch).map(query=>concatItems(query,filter)))
+      }else{
+        searchList = searchList.concat(...newNameList(querySearch))
+      }
+
     }
 
 
-    //if(filter.length > 0){
-    //   listaBuscar = listBuscar.concat(filter)
-    // }
+    if(filter.length > 0 && querySearch === ''){
+      searchList = searchList.concat(...filter)
+    }
 
     if(searchList.length > 0){
       products = products.where('search','array-contains-any',searchList)
     }
-
-
     
     let data = await products.limit(20).get()
-
-
     return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
 
   }catch(err){
     throw new Error(`getProductsBySearch ${err}`)
   }
 }
-
-// function buildKeyWords(text){
-
-//   const listWords = text.split(' ')
-
-//   const keyWords = {}
-
-//   listWords.forEach(word=>{
-    
-//     const listWord = word.split('')
-
-//     for(const i = 0; i < listWord.length; i++){
-//       keyWords[word.slice()]
-//     }
-
-//   })
-
-// }
-
-
-
-// hola
-
-// h
-// ho
-// hol
-// hola
-
-
-
-    // n = numero de palabras claves
-    // m = numero de precios
-
-
-    // (n*(n+1))/2 = palabras descompuestas
-
-
-    // palabra de 5 letras tiene = 15
-
-
-
-    // 2mn  + 3n  + 2m 
-
-    // (20 * 3)* 2 + 40 + 2*3
-
-    // 120*15 + 40*15 + 6 = 166
-
-    // 2400 + 6 = 2406
-
-    // ubication__villavo
-    
-    // videño
-    // videño__ubication__villavo
-    // videño__price__libra
-    // videño__price__kilogramo
-    // videño__price__unidad
-
-    // videño__price__libra__ubication__villavo
-    // videño__price__kilogramo__ubication__villavo
-    // videño__price__unidad__ubication__villavo
-
-
-    // price__libra
-    // price__kilogramo
-    // price__unidad
-
-    // price__libra__ubication__villavo
-    // price__kilogramo__ubication__villavo
-    // price__unidad__ubication__villavo
-
-
-    // Producto 
-      //name -> yogourt melo gomelo
-
-      //description -> Este yougurt es muy bueno, traido de vacas del himalaya
-      //keywords -> yougurt, himalaya, bueno
-
-
-      //search = [].concat(funcionKeyWords(name),funcionKeyWords(description),funcionKeyWords(keywords))
-
-
-
-      //example query -> funcionKeyWords('yougurt melo gomelo',prices,ubication) -> return []
-
-        //description equal to query
-
-      //keywords are [].join(' ')
-
-
-      // yougurt melo
-
-      // yougurt_melo__price__libra
-      // yougurt_melo__price__kilogramo
-      // yougurt_melo__price__unidad
-
-      // yougurt_melo__price__libra__ubication__villavo
-      // yougurt_melo__price__kilogramo__ubication__villavo
-      // yougurt_melo__price__unidad__ubication__villavo
-
-      // yougurt melo gomelo
-
-      // yougurt_melo_gomelo__price__libra
-      // yougurt_melo_gomelo__price__kilogramo
-      // yougurt_melo_gomelo__price__unidad
-
-      // yougurt_melo_gomelo__price__libra__ubication__villavo
-      // yougurt_melo_gomelo__price__kilogramo__ubication__villavo
-      // yougurt_melo_gomelo__price__unidad__ubication__villavo
-
-      // yougurt
-
-      // yougurt__price__libra
-      // yougurt__price__kilogramo
-      // yougurt__price__unidad
-
-      // yougurt__price__libra__ubication__villavo
-      // yougurt__price__kilogramo__ubication__villavo
-      // yougurt__price__unidad__ubication__villavo
-
-      // price__libra
-      // price__kilogramo
-      // price__unidad
-
-      // price__libra__ubication__villavo
-      // price__kilogramo__ubication__villavo
-      // price__unidad__ubication__villavo
-
-
-      // melo
-
-      // melo__price__libra
-      // melo__price__kilogramo
-      // melo__price__unidad
-
-      // melo__price__libra__ubication__villavo
-      // melo__price__kilogramo__ubication__villavo
-      // melo__price__unidad__ubication__villavo
-
-
-      // gomelo
-
-      // gomelo__price__libra
-      // gomelo__price__kilogramo
-      // gomelo__price__unidad
-
-      // gomelo__price__libra__ubication__villavo
-      // gomelo__price__kilogramo__ubication__villavo
-      // gomelo__price__unidad__ubication__villavo
-
-
-
 
     
     //filterSearch = [videño, libra, unidad, kilogramo, villavo]

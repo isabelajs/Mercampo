@@ -52,9 +52,10 @@ export const validationsInFormProducts = (form)=>{
   let pricesAreValid = form.prices.every(price=>  price.name !== '' && isValidInputNumber(price.value,[3,10]))
   let keywordsAreValid = listKeywords.every(keyword=> keyword.includes(' ') === false)
 
-  if(form.photos.length < 1){
-    message =  'Por favor ingresa imagenes de tu producto'
+  if(form.photos.length < 2 || form.photos.length > 4){
+    message =  'Por favor ingresa minimo 2 imagenes, maximo 4'
   }
+
   else if (!isValidInputString(form.name,[3,25])){
     message =  'Por favor ingresa un nombre válido [a-zA-Z]'
   }
@@ -62,6 +63,15 @@ export const validationsInFormProducts = (form)=>{
   else if(!isValidInputGeneric(form.description,[15,150])){
     message =  'Descripción inválida, debe contener entre 15 y 150 caracteres'
   }
+
+  else if(!form.keywords.includes(',') || !keywordsAreValid){
+    message =  `Por favor ingresa las palabras claves separadas por comas ejemplo: 'huevos, gallinas, campo'`
+  }
+  
+  else if(listKeywords.length < 2 || listKeywords.length > 10){
+    message =  'Por favor, ingresa entre 2 y 10 palabras claves'
+  }
+  
 
   else if(form.category === ''){
     message =  'Por favor seleccione una categoria'
@@ -71,13 +81,6 @@ export const validationsInFormProducts = (form)=>{
     message =  'Por favor seleccione un departamento'
   }
 
-  else if(!form.keywords.includes(',') || !keywordsAreValid){
-    message =  `Por favor ingresa las palabras claves sin espacios y separadas por comas ejemplo: 'huevos, gallinas, campo'`
-  }
-
-  else if(listKeywords.length < 2 || listKeywords.length > 10){
-    message =  'Por favor, ingresa entre 2 y 10 palabras claves'
-  }
 
   else if(!pricesAreValid){
     message = 'Por favor ingrese una unidad con su respectivo precio válido ejm: Unidad: Libra valor: 22000'
