@@ -60,15 +60,19 @@ const PasswordForm = memo((props) => {
     try{
 
       const response = await changePassword(state.password,state.newPassword)
-
+    
       //open alert ok!
       openAlert({
-        error:null,
+        error:false,
         message:response.message,
       })
 
       //reset form
-      resetState()
+      setState({
+        password: '',
+        newPassword:'',
+        verifyNewPassword:'',
+      })
 
     }catch(err){
       openAlert({
@@ -83,6 +87,10 @@ const PasswordForm = memo((props) => {
   return (
     <form className="profileSettings__password l-systemSubGroup form" onSubmit={handleSubmit}>
       
+      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert} />
+
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
+
       <div className="systemSubGroup__title">Cambiar contraseña</div>
 
       <div className="l-password">
@@ -127,15 +135,10 @@ const PasswordForm = memo((props) => {
         </div>
       </div>
 
-      <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert} />
-
-      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
-
       <div className="l-buttons">
         <button className="button button--second">Cambiar</button>
         <button onClick={resetState} className="button button--second">Cancelar</button>
       </div>
-   
       
     </form>
   )

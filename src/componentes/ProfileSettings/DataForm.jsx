@@ -98,8 +98,7 @@ const DataForm = ({data,setData}) => {
     <form className="profileSettings__data form" onSubmit={handleSubmit}>
 
       <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert}/>
-
-
+      
       <div className="data__photo">
         <div className="systemSubGroup__title">Foto:</div>
         <AddImage image={data.photo.url} callback={changeImage} />
