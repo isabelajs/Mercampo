@@ -37,6 +37,8 @@ function Header (props){
   useEffect(()=>{
     if(user){
       setUserName(user.displayName.split(' ').splice(0,3).join(' ')) 
+    }else{
+      setUserName('')
     }
   },[user])
 
