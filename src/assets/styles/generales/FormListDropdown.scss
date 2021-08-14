@@ -1,0 +1,48 @@
+.input-text{
+  border-radius: 4px;
+  border: 1px solid gray;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.value-list {
+  width: 185px;
+  box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.2);
+  overflow: hidden;
+  max-height: 0;
+  // transition: .3s ease-in-out;  
+  
+  &.open {
+    max-height: 144px;
+    overflow: auto;
+    padding: 0 0 0 10px;
+  }
+  &::-webkit-scrollbar{
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(181, 177, 177);
+    border-radius: 4px;
+  }
+  
+  li {
+    background-color: #FAFCFD;
+    padding: 10px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    opacity: 1;
+    
+    &:hover {
+      background-color: hsl(105, 100%, 77%);
+    }
+  
+    &.closed {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      opacity: 0;
+    }
+  }
+}

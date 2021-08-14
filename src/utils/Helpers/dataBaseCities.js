@@ -1337,22 +1337,16 @@ const dbCities = [
 export const departments = dbCities.map(data => data.departamento)
 
 export const cities = (depart )=>{
+    if(!depart) depart = ''
+    const dataDepart = dbCities.find(data => data.departamento === depart)
 
-  const dataDepart = dbCities.find(data => data.departamento === depart)
+    return dataDepart.ciudades  // []
+}
 
-  return dataDepart.ciudades  // []
+export const allCities = ()=>{
+    let cities = []
+    dbCities.forEach(data => !data.ciudades.includes('') &&cities.push(...data.ciudades ))
+    return cities
 }
 
 
-
-// ---- departamento 
-
-// ----- ciudades
-
-
-// ---- ya este seleccionado la localizacion de la persona
-
-// ? si el usuario no tiene una localizacion que va a pasar 
-
-
-//si pongo las tildes, debo quitarlas en el guardado de firebase por que con tildes no van a aparecer las busquedas
