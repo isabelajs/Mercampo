@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 //componentes
 import ModalMenu from './ModalMenu';
@@ -6,8 +6,6 @@ import SubMenu from './SubMenu';
 import OptionCheck from './OptionCheck';
 import FormListDropdown from '../common/FormListDropdown';
 
-//listado
-import { departments, cities } from '../../utils/Helpers/dataBaseCities';
 
 //estilos
 import '../../assets/styles/componentes/ModalMenu/FilterMenu.scss'
@@ -15,7 +13,7 @@ import '../../assets/styles/componentes/ModalMenu/FilterMenu.scss'
 //funciones
 const FilterMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu, handleKeyUp})=>{
 
-  const [queryCity,setQueryCity]= useState('')
+  // const [queryCity,setQueryCity]= useState('')
 
   //TODO la lista deberia poder clasificarse 
   const unidades = ['Gramo','Libra', 'Kilogramo','Unidad', 'Docena', 'Tonelada','Otros']

@@ -1343,10 +1343,12 @@ export const cities = (depart )=>{
     return dataDepart.ciudades  // []
 }
 
+//limpio los elementos repetidos, los ordenos y luego como son un set los convierto a un array
 export const allCities = ()=>{
+    let allCities = new Set()
     let cities = []
-    dbCities.forEach(data => !data.ciudades.includes('') &&cities.push(...data.ciudades ))
-    return cities
+    dbCities.forEach(data => !data.ciudades.includes('') && cities.push(...data.ciudades ))
+    cities.sort().forEach(data=> allCities.add(data))
+    return Array.from(allCities)
 }
-
 
