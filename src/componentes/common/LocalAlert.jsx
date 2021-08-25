@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+// import { useCallback } from 'react';
 
 import '../../assets/styles/componentes/Alert.scss'
 
@@ -13,7 +12,7 @@ export default function LocalAlert ({alertStatus,closeAlert}) {
 
   useEffect(()=>{
 
-    let timer 
+    // let timer 
 
     if(ref.current){
       ref.current.addEventListener('animationend',closeAlert)

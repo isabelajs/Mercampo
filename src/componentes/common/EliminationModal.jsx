@@ -2,8 +2,8 @@ import React from 'react';
 import Modal from './Modal';
 
 import '../../assets/styles/generales/ConfirmationModal.scss'
-import { useRef } from 'react';
-import { useEffect } from 'react';
+// import { useRef } from 'react';
+// import { useEffect } from 'react';
 
 export default function EliminationModal({closeCallback,acceptCallback, isOpen}) {
 
