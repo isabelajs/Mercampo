@@ -1,15 +1,17 @@
+@import '../Vars.scss';
+
 .l-signMethod{
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .imagen{
-  opacity: 0;
-  visibility: hidden;
+  display: none;
   height: 100vh;
-  background-color: blue;
+  background-color: $main-green;
+  // background-color: $semiDark-green;
 }
 
 @media (min-width:910px){
@@ -17,13 +19,22 @@
     justify-content: space-between;
     .login,.register,.recovery{
       padding:0 40px;
-      width: 450px;
+      min-width: 400px;
     }
   }
 
   .imagen{
-    width: 75%;
-    visibility: visible;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 1;
+
+    img{
+      width: 100%;
+      max-width: 600px;
+    }
+
   }
+
 }

@@ -77,12 +77,11 @@ function Register(props){
   return(
 
     <LayoutSignMethod>
+
       <div className="register">
 
         <div className="register__title">
-          
-        <div className='title'>Bienvenido</div>
-
+        <div className='title'>Bienvenido !</div>
           <div className='subtitle'>Registrate para continuar</div>
         </div>
 
@@ -129,15 +128,6 @@ function Register(props){
 
           <button className='button button--main'>Registrate</button>
         </form>
-
-        {/* <div className="login__options">
-          <div className="login__options--text">Registrate con:</div>
-          <div className="login__options--options">
-            <img className='method-icon' src={google} alt="" />
-            <img className='method-icon' src={facebook} alt="" />
-            <img className='method-icon' src={phone} alt="" />
-          </div>
-        </div> */}
 
         <div className="login__register">
           <div className="login__register--text">¿Ya estas registrado? <Link to={'/login'} className='bold'>Ingresa</Link>   </div>

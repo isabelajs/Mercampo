@@ -9,16 +9,16 @@
 body{
   margin: 0;
   padding: 0;
-
 }
 
 #root{
   width: 100%;
+  height: 100vh;
   font-size: 14px;
   display: flex;
-  height: 100vh;
   flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: $family-font;
+  color: $main-FontColor;
 }
 
 .separator{
@@ -35,15 +35,9 @@ body{
   }
 }
 
-.bold{
-  font-weight: 600;
-  color: #22409d;
-  cursor: pointer;
-}
-
 a{
   text-decoration: none;
-  color: black;
+  color: $main-FontColor;
 }
 
 
