@@ -37,12 +37,17 @@ const FilterMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu, han
     }
 
     else if(value !== ''){
-      //verifica si dentro de la lista existe valor con el mismo type
-      let verifiedType = filterList.some(filter=> filter.split('__')[0] === type)
-
-      //si la opcion a filtrar no esta en la lista y el tipo aun no se ha usado se agrega
-      if(!verifiedType  && !filterList.includes(filterOption)){
-        setFilterList([...filterList,filterOption])
+      //verifica si dentro de la lista existe valor con el type
+      let verifiedType = filterList.find(filter=> filter.split('__')[0] === type)
+      
+      //si la opcion a filtrar no esta en la lista 
+      if(!filterList.includes(filterOption)){
+        //verifica si hay algun elemento con el mismo type dentro del filtro
+        if(verifiedType){
+          setFilterList([...filterList.filter( item=> item !== verifiedType), filterOption])
+        }else{
+          setFilterList([...filterList,filterOption])
+        }
       }
     }
     
