@@ -22,7 +22,7 @@ const CardProduct = memo(({id,name,userName,prices,photos})=>{
 
   return(
     <div className="cardProduct">
-      <img className="cardProduct__img" src={photos[0]} alt='img product'></img>
+      <img loading='lazy' className="cardProduct__img" src={photos[0]} alt='img product'></img>
 
       <div className="cardProduct__description">
 

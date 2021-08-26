@@ -8,6 +8,7 @@ import menuBurger from '../assets/static/menuBurguer.png'
 
 //components
 import MainMenu from './ModalMenu/MainMenu';
+import DesktopMenu from './ModalMenu/DesktopMenu';
 
 //styles
 import '../assets/styles/componentes/Header/Header.scss'
@@ -71,9 +72,10 @@ function Header (props){
       }
 
       {user && 
-        <div className="header__userStatus" onClick={moveToProfile}>
+        <div className="header__userStatus">
           <img loading='lazy' className='userStatus__icon icon' src={user.photoURL} alt=""/>
           <p className="userStatus__userName">{userName}</p>
+          <DesktopMenu/>
         </div>
       }  
 

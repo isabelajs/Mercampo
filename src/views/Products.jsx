@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback} from "react";
+import React, { useState, useEffect } from "react";
 
 //estilos
 import "../assets/styles/componentes/Products.scss";
@@ -75,11 +75,11 @@ export default function Products() {
 		fetchDataSearch()
 	}
 
-	const handleKeyUp = useCallback((e) =>{
+	const handleKeyUp = (e) =>{
 		if(e.keyCode === 13){
 			fetchDataSearch(querySearch,selectedCategory)
 		}
-	},[querySearch, selectedCategory])
+	}
 
 
   return (

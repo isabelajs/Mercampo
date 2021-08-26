@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback  } from 'react';
+import React, {useState , useCallback  } from 'react';
 import { Link } from 'react-router-dom';
 
 //componentes de react
@@ -82,7 +82,7 @@ function Login (props){
       <div className="login">
 
       <div className="login__title">
-        <div className='title'>Bienvenido</div>
+        <div className='title'>Bienvenido !</div>
         <div className='subtitle'>Ingresa para continuar</div>
       </div>
 
@@ -117,15 +117,6 @@ function Login (props){
 
 
       </form>
-
-      {/* <div className="login__options">
-        <div className="login__options--text">Ingresar con:</div>
-        <div className="login__options--options">
-          <img onClick={googleLog} className='method-icon' src={google} alt="" />
-          <img className='method-icon' src={facebook} alt="" />
-          <img className='method-icon' src={phone} alt="" />
-        </div>
-      </div> */}
 
       <div className="login__register">
         <div className="login__register--text">¿No estas registrado? <Link to={'/register'} className='bold'>Registrate</Link>   </div>
