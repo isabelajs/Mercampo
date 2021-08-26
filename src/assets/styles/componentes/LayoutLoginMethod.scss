@@ -5,13 +5,19 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  .login,.register,.recovery{
+    padding:0 32px;
+    max-width: 370px;
+    width: 100%;
+  }
+
 }
 
 .imagen{
   display: none;
   height: 100vh;
-  background-color: $main-green;
-  // background-color: $semiDark-green;
+  background-color: #F7F4F4;
 }
 
 @media (min-width:910px){
@@ -20,6 +26,7 @@
     .login,.register,.recovery{
       padding:0 40px;
       min-width: 400px;
+      margin: 0 38px;
     }
   }
 
@@ -29,12 +36,7 @@
     align-items: center;
     justify-content: center;
     opacity: 1;
-
-    img{
-      width: 100%;
-      max-width: 600px;
-    }
-
+    overflow: hidden;
   }
 
 }
