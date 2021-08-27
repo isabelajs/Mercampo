@@ -113,7 +113,7 @@ const ProfileSettings = (props) => {
           />
         </div>
 
-        <div className="button button--icon">
+        <div className="filter button button--icon">
           <svg
             className="button__icon"
             width="15"

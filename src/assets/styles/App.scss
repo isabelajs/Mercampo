@@ -46,7 +46,7 @@ a{
   display: flex;
   align-items: center;
   background: white;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   border: solid 0.8px #B8B5B5;
   padding-right: 20px;
@@ -63,3 +63,6 @@ a{
 
 }
 
+.filter{
+  height: 38px;
+}
