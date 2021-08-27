@@ -33,6 +33,23 @@
   p{
     text-align: center;
   }
+
+  .confirmationModal div{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+}
+
+
+@media (min-width:425px){
+  .modal{
+    &__container{
+      width: 330px;
+    }
+  }
 }
 
 

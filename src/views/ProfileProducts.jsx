@@ -12,7 +12,7 @@ import { getProductsByUser, removeProduct } from "../utils/dataBase";
 import { useState } from "react";
 import { CardAddProduct } from "../componentes/ProfileProducts/CardAddProduct";
 import Loading from "../componentes/common/Loading";
-import { useModal } from "../utils/Hooks";
+import { useModal, useStateRef } from "../utils/Hooks";
 
 import EliminationModal from '../componentes/common/EliminationModal'
 
@@ -24,6 +24,8 @@ const ProfileSettings = (props) => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const {modalStatus,openModal,closeModal,modalData} = useModal()
+  const [isSendingData, setIsSendingData, isSendingDataRef] = useStateRef(false)
+
   const { user } = props;
 
   const links = [{ name: "Mis productos", url: "/profile/products" }];
@@ -49,28 +51,36 @@ const ProfileSettings = (props) => {
 
     let {avaliables, notAvaliables} = userProducts
 
+    if(!isSendingDataRef.current){
 
-    if(avaliable === 'true'){
-      avaliables--
-    }else{
-      notAvaliables--
+      try{
+  
+        setIsSendingData(true)
+  
+        await removeProduct(id)
+  
+        if(avaliable === 'true'){
+          avaliables--
+        }else{
+          notAvaliables--
+        }
+  
+        setUserProducts({
+          list:userProducts.list.filter(product => product.id !== id),
+          avaliables: avaliables,
+          notAvaliables: notAvaliables
+        })
+      }
+      catch(err){
+        console.log(err)
+      }
+  
+      closeModal()
+  
+      setIsSendingData(false)
+
     }
 
-    try{
-
-      await removeProduct(id)
-
-      setUserProducts({
-        list:userProducts.list.filter(product => product.id !== id),
-        avaliables: avaliables,
-        notAvaliables: notAvaliables
-      })
-    }
-    catch(err){
-      console.log(err)
-    }
-
-    closeModal()
 
   }
 
@@ -153,7 +163,6 @@ const ProfileSettings = (props) => {
                   history={props.history}
                   key={index}
                   openEliminationModal = {()=> openModal(element)}
-                  acceptCallback
                 />
               );
             })
@@ -161,7 +170,7 @@ const ProfileSettings = (props) => {
         </div>
       </div>
       
-      <EliminationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={()=>deleteProduct(modalData)}/>
+      <EliminationModal inProcess={isSendingData} isOpen={modalStatus} closeCallback={closeModal} acceptCallback={()=>deleteProduct(modalData)}/>
 
     </SystemLayout>
   );
