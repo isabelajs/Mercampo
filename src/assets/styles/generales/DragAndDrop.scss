@@ -1,0 +1,55 @@
+.dragAndDrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  
+  &__container{
+    border-radius: 10px;
+    position: relative;
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 300px;
+    overflow: hidden;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    background-color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+  }
+
+  // p{
+  //   text-align: center;
+  // }
+
+  // .confirmationModal div{
+  //   width: 100%;
+  //   margin-top: 20px;
+  //   display: flex;
+  //   justify-content: space-around;
+  // }
+
+}
+
+
+// @media (min-width:425px){
+//   .modal{
+//     &__container{
+//       width: 330px;
+//     }
+//   }
+// }
+
+

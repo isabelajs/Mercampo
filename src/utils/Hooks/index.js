@@ -241,5 +241,12 @@ export const useModal = () =>{
   },[])
 
 
+  const useDragAndDrop = () =>{
+    const [status,setModalStatus] = useState()
+
+    // const 
+  }
+
+
   return {modalStatus,closeModal,openModal,modalData}
 }
