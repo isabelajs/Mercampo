@@ -1,7 +1,7 @@
 import React from 'react'
 
 //hooks
-import { useAlert, useModal } from '../../utils/Hooks';
+import { useAlert, useModal, useStateRef } from '../../utils/Hooks';
 
 //components
 import AddImage from '../common/addImage';
@@ -18,10 +18,11 @@ import { departments,cities } from '../../utils/Helpers/dataBaseCities';
 
 const DataForm = ({data,setData}) => {
 
-  const {alertStatus,openAlert, closeAlert} = useAlert()
+  const {alertStatus, openAlert, closeAlert} = useAlert()
 
   const {modalStatus,closeModal,openModal} = useModal()
 
+  const [isSendingData, setIsSendingData, isSendingDataRef] = useStateRef(false)
 
   const handleChangeInput = ({target}) => {
 
@@ -50,24 +51,36 @@ const DataForm = ({data,setData}) => {
   //send data to update
   const sendData = async () => {
 
-    try {
-      
-      await updateUserInfo(data);
-      
-      openAlert({
-        error: false,
-        message: "Se ha actualizado la información con exito",
-      });
-      
-      
-    } catch (error) {
-      openAlert({
-        error: true,
-        message: error.code,
-      });
-    }
+    console.log(isSendingDataRef)
     
-    closeModal()
+    if(!isSendingDataRef.current){
+      
+      setIsSendingData(true)
+      
+      console.log(isSendingDataRef)
+      try {
+        
+        await updateUserInfo(data);
+        
+        openAlert({
+          error: false,
+          message: "Se ha actualizado la información con exito",
+        });
+        
+        
+      } catch (error) {
+        openAlert({
+          error: true,
+          message: error.code,
+        });
+      }
+      
+      closeModal()
+      
+      setIsSendingData(false)
+    }
+
+
   };
 
   const handleSubmit = (e) => {
@@ -233,8 +246,7 @@ const DataForm = ({data,setData}) => {
 
       </div>
 
-
-      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
+      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData} inProcess={isSendingData}/>
       
       <button className="button button--second">Guardar</button>
   

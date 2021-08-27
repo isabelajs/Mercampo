@@ -1,16 +1,19 @@
 import React , { memo, useState }from 'react'
 import { changePassword } from '../../utils/auth';
 import { validationsInForm } from '../../utils/Helpers/validationsInform';
-import { useAlert, useModal } from '../../utils/Hooks';
+import { useAlert, useModal, useStateRef } from '../../utils/Hooks';
 import ConfirmationModal from '../common/ConfirmationModal';
 import LocalAlert from '../common/LocalAlert';
 
 
-const PasswordForm = memo((props) => {
+const PasswordForm = memo(() => {
 
   const {alertStatus,openAlert,closeAlert} = useAlert()
 
   const {modalStatus,closeModal,openModal} = useModal()
+
+  const [isSendingData, setIsSendingData, isSendingDataRef] = useStateRef(false)
+
 
   const [state, setState] = useState({
     password: "",
@@ -57,31 +60,39 @@ const PasswordForm = memo((props) => {
 
   const sendData = async() =>{
 
-    try{
+    if(!isSendingDataRef.current){
 
-      const response = await changePassword(state.password,state.newPassword)
-    
-      //open alert ok!
-      openAlert({
-        error:false,
-        message:response.message,
-      })
+      setIsSendingData(true)
 
-      //reset form
-      setState({
-        password: '',
-        newPassword:'',
-        verifyNewPassword:'',
-      })
+      try{
+  
+        const response = await changePassword(state.password,state.newPassword)
+      
+        //open alert ok!
+        openAlert({
+          error:false,
+          message:response.message,
+        })
+  
+        //reset form
+        setState({
+          password: '',
+          newPassword:'',
+          verifyNewPassword:'',
+        })
+  
+      }catch(err){
+        openAlert({
+          error:true,
+          message:err.code,
+        })
+      }
+  
+      closeModal()
 
-    }catch(err){
-      openAlert({
-        error:true,
-        message:err.code,
-      })
+      setIsSendingData(false)
     }
 
-    closeModal()
   }
 
   return (
@@ -89,7 +100,7 @@ const PasswordForm = memo((props) => {
       
       <LocalAlert alertStatus={alertStatus} closeAlert={closeAlert} />
 
-      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
+      <ConfirmationModal inProcess={isSendingData} isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
       <div className="systemSubGroup__title">Cambiar contraseña</div>
 

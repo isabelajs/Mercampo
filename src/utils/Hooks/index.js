@@ -200,6 +200,7 @@ export const useAlert = () =>{
     message: ''
   })
 
+
   const openAlert = (newState)=> {
     setStateAlert({
       isOpen:true,
@@ -219,6 +220,10 @@ export const useAlert = () =>{
   return {alertStatus,openAlert,closeAlert}
 }
 
+
+
+//Hook para los modales, puede recibir data, cuando son abiertos
+//esto debe recibir una promesa y cuando la promesa se cumpla se debe cerrar?
 export const useModal = () =>{
 
   const [modalStatus,setModalStatus] = useState()
@@ -226,8 +231,8 @@ export const useModal = () =>{
   const modalData = useRef(null)
 
   const closeModal = useCallback(() =>{
-    setModalStatus(false)
-    modalData.current = null
+      setModalStatus(false)
+      modalData.current = null
   },[])
 
   const openModal = useCallback((data) =>{

@@ -18,7 +18,7 @@ import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 import {getProductById, updateProduct} from '../utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert, useStateRef } from "../utils/Hooks";
 
 //validaciones
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
@@ -47,7 +47,7 @@ const EditProduct = (props) => {
   const {photos, addPhoto, removePhoto,  addPhotosFromData} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, addPricesFromData } = useFormPricesProduct()
   const [isLoading, setIsLoading] = useState(true)
-  const [isSendingData, setIsSendingData]= useState(false)
+  const [isSendingData, setIsSendingData, isSendingDataRef] = useStateRef(false)
 
   const validationForm = useCallback((form)=>validationsInFormProducts(form),[])
 
@@ -75,26 +75,35 @@ const EditProduct = (props) => {
   },[])
 
 
-  const sendData = async (e) =>{
-    
-    try{
+  const sendData = async () =>{
 
-      await updateProduct(productId,formBasic,photos,prices)
+    if(!isSendingDataRef.current){
 
-      openAlert({
-        error:false,
-        message:'La informacion se ha actualizado con exito'
-      })
+      setIsSendingData(true)
 
-    }catch (error){
-      openAlert({
-        error: true,
-        message: error.code,
-      })
+      try{
+  
+        await updateProduct(productId,formBasic,photos,prices)
+  
+        openAlert({
+          error:false,
+          message:'La informacion se ha actualizado con exito'
+        })
+  
+      }catch (error){
+        openAlert({
+          error: true,
+          message: error.code,
+        })
+  
+      }
+
+      
+      closeModal()
+      setIsSendingData(false)
 
     }
-    
-    closeModal()
+
   }
 
   const handleSubmit = (e) => {
@@ -120,6 +129,7 @@ const EditProduct = (props) => {
   if(isLoading) return <Loading />
 
   return (
+
     <SystemLayout links={links} type="products" props={props}>
 
       <div className="l-editProduct">
@@ -272,10 +282,7 @@ const EditProduct = (props) => {
       
       </div>
     
-
-      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
-
-      {isSendingData && <div>...Enviando informacion</div>}
+      <ConfirmationModal inProcess={isSendingData} isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
     </SystemLayout>
   );

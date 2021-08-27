@@ -6,7 +6,6 @@ import '../../assets/styles/generales/Modal.scss'
 export default function Modal(props) {
 
   useEffect(()=>{
-
     if(props.isOpen){
       document.body.style.overflow = 'hidden'
     }

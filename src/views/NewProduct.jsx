@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
@@ -17,7 +17,7 @@ import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
 import { addProductToStore, findUserById } from '../utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert } from "../utils/Hooks";
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert, useStateRef } from "../utils/Hooks";
 
 //validaciones del formulario
 import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
@@ -44,38 +44,41 @@ const ProfileNewProduct = (props) => {
   const {formBasic, setFormBasic, setBasicData, resetBasicData} = useFormBasicProduct(user)
   const {photos, addPhoto, removePhoto, resetPhotos} = useFormPhotosProduct()
   const {prices, insertNewPrice, handleUnitPrice, deletePrice, handleUnitName, resetPrices} = useFormPricesProduct()
-  const [isSendingData, setIsSendingData] = useState(false)
+  const [isSendingData, setIsSendingData, isSendingDataRef] = useStateRef(false)
 
   //validaciones que nada falta
   const validationForm = useCallback ((form)=>validationsInFormProducts(form),[])
   
   const sendData = async () =>{
     
-    try{
+    if(!isSendingDataRef.current){
 
       setIsSendingData(true)
-      
-      await addProductToStore(formBasic,photos,prices)      
 
-      resetBasicData()
-      resetPhotos()
-      resetPrices()
+      try{
+  
+        await addProductToStore(formBasic,photos,prices)      
 
-      openAlert({
-        error:false,
-        message:'Producto agregado con exito!'
-      })
-      
-    }catch (error){
-      
-      openAlert({
-        error: true,
-        message: error.code,
-      })
+        resetBasicData()
+        resetPhotos()
+        resetPrices()
+  
+        openAlert({
+          error:false,
+          message:'Producto agregado con exito!'
+        })
+        
+      }catch (error){
+        openAlert({
+          error: true,
+          message: error.code,
+        })
+      }
+
+      closeModal()
+      setIsSendingData(false)
     }
     
-    closeModal()
-    setIsSendingData(false)
   }
 
   const handleSubmit = async (e) =>{
@@ -269,9 +272,7 @@ const ProfileNewProduct = (props) => {
       
       </div>
     
-      {isSendingData && <div>...Enviando informacion</div>}
-
-      <ConfirmationModal isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
+      <ConfirmationModal inProcess={isSendingData} isOpen={modalStatus} closeCallback={closeModal} acceptCallback={sendData}/>
 
     </SystemLayout>
   );

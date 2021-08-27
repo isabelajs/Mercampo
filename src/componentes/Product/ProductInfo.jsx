@@ -10,7 +10,7 @@ const ProductInfo = (props) =>{
 
   const sendWaMessage = () =>{
 
-    const message = waMessage(userData.phoneMain,encodeURIComponent(`Me encuentro interesado en tu producto ${data.name} me gustaria tener mas informacion`))
+    const message = waMessage(userData.phoneMain,`Me encuentro interesado en tu producto ${data.name} me gustaria tener mas informacion`)
 
     window.open(message,'_blank').focus()
   }
