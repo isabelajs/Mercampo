@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../assets/styles/generales/DragAndDrop.scss'
 
 export default function DragAndDrop(props) {
+
+  const [photos,setPhotos] = useState()
 
   useEffect(()=>{
     if(props.isOpen){
@@ -17,8 +19,12 @@ export default function DragAndDrop(props) {
   return (
     <div className='dragAndDrop'>
       <div className='dragAndDrop__container'>
-        <div></div>
-        <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' multiple onChange/>
+        <div>
+          <input type="file" accept='image/png, image/jpeg, image/jpg' name='file' multiple onChange/>
+        </div>
+        <div>
+          <img src="" alt="" />
+        </div>
       </div>
     </div>
   );

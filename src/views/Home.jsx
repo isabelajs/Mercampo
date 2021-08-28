@@ -1,20 +1,8 @@
 import React from "react";
-import { signOut } from "../utils/auth";
 import homeImg from '../assets/static/hero-1.jpg'
 import '../assets/styles/Home.scss'
 
 export default function Home(props) {
-  const handleCloseSesion = async () => {
-    signOut()
-      .then(() => {
-        // props.history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // {/* <button onClick={handleCloseSesion} className="button button--second">Cerrar sesión</button> */}
 
   return (
     <div className='home-container'>
