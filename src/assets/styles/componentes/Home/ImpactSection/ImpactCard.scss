@@ -1,0 +1,83 @@
+@import '../../../Vars.scss';
+
+.impactCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 170px;
+  text-align: center;
+  position: relative;
+  
+
+  &::after{
+    content: '';
+    z-index: -1;
+    position: absolute;
+    inset: 0 0 0 0;
+    background: url(../../../../static/Home/ImpactSection/shape.svg) no-repeat center / contain;
+
+  }
+
+  &:nth-child(2){
+    &::after{
+      transform: rotate(180deg) scaleX(-1);
+    }
+  }
+
+  &:nth-child(3){
+    &::after{
+      transform: scaleX(-1);
+    }
+  }
+
+
+  &__counter{
+    font-size: 40px;
+    color: $subTitle-blue;
+    position: relative;
+
+    &::after{
+      content: '+';
+      font-size: 32px;
+      position: absolute;
+      top: -10px;
+      margin-left: 5px;
+    }
+
+  }
+
+  &__title{
+    font-size: 22px;
+  }
+
+  &__text{
+    font-style: italic;
+  }
+}
+
+@media (min-width:768px){
+  .impactCard{
+    width: 200px;
+    height: 200px;
+
+    &__counter{
+      font-size: 48px;
+    }
+
+    &__title{
+      font-size: 26px;
+    }
+  }
+}
+
+@media (min-width:1024px){
+  .impactCard{
+
+    &__counter{
+      font-size: 54px;
+    }
+
+  }
+}

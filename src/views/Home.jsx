@@ -3,6 +3,7 @@ import homeImg from '../assets/static/hero-1.jpg'
 import '../assets/styles/Home.scss'
 
 import AboutUsSection from "../componentes/Home/AboutUsSection";
+import ImpactSection from "../componentes/Home/ImpactSection/ImpactSection";
 
 export default function Home(props) {
 
@@ -19,7 +20,7 @@ export default function Home(props) {
       
 
       <AboutUsSection/>
-
+      <ImpactSection/>
 
     </main>
   );

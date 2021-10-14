@@ -3,6 +3,7 @@ import horizontalImg from '../../assets/static/Home/AboutUsSection/horizontalIma
 import verticalImg from '../../assets/static/Home/AboutUsSection/verticalImage.png'
 
 import '../../assets/styles/componentes/Home/AboutUsSection.scss'
+
 export default function AboutUsSection () {
     return (
     <section className='aboutUsSection'>
