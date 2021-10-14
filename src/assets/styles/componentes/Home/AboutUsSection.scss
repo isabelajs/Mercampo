@@ -8,7 +8,6 @@
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-  margin-bottom: 50px;
 
   &__info {
     h2 {
@@ -120,7 +119,6 @@
 
 @media (min-width:1024px){
   .aboutUsSection{
-    margin-bottom: 100px;
 
     &__imgsContainer{
       height: 330px;

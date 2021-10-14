@@ -1,6 +1,6 @@
 import React from "react";
 import homeImg from '../assets/static/hero-1.jpg'
-import '../assets/styles/Home.scss'
+import '../assets/styles/componentes/Home/Home.scss'
 
 import AboutUsSection from "../componentes/Home/AboutUsSection";
 import ImpactSection from "../componentes/Home/ImpactSection/ImpactSection";

@@ -1,9 +1,13 @@
-@import "./Vars.scss";
+@import '../../Vars.scss';
 
 .home {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  section{
+    margin-bottom: 50px;
+  }
 }
 
 .home-infoContainer {
@@ -105,6 +109,11 @@
 }
 
 @media (min-width: 1024px) {
+  .home{
+    section{
+      margin-bottom: 100px;
+    }
+  }
   .home-infoContainer {
     .home__info {
       width: 45%;
