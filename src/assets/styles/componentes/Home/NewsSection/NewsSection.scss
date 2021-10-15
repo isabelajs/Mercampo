@@ -1,0 +1,12 @@
+.newsSection{
+  width: 90%;
+  max-width: 1100px;
+  margin-bottom: 50px;
+
+  &__cardsContainer{
+    width: 100%;
+    display: grid;
+    row-gap: 20px;
+    justify-items: center;
+  }
+}

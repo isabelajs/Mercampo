@@ -6,6 +6,7 @@ import AboutUsSection from "../componentes/Home/AboutUsSection";
 import ImpactSection from "../componentes/Home/ImpactSection";
 import HowItWorksSection from "../componentes/Home/HowItWorksSection"
 import OurGoalSection from "../componentes/Home/OurGoalSection"
+import NewsSection from '../componentes/Home/NewsSection'
 
 export default function Home(props) {
 
@@ -25,6 +26,7 @@ export default function Home(props) {
       <ImpactSection/>
       <HowItWorksSection/>
       <OurGoalSection/>
+      <NewsSection/>
 
     </main>
   );
