@@ -88,6 +88,7 @@ h1{
 h2{
   font-size: 22px;
   color: $subTitle-blue;
+  margin-bottom: 30px;
   
   &.green{
     color: $subTitle-green;
@@ -99,6 +100,7 @@ h2{
 
   @media (min-width: 910px) {
     font-size: 40px;
+    margin-bottom: 40px;
   }
 }
 

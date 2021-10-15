@@ -3,8 +3,9 @@ import homeImg from '../assets/static/hero-1.jpg'
 import '../assets/styles/componentes/Home/Home.scss'
 
 import AboutUsSection from "../componentes/Home/AboutUsSection";
-import ImpactSection from "../componentes/Home/ImpactSection/ImpactSection";
-import HowItWorksSection from "../componentes/Home/HowItWorksSection/HowItWorksSection"
+import ImpactSection from "../componentes/Home/ImpactSection";
+import HowItWorksSection from "../componentes/Home/HowItWorksSection"
+import OurGoalSection from "../componentes/Home/OurGoalSection"
 
 export default function Home(props) {
 
@@ -23,6 +24,7 @@ export default function Home(props) {
       <AboutUsSection/>
       <ImpactSection/>
       <HowItWorksSection/>
+      <OurGoalSection/>
 
     </main>
   );

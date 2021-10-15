@@ -1,0 +1,59 @@
+.ourGoalSection{
+  width: 90%;
+  max-width: 1100px;
+
+  &__imgsContainer{
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 30px;
+    max-width: 400px;
+    margin-bottom: 30px;
+
+    img{
+      border-radius: 5px;
+      position: relative;
+      display: block;
+      
+      &:first-child{
+        width: 80%;
+        max-width: 300px;
+        margin-left: auto; 
+      }
+
+      &:nth-child(2){
+        position: absolute;
+        bottom: 0;
+        width: 50%;
+        max-width: 200px;
+      }
+    }
+
+  }
+  
+  p{
+    max-width: 650px;
+  }
+
+  &__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .button{
+      margin: 0 auto;
+    }
+  }
+
+
+}
+
+@media (min-width:910px){
+  .ourGoalSection{
+
+    &__content{
+      flex-direction: row-reverse;
+    }
+  }
+}
