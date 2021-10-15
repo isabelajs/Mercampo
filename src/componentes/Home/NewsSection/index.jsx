@@ -21,7 +21,7 @@ const news = [
 
 export default function NewsSection () {
     return (
-    <div className='newsSection'>
+    <section className='newsSection'>
         <h2 >Calendario</h2>
 
         <div className="newsSection__cardsContainer">
@@ -29,5 +29,5 @@ export default function NewsSection () {
                 news.length  > 0 && news.map(element => <NewsCard title={element.title} content={element.content} image={element.image} date={element.date}/>)
             }
         </div>
-    </div>
+    </section>
 )};
