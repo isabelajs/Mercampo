@@ -4,6 +4,7 @@ import '../assets/styles/componentes/Home/Home.scss'
 
 import AboutUsSection from "../componentes/Home/AboutUsSection";
 import ImpactSection from "../componentes/Home/ImpactSection/ImpactSection";
+import HowItWorksSection from "../componentes/Home/HowItWorksSection/HowItWorksSection"
 
 export default function Home(props) {
 
@@ -21,6 +22,7 @@ export default function Home(props) {
 
       <AboutUsSection/>
       <ImpactSection/>
+      <HowItWorksSection/>
 
     </main>
   );

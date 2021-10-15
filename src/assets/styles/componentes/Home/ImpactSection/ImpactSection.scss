@@ -15,7 +15,7 @@
     align-items: center;
     justify-items: center;
 
-    :first-child{
+    >:first-child{
       grid-row: 1 / 3;
     }
   }
@@ -25,10 +25,6 @@
   .impactSection{
     .impactCardsContainer{
       display:flex;
-
-      &>div{
-        margin: 0 30px;
-      }
 
       &>:nth-child(2){
         margin-bottom: 100px;

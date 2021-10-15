@@ -45,7 +45,6 @@ a{
   display: flex;
   align-items: center;
   background: white;
-  // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   border: solid 0.8px #B8B5B5;
   padding-right: 20px;
@@ -101,7 +100,18 @@ h2{
   @media (min-width: 910px) {
     font-size: 40px;
   }
+}
 
+h3 {
+  font-size: 18px;
+
+  @media (min-width: 910px) {
+    font-size: 22px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 24px;
+  }
 }
 
 p{
