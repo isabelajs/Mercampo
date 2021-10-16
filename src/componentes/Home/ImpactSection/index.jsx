@@ -1,5 +1,6 @@
 import React from 'react';
 import ImpactCard from './ImpactCard';
+
 import '../../../assets/styles/componentes/Home/ImpactSection/ImpactSection.scss'
 
 export default function ImpactSection () {
