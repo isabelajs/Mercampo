@@ -7,7 +7,6 @@ const ProductInfo = (props) =>{
 
   const {data, userData} = props
 
-
   const sendWaMessage = () =>{
 
     const message = waMessage(userData.phoneMain,`Me encuentro interesado en tu producto ${data.name} me gustaria tener mas informacion`)
@@ -21,7 +20,7 @@ const ProductInfo = (props) =>{
 
       <div>
         <h2 className='product__name'>{data.name}</h2>
-        <h3>{userData.name}</h3>
+        <h3>{userData.name || 'unknown user name' }</h3>
       </div>
 
       <p className="product__description">{data.description}</p>
@@ -33,8 +32,8 @@ const ProductInfo = (props) =>{
       </div>
 
       <div className="product__userInfo">
-        <p>Email: {userData.email}</p>
-        <p>Celular: {userData.phoneMain} {userData.phoneSecond && ` - ${userData.phoneSecond}`} </p>
+        <p>Email: {userData.email || 'unknown user email'}</p>
+        <p>Celular: {userData.phoneMain || 'unknown user phone' } {userData.phoneSecond && ` - ${userData.phoneSecond}`} </p>
         <div className='product__userContact'>
           <span onClick={sendWaMessage}>Enviale un mensaje</span>
           <svg style={{cursor:'pointer'}} onClick={sendWaMessage} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

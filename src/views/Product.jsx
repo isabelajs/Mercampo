@@ -23,8 +23,8 @@ const Product = (props) => {
     const fetchData = async() =>{
 
       try{
-        const data = await getProductById(props.match.params.id)
-        const userData = await findUserById(data.userId)
+        const data = await getProductById(props.match.params.id) 
+        const userData = await findUserById(data.userId) || {}
 
         if(!data){
           setStatus({
