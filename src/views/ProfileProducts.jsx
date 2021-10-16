@@ -133,7 +133,7 @@ const ProfileSettings = (props) => {
       </div>
 
       <div className="l-profileProducts__info">
-        <h2 className="profileProducts__textList">Listado de productos</h2>
+        <p className="profileProducts__textList">Listado de productos</p>
 
         <div className="profileProducts__infoList">
           <p className="infoList__count infoList__count--green">

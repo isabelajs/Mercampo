@@ -18,12 +18,12 @@ export default function ConfirmationModal(props) {
         {
           props.inProcess ? 
           <>
-            <h1>Enviando</h1>
+            <h3>Enviando</h3>
             <p>Por favor espere ...</p>
           </>
           :
           <>
-            <h1>Confirmacion</h1>
+            <h3>Confirmacion</h3>
             <p>¿Esta seguro de realizar la modificacion?</p>
           </>
         }
