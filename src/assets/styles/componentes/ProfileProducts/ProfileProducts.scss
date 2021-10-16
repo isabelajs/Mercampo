@@ -39,36 +39,41 @@
 }
 
 .l-profileProducts__info{
-  display: none;
-  padding: 0 3.5% 0 3.5%;
+  display: grid;
+  grid-template-columns: 1fr repeat(2,50px);
   width: 100%;
-  align-items: flex-end;
-  justify-content: space-between;
+  justify-items: center;
   margin-top: 20px;
+  padding: 0 calc( 3.5% + 10px);
 
   .profileProducts__textList{
     margin: 0;
     font-size: 20px;
     font-weight: bold;
+    justify-self: start;
+
   }
 
   .profileProducts__infoList{
+    // display: flex;
 
     &:nth-child(2){
-      margin-left: 20%;
+      // margin-left: 20%;
     }
 
     &:last-child{
-      margin-right: 5%;
+      // margin-right: 5%;
     }
 
     .infoList__type{
       font-size: 18px;
       margin: 0;
+      display: none;
     }
 
     .infoList__count{
       margin: 0;
+      // margin-right: 20px;
       text-align: center;
       font-size: 17px;
 
@@ -107,7 +112,15 @@
   }
 
   .l-profileProducts__info{
-    display: flex;
+    grid-template-columns: 2fr repeat(2,1fr);
+    align-items: center;
+
+
+    .profileProducts__infoList{      
+      .infoList__type{
+        display: block;
+      }
+    }
   }
 
 }
