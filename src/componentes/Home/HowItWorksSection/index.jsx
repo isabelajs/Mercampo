@@ -1,13 +1,14 @@
 import React from 'react';
-import '../../../assets/styles/componentes/Home/HowItWorksSection/HowItWorksSection.scss'
 import producerImg from '../../../assets/static/Home/HowItWorksSection/agriculturalProducer.svg'
 import userImg from '../../../assets/static/Home/HowItWorksSection/user.svg'
 
 import HowItWorksBlock from './HowItWorksBlock';
 
+import '../../../assets/styles/componentes/Home/HowItWorksSection/HowItWorksSection.scss'
+
 export default function HowItWorksSection () {
     return (
-    <section className='howItWorksSection'>
+    <section className='howItWorksSection section--gray section--separation'>
       <div className="howItWorksSection__content">
         <h2>¿Cómo funciona?</h2>
         <p>Brindamos una vitrina virtual donde los productores pueden exponer sus productos, de manera que atraigan a su posibles comprados</p>

@@ -5,122 +5,56 @@
   flex-direction: column;
   align-items: center;
 
-  section{
-    margin-bottom: 60px;
-  }
-}
 
-.home-infoContainer {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  color: #353d4d;
-  width:100%;
-
-  .home__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 10px 20px 10px;
-
-    button {
-      background-color: #48bb78;
-      width: 60%;
-      font-size: 16px;
-      min-height: 45px;
-    }
-  }
-
-  .home__infoTitle {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    letter-spacing: -0.025em;
-    line-height: 1;
-
-    span {
-      color: #48bb78;
-    }
-  }
-
-  .home__infoText {
-    max-width: 560px;
-    font-size: 16px;
-    margin: 30px 0;
-    color: #a0aec0;
-  }
-
-  img {
-    object-fit: cover;
-    height: 250px;
+  &__backgroundBlock{
     width: 100%;
+    position: relative;
   }
-}
 
-
-@media (min-width: 420px) {
-  .home-infoContainer {
-    .home__infoText {
-      margin: 40px 0;
-      font-size: 18px;
-    }
+  section{
+    padding-bottom: 30px;
   }
-}
 
-@media (min-width: 550px) {
-  .home-infoContainer {
-    button {
-      font-size: 18px;
+  .section{
+    &--gray{
+      background-color: $light-gray;
     }
 
-    .home__infoText {
-      margin: 40px 0;
-      font-size: 18px;
+    &--separation{
+      margin-top: 60px;
     }
   }
+
 }
 
 @media (min-width: 910px) {
-  .home-infoContainer {
-    height: 450px;
-    flex-direction: row;
-    text-align: left;
-    padding-left: 20px;
+ .home{
 
-    .home__info {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      width: 55%;
-      height: 100%;
-      z-index: 2;
+  .section{
+    &--gray{
+      background-color: transparent;
     }
 
-    .home__infoText {
-      font-size: 20px;
-    }
-
-    img {
-      clip-path: polygon(70px 0, 100% 0, 100% 100%, 0 100%);
-      width: 45%;
-      height: 100%;
+    &--separation{
+      margin-top: 80px;
     }
   }
+
+  &__backgroundBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &::after{
+      position: absolute;
+      content: '';
+      inset: 0 0 0 0;
+      background: #F4F4F4;
+      clip-path: polygon(60% 0, 100% 0, 100% 100%, 0 100%);
+      z-index: -2;
+    }
+  
+  }
+ }
 }
 
-@media (min-width: 1024px) {
-  .home{
-    section{
-      margin-bottom: 100px;
-    }
-  }
-  .home-infoContainer {
-    .home__info {
-      width: 45%;
-    }
-
-    img {
-      width: 55%;
-    }
-  }
-}

@@ -6,7 +6,7 @@ import '../../assets/styles/componentes/Home/AboutUsSection.scss'
 
 export default function AboutUsSection () {
     return (
-    <section className='aboutUsSection'>
+    <section className='aboutUsSection section--gray  section--separation'>
         <div className='aboutUsSection__info'>
             <h2>¿Quiénes somos?</h2>
             <p>Somos una plataforma digital que permite crear una relación directa entre productores agricolas con sus clientes potenciales, evitando intermediariarios en el proceso.</p>

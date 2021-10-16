@@ -4,7 +4,7 @@ import '../../../assets/styles/componentes/Home/ImpactSection/ImpactSection.scss
 
 export default function ImpactSection () {
     return (
-    <section className='impactSection'>
+    <section className='impactSection  section--separation'>
       <h2 className="green">Nuestro impacto</h2>
       <div className="impactCardsContainer">
         <ImpactCard counter={150} title='Productos' text='Agricolas'/>

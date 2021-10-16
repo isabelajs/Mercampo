@@ -6,7 +6,7 @@ import '../../../assets/styles/componentes/Home/OurGoalSection/OurGoalSection.sc
 
 export default function OurGoalSection () {
     return (
-    <section className='ourGoalSection'>
+    <section className='ourGoalSection section--separation'>
 
       <h2 className='green'>Nuestra Meta</h2>
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import '../../../assets/styles/componentes/Home/NewsSection/NewsSection.scss'
 import NewsCard from './NewsCard';
 import image01 from '../../../assets/static/Home/NewsSection/image01.png'
 import image02 from '../../../assets/static/Home/NewsSection/image02.png'
+
+import '../../../assets/styles/componentes/Home/NewsSection/NewsSection.scss'
 
 const news = [
     {
@@ -21,12 +22,12 @@ const news = [
 
 export default function NewsSection () {
     return (
-    <section className='newsSection'>
+    <section id='calendario' className='newsSection section--separation'>
         <h2 >Calendario</h2>
 
         <div className="newsSection__cardsContainer">
             {
-                news.length  > 0 && news.map(element => <NewsCard title={element.title} content={element.content} image={element.image} date={element.date}/>)
+                news.length  > 0 && news.map((element,index) => <NewsCard key={`card_${index}`} title={element.title} content={element.content} image={element.image} date={element.date}/>)
             }
         </div>
     </section>

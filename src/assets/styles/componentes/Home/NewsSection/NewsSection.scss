@@ -2,7 +2,6 @@
   width: 100%;
   position: relative;
 
-  padding-bottom: 60px;
   
   &__cardsContainer{
     width: 90%;
@@ -11,8 +10,7 @@
     row-gap: 20px;
     justify-items: center;
     margin: 0 auto;
-    
-
+  
   }
 
   &::after{
@@ -26,14 +24,16 @@
 }
 
 .home{
-  section{
-    margin-bottom: 0;
+  .newsSection{
+    padding-bottom: 50px;
   }
 }
 
-
 @media (min-width: 1024px) {
-  .newsSection{
-    padding-bottom: 100px;
+
+  .home{
+    .newsSection{
+      padding-bottom: 100px;
+    }
   }
 }
