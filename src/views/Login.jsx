@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom';
 import LocalAlert from '../componentes/common/LocalAlert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
-//imagenes
-// import google from '../assets/static/google-icon.svg'
-// import facebook from '../assets/static/facebook-icon.svg'
-// import phone from '../assets/static/phone-icon.svg'
 import '../assets/styles/componentes/Login.scss'
 
 //funciones de firebase

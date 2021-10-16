@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Facebook from '../assets/static/Facebook.svg'
-import Twitter from '../assets/static/Twitter.svg'
-import Instagram from '../assets/static/Instagram.svg'
+
 import Logo from '../assets/static/logo.png'
+
+import {ReactComponent as TwitterIcon} from '../assets/static/Icons/Twitter.svg'
+import {ReactComponent as InstagramIcon} from '../assets/static/Icons/Instagram.svg'
+import {ReactComponent as FacebookIcon} from '../assets/static/Icons/Facebook.svg'
 
 import '../assets/styles/componentes/Footer.scss'
 
@@ -13,8 +15,8 @@ export default function Footer() {
 
       <div className="top">
 
-        <img className='footer__mainLogo' src={Logo} alt="" />
-        <nav>
+       <Link to='/'> <img className='footer__mainLogo' src={Logo} alt="" /></Link>
+        {/* <nav>
           <ul>
             <li>
               <Link to='/'>Home</Link>
@@ -29,18 +31,17 @@ export default function Footer() {
               <Link to='/'>Home</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         <div className="footer__socialMedia">
-          <img src={Facebook} alt="" />
-          <img src={Instagram} alt="" />
-          <img src={Twitter} alt="" />
-          <img src={Facebook} alt="" />
+          <Link to='/'> <FacebookIcon/> </Link>
+          <Link to='/'><InstagramIcon/></Link>
+          <Link to='/'><TwitterIcon/></Link>
         </div>
       </div>
 
       <div className="copyright">
-        © Develop by JuanCJC & IsabelaJS - All Rights Reserved
+        © Develop by JuanCJC & IsaJS - All Rights Reserved
       </div>
     </footer>
   );
