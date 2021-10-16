@@ -34,15 +34,27 @@
 
 
 .button--main{
-  background-color: $main-button;
+  background-color: $main-green;
   color: white;
   border: none;
+
+  &:hover{
+    border: 1px solid $main-green;
+    background: white;
+    color: $main-green;
+  }
 }
 
 .button--second{
-  background-color: #2D9CDB ;
+  background-color: $main-blue ;
   color: white;
   border: none;
+
+  &:hover{
+    border: 1px solid $main-blue;
+    background: white;
+    color: $main-blue;
+  }
 }
 
 .button--danger{

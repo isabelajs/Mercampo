@@ -91,12 +91,12 @@ h1{
 
 h2{
   font-size: 22px;
-  color: $subTitle-blue;
+  color: $dark-blue;
   margin-bottom: 30px;
   margin-top: 30px; 
   
   &.green{
-    color: $subTitle-green;
+    color: $main-green;
   }
 
   @media (min-width: 425px) {
