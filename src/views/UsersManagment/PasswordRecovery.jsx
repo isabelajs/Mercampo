@@ -1,17 +1,20 @@
 import React, {useState, useEffect, useCallback  } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { openAlert,closeAlert } from '../actions';
+
+//redux actions
+import { openAlert,closeAlert } from '@actions';
 
 //componentes de react
 import Alert from '@components/common/Alert'
 import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
-import '@styles/componentes/PasswordRecovery.scss'
-
 //funciones de firebase
 import { passwordReset } from '@utils/auth'
 import {validationsInForm} from '@helpers/validationsInform';
+
+//styles
+import '@styles/componentes/PasswordRecovery.scss'
 
 function RecoverPassword (props){
   const {openAlert, closeAlert} = props

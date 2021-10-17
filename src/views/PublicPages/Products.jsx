@@ -10,7 +10,7 @@ import CardCategory  from '@components/Products/CardCategory'
 import FilterMenu from '@components/ModalMenu/FilterMenu'
 
 //funciones
-import { useFilterProducts } from  '../utils/Hooks'
+import { useFilterProducts } from  '../../utils/Hooks'
 import { getAllProducts, getProductsByFilters } from "@utils/dataBase";
 
 //lista de elementos de categoria

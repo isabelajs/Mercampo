@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 //redux
 import { connect } from "react-redux";
-import { setUser,setLoadingUser } from '../../actions'
+import { setUser,setLoadingUser } from '@actions'
 
 //public Views
 import {Home, Team, Products, Product} from "../../views"
