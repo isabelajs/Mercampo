@@ -1,5 +1,5 @@
 import React from 'react'
-import { waMessage } from '../../utils/Helpers/functions'
+import { waMessage } from '@helpers/functions'
 
 import '@styles/componentes/Product/ProductInfo.scss'
 

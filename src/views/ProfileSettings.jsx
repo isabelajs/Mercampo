@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 //componentes react
-import SystemLayout from "../componentes/system/SystemLayout";
-import PasswordForm from "../componentes/ProfileSettings/PasswordForm";
-import DataForm from "../componentes/ProfileSettings/DataForm";
+import SystemLayout from "@components/system/SystemLayout";
+import PasswordForm from "@components/ProfileSettings/PasswordForm";
+import DataForm from "@components/ProfileSettings/DataForm";
 
 //estilos
 import "@styles/componentes/ProfileSettings.scss";
-import { findUserById } from "../utils/dataBase";
-import Loading from "../componentes/common/Loading";
+import { findUserById } from "@utils/dataBase";
+import Loading from "@components/common/Loading";
 
 
 //BUG: Cuando el form no halla cambiado y se hace un guardar evitar, que envie informacion

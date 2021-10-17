@@ -2,31 +2,31 @@ import React, { useCallback, useEffect } from "react";
 import { connect } from 'react-redux';
 
 //componentes react
-import SystemLayout from "../componentes/system/SystemLayout";
-import TableUnitPrices from "../componentes/ProfileProduct/TableUnitPrices";
-import ProductPhoto from '../componentes/ProfileProduct/ProductPhoto';
-import NewProductPhoto from "../componentes/ProfileProduct/AddProductPhoto";
-import FormListbox from "../componentes/common/formListbox";
-import LocalAlert from '../componentes/common/LocalAlert'
+import SystemLayout from '@components/system/SystemLayout';
+import TableUnitPrices from '@components/ProfileProduct/TableUnitPrices';
+import ProductPhoto from '@components/ProfileProduct/ProductPhoto';
+import NewProductPhoto from '@components/ProfileProduct/AddProductPhoto';
+import FormListbox from '@components/common/formListbox';
+import LocalAlert from '@components/common/LocalAlert'
 
 
 //estilos
 import '@styles/componentes/ProfileProduct/EditProduct.scss';
 
 //funcion  firestore
-import { addProductToStore, findUserById } from '../utils/dataBase'
+import { addProductToStore, findUserById } from '@utils/dataBase'
 
 //hooks
-import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert, useStateRef } from "../utils/Hooks";
+import { useFormBasicProduct, useFormPricesProduct, useFormPhotosProduct, useModal, useAlert, useStateRef } from '@hooks';
 
 //validaciones del formulario
-import {validationsInFormProducts} from "../utils/Helpers/validationsInform";
-import ConfirmationModal from "../componentes/common/ConfirmationModal";
+import {validationsInFormProducts} from '@helpers/validationsInform';
+import ConfirmationModal from '@components/common/ConfirmationModal';
 
 
 //import listado de categorias
-import { categoriesList } from "../utils/Helpers/listElements";
-import { departments, cities } from '../utils/Helpers/dataBaseCities'
+import { categoriesList } from '@helpers/listElements';
+import { departments, cities } from '@helpers/dataBaseCities'
 
 
 const ProfileNewProduct = (props) => { 

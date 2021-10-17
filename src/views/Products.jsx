@@ -4,18 +4,18 @@ import React, { useState, useEffect } from "react";
 import "@styles/componentes/Products.scss";
 
 //componentes
-import CardProduct from "../componentes/Products/CardProduct";
-import Carousel from '../componentes/common/Carousel'
-import CardCategory  from '../componentes/Products/CardCategory'
-import FilterMenu from '../componentes/ModalMenu/FilterMenu'
+import CardProduct from "@components/Products/CardProduct";
+import Carousel from '@components/common/Carousel'
+import CardCategory  from '@components/Products/CardCategory'
+import FilterMenu from '@components/ModalMenu/FilterMenu'
 
 //funciones
 import { useFilterProducts } from  '../utils/Hooks'
-import { getAllProducts, getProductsByFilters } from "../utils/dataBase";
+import { getAllProducts, getProductsByFilters } from "@utils/dataBase";
 
 //lista de elementos de categoria
-import { categoriesList } from "../utils/Helpers/listElements.js";
-import Loading from "../componentes/common/Loading";
+import { categoriesList } from "@helpers/listElements.js";
+import Loading from "@components/common/Loading";
 
 export default function Products() {
 

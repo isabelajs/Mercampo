@@ -2,18 +2,18 @@ import React , { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 //componentes react
-import LocalAlert from '../componentes/common/LocalAlert';
-import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
+import LocalAlert from '@components/common/LocalAlert';
+import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
 
 import '@styles/componentes/Register.scss'
 
 //funciones auth and database
-import { signUpWithEmail } from '../utils/auth'
-import { validationsInForm } from '../utils/Helpers/validationsInform';
+import { signUpWithEmail } from '@utils/auth'
+import { validationsInForm } from '@helpers/validationsInform';
 
 //actiones
-import { useAlert } from '../utils/Hooks';
+import { useAlert } from '@hooks';
 
 //TODO CONFIRMACIÓN DE CONTRASEÑA Y VISUALIZACIÓN
 

@@ -27,9 +27,9 @@ function Header (props){
     history.push('/products')
   }
 
-  const moveToProfile = ()=>{
-    history.push('/profile/settings')
-  }
+  // const moveToProfile = ()=>{
+  //   history.push('/profile/settings')
+  // }
 
   const toggleMenu = ()=>{
     setIsOpenMenu(!isOpenMenu)

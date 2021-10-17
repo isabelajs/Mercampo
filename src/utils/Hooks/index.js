@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { objectToList } from '../Helpers/conversionFunctions';
+import { objectToList } from '@helpers/conversionFunctions';
 
-import { cities } from '../Helpers/dataBaseCities';
+import { cities } from '@helpers/dataBaseCities';
 
 
 export function useFilterProducts (initialCategory){

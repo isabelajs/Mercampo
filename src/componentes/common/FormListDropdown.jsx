@@ -2,7 +2,7 @@ import React, { useState,useRef } from 'react';
 import '@styles/generales/FormListDropdown.scss'
 
 //lista de ciudades
-import { allCities } from '../../utils/Helpers/dataBaseCities'
+import { allCities } from '@helpers/dataBaseCities'
 
 const FormListDropdown = ({changeFilterList,type})=>{
   const ref = useRef()

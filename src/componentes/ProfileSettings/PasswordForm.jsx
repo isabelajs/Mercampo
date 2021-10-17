@@ -1,7 +1,7 @@
 import React , { memo, useState }from 'react'
-import { changePassword } from '../../utils/auth';
-import { validationsInForm } from '../../utils/Helpers/validationsInform';
-import { useAlert, useModal, useStateRef } from '../../utils/Hooks';
+import { changePassword } from '@utils/auth';
+import { validationsInForm } from '@helpers/validationsInform';
+import { useAlert, useModal, useStateRef } from '@hooks';
 import ConfirmationModal from '../common/ConfirmationModal';
 import LocalAlert from '../common/LocalAlert';
 

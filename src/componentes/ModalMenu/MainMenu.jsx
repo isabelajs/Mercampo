@@ -11,7 +11,7 @@ import ModalMenu from './ModalMenu';
 import MenuLink  from './MenuLink'
 import SubMenu from './SubMenu'
 
-import { signOut } from '../../utils/auth'
+import { signOut } from '@utils/auth'
 
 import '@styles/componentes/ModalMenu/MainMenu.scss'
 

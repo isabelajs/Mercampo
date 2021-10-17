@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 //componentes react
-import SystemLayout from "../componentes/system/SystemLayout";
-import { ProductCard } from "../componentes/ProfileProducts/ProductCard";
+import SystemLayout from "@components/system/SystemLayout";
+import { ProductCard } from "@components/ProfileProducts/ProductCard";
 
 //styles
 import "@styles/componentes/ProfileProducts/ProfileProducts.scss";
 
 //funciones firestore
-import { getProductsByUser, removeProduct } from "../utils/dataBase";
+import { getProductsByUser, removeProduct } from "@utils/dataBase";
 import { useState } from "react";
-import { CardAddProduct } from "../componentes/ProfileProducts/CardAddProduct";
-import Loading from "../componentes/common/Loading";
-import { useModal, useStateRef } from "../utils/Hooks";
+import { CardAddProduct } from "@components/ProfileProducts/CardAddProduct";
+import Loading from "@components/common/Loading";
+import { useModal, useStateRef } from '@hooks';
 
-import EliminationModal from '../componentes/common/EliminationModal'
+import EliminationModal from '@components/common/EliminationModal'
 
 const ProfileSettings = (props) => {
   const [userProducts, setUserProducts] = useState({

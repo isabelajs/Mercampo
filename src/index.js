@@ -5,7 +5,7 @@ import { Provider} from 'react-redux';
 import { createStore, compose } from 'redux';
 import reducer from './reducers';
 //componente react
-import App from './componentes/router/App.jsx';
+import App from '@components/router/App.jsx';
 
 
 const initialState ={

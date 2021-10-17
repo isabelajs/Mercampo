@@ -1,7 +1,7 @@
 import React from 'react';
 
 //components
-import CardTeam from '../componentes/Team/CardTeam';
+import CardTeam from '@components/Team/CardTeam';
 
 //assets
 import mainImg from '@images/Team/main.jpg'

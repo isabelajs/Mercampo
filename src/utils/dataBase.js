@@ -1,6 +1,6 @@
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
-import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick, concatItems} from "./Helpers/conversionFunctions";
+import { listToObject,textToKeywords, newNameList, buildKeywords, replaceVowelsTick, concatItems} from "@helpers/conversionFunctions";
 
 // agrega los usuarios a firestore (copia de users + info adicional)
 export const registerUser = (user) => {

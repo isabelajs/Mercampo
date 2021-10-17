@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+
 //redux
 import { connect } from "react-redux";
 import { setUser,setLoadingUser } from '../../actions'
 
-//componentes de react
-import Home from "../../views/Home";
-import Team from "../../views/Team";
-import Login from "../../views/Login";
-import Register from "../../views/Register";
-import PasswordRecovery from "../../views/PasswordRecovery";
-import Products from '../../views/Products'
-import Product from '../../views/Product'
-import Layout  from "../../componentes/Layouts/LayoutLoged";
-import ProfileSettings from "../../views/ProfileSettings";
-import ProfileProducts from '../../views/ProfileProducts'
-import ProfileNewProduct from "../../views/NewProduct";
-import EditProduct from "../../views/EditProduct";
-import PrivateRoute from "./PrivateRoute";
+//public Views
+import {Home, Team, Products, Product} from "../../views"
 
+//user managment
+import {Login,Register,PasswordRecovery} from '../../views'
+
+//app views
+import {EditProduct, ProfileSettings, ProfileProducts, ProfileNewProduct} from '../../views'
+
+//components
+import Layout  from "@components/Layouts/LayoutLoged";
+
+import PrivateRoute from "./PrivateRoute";
 
 //estilos
 import '@styles/App.scss';

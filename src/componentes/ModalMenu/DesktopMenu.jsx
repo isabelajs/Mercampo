@@ -4,7 +4,7 @@ import profileIcon from '@images/profileIcon.svg'
 import productsIcon from '@images/productsIcon.svg'
 import '@styles/componentes/DesktopMenu.scss'
 import { Link, useHistory } from 'react-router-dom';
-import { signOut } from '../../utils/auth';
+import { signOut } from '@utils/auth';
 
 export default function DesktopMenu(props) {
 

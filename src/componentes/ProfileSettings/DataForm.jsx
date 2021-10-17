@@ -1,7 +1,7 @@
 import React from 'react'
 
 //hooks
-import { useAlert, useModal, useStateRef } from '../../utils/Hooks';
+import { useAlert, useModal, useStateRef } from '@hooks';
 
 //components
 import AddImage from '../common/addImage';
@@ -9,12 +9,12 @@ import LocalAlert from '../common/LocalAlert';
 import ConfirmationModal from '../common/ConfirmationModal';
 
 //functions
-import { validationsInForm } from '../../utils/Helpers/validationsInform';
-import { updateUserInfo } from '../../utils/dataBase';
+import { validationsInForm } from '@helpers/validationsInform';
+import { updateUserInfo } from '@utils/dataBase';
 import FormListbox from '../common/formListbox';
 
 //listas
-import { departments,cities } from '../../utils/Helpers/dataBaseCities';
+import { departments,cities } from '@helpers/dataBaseCities';
 
 const DataForm = ({data,setData}) => {
 

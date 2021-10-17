@@ -1,17 +1,18 @@
 import React, {useState , useCallback  } from 'react';
 import { Link } from 'react-router-dom';
 
-//componentes de react
-import LocalAlert from '../componentes/common/LocalAlert'
-import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
+//components
+import LocalAlert from '@components/common/LocalAlert'
+import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
+//styles
 import '@styles/componentes/Login.scss'
 
-//funciones de firebase
-import { signInWithEmail, signOut } from '../utils/auth'
-import {validationsInForm} from '../utils/Helpers/validationsInform';
+//firebase functions
+import { signInWithEmail, signOut } from '@utils/auth'
+import {validationsInForm} from '@helpers/validationsInform';
 
-import {useAlert} from '../utils/Hooks'
+import {useAlert} from '@hooks'
 
 // https://dribbble.com/wenhy/collections/1631290-design
 //  https://co.pinterest.com/pin/184577284702032988/

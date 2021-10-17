@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import ProductInfo from '../componentes/Product/ProductInfo';
-import ProductPhotos from '../componentes/Product/ProductPhotos';
-import { findUserById, getProductById } from '../utils/dataBase';
+import ProductInfo from '@components/Product/ProductInfo';
+import ProductPhotos from '@components/Product/ProductPhotos';
+import { findUserById, getProductById } from '@utils/dataBase';
 
 import '@styles/componentes/Product/Product.scss'
-import MoreProducts from '../componentes/Product/MoreProducts';
-import Loading from '../componentes/common/Loading';
+import MoreProducts from '@components/Product/MoreProducts';
+import Loading from '@components/common/Loading';
 
 const Product = (props) => {
 

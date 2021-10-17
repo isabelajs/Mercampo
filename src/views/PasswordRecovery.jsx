@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { openAlert,closeAlert } from '../actions';
 
 //componentes de react
-import Alert from '../componentes/common/Alert'
-import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
+import Alert from '@components/common/Alert'
+import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
 import '@styles/componentes/PasswordRecovery.scss'
 
 //funciones de firebase
-import { passwordReset } from '../utils/auth'
-import {validationsInForm} from '../utils/Helpers/validationsInform';
+import { passwordReset } from '@utils/auth'
+import {validationsInForm} from '@helpers/validationsInform';
 
 function RecoverPassword (props){
   const {openAlert, closeAlert} = props
