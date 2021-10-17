@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import LocalAlert from '@components/common/LocalAlert';
 import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
-
+//styles
 import '@styles/componentes/Register.scss'
+
+//hooks
+import {useVisibilityPassword} from '@hooks'
 
 //funciones auth and database
 import { signUpWithEmail } from '@utils/auth'
@@ -27,6 +30,7 @@ function Register(props){
     password: '',
   })
 
+  const {visibilityPassword, handlerVisibilityPassword} = useVisibilityPassword()
   
   //agrega información a mi estado form
   const handleChange = (event)=>{
@@ -117,10 +121,15 @@ function Register(props){
               onChange={handleChange}
               className='form-input' 
               name='password' 
-              type='password' 
+              type={`${visibilityPassword ? 'text' : 'password'}`}
               placeholder='Ingresa tu contraseña' 
               autoComplete='false'
             />
+          </div>
+
+          <div className="form__checkbox">
+            <input onChange={handlerVisibilityPassword} id='viewPassword' type='checkbox'/>
+            <label htmlFor="viewPassword">Ver contraseña</label>
           </div>
 
           <button className='button button--main'>Registrate</button>

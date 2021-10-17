@@ -50,4 +50,61 @@ input::-webkit-inner-spin-button {
     resize: none;
   }
 
+
+}
+
+
+.form__checkbox{
+
+  margin-left: 5px;
+
+  input{
+    display: none;
+
+    &:not(:checked) + label::before{
+    
+      -webkit-transform: scale(1) rotate(0);
+      transform: scale(1) rotate(0);
+
+    }
+
+    &:checked {
+        &+label::before{
+          content: 'x';
+          font-size: 12px;
+          -webkit-transform: scale(1) rotate(180deg);
+          transform: scale(1) rotate(180deg);
+    
+      }
+    } 
+
+  }
+  
+  label{
+    display: flex;
+    align-items: center;
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    &::before{
+      font-weight: bolder;
+      content: '';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      border-radius: 2.5px;
+      width: 16px;
+      height: 16px;
+      
+      border: 2px solid #383838;
+      transition: all 0.1s;
+      margin-right: 10px;
+
+  }
+
+  }    
+  
 }

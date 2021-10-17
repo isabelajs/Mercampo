@@ -3,6 +3,19 @@ import { objectToList } from '@helpers/conversionFunctions';
 
 import { cities } from '@helpers/dataBaseCities';
 
+export function useVisibilityPassword () {
+  const [state,setState] = useState(false)
+
+  const handlerVisibilityPassword = useCallback((event)=>{
+    setState(event.target.checked)
+  },[])
+
+  return {
+    visibilityPassword: state,
+    handlerVisibilityPassword,
+    setVisibilityPassword: setState
+  }
+}
 
 export function useFilterProducts (initialCategory){
 

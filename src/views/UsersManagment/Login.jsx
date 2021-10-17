@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import LocalAlert from '@components/common/LocalAlert'
 import LayoutSignMethod from '@components/Layouts/LayoutSignMethod';
 
+//hooks
+import {useVisibilityPassword} from '@hooks'
+
 //styles
 import '@styles/componentes/Login.scss'
 
@@ -27,6 +30,8 @@ function Login (props){
                               password: '',
                             })
 
+  const {visibilityPassword, handlerVisibilityPassword} = useVisibilityPassword()
+
   const validationForm = useCallback((form)=>{validationsInForm(form)},[])
 
   const handleInput = (event)=>{
@@ -34,7 +39,7 @@ function Login (props){
       ...form,
       [event.target.name]: event.target.value
     })
-  }        
+  }
 
   const handleSubmit = async (event)=>{
 
@@ -103,15 +108,19 @@ function Login (props){
             onChange={handleInput} 
             className="form-input" 
             name='password' 
-            type="password" 
+            type={`${visibilityPassword ? 'text' : 'password'}`}
             placeholder="Ingresa la contraseña" 
             autoComplete='false'/>
         </div>
 
+        <div className="form__checkbox">
+          <input onChange={handlerVisibilityPassword} id='viewPassword' type='checkbox'/>
+          <label htmlFor="viewPassword">Ver contraseña</label>
+        </div>
+
         <Link to='/recovery' className='form__text'>¿Olvidaste tu contraseña?</Link>
         <button className="button button--main">Ingresar</button>
-
-
+        
       </form>
 
       <div className="login__register">
