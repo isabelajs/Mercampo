@@ -116,7 +116,7 @@
     justify-items: center;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
-    max-width: 1100px;
+    max-width: 1200px;
     background-color: transparent;
 
     &__imgsContainer{
@@ -131,8 +131,8 @@
   .aboutUsSection{
 
     &__imgsContainer{
-      height: 330px;
-      max-width: 450px;
+      height: 350px;
+      max-width: 500px;
     }
   }
 }
