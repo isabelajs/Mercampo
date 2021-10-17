@@ -20,19 +20,19 @@ export default function AboutUsSection () {
         <div className="aboutUsSection__helpsContainer">
             <div className="aboutUsSection__help">
                 <img src={sostenibilityImg} alt="" />
-                <p>Agronomia Sostenible</p>
+                <h4>Agronomia Sostenible</h4>
             </div>
             <div className="aboutUsSection__help">
                 <img src={sostenibilityImg} alt="" />
-                <p>Apoyo a la comunidad</p>
+                <h4>Apoyo a la comunidad</h4>
             </div>
             <div className="aboutUsSection__help">
                 <img src={sostenibilityImg} alt="" />
-                <p>Negocios Verdes</p>
+                <h4>Negocios Verdes</h4>
             </div>
             <div className="aboutUsSection__help">
                 <img src={entrepreneurshipImg} alt="" />
-                <p>Emprendimiento</p>
+                <h4>Emprendimiento</h4>
             </div>
         </div>
 
