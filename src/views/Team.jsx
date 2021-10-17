@@ -51,7 +51,6 @@ export default function Team () {
           listTeam.map(member => <CardTeam {...member}/>)
         }
 
-
       </div>
 
 

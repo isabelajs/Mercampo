@@ -96,7 +96,7 @@
         h3{
           margin-top: 10px;
         }
-        
+
         background: rgba(255, 255, 255, 0.9);
         padding: 30px;
         border-radius: 5px;
@@ -116,6 +116,10 @@
   .team{
     h2{
       margin-top: 80px;
+    }
+
+    &__info{
+      padding-bottom: 100px;
     }
 
     &__cardsContainer{
