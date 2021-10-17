@@ -7,7 +7,7 @@ function LayoutLoginMethod ({children}){
     <div className='l-signMethod'>
       {children}
       <div className="imagen">
-        <img src={HomeImg} alt="" sizes="" srcset="" />
+        <img src={HomeImg} alt="" />
       </div>
     </div>
   )

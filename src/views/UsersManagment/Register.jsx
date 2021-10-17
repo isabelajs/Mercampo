@@ -54,7 +54,7 @@ function Register(props){
 
     try{
 
-      await signUpWithEmail(form.email,form.password, form.name)
+      await signUpWithEmail(form.email.trim(),form.password, form.name.trim())
       
       openAlert({
         error:false,

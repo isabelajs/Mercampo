@@ -50,7 +50,7 @@ function RecoverPassword (props){
 
     try{
 
-      await passwordReset(form.email)
+      await passwordReset(form.email.trim())
 
       openAlert({
         error: true,

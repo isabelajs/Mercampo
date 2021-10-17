@@ -22,7 +22,6 @@ function Login (props){
 
   const {alertStatus,openAlert,closeAlert} = useAlert()
 
-  
   const [form, setForm ] =  useState({
                               email: '',
                               password: '',
@@ -53,7 +52,7 @@ function Login (props){
 
     try{
       //El usuario intenta loguearse
-      const user = await signInWithEmail(form.email, form.password)
+      const user = await signInWithEmail(form.email.trim(), form.password)
 
       // si el usuario esta verificado, se confirma si esta en la base de datos
       if(!user.emailVerified){
