@@ -8,7 +8,7 @@ import OurGoalSection from "../componentes/Home/OurGoalSection"
 import NewsSection from '../componentes/Home/NewsSection'
 import IntroSection from "../componentes/Home/IntroSection";
 
-import '../assets/styles/componentes/Home/Home.scss'
+import '@styles/componentes/Home/Home.scss'
 
 export default function Home() {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../assets/styles/componentes/ModalMenu/OptionCheck.scss'
+import '@styles/componentes/ModalMenu/OptionCheck.scss'
 
 const OptionCheck = ({title,changeFilterList,type})=>{
   

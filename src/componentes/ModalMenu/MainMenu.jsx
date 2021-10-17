@@ -2,9 +2,9 @@ import React from 'react';
 import {Link, useHistory } from 'react-router-dom';
 
 //images
-import homeIcon from '../../assets/static/home-icon.svg'
-import profileIcon from '../../assets/static/profile-icon.svg'
-import aboutUsIcon from '../../assets/static/aboutUs-icon.svg'
+import homeIcon from '@images/home-icon.svg'
+import profileIcon from '@images/profile-icon.svg'
+import aboutUsIcon from '@images/aboutUs-icon.svg'
 
 //componentes 
 import ModalMenu from './ModalMenu';
@@ -13,7 +13,7 @@ import SubMenu from './SubMenu'
 
 import { signOut } from '../../utils/auth'
 
-import '../../assets/styles/componentes/ModalMenu/MainMenu.scss'
+import '@styles/componentes/ModalMenu/MainMenu.scss'
 
 
 const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{

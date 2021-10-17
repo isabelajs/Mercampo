@@ -4,12 +4,12 @@ import React from 'react';
 import CardTeam from '../componentes/Team/CardTeam';
 
 //assets
-import mainImg from '../assets/static/Team/main.jpg'
-import memberImg from '../assets/static/Team/imgTeam_1.png'
-import info01 from '../assets/static/Team/info01.jpg'
+import mainImg from '@images/Team/main.jpg'
+import memberImg from '@images/Team/imgTeam_1.png'
+import info01 from '@images/Team/info01.jpg'
 
 //styles
-import '../assets/styles/componentes/Team/Team.scss'
+import '@styles/componentes/Team/Team.scss'
 
 const listTeam = [{
     image: memberImg,

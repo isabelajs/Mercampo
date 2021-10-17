@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../../assets/styles/componentes/ProfileProduct/UnitPrice.scss";
+import "@styles/componentes/ProfileProduct/UnitPrice.scss";
 
 
 const UnitPrice = (props) => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import producerImg from '../../../assets/static/Home/HowItWorksSection/agriculturalProducer.svg'
-import userImg from '../../../assets/static/Home/HowItWorksSection/user.svg'
+import producerImg from '@images/Home/HowItWorksSection/agriculturalProducer.svg'
+import userImg from '@images/Home/HowItWorksSection/user.svg'
 
 import HowItWorksBlock from './HowItWorksBlock';
 
-import '../../../assets/styles/componentes/Home/HowItWorksSection/HowItWorksSection.scss'
+import '@styles/componentes/Home/HowItWorksSection/HowItWorksSection.scss'
 
 export default function HowItWorksSection () {
     return (

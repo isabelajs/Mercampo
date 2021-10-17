@@ -1,11 +1,13 @@
 import React from 'react';
-import horizontalImg from '../../assets/static/Home/AboutUsSection/horizontalImage.png'
-import verticalImg from '../../assets/static/Home/AboutUsSection/verticalImage.png'
 
-import sostenibilityImg from '../../assets/static/Home/AboutUsSection/sostenibility.png'
-import entrepreneurshipImg from '../../assets/static/Home/AboutUsSection/entrepreneurship.png'
+//assets
+import horizontalImg from '@images/Home/AboutUsSection/horizontalImage.png'
+import verticalImg from '@images/Home/AboutUsSection/verticalImage.png'
+import sostenibilityImg from '@images/Home/AboutUsSection/sostenibility.png'
+import entrepreneurshipImg from '@images/Home/AboutUsSection/entrepreneurship.png'
 
-import '../../assets/styles/componentes/Home/AboutUsSection.scss'
+//styles
+import '@styles/componentes/Home/AboutUsSection.scss'
 
 export default function AboutUsSection () {
     return (

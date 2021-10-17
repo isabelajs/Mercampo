@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 // import { useCallback } from 'react';
 
-import '../../assets/styles/componentes/Alert.scss'
+import '@styles/componentes/Alert.scss'
 
 
 //closeAlert debe ser memorizado para poder eliminar correctamente la funcion

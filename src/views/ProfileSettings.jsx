@@ -7,7 +7,7 @@ import PasswordForm from "../componentes/ProfileSettings/PasswordForm";
 import DataForm from "../componentes/ProfileSettings/DataForm";
 
 //estilos
-import "../assets/styles/componentes/ProfileSettings.scss";
+import "@styles/componentes/ProfileSettings.scss";
 import { findUserById } from "../utils/dataBase";
 import Loading from "../componentes/common/Loading";
 

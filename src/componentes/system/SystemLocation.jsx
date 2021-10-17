@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import ProductsIcon from '../../assets/static/productsIcon.svg'
-import ProfileIcon from '../../assets/static/profileIcon.svg'
+import ProductsIcon from '@images/productsIcon.svg'
+import ProfileIcon from '@images/profileIcon.svg'
 
 const SystemLocation = ({links,type})=>{
 

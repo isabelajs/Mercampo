@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import '../../assets/styles/generales/DragAndDrop.scss'
+import '@styles/generales/DragAndDrop.scss'
 
 export default function DragAndDrop(props) {
 

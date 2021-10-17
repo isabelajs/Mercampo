@@ -5,7 +5,7 @@ import SystemLayout from "../componentes/system/SystemLayout";
 import { ProductCard } from "../componentes/ProfileProducts/ProductCard";
 
 //styles
-import "../assets/styles/componentes/ProfileProducts/ProfileProducts.scss";
+import "@styles/componentes/ProfileProducts/ProfileProducts.scss";
 
 //funciones firestore
 import { getProductsByUser, removeProduct } from "../utils/dataBase";

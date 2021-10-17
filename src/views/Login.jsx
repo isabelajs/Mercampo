@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import LocalAlert from '../componentes/common/LocalAlert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
-import '../assets/styles/componentes/Login.scss'
+import '@styles/componentes/Login.scss'
 
 //funciones de firebase
 import { signInWithEmail, signOut } from '../utils/auth'

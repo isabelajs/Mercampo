@@ -1,8 +1,8 @@
 import React from 'react';
-import image01 from '../../../assets/static/Home/OurGoalSection/image01.png'
-import image02 from '../../../assets/static/Home/OurGoalSection/image02.png'
+import image01 from '@images/Home/OurGoalSection/image01.png'
+import image02 from '@images/Home/OurGoalSection/image02.png'
 
-import '../../../assets/styles/componentes/Home/OurGoalSection/OurGoalSection.scss'
+import '@styles/componentes/Home/OurGoalSection/OurGoalSection.scss'
 
 export default function OurGoalSection () {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../assets/styles/componentes/ProfileProducts/ProductCard.scss'
-import '../../assets/styles/componentes/ProfileProducts/itemNewProduct.scss'
+import '@styles/componentes/ProfileProducts/ProductCard.scss'
+import '@styles/componentes/ProfileProducts/itemNewProduct.scss'
 import { useHistory } from 'react-router-dom';
 
 function ProductCard(props) {

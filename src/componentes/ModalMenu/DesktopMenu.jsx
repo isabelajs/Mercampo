@@ -1,8 +1,8 @@
 import React from 'react';
-import closeIcon from '../../assets/static/closeIcon.svg';
-import profileIcon from '../../assets/static/profileIcon.svg'
-import productsIcon from '../../assets/static/productsIcon.svg'
-import '../../assets/styles/componentes/DesktopMenu.scss'
+import closeIcon from '@images/closeIcon.svg';
+import profileIcon from '@images/profileIcon.svg'
+import productsIcon from '@images/productsIcon.svg'
+import '@styles/componentes/DesktopMenu.scss'
 import { Link, useHistory } from 'react-router-dom';
 import { signOut } from '../../utils/auth';
 

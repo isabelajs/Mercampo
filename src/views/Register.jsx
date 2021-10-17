@@ -6,7 +6,7 @@ import LocalAlert from '../componentes/common/LocalAlert';
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
 
-import '../assets/styles/componentes/Register.scss'
+import '@styles/componentes/Register.scss'
 
 //funciones auth and database
 import { signUpWithEmail } from '../utils/auth'

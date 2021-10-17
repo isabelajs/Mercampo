@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../assets/styles/generales/Loading.scss'
+import '@styles/generales/Loading.scss'
 
 export default function Loading() {
   return (

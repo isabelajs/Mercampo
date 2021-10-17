@@ -21,7 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 
 
 //estilos
-import "../../assets/styles/App.scss";
+import '@styles/App.scss';
 
 //funciones de auth
 import { auth } from '../../firebase.config'

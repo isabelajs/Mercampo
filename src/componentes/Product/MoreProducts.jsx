@@ -4,7 +4,7 @@ import { getAllProducts } from '../../utils/dataBase'
 import Carousel from '../common/Carousel'
 
 
-import '../../assets/styles/componentes/Product/MoreProducts.scss'
+import '@styles/componentes/Product/MoreProducts.scss'
 
 const MoreProducts = memo(() =>{
 

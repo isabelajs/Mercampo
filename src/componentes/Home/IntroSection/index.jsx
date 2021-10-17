@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {ReactComponent as  MainImage} from '../../../assets/static/Home/IntroSection/main.svg'
+import {ReactComponent as  MainImage} from '@images/Home/IntroSection/main.svg'
 
-import '../../../assets/styles/componentes/Home/IntroSection/IntroSection.scss'
+import '@styles/componentes/Home/IntroSection/IntroSection.scss'
 
 export default function IntroSection () {
     return (

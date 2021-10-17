@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../assets/styles/componentes/Home/HowItWorksSection/HowItWorksBlock.scss'
+import '@styles/componentes/Home/HowItWorksSection/HowItWorksBlock.scss'
 
 export default function HowItWorksBlock ({title,children,image,left}) {
     return (

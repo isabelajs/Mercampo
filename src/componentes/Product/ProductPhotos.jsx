@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-import '../../assets/styles/componentes/Product/ProductPhotos.scss'
+import '@styles/componentes/Product/ProductPhotos.scss'
 import Carousel from '../common/Carousel'
 
 const ProductPhotos = ({imgs}) =>{

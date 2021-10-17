@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../assets/static/logo.png'
+import Logo from '@images/logo.png'
 
-import {ReactComponent as TwitterIcon} from '../assets/static/Icons/Twitter.svg'
-import {ReactComponent as InstagramIcon} from '../assets/static/Icons/Instagram.svg'
-import {ReactComponent as FacebookIcon} from '../assets/static/Icons/Facebook.svg'
+import {ReactComponent as TwitterIcon} from '@images/Icons/Twitter.svg'
+import {ReactComponent as InstagramIcon} from '@images/Icons/Instagram.svg'
+import {ReactComponent as FacebookIcon} from '@images/Icons/Facebook.svg'
 
-import '../assets/styles/componentes/Footer.scss'
+import '@styles/componentes/Footer.scss'
 
 export default function Footer() {
   return (

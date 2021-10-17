@@ -1,9 +1,9 @@
 import React from 'react';
-import home from '../assets/static/home-icon.svg'
+import home from '@images/home-icon.svg'
 import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
-import '../assets/styles/componentes/MenuMobile.scss';
+import '@styles/componentes/MenuMobile.scss';
 
 function MenuMobile(props){
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 //estilos
-import "../assets/styles/componentes/Products.scss";
+import "@styles/componentes/Products.scss";
 
 //componentes
 import CardProduct from "../componentes/Products/CardProduct";

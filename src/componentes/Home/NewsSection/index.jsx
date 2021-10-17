@@ -1,9 +1,9 @@
 import React from 'react';
 import NewsCard from './NewsCard';
-import image01 from '../../../assets/static/Home/NewsSection/image01.png'
-import image02 from '../../../assets/static/Home/NewsSection/image02.png'
+import image01 from '@images/Home/NewsSection/image01.png'
+import image02 from '@images/Home/NewsSection/image02.png'
 
-import '../../../assets/styles/componentes/Home/NewsSection/NewsSection.scss'
+import '@styles/componentes/Home/NewsSection/NewsSection.scss'
 
 const news = [
     {

@@ -1,6 +1,6 @@
 import React from 'react';
 import SystemLocation from './SystemLocation'
-import '../../assets/styles/componentes/SystemLayout.scss'
+import '@styles/componentes/SystemLayout.scss'
 import {Link} from 'react-router-dom'
 
 const SystemLayout = (props)=>{

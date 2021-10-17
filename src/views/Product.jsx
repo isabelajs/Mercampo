@@ -5,7 +5,7 @@ import ProductInfo from '../componentes/Product/ProductInfo';
 import ProductPhotos from '../componentes/Product/ProductPhotos';
 import { findUserById, getProductById } from '../utils/dataBase';
 
-import '../assets/styles/componentes/Product/Product.scss'
+import '@styles/componentes/Product/Product.scss'
 import MoreProducts from '../componentes/Product/MoreProducts';
 import Loading from '../componentes/common/Loading';
 

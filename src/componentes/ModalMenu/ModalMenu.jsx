@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 //styles
-import '../../assets/styles/componentes/ModalMenu/ModalMenu.scss'
-import '../../assets/styles/componentes/ModalMenu/MenuOption.scss'
-import closeIcon from '../../assets/static/closeIcon.svg'
+import '@styles/componentes/ModalMenu/ModalMenu.scss'
+import '@styles/componentes/ModalMenu/MenuOption.scss'
+import closeIcon from '@images/closeIcon.svg'
 
 
 function ModalMenu(props){

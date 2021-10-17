@@ -7,7 +7,7 @@ import OptionCheck from './OptionCheck';
 import FormListDropdown from '../common/FormListDropdown';
 
 //estilos
-import '../../assets/styles/componentes/ModalMenu/FilterMenu.scss'
+import '@styles/componentes/ModalMenu/FilterMenu.scss'
 
 //funciones
 const FilterMenu = ({callback,filterList, setFilterList, isOpen ,toggleMenu, handleKeyUp})=>{

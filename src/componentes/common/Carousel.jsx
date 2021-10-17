@@ -1,7 +1,7 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 
-// import '../../assets/styles/componentes/generales/Carousel.scss'
-import '../../assets/styles/generales/Carousel.scss'
+// import '@styles/componentes/generales/Carousel.scss'
+import '@styles/generales/Carousel.scss'
 
 export default function CarouselCategories ({children,widthItems = 200}){
 

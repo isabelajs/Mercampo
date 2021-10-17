@@ -7,7 +7,7 @@ import { openAlert,closeAlert } from '../actions';
 import Alert from '../componentes/common/Alert'
 import LayoutSignMethod from '../componentes/Layouts/LayoutSignMethod';
 
-import '../assets/styles/componentes/PasswordRecovery.scss'
+import '@styles/componentes/PasswordRecovery.scss'
 
 //funciones de firebase
 import { passwordReset } from '../utils/auth'

@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 
-import '../../assets/styles/generales/ConfirmationModal.scss'
+import '@styles/generales/ConfirmationModal.scss'
 
 export default function EliminationModal(props) {
 

@@ -1,6 +1,6 @@
 import React, {cloneElement, useState} from 'react';
 
-import '../../assets/styles/componentes/ModalMenu/SubMenu.scss'
+import '@styles/componentes/ModalMenu/SubMenu.scss'
 
 export default function SubMenu ({icon,title,children, typeOptionsSubmenu = false, type}){
   const [isOpenOptions,setIsOpenOptions] = useState(false)

@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import '../../assets/styles/generales/FormListDropdown.scss'
+import '@styles/generales/FormListDropdown.scss'
 
 //lista de ciudades
 import { allCities } from '../../utils/Helpers/dataBaseCities'

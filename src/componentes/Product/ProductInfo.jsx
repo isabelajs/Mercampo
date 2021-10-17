@@ -1,7 +1,7 @@
 import React from 'react'
 import { waMessage } from '../../utils/Helpers/functions'
 
-import '../../assets/styles/componentes/Product/ProductInfo.scss'
+import '@styles/componentes/Product/ProductInfo.scss'
 
 const ProductInfo = (props) =>{
 

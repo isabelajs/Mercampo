@@ -12,7 +12,7 @@ import Loading from "../componentes/common/Loading";
 import LocalAlert from "../componentes/common/LocalAlert";
 
 //estilos
-import "../assets/styles/componentes/ProfileProduct/EditProduct.scss";
+import "@styles/componentes/ProfileProduct/EditProduct.scss";
 
 //funcion  firestore
 import {getProductById, updateProduct} from '../utils/dataBase'

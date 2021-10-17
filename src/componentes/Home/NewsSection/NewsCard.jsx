@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../assets/styles/componentes/Home/NewsSection/NewsCard.scss'
+import '@styles/componentes/Home/NewsSection/NewsCard.scss'
 
 export default function NewsCard ({title,content,image, date}) {
     return (

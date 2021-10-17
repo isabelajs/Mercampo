@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import '../../assets/styles/componentes/Alert.scss'
+import '@styles/componentes/Alert.scss'
 
 //input the password is wrond
 

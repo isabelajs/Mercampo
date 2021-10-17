@@ -1,6 +1,6 @@
 import React from 'react'
 import UnitPrice from './UnitPrice'
-import '../../assets/styles/componentes/ProfileProduct/TableUnitPrices.scss'
+import '@styles/componentes/ProfileProduct/TableUnitPrices.scss'
 
 const TableUnitPrices = (props)=>{
 

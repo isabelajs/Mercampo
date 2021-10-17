@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
 //imagenes
-import logo from '../assets/static/logo.png'
-import menuBurger from '../assets/static/menuBurguer.png'
+import logo from '@images/logo.png'
+import menuBurger from '@images/menuBurguer.png'
 
 //components
 import MainMenu from './ModalMenu/MainMenu';
 import DesktopMenu from './ModalMenu/DesktopMenu';
 
 //styles
-import '../assets/styles/componentes/Header/Header.scss'
+import '@styles/componentes/Header/Header.scss'
 
 
 //solucion para el modal https://codesandbox.io/s/friendly-hofstadter-qtrtn?file=/src/index.js:1011-1071

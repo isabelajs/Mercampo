@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
-import '../../assets/styles/componentes/CardProduct.scss'
+import '@styles/componentes/CardProduct.scss'
 
 const DescriptionPrice = ({name,value})=>{
   
