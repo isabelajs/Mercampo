@@ -16,14 +16,14 @@ const listTeam = [{
     name: 'Juan Camilo Chaparro',
     profession: 'Industrial Enginner',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna risus massa aliquam in enim suspendisse',
-    contact: '',
+    contact: 'https://github.com/JuanC-JC',
   },
   {
     image: memberImg,
     name: 'Isabela Jimenez Salazar',
     profession: 'Industrial Enginner',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna risus massa aliquam in enim suspendisse',
-    contact: '',
+    contact: 'https://github.com/isabelajs',
   },
   {
     image: memberImg,
