@@ -2,6 +2,9 @@ import React from 'react';
 import horizontalImg from '../../assets/static/Home/AboutUsSection/horizontalImage.png'
 import verticalImg from '../../assets/static/Home/AboutUsSection/verticalImage.png'
 
+import sostenibilityImg from '../../assets/static/Home/AboutUsSection/sostenibility.png'
+import entrepreneurshipImg from '../../assets/static/Home/AboutUsSection/entrepreneurship.png'
+
 import '../../assets/styles/componentes/Home/AboutUsSection.scss'
 
 export default function AboutUsSection () {
@@ -14,19 +17,19 @@ export default function AboutUsSection () {
 
         <div className="aboutUsSection__helpsContainer">
             <div className="aboutUsSection__help">
-                <img src="" alt="" />
+                <img src={sostenibilityImg} alt="" />
                 <p>Agronomia Sostenible</p>
             </div>
             <div className="aboutUsSection__help">
-                <img src="" alt="" />
+                <img src={sostenibilityImg} alt="" />
                 <p>Apoyo a la comunidad</p>
             </div>
             <div className="aboutUsSection__help">
-                <img src="" alt="" />
+                <img src={sostenibilityImg} alt="" />
                 <p>Negocios Verdes</p>
             </div>
             <div className="aboutUsSection__help">
-                <img src="" alt="" />
+                <img src={entrepreneurshipImg} alt="" />
                 <p>Emprendimiento</p>
             </div>
         </div>

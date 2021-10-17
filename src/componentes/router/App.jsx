@@ -6,6 +6,7 @@ import { setUser,setLoadingUser } from '../../actions'
 
 //componentes de react
 import Home from "../../views/Home";
+import Team from "../../views/Team";
 import Login from "../../views/Login";
 import Register from "../../views/Register";
 import PasswordRecovery from "../../views/PasswordRecovery";
@@ -78,6 +79,8 @@ const App = (props)=> {
             <Switch>
               
               <Route exact path="/" component={Home} />
+
+              <Route exact path="/team" component={Team} />
 
               <Route exact path='/products' component={Products} />
 

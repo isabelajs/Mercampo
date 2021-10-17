@@ -1,9 +1,12 @@
+@import '../../Vars.scss';
+
 .newProduct__unitPrices{
 
   .l-table{
     border: solid 0.8px #B8B5B5;
     border-radius: 5px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    // box-shadow: 
+    box-shadow: $light-shadow;
     padding: 0px 10px;
     width: 100%;
     max-width: 350px;

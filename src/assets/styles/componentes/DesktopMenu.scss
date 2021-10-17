@@ -1,3 +1,4 @@
+@import '../Vars.scss';
 
 .profileDesktopMenu{
   display: none;
@@ -24,7 +25,7 @@
       transition: max-height 0.3s;
       max-height: 0;
       overflow: hidden;
-      box-shadow: 0 5px 8px rgba(162, 162, 162, 0.46);
+      box-shadow: $shadow;
     
       &__option{
         display: flex;

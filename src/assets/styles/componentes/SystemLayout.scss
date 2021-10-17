@@ -1,4 +1,6 @@
 //estandars layout c-profile
+@import '../Vars.scss';
+
 .system{
   width: 100%;
   background-color: rgb(250, 250, 250);
@@ -37,11 +39,6 @@
 
       &.selected{
         border-bottom: 3px solid #FE043C;
-        // &:hover{
-        //   &::after{
-        //     content: none;
-        //   }
-        // }
       }
     }
     
@@ -60,7 +57,7 @@
   align-items: center;
   padding: 0 2.5% 20px 2.5%;
   margin-bottom: 20px;
-  box-shadow: 0px 5px 8px rgba(65, 65, 65, 0.3);
+  box-shadow: $shadow;
   border-radius: 10px;
 
   .system__location{

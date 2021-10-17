@@ -1,5 +1,7 @@
+@import '../Vars.scss';
+
 .cardProduct{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; 
+  box-shadow: $light-shadow;
   border-radius: 10px;
   width: 100%;
 

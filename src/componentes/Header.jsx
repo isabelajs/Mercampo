@@ -65,7 +65,7 @@ function Header (props){
               <Link to='/products'>Products</Link>
             </li>
             <li>
-              <Link to='/contact'>About Us</Link>
+              <Link to='/team'>About Us</Link>
             </li>
           </ul>
         </nav>

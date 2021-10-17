@@ -1,3 +1,5 @@
+@import '../../Vars.scss';
+
 .profileProductCard{
   display: grid;
   grid-template-columns: 65px auto;
@@ -5,7 +7,7 @@
   column-gap: 10px;
   width: 100%;
   padding: 8px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: $light-shadow;
   border: solid 0.8px #B8B5B5;
   border-radius: 5px;
 
