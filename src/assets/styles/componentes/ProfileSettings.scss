@@ -9,6 +9,7 @@
   margin-bottom: 20px;
 
   .button{
+    margin-top: 10px;
     align-self: flex-end;
   }
 }
@@ -26,16 +27,6 @@
   }
 }
 
-// .data__photo{
-//   img{
-//     width: 160px;
-//     height: 160px;
-//     border-radius: 10px;
-//     background-color: gray;
-//     overflow: hidden;
-//   }
-
-// }
 
 .profileSettings__password{
   display: flex;
@@ -46,6 +37,7 @@
 
     display: flex;
     align-self: center;
+    margin-top: 20px;
 
     .button:first-child{
       margin-right: 10px;
