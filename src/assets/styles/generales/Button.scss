@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 130px;
+  // width: 130px;
   height: 36px;
   border-radius: 4px;
   cursor: pointer;
@@ -12,22 +12,21 @@
   color: rgb(0, 0, 0);
   font-size: 14px;
   font-weight: 500;
-
+  padding: 0 40px;
 }
 
 .button--icon{
   padding: 0px 3%;
   border: solid 0.8px #B8B5B5;
-  width: 100%;
+  align-items: center;
+
+  display: grid;
+  grid-template-columns: 25px 1fr;
 
   p{
-    text-align:start;
-    padding-left: 15%;
-    width: 70%;
-  }
-
-  .button__icon{
-    width: 30%;
+    justify-self: center;
+    padding: 0px 20px;
+    margin: 0;
   }
 }
 

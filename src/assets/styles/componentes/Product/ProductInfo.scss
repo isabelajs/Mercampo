@@ -1,22 +1,41 @@
+@import '../../Vars.scss';
+
 .product__info{
   width: 95%;
   display: flex;
   flex-direction: column;
-
-  p{
-    font-size: 16px;
-  }
+  margin-top: 50px;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 216, 216);
+  padding: 20px;
 
   h2{
     margin-top: 0;
     margin-bottom: 0px;
-    font-size: 28px;
+    color: $main-green;
+    margin-bottom: 20px;
+    text-align: left;
   }
 
   h3{
-    font-weight: 500;
+    font-weight: bold;
     margin-top: 0;
-    margin-left: 20px;
+    text-align: left;
+  }
+
+
+  &Value{
+    margin: 5px 0 ;
+  }
+
+  &Block{
+
+    margin-top: 25px;
+
+    &Title{
+      font-size: 20px;
+    }
+
   }
 
   .product__userContact{
@@ -28,13 +47,27 @@
       margin-right: 10px;
     }
   }
+
+  .button{
+    max-width: 170px;
+    align-self: center;
+    margin-top: 25px;
+
+    &:hover{
+      svg{
+        path{
+          fill: $main-green;
+        }
+      }
+    }
+  }
 }
 
 @media(min-width:910px){
   .product__info{
-    margin-left: 20px;
     justify-content: space-between;
-    height: 490px;
+    margin-top: 0;
+    max-width: 400px;
 
     h2{
       font-size: 40px;
