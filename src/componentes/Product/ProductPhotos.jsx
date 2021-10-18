@@ -21,26 +21,13 @@ const ProductPhotos = ({imgs}) =>{
 
         {
           imgs.map((img,index) => {
-            
-            if(img === firstImg){
-
-              return(
-                <div key={index} onClick={selectImg} className='photos__secondPhoto select'>
-                  <div >
-                    <img src={img} alt='imagen del producto'/>
-                  </div>
+            return(
+              <div key={index} onClick={selectImg} className={ img === firstImg ? 'photos__secondPhoto select' : 'photos__secondPhoto' }>
+                <div >
+                  <img src={img} alt='imagen del producto'/>
                 </div>
-              )
-            }else{
-              
-              return(
-                <div key={index} onClick={selectImg} className='photos__secondPhoto'>
-                  <div >
-                    <img src={img} alt='imagen del producto'/>
-                  </div>
-                </div>
-              )
-            }
+              </div>
+            )
           })
         }
 
