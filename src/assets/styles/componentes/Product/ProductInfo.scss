@@ -35,6 +35,30 @@
       font-size: 20px;
     }
 
+    &List{
+      padding-left: 15px;
+      list-style: none;
+
+      li{
+        display: flex;
+        align-items: center;
+
+        p{
+          margin: 5px 0 ;
+        }
+
+        &::before{
+          content: '';
+          position: relative;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: $main-green;
+          margin-right: 15px;
+        }
+      }
+    }
+
     &Data{
       display: flex;
       align-items: center;

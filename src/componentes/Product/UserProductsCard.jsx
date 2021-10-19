@@ -15,15 +15,17 @@ export default function UserProductsCard ({photo,name,prices}) {
           </div>
 
           <div className="userProductsCard__prices">
-            {
-              Object.entries(prices).slice(0,2).map((price,index)=>{
-                return(
-                  <div key={`price_${index}`} className='userProductsCard__price'> 
-                    {unitsTranslate[price[0]]} - {`$${price[1]}`}
-                  </div>
-                )
-              })
-            }
+            <ul>
+              {
+                Object.entries(prices).slice(0,2).map((price,index)=>{
+                  return(
+                    <li key={`price_${index}`} className='userProductsCard__price'> 
+                      {unitsTranslate[price[0]]} - {`$${price[1]}`}
+                    </li>
+                  )
+                })
+              }
+            </ul>
           </div>
         </div>
       </div>

@@ -32,8 +32,6 @@ const Product = (props) => {
         const productsData = await getProductsByUser(data.userId) || {products:[],productsAvaliables:0, productsNotAvaliables:0}
         productsData.products = productsData.products.filter(product => product.id !== props.match.params.id)
 
-        // console.log(productsData)
-
         if(!data){
           setStatus({
             isLoading:false,

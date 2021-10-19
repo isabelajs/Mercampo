@@ -5,6 +5,10 @@
   min-width: 180px;
   width: 180px;
   margin-right: 10px;
+
+  &:hover{
+    transform: scale(1.01);
+  }
   
   &__description{
     border: 1px solid #B8B5B5;
@@ -26,6 +30,11 @@
     >*{      
       margin-bottom: 5px;
     }
+  }
+
+  ul{
+    padding-left: 0px;
+    list-style: none;
   }
 
   img{
