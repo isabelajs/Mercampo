@@ -4,7 +4,6 @@
   width: 95%;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 216);
   padding: 20px;
@@ -36,11 +35,20 @@
       font-size: 20px;
     }
 
-    p{
+    &Data{
       display: flex;
       align-items: center;
+      margin: 1em 0;
+      font-size: 16px;
+
+      //only for email that is only one word
+      &:nth-child(3){
+        word-break: break-all;
+      }
+
       svg{
         margin-right:15px;
+        min-width: 25px;
       }
     }
 
@@ -74,7 +82,6 @@
 @media(min-width:910px){
   .product__info{
     justify-content: space-between;
-    margin-top: 0;
     max-width: 400px;
     height: 100%;
 

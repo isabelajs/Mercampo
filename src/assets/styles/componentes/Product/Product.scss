@@ -10,6 +10,7 @@
   
   .l-product__top{
     display: grid;
+    grid-template-columns: minmax(0,1fr);
     gap: 10px;
     margin: 0 auto;
     margin-top: 35px;
@@ -33,6 +34,7 @@
     
     .l-product__top{
       grid-template-columns: minmax(200px,550px) minmax(320px,1fr);
+      grid-template-columns: none;
       align-items: flex-start;
 
       .product__info{
