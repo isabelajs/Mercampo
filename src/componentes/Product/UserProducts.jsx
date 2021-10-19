@@ -19,7 +19,7 @@ export default function UserProducts ({products}) {
           products && products.slice(0,4).map(product => {
             return(
 
-              <a key={`cardUserProduct_${product.id}`} href={`http://localhost:3000/product/"${product.id}`} target='_blank' rel="noreferrer">
+              <a key={`cardUserProduct_${product.id}`} href={`/product/${product.id}`} target='_blank' rel="noreferrer">
                 <UserProductsCard   name={product.name} photo={product.photos[0]} prices={product.prices}/>
               </a>
               )
