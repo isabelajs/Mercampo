@@ -1,0 +1,41 @@
+@import '../../Vars.scss';
+
+.userProductsCard{
+  box-shadow: $light-shadow;
+  min-width: 180px;
+  width: 180px;
+  margin-right: 10px;
+  
+  &__description{
+    border: 1px solid #B8B5B5;
+    height: 100px;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+    border-top: none;
+  }
+
+  &__title{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  &__prices{
+    margin-left: 5px;
+    
+    >*{      
+      margin-bottom: 5px;
+    }
+  }
+
+  img{
+    border-radius: 5px 5px 0 0 ;
+    border: 1px solid rgb(220, 220, 220);
+    border-bottom: none;
+    width: 100%;
+    // padding: ;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+  }
+}

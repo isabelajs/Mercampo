@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState, memo, useEffect } from 'react'
 import { getAllProducts } from '@utils/dataBase'
-import Carousel from '../common/Carousel'
+
+
+import Carousel from '../common/Carousel';
 
 
 import '@styles/componentes/Product/MoreProducts.scss'

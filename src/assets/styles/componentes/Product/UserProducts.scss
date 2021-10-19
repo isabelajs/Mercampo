@@ -1,0 +1,28 @@
+@import '../../Vars.scss';
+
+.userProducts{
+  width: 95%;
+  justify-self: center;
+
+  h3{
+    color: $main-blue;
+    font-size: 18px;
+    text-align: left;
+
+    @media(min-width:910px){
+      font-size: 20px;
+    }
+  }
+
+  &__cards{
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+
+@media (min-width:910px){
+  .userProducts{
+    width: 100%;
+  }
+}

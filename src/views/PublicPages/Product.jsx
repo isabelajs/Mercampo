@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+
+import { findUserById, getProductById, getProductsByUser } from '@utils/dataBase';
+
 import ProductInfo from '@components/Product/ProductInfo';
 import ProductPhotos from '@components/Product/ProductPhotos';
-import { findUserById, getProductById } from '@utils/dataBase';
+import MoreProducts from '@components/Product/MoreProducts';
+import UserProducts from '@components/Product/UserProducts';
+import Loading from '@components/common/Loading';
 
 import '@styles/componentes/Product/Product.scss'
-import MoreProducts from '@components/Product/MoreProducts';
-import Loading from '@components/common/Loading';
 
 const Product = (props) => {
 
@@ -15,6 +18,7 @@ const Product = (props) => {
     data:null,
     userData:null,
     isLoading: true,
+    productsData:null,
     error: null,
   })
 
@@ -23,7 +27,12 @@ const Product = (props) => {
 
       try{
         const data = await getProductById(props.match.params.id) 
-        const userData = await findUserById(data.userId) || {}
+        const userData = {key:data.userId ,...await findUserById(data.userId) || {} }
+        
+        const productsData = await getProductsByUser(data.userId) || {products:[],productsAvaliables:0, productsNotAvaliables:0}
+        productsData.products = productsData.products.filter(product => product.id !== props.match.params.id)
+
+        // console.log(productsData)
 
         if(!data){
           setStatus({
@@ -36,6 +45,7 @@ const Product = (props) => {
         setStatus({
           data,
           userData,
+          productsData,
           isLoading:false,
           error:null,
         })
@@ -60,6 +70,7 @@ const Product = (props) => {
             <div className='l-product__top'>
               <ProductPhotos imgs={status.data.photos}/>
               <ProductInfo data={status.data} userData={status.userData}/>
+              <UserProducts products={status.productsData.products} />
             </div>
             <MoreProducts />
           </>
