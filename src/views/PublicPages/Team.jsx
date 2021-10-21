@@ -58,8 +58,8 @@ export default function Team () {
         <img src={info01} alt="Imagen de informacion acerca del equipo" />
         <div className="team__infoContainer">
           <h3>Lorem Ipsum</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum nisl diam urna ipsum turpis nisl mi enim. Lorem </p>
-          <p>congue erat adipiscing mauris sed blandit porttitor adipiscing. Eu euismod adipiscing interdum pharetra malesuada etiam.</p>
+          <p> Somos un equipo multidisciplinar que transforma las oportunidades en estrategias de mejora, potencializando los resultados. </p>
+          <p>Nuestro objetivo es brindar mayores oportunidades de visualización en el mercado digital a los pequeños productores y comercializadores.</p>
         </div>
       </div>
 

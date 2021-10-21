@@ -7,6 +7,8 @@ import homeIcon from '@images/Icons/home.svg'
 import profileIcon from '@images/Icons/profile.svg'
 import productsIcon from '@images/Icons/products.svg'
 import aboutUsIcon from '@images/Icons/aboutUs.svg'
+import productsItemsIcon from '@images/Icons/productsItems.svg'
+import configIcon from '@images/Icons/config.svg'
 
 //componentes 
 import ModalMenu from './ModalMenu';
@@ -45,13 +47,13 @@ const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{
 
       <ul>
         <SubMenu icon={profileIcon} title={'Perfil'} >
-          <MenuLink callback={toggleMenu} to={'/profile/settings'} icon={homeIcon} title={'Configuración de perfil'}/>
-          <MenuLink callback={toggleMenu} to={'/profile/products'} icon={homeIcon} title={'Mis productos'}/>
+          <MenuLink callback={toggleMenu} to={'/profile/settings'} icon={configIcon} title={'Configuración de perfil'}/>
+          <MenuLink callback={toggleMenu} to={'/profile/products'} icon={productsItemsIcon} title={'Mis productos'}/>
         </SubMenu>
 
         <MenuLink callback={toggleMenu} to={'/'} icon={homeIcon} title={'Home'}/>
         <MenuLink callback={toggleMenu} to={'/products'} icon={productsIcon} title={'Products'}/>
-        <MenuLink callback={toggleMenu} to={'/contact'} icon={aboutUsIcon} title={'About us'}/>
+        <MenuLink callback={toggleMenu} to={'/team'} icon={aboutUsIcon} title={'About us'}/>
       </ul>
       
       {
