@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 //estilos
 import "@styles/componentes/Products.scss";
@@ -8,6 +8,7 @@ import CardProduct from "@components/Products/CardProduct";
 import Carousel from '@components/common/Carousel'
 import CardCategory  from '@components/Products/CardCategory'
 import FilterMenu from '@components/ModalMenu/FilterMenu'
+import MiniLoading from '@components/common/MiniLoading'
 
 //funciones
 import { useFilterProducts } from  '../../utils/Hooks'
@@ -21,53 +22,96 @@ export default function Products() {
 
 	const [listProducts, setListProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
+	const [isFetching,setIsFetching] = useState(false)
 	const [isError,setIsError] = useState(null)
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
 	const {filterList,filterListRef,setFilterList,selectedCategoryRef,selectedCategory, setSelectedCategory,querySearch, setQuerySearch} = useFilterProducts('All')
-	
-	const toggleIsOpenFilter = ()=>{
-		setIsOpenFilter(!isOpenFilter)
-	}
-
-	//Fetch-Data
-	useEffect(()=>{
-
-		const fetchData = async ()=>{
-
-			try{
-				const data = await getAllProducts()
-				setListProducts(data)
-				setIsLoading(false)
-
-			}catch(err){
-				setIsError(err)
-			}
-		}
-
-		fetchData()
-	
-	},[])
+	const [lastProduct, setLastProduct] = useState(null)
+	const [notMoreProducts, setNotMoreProducts] = useState(false)
+	const loader = useRef(null);
+	const productsPerView = 10
 
 
+	const fetchData = async () =>{
 
-	//function to use when clickSearch 
-	const fetchDataSearch = async()=>{
-		
 		setIsLoading(true)
 		setIsError(null)
-		setListProducts([])
 
 		try{
-			const data = await getProductsByFilters( querySearch.toLowerCase() , selectedCategoryRef.current , filterListRef.current )
-			setListProducts(data)
+
+			const data = await getAllProducts(productsPerView)
+			setListProducts(data.products)
+			setLastProduct(data.lastProduct)
 			setIsLoading(false)
 
 		}catch(err){
 			setIsError(err)
 		}
-
 	}
 
+	//function to use when clickSearch 
+	const fetchDataSearch = async()=>{
+
+		setIsLoading(true)
+		setIsError(null)
+		setListProducts([])
+
+		try{
+
+			//lasproduct null to prevent startAfter
+			let data = await getProductsByFilters( querySearch.toLowerCase() , selectedCategoryRef.current , filterListRef.current, null , productsPerView )
+				
+			setListProducts(data.products) 
+			setLastProduct(data.lastProduct)
+			setIsLoading(false)
+			
+			
+		}catch(err){
+			setIsError(err)
+		}
+	}
+
+	//function for infinite scroll
+	const fetchMoreData = useCallback( async ()=>{
+
+		if(!notMoreProducts){
+
+			setIsError(null)
+			setIsFetching(true)
+
+			try{
+	
+				let data = await getProductsByFilters( querySearch.toLowerCase() , selectedCategoryRef.current , filterListRef.current, lastProduct, productsPerView )
+					
+				if(data.products.length > 0){
+					setListProducts([...listProducts,...data.products]) 
+					setLastProduct(data.lastProduct)
+				}else{
+					setNotMoreProducts(true)
+				}
+				setIsFetching(false)
+			}catch(err){
+				setIsError(err)
+			}
+		}
+
+	},[listProducts, notMoreProducts,querySearch,selectedCategoryRef,filterListRef,lastProduct,productsPerView])
+
+
+	const loadMore = useCallback((entries) =>{
+
+		const target = entries[0]
+
+		//si esta intersecando la pantalla , fetching es false and loading is false y aun tenemos mas productos para fetchear
+		if(target.isIntersecting && !isFetching && !isLoading && !notMoreProducts){
+			fetchMoreData()
+		}
+
+	},[isFetching, isLoading, notMoreProducts,fetchMoreData])
+
+	const toggleIsOpenFilter = ()=>{
+		setIsOpenFilter(!isOpenFilter)
+	}
 
 	//todo deberiamos envolverlo en un call back?
 	const handleSelecteCategory =  (category)=> {
@@ -81,6 +125,31 @@ export default function Products() {
 		}
 	}
 
+	useEffect(()=>{
+
+		const options = {
+			root: null,
+			rootMargin:'0px',
+			threshold:0.25,
+		}
+
+		const observer = new IntersectionObserver(loadMore,options)
+
+		if(loader && loader.current){
+			observer.observe(loader.current)
+		}
+		
+		return () => observer.unobserve(loader.current)
+
+	},[loader,loadMore])
+
+	
+	//Fetch-Data component didUmounted
+	useEffect(()=>{
+
+		fetchData()
+	
+	},[])
 
   return (
     <div className=" l-products">
@@ -166,6 +235,9 @@ export default function Products() {
 			{isError && <h1 style={{width:'100%', textAlign:'center'}}>{isError}</h1> }
 			
 			{isLoading &&  <Loading />}
+				
+			<MiniLoading ref={loader} isFetching={isFetching}/>
+			
 
     </div>
   );

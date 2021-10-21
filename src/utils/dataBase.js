@@ -122,6 +122,8 @@ export const addProductToStore = async (basic, photos, prices)=>{
   //lista de promesas (envio de photos)
   const resultPostPhotos = await Promise.all(photos.map((photo)=> uploadImg(photo.file)))
 
+  const date = new Date(Date.now())
+
   //obtengo las urls de las imagenes
   const photosUrls = resultPostPhotos.map(({ data: { url } }) => url);
 
@@ -142,7 +144,6 @@ export const addProductToStore = async (basic, photos, prices)=>{
   const filtersType = {
     prices: Object.keys(pricesObject),
     ubication: [replaceVowelsTick(city).replace(new RegExp(' ','g'),'-')]
-
   }
 
 
@@ -150,6 +151,7 @@ export const addProductToStore = async (basic, photos, prices)=>{
     ...basic,
     photos: photosUrls,
     prices: pricesObject,
+    date,
     search: buildKeywords(newKeywords,filtersType),
   };
 
@@ -238,17 +240,22 @@ export const getProductById = async ( id )=>{
 };
 
 //obtengo todos los productos disponibles -> only 20
-export const getAllProducts = async (number = 20) => {
+export const getAllProducts = async (limit = 20) => {
   try {
-    let data = await db.collection("products").where('avaliable','==','true').limit(number).get();
-    return data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+    let data = await db.collection("products").where('avaliable','==','true').orderBy('date','desc').limit(limit).get();
+
+    const result = {products: data.docs.map((doc) =>({...doc.data(),id:doc.id})), lastProduct:data.docs.at(-1)}
+    
+    return result
+
+    // return data.docs.map((doc) =>({...doc.data(),id:doc.id}))
   } catch (err) {
     throw new Error(`getAllProducts -> ${err}`);
   }
 };
 
 //obtengo los productos por medio del search
-export const getProductsByFilters = async (querySearch, category, filter) =>{
+export const getProductsByFilters = async (querySearch, category, filter, lastProduct, limit = 20) =>{
   try{
 
     let products = db.collection('products').where('avaliable','==','true')
@@ -270,7 +277,6 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
 
     }
 
-
     if(filter.length > 0 && querySearch === ''){
       searchList = searchList.concat(...filter)
     }
@@ -279,12 +285,22 @@ export const getProductsByFilters = async (querySearch, category, filter) =>{
       products = products.where('search','array-contains-any',searchList)
     }
     
-    let data = await products.limit(20).get()
-    return   data.docs.map((doc) =>({...doc.data(),id:doc.id}))
+
+    let data
+
+    if(lastProduct){
+      data = await products.limit(limit).orderBy('date','desc').startAfter(lastProduct).get()
+    }else{
+      data = await products.limit(limit).orderBy('date','desc').get()
+    }
+
+    const result =   {products: data.docs.map((doc) =>({...doc.data(),id:doc.id})), lastProduct:data.docs.at(-1)}
+    
+    return result
 
   }catch(err){
     throw new Error(`getProductsBySearch ${err}`)
-  }
+  } 
 }
 
     

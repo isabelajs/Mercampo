@@ -4,7 +4,7 @@ import '@styles/generales/Loading.scss'
 
 export default function Loading() {
   return (
-    <div className='test'>
+    <div className='layoutLoading'>
       <div className="loading">
         <div />
         <div />
