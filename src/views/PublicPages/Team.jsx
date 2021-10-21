@@ -17,7 +17,7 @@ import '@styles/componentes/Team/Team.scss'
 const listTeam = [{
     image: juanImg,
     name: 'Juan Camilo Chaparro',
-    profession: 'Full stack Developer',
+    profession: 'Frontend Developer',
     text: 'Ingeniero industrial enfocado en el desarrollo, diseño e implementacion de herramientas tecnologias para cualquier tipo de industria.',
     contact: 'https://github.com/JuanC-JC',
   },
