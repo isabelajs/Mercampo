@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 //styles
 import '@styles/componentes/ModalMenu/ModalMenu.scss'
 import '@styles/componentes/ModalMenu/MenuOption.scss'
-import closeIcon from '@images/closeIcon.svg'
+import closeIcon from '@images/Icons/close.svg'
 
 
 function ModalMenu(props){

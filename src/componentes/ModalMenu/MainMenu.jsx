@@ -2,9 +2,11 @@ import React from 'react';
 import {Link, useHistory } from 'react-router-dom';
 
 //images
-import homeIcon from '@images/home-icon.svg'
-import profileIcon from '@images/profile-icon.svg'
-import aboutUsIcon from '@images/aboutUs-icon.svg'
+// import homeIcon from '@images/home-icon.svg'
+import homeIcon from '@images/Icons/home.svg'
+import profileIcon from '@images/Icons/profile.svg'
+import productsIcon from '@images/Icons/products.svg'
+import aboutUsIcon from '@images/Icons/aboutUs.svg'
 
 //componentes 
 import ModalMenu from './ModalMenu';
@@ -48,7 +50,7 @@ const MainMenu = ({isOpenMenu,toggleMenu, userName, userImg})=>{
         </SubMenu>
 
         <MenuLink callback={toggleMenu} to={'/'} icon={homeIcon} title={'Home'}/>
-        <MenuLink callback={toggleMenu} to={'/products'} icon={''} title={'Products'}/>
+        <MenuLink callback={toggleMenu} to={'/products'} icon={productsIcon} title={'Products'}/>
         <MenuLink callback={toggleMenu} to={'/contact'} icon={aboutUsIcon} title={'About us'}/>
       </ul>
       
