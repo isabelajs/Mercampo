@@ -16,11 +16,10 @@ export default function CardTeam ({image,name,profession,text,contact}) {
         </div>
       </a>
 
-      <p className="cardTeam__text">
-        {profession}
-        <br />
-        {text}
-      </p>
+      <div className="cardTeam__text">
+        <p><strong>{profession}</strong></p>
+        <p>{text}</p>
+      </div>
     </div>
 );
 };

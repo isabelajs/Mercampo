@@ -21,8 +21,8 @@
     img{
       border-radius: 50%;
       overflow: hidden;
-      width: 230px;
-      height: 230px;
+      width: 210px;
+      height: 210px;
       object-fit: cover;
     }
 
@@ -42,14 +42,14 @@
 
     &::after {
       content: "";
-      background: url(../../../static/Team/blackBranch.svg) no-repeat center
+      background: url(../../../static/Team/branch.svg) no-repeat center
       center / contain;
       max-height: 0%;
-      width: 80px;
-      height: 200px;
+      width: 100px;
+      height: 280px;
       position: absolute;
       bottom: 0;
-      right: -20px;
+      right: -35px;
     }
   }
 
@@ -70,5 +70,14 @@
   &__text {
     text-align: center;
     margin-top: 0;
+
+    p:first-child{
+      margin-top: 0;
+    }
+
+    p{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
   }
 }
