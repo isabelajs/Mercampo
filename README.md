@@ -93,7 +93,7 @@ _Necesario `npm`_
 
 # 5. Demo 
 
-* Deploy [Netlify](hhttps://alcampo.netlify.app/)
+* Deploy [Netlify](https://alcampo.netlify.app/)
 * repositorio [GITHUB](https://github.com/isabelajs/Mercampo)
 * Mockup [FIGMA](https://www.figma.com/file/uvqM1akBo4pnEgEmaSWjkJ/Dise%C3%B1o?node-id=0%3A1)
 
