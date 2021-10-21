@@ -127,6 +127,8 @@ export default function Products() {
 
 	useEffect(()=>{
 
+		const htmlLoading = loader.current
+
 		const options = {
 			root: null,
 			rootMargin:'0px',
@@ -139,7 +141,7 @@ export default function Products() {
 			observer.observe(loader.current)
 		}
 		
-		return () => observer.unobserve(loader.current)
+		return () => observer.unobserve(htmlLoading)
 
 	},[loader,loadMore])
 
