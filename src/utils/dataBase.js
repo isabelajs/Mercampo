@@ -256,16 +256,19 @@ export const getAllProducts = async (limit = 20) => {
 
 //obtengo los productos por medio del search
 export const getProductsByFilters = async (querySearch, category, filter, lastProduct, limit = 20) =>{
+
+
+  //avaliable //date //category //search
+
   try{
 
     let products = db.collection('products').where('avaliable','==','true')
     let searchList = []
 
   
-    //
     if(category !== 'All'){
-        products = products.where('category','==',category)
-      }
+      products = products.where('category','==',category)
+    }
 
     if(querySearch){
 
@@ -285,7 +288,6 @@ export const getProductsByFilters = async (querySearch, category, filter, lastPr
       products = products.where('search','array-contains-any',searchList)
     }
     
-
     let data
 
     if(lastProduct){

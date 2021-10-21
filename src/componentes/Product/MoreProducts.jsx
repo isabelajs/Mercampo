@@ -17,7 +17,7 @@ const MoreProducts = memo(() =>{
     const fetch = async () =>{
       const data = await getAllProducts(15)
 
-      setData(data)
+      setData(data.products)
     }
 
     fetch()

@@ -8,7 +8,7 @@ import Carousel from '@components/common/Carousel';
 
 export default function UserProducts ({products}) {
 
-  console.log(products)
+  // console.log(products)
 
     return (
     <div className='userProducts'>
