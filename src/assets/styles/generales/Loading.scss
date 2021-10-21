@@ -1,3 +1,5 @@
+@import '../Vars.scss';
+
 .layoutLoading{
   position: absolute;
   inset: 0 0 0 0;
@@ -20,7 +22,7 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #000;
+  background: $main-green;
   animation: loading 1.2s linear infinite;
 }
 
