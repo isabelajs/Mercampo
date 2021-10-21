@@ -41,30 +41,30 @@ de nuestro campo
         <td>Productos</td>
     </tr>
     <tr>
-        <td><img src="./src/assets/static/Mockup/home.jpg" width=500 ></td>
-        <td><img src="./src/assets/static/Mockup/products.jpg" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/home.JPG" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/products.JPG" width=500 ></td>
     </tr>
     <tr>
         <td style='text-align:center' colspan='2'>Product</td>
     </tr>
     <tr>
-        <td><img src="./src/assets/static/Mockup/product01.jpg" width=500 ></td>
-        <td><img src="./src/assets/static/Mockup/product02.jpg" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/product01.JPG" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/product02.JPG" width=500 ></td>
     </tr>
         <tr>
         <td>Mi Perfil</td>
         <td>Mis Productos</td>
     </tr>
     <tr>
-        <td><img src="./src/assets/static/Mockup/profile.jpg" width=500 ></td>
-        <td><img src="./src/assets/static/Mockup/mineProducts.jpg" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/profile.JPG" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/mineProducts.JPG" width=500 ></td>
     </tr>
     <tr>
         <td style='text-align:center' colspan='2'>Interfaz Editar/Agregar producto</td>
     </tr>
     <tr>
-        <td><img src="./src/assets/static/Mockup/interfazProduct.jpg" width=500 ></td>
-        <td><img src="./src/assets/static/Mockup/interfazProduct02.jpg" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/interfazProduct.JPG" width=500 ></td>
+        <td><img src="./src/assets/static/Mockup/interfazProduct02.JPG" width=500 ></td>
     </tr>
 
  </table>
