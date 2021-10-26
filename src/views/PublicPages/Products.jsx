@@ -64,6 +64,7 @@ export default function Products() {
 			setListProducts(data.products) 
 			setLastProduct(data.lastProduct)
 			setIsLoading(false)
+			setNotMoreProducts(false)
 			
 			
 		}catch(err){
