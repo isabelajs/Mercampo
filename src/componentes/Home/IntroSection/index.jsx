@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ReactComponent as  MainImage} from '@images/Home/IntroSection/main.svg'
+import {ReactComponent as  MainImage} from '@images/Home/IntroSection/mainHero.svg'
 
 import '@styles/componentes/Home/IntroSection/IntroSection.scss'
 
@@ -12,7 +12,7 @@ export default function IntroSection () {
           <div className='introSection__infoText'>Apoya tu economía local descubriendo cientos de productos</div>
           <a href='#calendario' className='button button--second'>Nuestro Calendario</a >
         </div>
-        <MainImage className='introSection__img'/>
+        <MainImage className='introSection__img' alt='Imagen principal' title='Imagen Principal'/>
       </section>
       
 );

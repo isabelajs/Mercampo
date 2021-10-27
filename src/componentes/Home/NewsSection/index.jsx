@@ -23,6 +23,7 @@ const news = [
 export default function NewsSection () {
     return (
     <section id='calendario' className='newsSection section--separation'>
+        
         <h2 >Calendario</h2>
 
         <div className="newsSection__cardsContainer">

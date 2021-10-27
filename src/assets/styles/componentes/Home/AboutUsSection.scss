@@ -10,6 +10,8 @@
 
   
   &__info {
+    max-width: 600px;
+
     h2 {
       text-align: center;
       margin-top: 40px;
@@ -18,7 +20,6 @@
 
     p {
       text-align: justify;
-      max-width: 600px;
     }
   }
 
@@ -30,7 +31,7 @@
 
     img{
       background-color: white;
-      box-shadow: $light-shadow;
+      box-shadow: $shadow;
       border-radius: 5px;
       padding: 5px;
     }
@@ -72,8 +73,9 @@
     height: 200px;
     border-radius: 5px;
     max-width: 550px;
+    box-shadow: $shadow;
   }
-
+  
   &__verticalImg {
     position: relative;
     height: 100%;
@@ -82,6 +84,7 @@
     border-radius: 5px;
     width: 180px;
     object-fit: cover;
+    box-shadow: $shadow;
   }
 }
 
@@ -118,6 +121,10 @@
     column-gap: 20px;
     max-width: 1200px;
     background-color: transparent;
+
+    &__info{
+      max-width: 500px;
+    }
 
     &__imgsContainer{
       padding-left: 0;

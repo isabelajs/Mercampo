@@ -16,9 +16,9 @@ export default function HowItWorksSection () {
 
         <HowItWorksBlock title='Productor Agricola' image={producerImg} left>
           <p>Cualquier productor puede vender en nuestra plataforma, con sólo seguir estos simples pasos: </p>
-          <p>1. Seleccionar los mejores productos a vender.</p>
-          <p>2. Registrase en nuestra plataforma,    ingresando datos de contacto y ubicación.</p>
-          <p>3. Crear cada producto a vender detallando su cantidad, disponibilidad, ubicación y precio. </p>
+          <p> <span>1.</span>  Seleccionar los mejores productos a vender.</p>
+          <p> <span>2.</span> Registrase en nuestra plataforma,    ingresando datos de contacto y ubicación.</p>
+          <p> <span>3.</span> Crear cada producto a vender detallando su cantidad, disponibilidad, ubicación y precio. </p>
           <p>Así su inscripción estará lista y los productos estará en nuestra vitrina virtual a la vista de posibles compradores.</p>
         </HowItWorksBlock>
 
