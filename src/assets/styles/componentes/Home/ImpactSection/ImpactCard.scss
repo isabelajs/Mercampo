@@ -11,26 +11,26 @@
   position: relative;
   
 
-  &::after{
-    content: '';
-    z-index: -1;
-    position: absolute;
-    inset: 0 0 0 0;
-    background: url(../../../../static/Home/ImpactSection/shape.svg) no-repeat center / contain;
+  // &::after{
+  //   content: '';
+  //   z-index: -1;
+  //   position: absolute;
+  //   inset: 0 0 0 0;
+  //   background: url(../../../../static/Home/ImpactSection/shape.svg) no-repeat center / contain;
 
-  }
+  // }
 
-  &:nth-child(2){
-    &::after{
-      transform: rotate(180deg) scaleX(-1);
-    }
-  }
+  // &:nth-child(2){
+  //   &::after{
+  //     transform: rotate(180deg) scaleX(-1);
+  //   }
+  // }
 
-  &:nth-child(3){
-    &::after{
-      transform: scaleX(-1);
-    }
-  }
+  // &:nth-child(3){
+  //   &::after{
+  //     transform: scaleX(-1);
+  //   }
+  // }
 
 
   &__counter{

@@ -1,4 +1,5 @@
 import React from "react";
+import Orbit from '@components/common/orbit'
 
 //components
 import {AboutUsSection, ImpactSection, HowItWorksSection, OurGoalSection, NewsSection, IntroSection} from '@components/Home'
@@ -20,6 +21,9 @@ export default function Home() {
       
       <OurGoalSection/>
       <NewsSection/>
+      <Orbit>
+        <h1>Text</h1>
+      </Orbit>
 
     </main>
   );
