@@ -16,7 +16,7 @@ export default function AboutUsSection () {
     useScrollReveal([refSection],{
         root:null,
         threshold:0.25,
-        rootMargin: "350px"
+        rootMargin: "450px"
     })
 
     return (
