@@ -11,9 +11,6 @@ export function useScrollReveal(listRef, configuration) {
       rootMargin: "0px 0px 0px 0px",
     };
 
-
-    console.log(configuration)
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {

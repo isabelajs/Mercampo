@@ -12,6 +12,10 @@ input,textarea,select{
   }
 }
 
+select{
+  box-shadow: inset 0 0 0 5px #fff !important;
+}
+
 
 //truco para evitar el fill del formulario
 input:-webkit-autofill,
