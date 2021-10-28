@@ -49,10 +49,21 @@ div.orbit {
           height: $size * 1px;
           width: $size * 1px;
         }
+
+        //if width is < 910px only watch first 5 elements
+        @media (max-width: 910px) {
+          @if $i > 6 {
+            opacity: 0;
+          }
+        }
       }
     }
   }
 }
+
+// @function addOrbit($x,$i,$diameter,$orbit-diameter){
+
+// }
 
 div.orbit:after {
   display: block;

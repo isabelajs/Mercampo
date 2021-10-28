@@ -1,14 +1,13 @@
-@import '../../Vars.scss';
+@import "../../Vars.scss";
 
 .aboutUsSection {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
   min-width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  
   &__info {
     max-width: 600px;
 
@@ -29,14 +28,14 @@
     grid-template-columns: 1fr 1fr;
     column-gap: 30px;
 
-    img{
+    img {
       background-color: white;
       box-shadow: $shadow;
       border-radius: 5px;
       padding: 5px;
     }
 
-    h4{
+    h4 {
       font-size: 16px;
     }
   }
@@ -46,7 +45,7 @@
     flex-direction: column;
     align-items: center;
 
-    p{
+    p {
       text-align: center;
     }
 
@@ -58,7 +57,7 @@
   }
 
   &__imgsContainer {
-    margin-top: 40px;
+    margin-top: 80px;
     position: relative;
     width: 100%;
     height: 280px;
@@ -75,7 +74,7 @@
     max-width: 550px;
     box-shadow: $shadow;
   }
-  
+
   &__verticalImg {
     position: relative;
     height: 100%;
@@ -88,33 +87,28 @@
   }
 }
 
-
-
 @media (min-width: 425px) {
   .aboutUsSection {
-    &__verticalImg {  
+    &__verticalImg {
       width: auto;
     }
   }
 }
 
-
-@media (min-width:475px){
-  .aboutUsSection{
-
-    &__imgsContainer{
+@media (min-width: 475px) {
+  .aboutUsSection {
+    &__imgsContainer {
       height: 300px;
     }
 
-    &__horizontalImg{
+    &__horizontalImg {
       height: 250px;
     }
   }
 }
 
-
-@media (min-width:910px){
-  .aboutUsSection{
+@media (min-width: 910px) {
+  .aboutUsSection {
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr 1fr;
@@ -122,22 +116,20 @@
     max-width: 1200px;
     background-color: transparent;
 
-    &__info{
+    &__info {
       max-width: 500px;
     }
 
-    &__imgsContainer{
+    &__imgsContainer {
       padding-left: 0;
       grid-row: 1 / 3;
     }
   }
 }
 
-
-@media (min-width:1024px){
-  .aboutUsSection{
-
-    &__imgsContainer{
+@media (min-width: 1024px) {
+  .aboutUsSection {
+    &__imgsContainer {
       height: 350px;
       max-width: 500px;
     }

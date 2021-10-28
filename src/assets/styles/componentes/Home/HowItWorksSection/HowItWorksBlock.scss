@@ -5,6 +5,7 @@
   justify-items: center;
   margin: 0 auto;
   align-items: center;
+  overflow-x: hidden;
 
   &:first-of-type {
     .howItWorksBlock__title {
@@ -39,7 +40,7 @@
     }
   }
 
-  img {
+  &__img {
     width: 100%;
     max-width: 350px;
   }
