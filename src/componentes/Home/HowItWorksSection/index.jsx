@@ -16,16 +16,15 @@ export default function HowItWorksSection () {
 
         <HowItWorksBlock title='Productor Agricola' image={producerImg} left>
           <p>Cualquier productor puede vender en nuestra plataforma, con sólo seguir estos simples pasos: </p>
-          <p> <span>1.</span>  Seleccionar los mejores productos a vender.</p>
-          <p> <span>2.</span> Registrase en nuestra plataforma,    ingresando datos de contacto y ubicación.</p>
-          <p> <span>3.</span> Crear cada producto a vender detallando su cantidad, disponibilidad, ubicación y precio. </p>
-          <p>Así su inscripción estará lista y los productos estará en nuestra vitrina virtual a la vista de posibles compradores.</p>
+          <p> <span>1.</span>  Selecciona los productos que deseas  vender.</p>
+          <p> <span>2.</span> Registrate en nuestra plataforma, ingresando tus datos de contacto y ubicación.</p>
+          <p> <span>3.</span> Ingresa cada producto que deseas vender detallando su cantidad, disponibilidad, ubicación y precio.  </p>
+          <p>Una vez terminado el proceso, tus productos estarán listos, para ser vistos en la web. </p>
         </HowItWorksBlock>
 
         <HowItWorksBlock title='Usuarios' image={userImg}>
-          <p>Los compradores  pueden ingresar  a buscar el producto de su elección directamente o como resutado de la clasificación de nuestros filtros. </p>
-          <p>Una vez seleccionado el producto se encontrará información sobre su cantidad, disponibilidad y ubicación, además de los datos de contacto del vendedor.</p>
-          <p>Así su inscripción estará lista y los productos estará en nuestra vitrina virtual a la vista de posibles compradores.</p>
+          <p>Los usuarios al ingresar a nuestra plataforma podrán encontrar los productos de su elección haciendo uso de nuestros filtros o por medio del buscador. </p>
+          <p>Una vez identificado el producto que desean adquirir, podrán seleccionarlo, de manera que puedan ver más  información sobre su cantidad, disponibilidad y ubicación, además de los datos de contacto del vendedor.</p>
         </HowItWorksBlock>
       </div>
     </section>
