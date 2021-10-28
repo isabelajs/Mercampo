@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import '@styles/componentes/Home/HowItWorksSection/HowItWorksBlock.scss'
 
-export default function HowItWorksBlock ({title,children,image,left}) {
-    return (
-      <div className={`howItWorksBlock ${ left ? "howItWorksBlock--left" : ''}`}>
-        <div className="howItWorksBlock__info ">
-          <h3 className='howItWorksBlock__title'>{title}</h3>
-          <div className="howItWorksBlock__text">
-            {children}
-          </div>
+function HowItWorksBlock({ title, children, image, left, className }, ref) {
+  return (
+    <div ref={ref} className={`howItWorksBlock ${className} ${left ? "howItWorksBlock--left" : ''}`}>
+      <div className="howItWorksBlock__info ">
+        <h3 className='howItWorksBlock__title'>{title}</h3>
+        <div className="howItWorksBlock__text">
+          {children}
         </div>
-        <img className='howItWorksBlock__img' src={image} alt="" />
       </div>
-)};
 
+      <embed className='howItWorksBlock__img' src={image} alt="" />
+    </div>
+  )
+};
+
+export default forwardRef(HowItWorksBlock)

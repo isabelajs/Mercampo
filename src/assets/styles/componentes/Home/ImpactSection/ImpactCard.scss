@@ -1,15 +1,15 @@
-@import '../../../Vars.scss';
+@import "../../../Vars.scss";
 
-.impactCard{
+.impactCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 170px;
-  height: 170px;
+  height: 150px;
+  padding: 10px;
   text-align: center;
   position: relative;
-  
 
   // &::after{
   //   content: '';
@@ -32,66 +32,61 @@
   //   }
   // }
 
-
-  &__counter{
+  &__counter {
     font-size: 40px;
     color: $main-blue;
     position: relative;
-    font-weight:600;
+    font-weight: 600;
 
-    &::after{
-      content: '+';
+    &::after {
+      content: "+";
       font-size: 32px;
       position: absolute;
       top: -10px;
       margin-left: 5px;
     }
-
   }
 
-  &__title{
+  &__title {
     font-size: 22px;
     font-weight: bold;
   }
 
-  &__text{
+  &__text {
     font-style: italic;
     position: relative;
 
-    &::before{
+    &::before {
       position: absolute;
-      content: '';
+      content: "";
       width: 60%;
       height: 5px;
       background: $main-blue;
       bottom: -10px;
       right: 20%;
     }
-  
   }
 }
 
-@media (min-width:768px){
-  .impactCard{
+@media (min-width: 768px) {
+  .impactCard {
     width: 200px;
     height: 200px;
 
-    &__counter{
+    &__counter {
       font-size: 48px;
     }
 
-    &__title{
+    &__title {
       font-size: 26px;
     }
   }
 }
 
-@media (min-width:1024px){
-  .impactCard{
-
-    &__counter{
+@media (min-width: 1024px) {
+  .impactCard {
+    &__counter {
       font-size: 54px;
     }
-
   }
 }
