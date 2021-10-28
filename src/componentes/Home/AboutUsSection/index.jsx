@@ -1,17 +1,26 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
 //assets
 import horizontalImg from '@images/Home/AboutUsSection/horizontalImage.png'
 import verticalImg from '@images/Home/AboutUsSection/verticalImage.png'
-import sostenibilityImg from '@images/Home/AboutUsSection/sostenibility.png'
-import entrepreneurshipImg from '@images/Home/AboutUsSection/entrepreneurship.png'
+import sostenibilityImg from '@images/Home/AboutUsSection/plant.png'
+import {useScrollReveal} from '@hooks'
 
 //styles
 import '@styles/componentes/Home/AboutUsSection.scss'
 
 export default function AboutUsSection () {
+
+    const refSection = useRef(null)
+
+    useScrollReveal([refSection],{
+        root:null,
+        threshold:0.25,
+        rootMargin: "350px"
+    })
+
     return (
-    <section className='aboutUsSection section--gray  section--separation'>
+    <section ref={refSection} className='aboutUsSection section--gray  section--separation fade-down fade-in--right'>
         <div className='aboutUsSection__info'>
             <h2>¿Quiénes somos?</h2>
             <p>Somos una plataforma digital que permite crear una relación directa entre productores agricolas con sus clientes potenciales, evitando intermediariarios en el proceso.</p>
@@ -31,7 +40,7 @@ export default function AboutUsSection () {
                 <h4>Negocios Verdes</h4>
             </div>
             <div className="aboutUsSection__help">
-                <img src={entrepreneurshipImg} alt="" />
+                <img src={sostenibilityImg} alt="" />
                 <h4>Emprendimiento</h4>
             </div>
         </div>

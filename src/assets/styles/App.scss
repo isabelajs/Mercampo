@@ -1,12 +1,40 @@
-@import './Vars.scss';
-@import './generales/Button.scss';
-@import './generales/Form.scss';
+@import "./Vars.scss";
+@import "./generales/Button.scss";
+@import "./generales/Form.scss";
 
-*{
+.fade-in {
+  transform: translateX(-50%);
+
+  &--right {
+    transform: translateX(50%);
+  }
+
+  opacity: 0;
+  transition: all 1.2s ease-in-out;
+}
+
+
+.fade-down{
+  transform: translateY(50%);
+  opacity: 0;
+  transition: all 1.2s ease-in-out;
+
+  &.view{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.view {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+* {
   box-sizing: border-box;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
 }
@@ -15,7 +43,7 @@ html {
   scroll-behavior: smooth;
 }
 
-#root{
+#root {
   width: 100%;
   height: 100vh;
   font-size: 14px;
@@ -23,82 +51,90 @@ html {
   flex-direction: column;
   font-family: $family-font;
   color: $main-FontColor;
+  overflow-x: hidden;
 }
 
-.separator{
+.separator {
   display: flex;
   justify-content: center;
   align-items: center;
-  &__line{
+  &__line {
     border-bottom: 1px solid black;
     width: 45%;
   }
-  &__text{
+  &__text {
     font-size: 12px;
     margin: 0 10px;
   }
 }
 
-a{
+a {
   text-decoration: none;
   color: $main-FontColor;
 }
 
-.search{
+.search {
   width: 100%;
   display: flex;
   align-items: center;
   background: white;
   border-radius: 5px;
-  border: solid 0.8px #B8B5B5;
+  border: solid 0.8px #b8b5b5;
   padding-right: 20px;
   overflow: hidden;
 
-  &__icon{
+  &__icon {
     margin: 0 10px;
   }
 
-  &__input{
+  &__input {
     width: 100%;
     border: none;
   }
-
 }
 
-.filter{
+.filter {
   height: 38px;
 }
 
-
-h1,h2,h3,h4{
+h1,
+h2,
+h3,
+h4 {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-weight: 800;
 }
 
-h1{
+h1 {
   font-size: 28px;
 
-  @media (min-width:425px){
-    font-size:36px;
+  @media (min-width: 425px) {
+    font-size: 36px;
   }
 
-  @media (min-width:550px){
-    font-size:48px;
+  @media (min-width: 550px) {
+    font-size: 48px;
+  }
+
+  @media (min-width: 1100px) {
+    font-size: 55px;
   }
 }
 
-h2{
+h2 {
   font-size: 22px;
   color: $dark-blue;
   margin-bottom: 30px;
-  margin-top: 30px; 
-  
-  &.green{
+  margin-top: 30px;
+
+  &.green {
     color: $main-green;
   }
 
@@ -110,6 +146,12 @@ h2{
     font-size: 40px;
     margin-bottom: 40px;
     margin-top: 40px;
+  }
+
+  @media (min-width: 1100px) {
+    font-size: 48px;
+    margin-top: 60px;
+    margin-bottom: 60px;
   }
 }
 
@@ -125,7 +167,7 @@ h3 {
   }
 }
 
-p{
+p {
   font-size: 16px;
   line-height: 22px;
 }

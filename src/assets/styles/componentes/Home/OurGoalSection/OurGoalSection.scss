@@ -1,13 +1,13 @@
-// @import 
+@import "../../../Vars.scss";
 
-.ourGoalSection{
+.ourGoalSection {
   width: 90%;
   max-width: 1100px;
   display: grid;
   text-align: center;
   justify-items: center;
 
-  &__imgsContainer{
+  &__imgsContainer {
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -15,52 +15,51 @@
     max-width: 400px;
     margin-bottom: 30px;
 
-    img{
+    img {
       border-radius: 5px;
       position: relative;
       display: block;
-      
-      &:first-child{
+      box-shadow: $light-shadow;
+
+      &:first-child {
         width: 80%;
         max-width: 300px;
-        margin-left: auto; 
+        margin-left: auto;
       }
 
-      &:nth-child(2){
+      &:nth-child(2) {
         position: absolute;
         bottom: 0;
         width: 50%;
         max-width: 200px;
       }
     }
-
   }
-  
-  p{
+
+  p {
     max-width: 650px;
-    text-align:justify;
+    text-align: justify;
     margin-bottom: 40px;
   }
 
-  .button{
+  .button {
     margin: 0 auto;
   }
-  
 }
 
-@media (min-width:910px){
-  .ourGoalSection{
+@media (min-width: 910px) {
+  .ourGoalSection {
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
 
-    h2{
+    h2 {
       margin: 0;
       margin-bottom: 20px;
       display: flex;
       align-items: flex-end;
     }
 
-    &__imgsContainer{
+    &__imgsContainer {
       grid-row: 1/3;
     }
   }
