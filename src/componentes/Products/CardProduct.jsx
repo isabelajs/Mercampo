@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { avaliableUnitsTranslate } from "@utils/dataBase";
 import '@styles/componentes/CardProduct.scss'
 
 const DescriptionPrice = ({name,value})=>{
@@ -18,7 +19,8 @@ const CardProduct = memo(({id,name,userName,prices,photos})=>{
 
   const refUserName = useRef(userName.split(' ').splice(0,3).join(' '))
   const refPrices = useRef(Object.entries(prices))
-  const refUnitsTranslate = useRef({kilogramo:'Kg', libra:'Lb', unidad:'Und'})
+
+  const refUnitsTranslate = avaliableUnitsTranslate
 
   return(
     <div className="cardProduct">
@@ -46,7 +48,7 @@ const CardProduct = memo(({id,name,userName,prices,photos})=>{
                 return(
                   < DescriptionPrice 
                     key={key} 
-                    name={refUnitsTranslate.current[price[0]]} 
+                    name={refUnitsTranslate[price[0]]} 
                     value={price[1]}/>
                 )
             })

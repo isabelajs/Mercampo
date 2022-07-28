@@ -6,6 +6,7 @@ const TableUnitPrices = (props)=>{
 
   const {prices,handleUnitName,handleUnitPrice,insertNewPrice,deletePrice} = props
   
+  console.log('prices',prices)
   return (
     <div className="l-table">
       <table>

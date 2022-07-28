@@ -305,6 +305,28 @@ export const getProductsByFilters = async (querySearch, category, filter, lastPr
   } 
 }
 
+  export const avaliableUnits = [
+    {
+      value: "unidad", label: "Unidad", minimify: "Und"
+    },
+    {
+      value: "libra", label: "Libra", minimify: "Lb"
+    },
+    {
+      value: "kilogramo", label: "Kilogramo", minimify: "Kg"
+    },
+    {
+      value: "tonelada", label: "Tonelada", minimify: "Ton"
+    }
+  ]
+
+  export const avaliableUnitsTranslate = avaliableUnits.reduce((acum,unit) => {
+    acum[unit.value] =  unit.minimify
+    return acum
+  },{})
+
+
+
     
     //filterSearch = [videño, libra, unidad, kilogramo, villavo]
 

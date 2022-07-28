@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { avaliableUnits } from "@utils/dataBase";
 import "@styles/componentes/ProfileProduct/UnitPrice.scss";
 
 
@@ -41,6 +42,7 @@ const UnitPrice = (props) => {
   }
 
 
+
   return (
     <tr className={isOpenEdit ? 'unitPrice--edit' : ''}>
       
@@ -51,11 +53,14 @@ const UnitPrice = (props) => {
           name={name}
           value={isNaN(name) ? name : ''}
           placeholder="Tipo de und"
-          disabled= {!isOpenEdit}>
-            <option value=''>--</option>
-            <option value='unidad'>Unidad</option>
-            <option value='libra'>libra</option>
-            <option value='kilogramo'>Kilogramo</option>
+          disabled= {!isOpenEdit}
+        >
+          <option value=''>--</option>
+          {
+            avaliableUnits.map(({value,label}) => (
+              <option value={value}>{label}</option>
+            ))
+          }
           </select>
       </td>
 
