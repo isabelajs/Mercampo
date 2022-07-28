@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom'
 const PrivateRoute = ({children, ...rest}) => {
   const { user } = {...rest}
 
+  console.log('validting privateRouter')
   return(
     <Route
       {...rest}
@@ -19,7 +20,7 @@ const mapStateToProps = state =>{
     user: state.user
   }
 }
-
+ 
 
 
 export default connect(mapStateToProps, null)(PrivateRoute)
