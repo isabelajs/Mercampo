@@ -15,7 +15,7 @@ export default function AboutUsSection() {
 
     useScrollReveal([refSection], {
         root: null,
-        threshold: 0.25,
+        threshold: 0.1,
         rootMargin: "450px"
     })
 
@@ -23,7 +23,11 @@ export default function AboutUsSection() {
         <section ref={refSection} className='aboutUsSection section--gray  section--separation fade-down fade-in--right'>
             <div className='aboutUsSection__info'>
                 <h2>¿Quiénes somos?</h2>
-                <p>Somos una plataforma digital que permite crear una relación directa entre productores agricolas con sus clientes potenciales, evitando intermediariarios en el proceso.</p>
+                {/* <p>Somos una plataforma digital que permite crear una relación directa entre productores agricolas con sus clientes potenciales, evitando intermediariarios en el proceso.</p> */}
+                <p>
+                    Somos una plataforma digitial, que esta diseñada para reducir los intermediarios en los procesos de compra y venta
+                    de productos y servicios ofertados en la región del Ariari.
+                </p>
             </div>
 
             <div className="aboutUsSection__helpsContainer">
@@ -37,7 +41,7 @@ export default function AboutUsSection() {
                 </div>
                 <div className="aboutUsSection__help">
                     <img src={sostenibilityImg} alt="" />
-                    <h4>Negocios Verdes</h4>
+                    <h4>Innovación</h4>
                 </div>
                 <div className="aboutUsSection__help">
                     <img src={sostenibilityImg} alt="" />
