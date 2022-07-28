@@ -57,28 +57,8 @@ const App = (props)=> {
 
       <BrowserRouter>
 
-        <Helmet>‍
-          <title>Mercampo</title>‍
-          <meta name="description" content="Somos una plataforma digitial, que esta diseñada para reducir los intermediarios en los procesos de compra y venta de productos y servicios ofertados en la región del Ariari." />
-          {/* <meta name="twitter:card" content="summary_large_image" /> */}
-          {/* <meta name="twitter:site" content="@user" /> */}
-          {/* <meta name="twitter:creator" content="@user" /> */}
-          {/* <meta name="twitter:title" content="Pets - Products" /> */}
-          {/* <meta name="twitter:description" content="Best Products for your pet" /> */}
-          {/* <meta name="twitter:image" content="url_to_image"/> */}
-          <meta property="og:title" content="Mercampo" />
-          <meta property="og:description" content="Somos una plataforma digitial, que esta diseñada para reducir los intermediarios en los procesos de compra y venta de productos y servicios ofertados en la región del Ariari." />
-          <meta property="og:image" content="https://www.caracteristicas.co/wp-content/uploads/2016/04/campo-1-e1558303226877.jpg"/>
-          <meta property="og:url" content="www.mercampo.store" />
-          <meta property="og:site_name" content="mercampo.store" />
-          <meta property="og:locale" content="es" />
-          <meta property="og:type" content="website" />
-          {/* <meta property="fb:app_id" content="ID_APP_FACEBOOK" /> */}
-
-        </Helmet>
         <Switch>
-        
-
+      
           <Route exact path="/login">
             { user  && <Redirect to='/profile/settings'/>}
             { !user  && <Login/>}
